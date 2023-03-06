@@ -74,5 +74,10 @@ public class Controlador {
         return admFormularios.consultarFormulario(idSolic);
     }
     
+    public void simulaciónAplicacionExamen(){}
+    
+    public void definirSituacionCandidatos(){
+        admFormularios.definirEstadoAdmisionCandidatos();
+    }
     
 }

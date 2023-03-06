@@ -95,6 +95,9 @@ public class ModeloExAdmision {
     }
     
     public static void main(String[] args) {
+        FrGestionExAdmision viewExamen = new FrGestionExAdmision(elCtrl);
+        FrFormulario viewForm = new FrFormulario(elCtrl);
+        
         System.out.println("En demoConfiguracion");
         demoConfiguracion();
     
@@ -104,6 +107,16 @@ public class ModeloExAdmision {
         System.out.println("En demoFormulario");
         demoFormulario();
        
+        System.out.println("Aplicando examen...");
+        
+        viewExamen.P6_simularAplicacionExamen();
+        
+        System.out.println("Definiendo estado de los solicitantes...");
+        
+        viewExamen.P7_definirSituacionSolicitantePostExamen();
+        
+        viewForm.P8_verCondicionSolicitud(1000);
+        
      }
     
 }
