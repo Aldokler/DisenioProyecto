@@ -13,6 +13,7 @@ import model.CentroAplicacion;
 import model.DireccionPCD;
 import model.FormularioSolicitante;
 import model.Sede;
+import model.TEstadoSolicitante;
 import model.TGrado;
 
 /**
@@ -79,6 +80,12 @@ public class SingletonDAO {
         return tablaSedes;
     }
     
+    public List<FormularioSolicitante> getFormulario(TEstadoSolicitante estado){
+        // pendiente: conectar a la persistencia y recuperar los formularios
+        // retornar en orden descendente por nota de admisión
+        return tablaFormularios;
+    }
+    
     public List<Carrera> consultarCarrerasdeUnaSede (String unaSede){
         List<Carrera> carrerasSede =new ArrayList();
         for (Iterator<Carrera> it = tablaCarreras.iterator(); it.hasNext();) {
@@ -133,4 +140,23 @@ public class SingletonDAO {
         return true;
     }
     
+    public boolean actualizarCapacidadCarrera(String codigo, int capacidadAdmision){
+        for (Carrera car : tablaCarreras){
+            if (car.getCodigo().equals(codigo)){
+                car.setMaxAdmision(capacidadAdmision);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean actualizarFormulario(int id, TEstadoSolicitante estado){
+        for (FormularioSolicitante form : tablaFormularios){
+            if (form.getIdSolic() == id){
+                form.setEstado(estado);
+                return true;
+            }
+        }
+        return false;
+    }
 }

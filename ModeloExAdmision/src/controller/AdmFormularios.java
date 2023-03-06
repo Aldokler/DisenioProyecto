@@ -6,7 +6,10 @@
 package controller;
 
 import controller.DAO.SingletonDAO;
+import java.util.ArrayList;
+import java.util.List;
 import model.FormularioSolicitante;
+import model.TEstadoSolicitante;
 
 /**
  *
@@ -43,4 +46,20 @@ public class AdmFormularios {
         return SingletonDAO.getInstance().consultarFormulario(idSolic);
     }
     
+    public void definirEstadoAdmisionCandidatos(){
+        List<FormularioSolicitante> formularios = SingletonDAO.getInstance().getFormulario(TEstadoSolicitante.CANDIDATO);
+        for (int i = 0; i < formularios.size(); i++){
+            int nota = formularios.get(i).getDetalleExamen().getPuntajeObtenido();
+            int admision = formularios.get(i).getCarreraSolic().getMaxAdmision();
+            int puntajeMinimo = formularios.get(i).getCarreraSolic().getPuntajeMinimo();
+            if (admision > 0 && nota >= puntajeMinimo){
+                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.ADMITIDO);
+                SingletonDAO.getInstance().actualizarCapacidadCarrera(formularios.get(i).getCarreraSolic().getCodigo(), admision-1);
+            } else if (nota >= puntajeMinimo){
+                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.POSTULANTE);
+            } else {
+                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.RECHAZADO);
+            }
+        }
+    }
 }
