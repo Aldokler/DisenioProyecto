@@ -80,4 +80,10 @@ public class Controlador {
         admFormularios.definirEstadoAdmisionCandidatos();
     }
     
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Solicitante(String codigoCarrera){
+         return admFormularios.getDesgloseCandidatosPorSolicitante(codigoCarrera);
+    }
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Estado(String codigoCarrera){
+        return admFormularios.getDesgloseCandidatosPorEstado(codigoCarrera);
+    }
 }

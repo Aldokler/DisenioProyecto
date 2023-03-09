@@ -62,4 +62,12 @@ public class AdmFormularios {
             }
         }
     }
+    
+    public  List<FormularioSolicitante> getDesgloseCandidatosPorSolicitante(String codigoCarrera){
+        return SingletonDAO.getInstance().getCarrerasFormulario(codigoCarrera);
+    }
+    
+    public  List<FormularioSolicitante> getDesgloseCandidatosPorEstado(String codigoCarrera){
+        return SingletonDAO.getInstance().getCarrerasFormulario(codigoCarrera);
+    }
 }

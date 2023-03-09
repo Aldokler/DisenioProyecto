@@ -97,6 +97,7 @@ public class ModeloExAdmision {
     public static void main(String[] args) {
         FrGestionExAdmision viewExamen = new FrGestionExAdmision(elCtrl);
         FrFormulario viewForm = new FrFormulario(elCtrl);
+        FrCarreras viewCarreras = new FrCarreras(elCtrl);
         
         System.out.println("En demoConfiguracion");
         demoConfiguracion();
@@ -116,6 +117,12 @@ public class ModeloExAdmision {
         viewExamen.P7_definirSituacionSolicitantePostExamen();
         
         viewForm.P8_verCondicionSolicitud(1000);
+        
+        System.out.println('\n' + "Mostrando resultado por carrera de los solicitantes...");
+        viewCarreras.P9_mostrarResultadosExamenPorCarrera_Solicitante("IC");
+    
+        System.out.println("Mostrando resultado por estado de carrera de los solicitantes 2 ...");
+        viewCarreras.P10_mostrarResultadosExamenPorCarrera_Estado("IC");
         
      }
     

@@ -80,6 +80,19 @@ public class SingletonDAO {
         return tablaSedes;
     }
     
+    
+    public List<FormularioSolicitante> getCarrerasFormulario(String codigoCarrera){
+        // pendiente: conectar a la persistencia y recuperar las carreras
+        List<FormularioSolicitante> formularios = new ArrayList();
+        for (FormularioSolicitante formulario : tablaFormularios) {
+            if (formulario.getCarreraSolic().getCodigo().equals(codigoCarrera))
+                formularios.add(formulario);
+        }
+        return formularios;
+    }
+    
+    
+    
     public List<FormularioSolicitante> getFormulario(TEstadoSolicitante estado){
         // pendiente: conectar a la persistencia y recuperar los formularios
         // retornar en orden descendente por nota de admisión
