@@ -9,8 +9,12 @@ import controller.Controlador;
 import controller.DAO.SingletonDAO;
 import controller.DTOFormulario;
 import controller.IParametros;
+import java.util.ArrayList;
+import java.util.List;
+import model.Carrera;
 import model.Configuracion;
 import model.DireccionPCD;
+import model.FormularioSolicitante;
 
 /**
  *
@@ -23,27 +27,6 @@ public class ModeloExAdmision {
      */
     
     public static Controlador elCtrl = new Controlador();
-    
-    
-    public static void demoFormulario(){
-    int idSolic = 1000;
-    String nombreSolic ="Solicitante 1000";
-    String correoSolic ="correo1000@gmail.com";
-    String celularSolic ="8123-4567";
-    String colegioSolic ="Colegio del Solicitante 1000";
-    DireccionPCD dirSolic = SingletonDAO.getInstance().getPCD(4); 
-    String detalleDir = "Cerquita del Morazán";
-    String carreraSolic = "IC";
-    String sedeSolic = "SJ";
-    
-    DTOFormulario elDTO = new  DTOFormulario(idSolic, nombreSolic, 
-                                correoSolic, celularSolic, colegioSolic, 
-                                dirSolic, detalleDir, carreraSolic, sedeSolic);
-    
-    boolean resultado = elCtrl.registrarFormulario(elDTO);
-    System.out.println( resultado   ? "Formulario registrado y es el numero: "+
-            elCtrl.getFormulario(idSolic): "No pudo registrar el formulario");
-    }
     
     public static void demoCarreras(){
         System.out.println("Visualizar todas las carreras de la institucion");
@@ -93,7 +76,19 @@ public class ModeloExAdmision {
         elCtrl.guardarConfiguracion();
        Configuracion.getInstance().guardarProperties();
     }
-    
+    public static void demoCitas(){
+        elCtrl.generarCitas();
+        List<Carrera> listaCar = elCtrl.getCarreras();
+        List<FormularioSolicitante> ListForms  = new ArrayList<FormularioSolicitante>();
+        for (Object object : listaCar) {
+            ListForms.addAll(elCtrl.getFormulariosPorCarrera_Estado("IC"));
+        }
+        for (FormularioSolicitante ListForm : ListForms) {
+            System.out.println(ListForm.getNumero() +  
+                    ListForm.getNombreSolic() + ListForm.getDetalleExamen().getCitaExamen().getTime() + 
+                    ListForm.getDetalleExamen().getLugarExamen());
+        }
+    }
     public static void main(String[] args) {
         FrGestionExAdmision viewExamen = new FrGestionExAdmision(elCtrl);
         FrFormulario viewForm = new FrFormulario(elCtrl);
@@ -104,10 +99,10 @@ public class ModeloExAdmision {
     
         System.out.println("En demoCarreras");
         demoCarreras();
-        
-        System.out.println("En demoFormulario");
-        demoFormulario();
        
+        System.out.println("Citas");
+        demoCitas();
+        
         System.out.println("Aplicando examen...");
         
         viewExamen.P6_simularAplicacionExamen();

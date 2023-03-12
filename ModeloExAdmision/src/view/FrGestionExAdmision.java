@@ -24,7 +24,6 @@ public class FrGestionExAdmision {
     
     public void P6_simularAplicacionExamen(){
         ctrl.simulaciónAplicacionExamen();
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
     
     public void P7_definirSituacionSolicitantePostExamen(){

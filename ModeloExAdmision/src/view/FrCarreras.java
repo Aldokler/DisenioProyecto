@@ -64,10 +64,10 @@ public class FrCarreras {
         for (FormularioSolicitante form : formularios) {
             switch (form.getEstado()) {
                 case ADMITIDO:
-                    formRechazados.add(form);
+                    formAdmitidos.add(form);
                     break;
                 case CANDIDATO:
-                    formRechazados.add(form);
+                    formCandidatos.add(form);
                     break;
                 case RECHAZADO:
                     formRechazados.add(form);

@@ -65,6 +65,7 @@ public class SingletonDAO {
         tablaCentros.add(new CentroAplicacion(200, "TEC Campus Central", tablaPCD.get(0), "Campus Central ITCR"));
         tablaCentros.add(new CentroAplicacion(100, "TEC Campus Local SJ", tablaPCD.get(4), "CTLSJ"));
         
+        
         }
     
     public static SingletonDAO getInstance(){

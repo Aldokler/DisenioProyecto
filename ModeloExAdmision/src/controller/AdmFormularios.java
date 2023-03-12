@@ -96,7 +96,7 @@ public class AdmFormularios {
             int numSolicitantesAusentes = random.nextInt(porcentajeAusencia);
             for (int i = 0; i < numSolicitantesAusentes; i++) {
                 int numeroRandom = random.nextInt(formularios.size() - 1);
-                SingletonDAO.getInstance().actualizarFormulario(formularios.get(numeroRandom).getNumero(), 0);
+                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getNumero(), TEstadoSolicitante.AUSENTE);
             }
         }
 

@@ -24,7 +24,7 @@ public class GeneradorCitas {
     private Calendar fechaInicio = Calendar.getInstance();
     private Calendar fechaFinal = Calendar.getInstance();
     
-    private List<CentroAplicacion> tablaCentrosAplicacion;
+    private List<CentroAplicacion> tablaCentrosAplicacion = new AdmCentrosAplicacion().getCentrosAplicacion();
     private AdmFormularios AdmFormularios = new AdmFormularios();
      UtilitarioComunicacion comunicacion = new UtilitarioComunicacion();
 
