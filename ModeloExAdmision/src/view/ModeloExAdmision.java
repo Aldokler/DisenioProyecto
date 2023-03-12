@@ -11,6 +11,7 @@ import controller.DTOFormulario;
 import controller.IParametros;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import model.Carrera;
 import model.Configuracion;
 import model.DireccionPCD;
@@ -76,6 +77,40 @@ public class ModeloExAdmision {
         elCtrl.guardarConfiguracion();
        Configuracion.getInstance().guardarProperties();
     }
+    
+    public static void genFormularios(){
+        
+        Random rand = new Random();
+        
+        List<Carrera> listaCar = elCtrl.getCarreras();
+        //List<Sede> listaSedes = elCtrl.getSedes();
+        
+        
+        String[] nombres = {"Maria","Jose","Luis","Ana","Carlos","Juan","Jorge","Victor","Gerardo","Rafael","Mario","Oscar","Manuel","Carmen","Miguel","Francisco","Rosa","Marco","Laura","Marta","Flor","Ronald","Alvaro","Alexander","William","Andrea","Marvin","Adriana","Eduardo","Olga","Karla","Elizabeth","David","Daniel","Jonathan","Karen","Silvia","Sandra","Sonia","Ricardo","Katherine","Luz","Edgar","Edwin","Mauricio","Fernando","Esteban","Javier","Michael","Jesus","Roberto","Walter","Andres","Diego","Alejandro","Sergio","Guillermo","Jessica","Julio","Evelyn","Adrian","Henry","Pablo","Shirley","Johnny","Christian","Gustavo","Alejandra","Rodrigo","Carolina","Roger","Rodolfo","Margarita","Freddy","Ligia","Marcos","Allan","Roxana","Virginia","Gabriela","Maritza","Patricia","Erick","Blanca","Isabel","Diana","Wendy","Cesar","Pedro","Marjorie","Cindy","Karol","Roy","Jenny","Cristian","Tatiana","Alberto","Bryan","Miriam","Marlene","Grettel","Yamileth","Antonio","Alexis","Natalia","Monica","Mayra","Kevin","Orlando","Daniela","Josue","Melissa","Giovanni","Yesenia","Jacqueline","Jennifer","Rolando","Johanna","Marcela","German","Kenneth","Stephanie","Rebeca","Kimberly","Jeannette","Ramon","Angie","Franklin","Hilda","Gabriel","Hector","Nelson","Damaris","Ingrid","Vilma","Marianela","Martin","Cecilia","Hazel","Rosibel","Raquel","Maribel","Enrique","Viviana","Leonardo","Angela","Juana","Rigoberto","Ruth","Omar","Nuria","Hugo","Fabian","Angel","Alfredo","Lidia","Marlon","Nancy","Jairo","Teresa","Erika","Sara","Norma","Gladys","Alicia","Lilliam","Gilberto","Steven","Maureen","Nidia","Giselle","Flora","Paola","Felix","Grace","Lorena","Yolanda","Veronica","Alba","Melvin","Eliecer","Mariana","Daisy","Eric","Irene","Susana","Jean","Vera","Karina","Mercedes","Vanessa","Rita","Mariela","Gilbert","Jimmy","Rocio","Paula","Hernan","Mayela","Ronny","Jeffry","Jaime","Jason","Anthony","Cristina","Raul","Andrey","Danilo","Ivan","Gloria","Claudio","Ileana","Douglas","Iris","Dennis","Ericka","Denis","Lucia","Alexandra","Marisol","Hellen","Priscilla","Alfonso","Danny","Fabio","Teresita","Mireya","Marilyn","Dora","Emilce","Santos","Johan","Dayana","Elena","Fanny","Cynthia","Alex","Claudia","Joselyn","Zaida","Yadira","Leonel","Wilber","Pamela","Doris","Armando","Leticia","Julia","Arturo","Angelica","Martha","Alonso","Carol","Dagoberto","Elias","Irma","Maricela","Fabiola","Guido","Aracelly","Elsa","Dinorah","Edith","Aida","Noemy","Efrain","Adolfo","Wilson","Vivian","Beatriz","Emilia","Nelly","Isaac","Clara","Anabelle","Christopher","Cinthya","Victoria","Sofia","Eladio","Luisa","Leidy","Sharon","Leda","Haydee","Bernardo","Arnoldo","Didier","Brayán","Bryan","Humberto","Norman","Catalina","Maikol","Graciela","Asdrubal","Gonzalo","Ernesto","Ruben","Gerardina","Santiago"};
+        String[] apellidos = {"Rodriguez","Vargas","Jimenez","Mora","Rojas","Gonzalez","Sanchez","Hernandez","Ramirez","Castro","Lopez","Araya","Solano","Alvarado","Chaves","Perez","Morales","Campos","Quesada","Gomez","Arias","Zuñiga","Quiros","Fernandez","Salazar","Villalobos","Brenes","Gutierrez","Garcia","Alfaro","Vega","Aguilar","Calderon","Valverde","Chavarria","Alvarez","Castillo","Salas","Espinoza","Martinez","Solis","Murillo","Soto","Chacon","Cordero","Mendez","Herrera","Monge","Montero","Barrantes","Segura","Madrigal","Diaz","Marin","Porras","Fallas","Navarro","Rivera","Torres","Fonseca","Nuñez","Calvo","Delgado","Ruiz","Hidalgo","Arce","Obando","Zamora","Molina","Muñoz","Cruz","Vasquez","Bonilla","Picado","Miranda","Gamboa","Badilla","Umaña","Mena","Esquivel","Corrales","Flores","Camacho","Arroyo","Chinchilla","Guzman","Granados","Cerdas","Acuña","Cascante","Abarca","Elizondo","Barquero","Arguedas","Bolaños","Ortiz","Blanco","Carvajal","Leon","Duran","Cortes","Ureña","Aguero","Cespedes","Villegas","Romero","Bermudez","Serrano","Barboza","Artavia","Sandi","Venegas","Angulo","Mata","Alpizar","Matarrita","Sequeira","Montoya","Ugalde","Vindas","Sibaja","Reyes","Ortega","Arrieta","Viquez","Varela","Rosales","Moya","Sandoval","Benavides","Mendoza","Orozco","Garro","Garita","Carrillo","Guevara","Morera","Duarte","Coto","Masis","Guerrero","Retana","Azofeifa","Cordoba","Loria","Padilla","Paniagua","Fuentes","Cambronero","Leiva","Sanabria","Trejos","Avila","Ulate","Carranza","Piedra","Guillen","Oviedo","Cubillo","Cubero","Naranjo","Ulloa","Matamoros","Carmona","Solorzano","Mesen","Carballo","Lobo","Baltodano","Robles","Mejias","Contreras","Amador","Pereira","Bustos","Madriz","Ramos","Sancho","Valerio","Suarez","Leiton","Acosta","Lara","Saborio","Aguirre","Saenz","Rios","Briceño","Marchena","Villarreal","Medina","Lizano","Meza","Peña","Godinez","Moreno","Cedeño","Roman","Jara","Melendez","Mejia","Ledezma","Zumbado","Loaiza","Barahona","Prado","Mayorga","Arguello","Rivas","Bejarano","Centeno","Berrocal","Zeledon","Tenorio","Conejo","Pacheco","Moraga","Pizarro","Montenegro","Villalta","Bogantes","Fajardo","Guido","Aleman","Guadamuz","Portuguez","Juarez","Palma","Santamaria","Cardenas","Anchia","Parra","Ocampo","Barrientos","Chaverri","Acevedo","Ovares","Canales","Montiel","Corella","Montes","Castrillo","Estrada","Luna","Ballestero","Moreira","Figueroa","Cabezas","Urbina","Leal","Obregon","Peraza","Jarquin","Valerin","Vallejos","Ceciliano","Palacios","Prendas","Bravo","Siles","Peralta","Maroto","Meneses","Redondo","Ordoñez","Solera","Corea","Viales","Hurtado","Leandro","Beita","Arauz","Aragon","Coronado","Barrios","Astua","Jaen","Sojo","Sosa","Avendaño","Navarrete","Cabrera","Davila","Altamirano","Silva","Cervantes","Borbon","Velasquez","Brown","Najera","Enriquez","Otarola","Cisneros","Chevez","Bustamante","Huertas","Medrano","Valenciano","Tencio","Pineda","Pastor","Ojeda","Suzuki","Ferrer","Iglesias","Oda","Miyamoto","Stark","Wayne","Banner","Parker","Turing","Babbage","Tesla","Pendragon","Nightingale","Edison"};        
+        
+        int n = rand.nextInt(50, 101);
+        for (int i = 0; i < n; i++) {
+            int id = rand.nextInt(100000000, 999999999);
+            if (i == 0){
+                id = 118560169;
+            }
+            String nombre = nombres[rand.nextInt(0, nombres.length)] + " " + apellidos[rand.nextInt(0, apellidos.length)];
+            String correo = nombres[rand.nextInt(0, nombres.length)] + "@gmail.com";
+            String telefono = Integer.toString(rand.nextInt(10000000, 100000000)).getClass().getName();
+            String colegio = "EL CASTRO!!!!";
+            DireccionPCD dirSolic = new DireccionPCD("San José", "DESAMPA!!!!!!!", "LOS GUIDO!!!!!!!!!");
+            String detalleDireccion = "Casa numero 777";
+            String carrera = listaCar.get(rand.nextInt(0, listaCar.size())).getCodigo();
+            String sede = "CA";
+            //String sede = listaSedes.get(rand.nextInt(0, listaSedes.size())).getCodigo();
+            
+            DTOFormulario formulario = new DTOFormulario(id, nombre, correo, telefono, colegio, dirSolic, detalleDireccion, carrera, sede);
+            elCtrl.registrarFormulario(formulario);
+        }
+        
+    }
+    
     public static void demoCitas(){
         elCtrl.generarCitas();
         List<Carrera> listaCar = elCtrl.getCarreras();
@@ -94,6 +129,8 @@ public class ModeloExAdmision {
         FrFormulario viewForm = new FrFormulario(elCtrl);
         FrCarreras viewCarreras = new FrCarreras(elCtrl);
         
+        genFormularios();
+        
         System.out.println("En demoConfiguracion");
         demoConfiguracion();
     
@@ -111,7 +148,7 @@ public class ModeloExAdmision {
         
         viewExamen.P7_definirSituacionSolicitantePostExamen();
         
-        viewForm.P8_verCondicionSolicitud(1000);
+        viewForm.P8_verCondicionSolicitud(118560169);
         
         System.out.println('\n' + "Mostrando resultado por carrera de los solicitantes...");
         viewCarreras.P9_mostrarResultadosExamenPorCarrera_Solicitante("IC");
