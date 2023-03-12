@@ -18,9 +18,14 @@ public class FrGestionExAdmision {
         this.ctrl = ctrl;
     }
     
-    public void P5_definirCitasYNotificar(){}
+    public void P5_definirCitasYNotificar(){
+        ctrl.generarCitas();
+    }
     
-    public void P6_simularAplicacionExamen(){}
+    public void P6_simularAplicacionExamen(){
+        ctrl.simulaciónAplicacionExamen();
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    }
     
     public void P7_definirSituacionSolicitantePostExamen(){
         ctrl.definirSituacionCandidatos();

@@ -6,10 +6,13 @@
 package controller.DAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import model.Carrera;
 import model.CentroAplicacion;
+import model.DatosExamen;
 import model.DireccionPCD;
 import model.FormularioSolicitante;
 import model.Sede;
@@ -92,10 +95,14 @@ public class SingletonDAO {
     }
     
     
-    
     public List<FormularioSolicitante> getFormulario(TEstadoSolicitante estado){
         // pendiente: conectar a la persistencia y recuperar los formularios
         // retornar en orden descendente por nota de admisión
+        return tablaFormularios;
+    }
+    
+    public List<FormularioSolicitante> getFormularios(){
+        // pendiente: conectar a la persistencia y recuperar los formularios
         return tablaFormularios;
     }
     
@@ -164,12 +171,37 @@ public class SingletonDAO {
     }
     
     public boolean actualizarFormulario(int id, TEstadoSolicitante estado){
-        for (FormularioSolicitante form : tablaFormularios){
-            if (form.getIdSolic() == id){
-                form.setEstado(estado);
+        for (FormularioSolicitante formulario : tablaFormularios){
+            if (formulario.getIdSolic() == id){
+                formulario.setEstado(estado);
                 return true;
             }
         }
         return false;
+    }
+    
+    public boolean actualizarFormulario(int numero, int puntajeObtenido){
+        for (FormularioSolicitante formulario : tablaFormularios){
+            if (formulario.getNumero() == numero){
+                formulario.getDetalleExamen().setPuntajeObtenido(puntajeObtenido);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean actualizarFormulario(int numero, Calendar fechaExamen, CentroAplicacion lugar){
+        for (FormularioSolicitante formulario : tablaFormularios){
+            if (formulario.getNumero() == numero){
+                formulario.getDetalleExamen().setCitaExamen(fechaExamen);
+                formulario.getDetalleExamen().setLugarExamen(lugar);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public List<CentroAplicacion> getCentrosAplicacion(){
+        return tablaCentros;
     }
 }

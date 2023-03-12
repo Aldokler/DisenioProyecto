@@ -19,6 +19,8 @@ public class Controlador {
     private AdmConfiguracion admConfig = new AdmConfiguracion();
     private AdmCarreras admCarreras = new AdmCarreras();
     private AdmFormularios admFormularios = new AdmFormularios();
+    private GeneradorCitas generadorCitas = new GeneradorCitas();
+    
     
     public Controlador() {
     }
@@ -74,7 +76,12 @@ public class Controlador {
         return admFormularios.consultarFormulario(idSolic);
     }
     
-    public void simulaciónAplicacionExamen(){}
+    public void generarCitas(){
+        generadorCitas.GenerarCitas();
+    }
+    public void simulaciónAplicacionExamen(){
+        admFormularios.simularApliacionExamen();
+    }
     
     public void definirSituacionCandidatos(){
         admFormularios.definirEstadoAdmisionCandidatos();
