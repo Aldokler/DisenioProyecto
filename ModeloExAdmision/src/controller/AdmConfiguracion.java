@@ -6,6 +6,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Configuracion;
@@ -26,6 +28,24 @@ public class AdmConfiguracion {
     
     public int getPuntajeAdmision(){
         return Configuracion.getInstance().getMaximoPuntaje();
+    }
+    
+    public Calendar getFechaInicioExamen(){
+        return Configuracion.getInstance().getFechaIncioExamen();
+    }
+    
+    public Calendar getFechaFinalExamen(){
+        return Configuracion.getInstance().getFechaFinalExamen();
+    }
+    
+    public boolean setFechaIncioExamen(Date fecha){
+        Configuracion.getInstance().setFechaInicioExamen(fecha);
+        return true;
+    }
+    
+    public boolean setFechaFinalExamen(Date fecha){
+        Configuracion.getInstance().setFechaFinalExamen(fecha);
+        return true;
     }
 
     public boolean guardarConfiguracion() {

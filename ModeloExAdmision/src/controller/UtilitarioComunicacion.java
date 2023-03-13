@@ -13,7 +13,7 @@ public class UtilitarioComunicacion {
     public UtilitarioComunicacion() {
     }
     
-    public boolean enviarCorreo(String emisor, String destinatario, String asunto){
-        return true;
+    public void enviarCorreo(String emisor, String destinatario, String asunto){
+        
     }
 }

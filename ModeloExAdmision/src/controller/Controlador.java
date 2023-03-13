@@ -5,53 +5,93 @@
  */
 package controller;
 
+import controller.DAO.SingletonDAO;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import model.Carrera;
 import model.Configuracion;
 import model.FormularioSolicitante;
+import model.Sede;
 
 /**
  *
  * @author ersolano
  */
 public class Controlador {
-    
+
     private AdmConfiguracion admConfig = new AdmConfiguracion();
     private AdmCarreras admCarreras = new AdmCarreras();
     private AdmFormularios admFormularios = new AdmFormularios();
     private GeneradorCitas generadorCitas = new GeneradorCitas();
-    
-    
+
     public Controlador() {
     }
-    
-    public boolean editarPuntajeGeneralAdmision(int nuevoValor){
+
+    public boolean editarPuntajeGeneralAdmision(int nuevoValor) {
         return admConfig.editarPuntajeAdmision(nuevoValor);
     }
 
     public int getPuntajeGeneralAdmision() {
         return admConfig.getPuntajeAdmision();
     }
-    
-    public boolean guardarConfiguracion(){
+
+    public boolean guardarConfiguracion() {
         return admConfig.guardarConfiguracion();
     }
-    
-    public List<Carrera> getCarreras(){
+
+    public List<Carrera> getCarreras() {
         return admCarreras.getCarreras();
     }
-      
-    public List<Carrera> getCarrerasPorSede(String sede){
+
+    public List<Carrera> getCarrerasPorSede(String sede) {
         return admCarreras.getCarreras(sede);
     }
-    
-    public boolean editarCapacidadAdmision(String codigoCarrera, String codigoSede, int capacidad){
-        return admCarreras.editarCarrera(codigoCarrera, codigoSede, capacidad);                
+
+    public boolean editarCapacidadAdmision(String codigoCarrera, String codigoSede, int capacidad) {
+        return admCarreras.editarCarrera(codigoCarrera, codigoSede, capacidad);
     }
-    
-    public boolean editarPuntajeMinimoAdmision(String codigoCarrera, String codigoSede, int puntaje){
-        return admCarreras.editarCarrera(puntaje, codigoCarrera, codigoSede);                
+
+    public boolean editarPuntajeMinimoAdmision(String codigoCarrera, String codigoSede, int puntaje) {
+        return admCarreras.editarCarrera(puntaje, codigoCarrera, codigoSede);
     }
+
+    public boolean registrarFormulario(DTOFormulario elDTO) {
+        // se hace cualquier otra operación que se pudiera requerir 
+        return admFormularios.registrarFormulario(elDTO);
+    }
+
+    public FormularioSolicitante getFormulario(int idSolic) {
+        return admFormularios.consultarFormulario(idSolic);
+    }
+
+    public boolean generarCitas() {
+        return generadorCitas.GenerarCitas();
+    }
+
+    public void simulaciónAplicacionExamen() {
+        admFormularios.simularApliacionExamen();
+    }
+
+    public void definirSituacionCandidatos() {
+        admFormularios.definirEstadoAdmisionCandidatos();
+    }
+
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Solicitante(String codigoCarrera) {
+        return admFormularios.getDesgloseCandidatosPorSolicitante(codigoCarrera);
+    }
+
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Estado(String codigoCarrera) {
+        return admFormularios.getDesgloseCandidatosPorCarrera(codigoCarrera);
+    }
+
+    public List<Sede> getSedes() {
+    // función solo para prueba momentanea de fucniones, 
+    //se debbería hacer un administrador de sedes con este función
+      return SingletonDAO.getInstance().getSedes();
+    }
+
+}
 
 //    public Object getParam(String param, Class elTipo) {
 //        if (Integer.class.equals(elTipo)) {
@@ -66,31 +106,3 @@ public class Controlador {
 //        return null;
 //
 //    }
-
-    public boolean registrarFormulario(DTOFormulario elDTO) {
-        // se hace cualquier otra operación que se pudiera requerir 
-        return admFormularios.registrarFormulario(elDTO);
-    }
-    
-    public FormularioSolicitante getFormulario(int idSolic){
-        return admFormularios.consultarFormulario(idSolic);
-    }
-    
-    public void generarCitas(){
-        generadorCitas.GenerarCitas();
-    }
-    public void simulaciónAplicacionExamen(){
-        admFormularios.simularApliacionExamen();
-    }
-    
-    public void definirSituacionCandidatos(){
-        admFormularios.definirEstadoAdmisionCandidatos();
-    }
-    
-    public List<FormularioSolicitante> getFormulariosPorCarrera_Solicitante(String codigoCarrera){
-         return admFormularios.getDesgloseCandidatosPorSolicitante(codigoCarrera);
-    }
-    public List<FormularioSolicitante> getFormulariosPorCarrera_Estado(String codigoCarrera){
-        return admFormularios.getDesgloseCandidatosPorEstado(codigoCarrera);
-    }
-}

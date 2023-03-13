@@ -21,27 +21,35 @@ import model.FormularioSolicitante;
 public class GeneradorCitas {
 
     // rango de fechas en las que se generan las citas
-    private Calendar fechaInicio = Calendar.getInstance();
-    private Calendar fechaFinal = Calendar.getInstance();
+    private Calendar fechaInicio;
+    private Calendar fechaFinal;
     
-    private List<CentroAplicacion> tablaCentrosAplicacion = new AdmCentrosAplicacion().getCentrosAplicacion();
-    private AdmFormularios AdmFormularios = new AdmFormularios();
-     UtilitarioComunicacion comunicacion = new UtilitarioComunicacion();
+    private List<CentroAplicacion> tablaCentrosAplicacion;
+    private AdmFormularios AdmFormularios;
+    private UtilitarioComunicacion comunicacion;
+    private AdmConfiguracion admConfiguracion;
 
     public GeneradorCitas() {
-        fechaInicio.set(2023, Calendar.SEPTEMBER, 1); // desde el 2 de setiembre de 2023
-        fechaFinal.set(2023, Calendar.SEPTEMBER, 12); // 12 de setiembre de 2023
+        fechaInicio = Calendar.getInstance();
+        fechaFinal = Calendar.getInstance();
+        
+        tablaCentrosAplicacion = new AdmCentrosAplicacion().getCentrosAplicacion();
+        AdmFormularios = new AdmFormularios();
+        admConfiguracion = new AdmConfiguracion();
+        comunicacion = new UtilitarioComunicacion();
     }
 
-    public GeneradorCitas(Calendar fechaInicio, Calendar fechaFinal) {
-        this.fechaInicio = fechaInicio;
-        this.fechaFinal = fechaFinal;
-
-    }
-
-    public void GenerarCitas() {
-        asignarCitasASolicitantes();
-        notificarFormularios();
+    public boolean GenerarCitas() {
+        this.fechaInicio = admConfiguracion.getFechaInicioExamen();
+        this.fechaFinal = admConfiguracion.getFechaFinalExamen();
+        try {
+            asignarCitasASolicitantes();
+            notificarFormularios();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
     private CentroAplicacion asignarCentro() {
@@ -50,7 +58,7 @@ public class GeneradorCitas {
         return tablaCentrosAplicacion.get(index);
     }
 
-    private Calendar generarFecha() {
+    private Calendar generarFechaHora() {
 
         long rango = Math.abs(fechaInicio.getTimeInMillis() - fechaFinal.getTimeInMillis()) / (24 * 60 * 60 * 1000);
         Random random = new Random();
@@ -70,7 +78,7 @@ public class GeneradorCitas {
     public void asignarCitasASolicitantes() {
         List<FormularioSolicitante> formularios = AdmFormularios.getFormularios();
         for (FormularioSolicitante formulario : formularios) {
-            AdmFormularios.registrarCitaAplicacionExamen(formulario.getNumero(), generarFecha(), asignarCentro());
+            AdmFormularios.registrarCitaAplicacionExamen(formulario.getNumero(), generarFechaHora(), asignarCentro());
         }
     }
 
@@ -78,7 +86,7 @@ public class GeneradorCitas {
         List<FormularioSolicitante> formularioSolicitantes = AdmFormularios.getFormularios();
         for (FormularioSolicitante formulario : formularioSolicitantes) {
             String destinatario = formulario.getCorreoSolic();
-            String emisor = "tec.ac.cr";
+            String emisor = "admision@tec.ac.cr";
             String asunto = "Saludos " + formulario.getNombreSolic() + " se le informa los detalles de su cita de aplicacion del examen";
             comunicacion.enviarCorreo(emisor, destinatario, asunto);
         }

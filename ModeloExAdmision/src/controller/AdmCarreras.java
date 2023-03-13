@@ -26,7 +26,7 @@ public class AdmCarreras {
     public List<Carrera> getCarreras(String sede){
         
         // simulando una posible comunicacion con el DAO..
-        return SingletonDAO.getInstance().consultarCarrerasdeUnaSede(sede);
+        return SingletonDAO.getInstance().getCarreras(sede);
     }
         
     public Carrera getCarrera(String codigoCarrera, String codigoSede){

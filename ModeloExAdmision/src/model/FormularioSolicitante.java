@@ -12,7 +12,7 @@ import java.util.Calendar;
  *
  * @author ersolano
  */
-public class FormularioSolicitante {
+public class FormularioSolicitante implements Comparable<FormularioSolicitante>{
     private static int proxFormulario = 
             (int) (Configuracion.getInstance().getParam("CONSECUTIVO_FORM", Integer.class));
      
@@ -185,6 +185,11 @@ public class FormularioSolicitante {
                                   carreraSolic.getSede().getCodigo() +  "\n" +
                 "estado=" + estado +  "\n" +
                 "detalleExamen=" + detalleExamen + '\n';
+    }
+
+    @Override
+    public int compareTo(FormularioSolicitante formulario) {
+        return Integer.compare(formulario.getDetalleExamen().getPuntajeObtenido(), this.getDetalleExamen().getPuntajeObtenido());
     }
     
     
