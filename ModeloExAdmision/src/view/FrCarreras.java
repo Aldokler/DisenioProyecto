@@ -82,7 +82,7 @@ public class FrCarreras {
         List<FormularioSolicitante> formularios = ctrl.getFormulariosPorCarrera_Estado(codigoCarrera);
 
         List<FormularioSolicitante> formAdmitidos = new ArrayList<>();
-        List<FormularioSolicitante> formCandidatos = new ArrayList<>();
+        List<FormularioSolicitante> formPostulantes = new ArrayList<>();
         List<FormularioSolicitante> formRechazados = new ArrayList<>();
 
         for (FormularioSolicitante form : formularios) {
@@ -90,8 +90,8 @@ public class FrCarreras {
                 case ADMITIDO:
                     formAdmitidos.add(form);
                     break;
-                case CANDIDATO:
-                    formCandidatos.add(form);
+                case POSTULANTE:
+                    formPostulantes.add(form);
                     break;
                 case RECHAZADO:
                     formRechazados.add(form);
@@ -101,7 +101,7 @@ public class FrCarreras {
                     break;
             }
         }
-        int a = (formAdmitidos.size() + formCandidatos.size() + formRechazados.size());
+        int a = (formAdmitidos.size() + formPostulantes.size() + formRechazados.size());
       
 
         if (formAdmitidos.isEmpty()) {
@@ -111,11 +111,11 @@ public class FrCarreras {
             ordenarLista(formAdmitidos);
         }
 
-        if (formCandidatos.isEmpty()) {
-            System.out.println('\n'+"Formularios Candidatos:" + '\n' + "No se encontraron" + '\n');
+        if (formPostulantes.isEmpty()) {
+            System.out.println('\n'+"Formularios Postulantes:" + '\n' + "No se encontraron" + '\n');
         } else {
-            System.out.println('\n'+"Formularios Candidatos:"+ '\n');
-            ordenarLista(formCandidatos);
+            System.out.println('\n'+"Formularios Postulantes:"+ '\n');
+            ordenarLista(formPostulantes);
         }
 
         if (formRechazados.isEmpty()) {
