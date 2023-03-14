@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import model.Carrera;
 import model.FormularioSolicitante;
 import static model.TEstadoSolicitante.ADMITIDO;
 import static model.TEstadoSolicitante.CANDIDATO;
@@ -22,8 +23,8 @@ public class FrCarreras {
         this.ctrl = ctrl;
     }
 
-    public void P9_mostrarResultadosExamenPorCarrera_Solicitante(String codigoCarrera) {
-        List<FormularioSolicitante> formularios = ctrl.getFormulariosPorCarrera_Solicitante(codigoCarrera);
+    public void P9_mostrarResultadosExamenPorCarrera_Solicitante(Carrera carrera) {
+        List<FormularioSolicitante> formularios = ctrl.getFormulariosPorCarrera_Solicitante(carrera);
 
         Collections.sort(formularios, new Comparator<FormularioSolicitante>() {
             @Override
@@ -41,8 +42,8 @@ public class FrCarreras {
         System.out.println("Identificacion Solicitante = " + formulario.getIdSolic());
         System.out.println("Nombre = " + formulario.getNombreSolic());
         System.out.println(formulario.getDirSolicPCD());
-        System.out.println(formulario.getColegioSolic());
-        System.out.println("Opcion Carrera = " + formulario.getCarreraSolic().getNombre()
+        System.out.println("Colegio: "+ formulario.getColegioSolic());
+        System.out.println("Opcion Carrera = " + formulario.getCarreraSolic().getNombre() + " - " + formulario.getCarreraSolic().getSede().getNombre()
                 + '\n' + "Código = " + formulario.getCarreraSolic().getCodigo()
                 + '\n' + "Puntaje Mínimo = " + formulario.getCarreraSolic().getPuntajeMinimo());
         System.out.println("Estado del Formulario = " + formulario.getEstado());
@@ -78,8 +79,8 @@ public class FrCarreras {
         }
     }
 
-    public void P10_mostrarResultadosExamenPorCarrera_Estado(String codigoCarrera) {
-        List<FormularioSolicitante> formularios = ctrl.getFormulariosPorCarrera_Estado(codigoCarrera);
+    public void P10_mostrarResultadosExamenPorCarrera_Estado(Carrera carrera) {
+        List<FormularioSolicitante> formularios = ctrl.getFormulariosPorCarrera_Estado(carrera);
 
         List<FormularioSolicitante> formAdmitidos = new ArrayList<>();
         List<FormularioSolicitante> formPostulantes = new ArrayList<>();
@@ -97,7 +98,7 @@ public class FrCarreras {
                     formRechazados.add(form);
                     break;
                 default:
-                    System.out.println(form.getEstado());
+                    //System.out.println(form.getEstado());
                     break;
             }
         }
@@ -105,7 +106,7 @@ public class FrCarreras {
       
 
         if (formAdmitidos.isEmpty()) {
-            System.out.println("'\n' + Formularios Admitidos:" + '\n' + "No se encontraron" + '\n');
+            System.out.println('\n' + "Formularios Admitidos:" + '\n' + "No se encontraron" + '\n');
         } else {
             System.out.println('\n'+"Formularios Admitidos:" + '\n');
             ordenarLista(formAdmitidos);

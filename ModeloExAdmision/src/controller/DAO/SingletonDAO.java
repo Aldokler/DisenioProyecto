@@ -38,21 +38,23 @@ public class SingletonDAO {
     private SingletonDAO() {
         tablaSedes.add(new Sede("CA", "Cartago"));       //tablaSedes.get(0)
         tablaSedes.add(new Sede("SJ", "San Jose"));      //tablaSedes.get(1)
-        tablaSedes.add(new Sede("LI", "Limon"));         //tablaSedes.get(2)
+        //tablaSedes.add(new Sede("LI", "Limon"));         //tablaSedes.get(2)
        // tablaSedes.add(new Sede("SC", "San Carlos"));    //tablaSedes.get(3)
        // tablaSedes.add(new Sede("AL", "Alajuela"));      //tablaSedes.get(4)
 
-        //carreras de Cartago
-        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(0), TGrado.BACHILLERATO, 1, 650));
-        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(0), TGrado.LICENCIATURA, 1, 620));
+        
 
         // carreras de San Jose
-        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(1), TGrado.BACHILLERATO, 1, 650));
-        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(1), TGrado.LICENCIATURA, 1, 520));
+        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(1), TGrado.BACHILLERATO, 1, 200));
+        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(1), TGrado.LICENCIATURA, 1, 200));
+        
+        //carreras de Cartago
+        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(0), TGrado.BACHILLERATO, 1, 200));
+        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(0), TGrado.LICENCIATURA, 1, 200));
 
         // carreras de Limon
-        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(2), TGrado.BACHILLERATO, 1, 650));
-        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(2), TGrado.LICENCIATURA, 1, 520));
+        //tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(2), TGrado.BACHILLERATO, 10, 650));
+        //tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(2), TGrado.LICENCIATURA, 10 , 520));
 
         // direcciones PCD
         tablaPCD.add(new DireccionPCD("Cartago", "Central", "Oriental"));       //0
@@ -101,9 +103,15 @@ public class SingletonDAO {
     }
 
     public List<FormularioSolicitante> getFormulario(TEstadoSolicitante estado) {
-        // pendiente: conectar a la persistencia y recuperar los formularios
-        // retornar en orden descendente por nota de admisión
-        return tablaFormularios;
+        // pendiente: conectar a la persistencia y recuperar los formularios, retornar en orden descendente por nota de admisión
+        List<FormularioSolicitante> formularios = new ArrayList();
+        for (FormularioSolicitante formulario : tablaFormularios) {
+            if (formulario.getEstado() == estado ) {
+                formularios.add(formulario);
+            }
+        }
+        
+        return formularios;
     }
 
     public List<FormularioSolicitante> getFormularios() {
@@ -111,11 +119,11 @@ public class SingletonDAO {
         return tablaFormularios;
     }
 
-    public List<FormularioSolicitante> getCarrerasFormulario(String codigoCarrera) {
+    public List<FormularioSolicitante> getFormularioCarrera(Carrera carrera) {
         // pendiente: conectar a la persistencia y recuperar las carreras
         List<FormularioSolicitante> formularios = new ArrayList();
         for (FormularioSolicitante formulario : tablaFormularios) {
-            if (formulario.getCarreraSolic().getCodigo().equals(codigoCarrera)) {
+            if (formulario.getCarreraSolic().getCodigo().equals(carrera.getCodigo()) && formulario.getCarreraSolic().getSede().equals(carrera.getSede())) {
                 formularios.add(formulario);
             }
         }

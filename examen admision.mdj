@@ -1369,7 +1369,7 @@
 											"top": 431,
 											"width": 559.60302734375,
 											"height": 13,
-											"text": "+getFormulariosPorCarrera_Solicitante(codigoCarrera: String): Collection<FormularioSolicitante>",
+											"text": "+getFormulariosPorCarrera_Solicitante(carrera: Carrera): Collection<FormularioSolicitante>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1386,7 +1386,7 @@
 											"top": 446,
 											"width": 559.60302734375,
 											"height": 13,
-											"text": "+getFormulariosPorCarrera_Estado(codigoCarrera: String): Collection<FormularioSolicitante>",
+											"text": "+getFormulariosPorCarrera_Estado(carrera: Carrera): Collection<FormularioSolicitante>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4766,13 +4766,30 @@
 											"height": 13,
 											"text": "+actualizarFormulario(numero: int, puntajeObtenido: int): boolean",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGG3jnIiAGO1NU=",
+											"_parent": {
+												"$ref": "AAAAAAF7eRa0/ui2EEM="
+											},
+											"model": {
+												"$ref": "AAAAAAGG3jnIdQF/Lcs="
+											},
+											"font": "Arial;13;0",
+											"left": 1077,
+											"top": 1213,
+											"width": 540.14111328125,
+											"height": 13,
+											"text": "+getFormularioCarrera(Carrera carrera): Collection<FormularioSolicitante>",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1072,
 									"top": 968,
 									"width": 550.14111328125,
-									"height": 248
+									"height": 263
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -8708,13 +8725,30 @@
 											"height": 13,
 											"text": "+getDesgloseCandidatosPorEstado(unaCarrera: Carrera): Collection<FormularioSolicitante>",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGG3jiVYu+Sksk=",
+											"_parent": {
+												"$ref": "AAAAAAF7pyx4CadD5F0="
+											},
+											"model": {
+												"$ref": "AAAAAAGG3jiVNe90qPM="
+											},
+											"font": "Arial;13;0",
+											"left": 1453,
+											"top": 810,
+											"width": 553.134765625,
+											"height": 13,
+											"text": "+getDesgloseCandidatosPorCarrera(unaCarrera: Carrera): Collection<FormularioSolicitante>",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1448,
 									"top": 640,
 									"width": 563.134765625,
-									"height": 173
+									"height": 188
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -16415,8 +16449,10 @@
 											"_parent": {
 												"$ref": "AAAAAAF7wpiRN3PpS24="
 											},
-											"name": "codigoCarrera",
-											"type": "String"
+											"name": "carrera",
+											"type": {
+												"$ref": "AAAAAAF7d9kfDGOTmMg="
+											}
 										},
 										{
 											"_type": "UMLParameter",
@@ -16443,8 +16479,10 @@
 											"_parent": {
 												"$ref": "AAAAAAF7wps6l3603/g="
 											},
-											"name": "codigoCarrera",
-											"type": "String"
+											"name": "carrera",
+											"type": {
+												"$ref": "AAAAAAF7d9kfDGOTmMg="
+											}
 										},
 										{
 											"_type": "UMLParameter",
@@ -17269,6 +17307,33 @@
 													"direction": "return"
 												}
 											]
+										},
+										{
+											"_type": "UMLOperation",
+											"_id": "AAAAAAGG3jnIdQF/Lcs=",
+											"_parent": {
+												"$ref": "AAAAAAF7eRa0/eit5Qs="
+											},
+											"name": "getFormularioCarrera",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGG3jt0vgo+Ij8=",
+													"_parent": {
+														"$ref": "AAAAAAGG3jnIdQF/Lcs="
+													},
+													"name": "Carrera carrera"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGG3jt0vgo/FDg=",
+													"_parent": {
+														"$ref": "AAAAAAGG3jnIdQF/Lcs="
+													},
+													"type": "Collection<FormularioSolicitante>",
+													"direction": "return"
+												}
+											]
 										}
 									]
 								},
@@ -17955,6 +18020,36 @@
 											"_id": "AAAAAAF7wp5gkpjGZXE=",
 											"_parent": {
 												"$ref": "AAAAAAF7wp47JJguyDI="
+											},
+											"type": "Collection<FormularioSolicitante>",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGG3jiVNe90qPM=",
+									"_parent": {
+										"$ref": "AAAAAAF7pyx4AKc6bo0="
+									},
+									"name": "getDesgloseCandidatosPorCarrera",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGG3jjC+/JL2a8=",
+											"_parent": {
+												"$ref": "AAAAAAGG3jiVNe90qPM="
+											},
+											"name": "unaCarrera",
+											"type": {
+												"$ref": "AAAAAAF7d9kfDGOTmMg="
+											}
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGG3jjC/PJM0kc=",
+											"_parent": {
+												"$ref": "AAAAAAGG3jiVNe90qPM="
 											},
 											"type": "Collection<FormularioSolicitante>",
 											"direction": "return"

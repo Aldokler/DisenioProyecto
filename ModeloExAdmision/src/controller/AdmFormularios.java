@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import model.Carrera;
 import model.CentroAplicacion;
 import model.FormularioSolicitante;
 import model.TEstadoSolicitante;
@@ -66,12 +67,12 @@ public class AdmFormularios {
         }
     }
 
-    public List<FormularioSolicitante> getDesgloseCandidatosPorSolicitante(String codigoCarrera) {
-        return SingletonDAO.getInstance().getCarrerasFormulario(codigoCarrera);
+    public List<FormularioSolicitante> getDesgloseCandidatosPorSolicitante(Carrera carrera) {
+        return SingletonDAO.getInstance().getFormularioCarrera(carrera);
     }
 
-    public List<FormularioSolicitante> getDesgloseCandidatosPorCarrera(String codigoCarrera) {
-        return SingletonDAO.getInstance().getCarrerasFormulario(codigoCarrera);
+    public List<FormularioSolicitante> getDesgloseCandidatosPorCarrera(Carrera carrera) {
+        return SingletonDAO.getInstance().getFormularioCarrera(carrera);
     }
 
     public List<FormularioSolicitante> getFormularios() {
@@ -85,19 +86,26 @@ public class AdmFormularios {
     public void simularApliacionExamen() {
         List<FormularioSolicitante> formularios = SingletonDAO.getInstance().getFormularios();
         Random random = new Random();
+        
+        for (FormularioSolicitante formulario : formularios) {
+            SingletonDAO.getInstance().actualizarFormulario(formulario.getIdSolic(), TEstadoSolicitante.CANDIDATO);
+        }
+        
+       
         // se simula que ciertos solicitantes no axisten a la prueba
         int porcentajeAusencia = (int) (formularios.size() * 0.4);
         if (porcentajeAusencia > 1) {
             int numSolicitantesAusentes = random.nextInt(porcentajeAusencia);
             for (int i = 0; i < numSolicitantesAusentes; i++) {
                 int numeroRandom = random.nextInt(formularios.size() - 1);
-                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getNumero(), TEstadoSolicitante.AUSENTE);
+                SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.AUSENTE);
             }
         }
 
+        formularios = SingletonDAO.getInstance().getFormulario(TEstadoSolicitante.CANDIDATO);
         int puntajeMax = new AdmConfiguracion().getPuntajeAdmision();
         for (FormularioSolicitante formulario : formularios) {
-            if (formulario.getEstado() == TEstadoSolicitante.SOLICITANTE) {
+            if (formulario.getEstado() == TEstadoSolicitante.CANDIDATO) {
                 int puntajeRandom = random.nextInt(puntajeMax);
                 SingletonDAO.getInstance().actualizarFormulario(formulario.getNumero(), puntajeRandom);
             }

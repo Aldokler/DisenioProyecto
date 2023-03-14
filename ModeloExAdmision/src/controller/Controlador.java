@@ -77,12 +77,12 @@ public class Controlador {
         admFormularios.definirEstadoAdmisionCandidatos();
     }
 
-    public List<FormularioSolicitante> getFormulariosPorCarrera_Solicitante(String codigoCarrera) {
-        return admFormularios.getDesgloseCandidatosPorSolicitante(codigoCarrera);
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Solicitante(Carrera carrera) {
+        return admFormularios.getDesgloseCandidatosPorSolicitante(carrera);
     }
 
-    public List<FormularioSolicitante> getFormulariosPorCarrera_Estado(String codigoCarrera) {
-        return admFormularios.getDesgloseCandidatosPorCarrera(codigoCarrera);
+    public List<FormularioSolicitante> getFormulariosPorCarrera_Estado(Carrera carrera) {
+        return admFormularios.getDesgloseCandidatosPorCarrera(carrera);
     }
 
     public List<Sede> getSedes() {
