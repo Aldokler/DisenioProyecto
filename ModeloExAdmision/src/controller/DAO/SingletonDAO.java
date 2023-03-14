@@ -7,7 +7,7 @@ package controller.DAO;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import model.Carrera;
@@ -110,24 +110,13 @@ public class SingletonDAO {
                 formularios.add(formulario);
             }
         }
-        
+        Collections.sort(formularios);
         return formularios;
     }
 
     public List<FormularioSolicitante> getFormularios() {
         // pendiente: conectar a la persistencia y recuperar los formularios
-        ArrayList<FormularioSolicitante> formularios = new ArrayList();
-        while (!tablaFormularios.isEmpty()){
-            FormularioSolicitante mayor = tablaFormularios.get(0);
-            for (FormularioSolicitante form : tablaFormularios){
-                if (form.getDetalleExamen().getPuntajeObtenido() > mayor.getDetalleExamen().getPuntajeObtenido()){
-                    mayor = form;
-                }
-            }
-            formularios.add(mayor);
-            tablaFormularios.remove(mayor);
-        }
-        tablaFormularios = formularios;
+        Collections.sort(tablaFormularios);
         return tablaFormularios;
     }
 
