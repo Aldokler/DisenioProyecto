@@ -58,7 +58,8 @@ public class AdmFormularios {
             int puntajeMinimo = formularios.get(i).getCarreraSolic().getPuntajeMinimo();
             if (admision > 0 && nota >= puntajeMinimo) {
                 SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.ADMITIDO);
-                SingletonDAO.getInstance().actualizarCapacidadCarrera(formularios.get(i).getCarreraSolic().getCodigo(), admision - 1);
+                SingletonDAO.getInstance().actualizarCapacidadCarrera(formularios.get(i).getCarreraSolic().getCodigo(),
+                        formularios.get(i).getCarreraSolic().getSede().getCodigo(), admision - 1);
             } else if (nota >= puntajeMinimo) {
                 SingletonDAO.getInstance().actualizarFormulario(formularios.get(i).getIdSolic(), TEstadoSolicitante.POSTULANTE);
             } else {

@@ -116,6 +116,18 @@ public class SingletonDAO {
 
     public List<FormularioSolicitante> getFormularios() {
         // pendiente: conectar a la persistencia y recuperar los formularios
+        ArrayList<FormularioSolicitante> formularios = new ArrayList();
+        while (!tablaFormularios.isEmpty()){
+            FormularioSolicitante mayor = tablaFormularios.get(0);
+            for (FormularioSolicitante form : tablaFormularios){
+                if (form.getDetalleExamen().getPuntajeObtenido() > mayor.getDetalleExamen().getPuntajeObtenido()){
+                    mayor = form;
+                }
+            }
+            formularios.add(mayor);
+            tablaFormularios.remove(mayor);
+        }
+        tablaFormularios = formularios;
         return tablaFormularios;
     }
 
@@ -180,9 +192,9 @@ public class SingletonDAO {
         return true;
     }
 
-    public boolean actualizarCapacidadCarrera(String codigo, int capacidadAdmision) {
+    public boolean actualizarCapacidadCarrera(String codigo, String sede, int capacidadAdmision) {
         for (Carrera car : tablaCarreras) {
-            if (car.getCodigo().equals(codigo)) {
+            if (car.getCodigo().equals(codigo) && car.getSede().getCodigo().equals(sede)) {
                 car.setMaxAdmision(capacidadAdmision);
                 return true;
             }
