@@ -45,12 +45,12 @@ public class SingletonDAO {
         
 
         // carreras de San Jose
-        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(1), TGrado.BACHILLERATO, 1, 200));
-        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(1), TGrado.LICENCIATURA, 1, 200));
+        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(1), TGrado.BACHILLERATO, 10, 200));
+        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(1), TGrado.LICENCIATURA, 10, 200));
         
         //carreras de Cartago
-        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(0), TGrado.BACHILLERATO, 1, 200));
-        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(0), TGrado.LICENCIATURA, 1, 200));
+        tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(0), TGrado.BACHILLERATO, 11, 250));
+        tablaCarreras.add(new Carrera("PI", "Ingenieria en Produccion Industrial", tablaSedes.get(0), TGrado.LICENCIATURA, 11, 250));
 
         // carreras de Limon
         //tablaCarreras.add(new Carrera("IC", "Ingenieria en Computacion", tablaSedes.get(2), TGrado.BACHILLERATO, 10, 650));
