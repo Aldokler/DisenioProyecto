@@ -87,11 +87,40 @@
                     <!-- ver y hacer comentarios -->
                     <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapse_comments" aria-expanded="false"
-                        style="background-color: #13293D; color: white;">Comentarios</button>
+                        style="background-color: #13293D; color: white;">
+                        Comentarios
+                    </button>
 
                     <button class="btn btn-outline-secondary me-2" type="button"
                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
-                        data-bs-target="#registration_commentary">Comentar</button>
+                        data-bs-target="#registration_commentary">
+                        Comentar
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2 " type="button"
+                        style="background-color: #13293D; color: white;">
+                        <a href="" class="text-decoration-none text-reset" [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
+                        
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#observacion" aria-expanded="false"
+                        style="background-color: #13293D; color: white;">
+                        Observación
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;">
+                        <a href="" class="text-decoration-none text-reset"
+                            [routerLink]="['/agregar-modificar-evidencia-plan-de-trabajo']">
+                            Agregar/Modificar evidencia
+                        </a>
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;">
+                        Cancelar Actividad
+                    </button>
 
                     <div class="collapse" id="collapse_comments">
                         <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
@@ -151,11 +180,29 @@
                         </div>
                     </div>
 
+                    <div class="collapse" id="observacion">
+                        <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
+                            <div class="card mb-4">
+
+                                <div class="card-body">
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="oberservacion" name="observacion" required
+                                            class="form-control form-control-lg" style="background-color: #E2EFF8;" />
+                                    </div>
+
+                                    <button type="submit" class="btn text-white"
+                                        style="background-color: #13293D;">Agregar Observación</button>
+                                </div>
 
 
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </section>
 
+            </section>
         </div>
     </section>
 
