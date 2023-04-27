@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Workbook, Worksheet } from 'exceljs';
 import * as fs from 'file-saver';
 import { Estudiante } from 'src/app/model/estudiante';
+import { TSede } from 'src/app/model/tsede';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Estudiante } from 'src/app/model/estudiante';
 export class ComunicadorExcelService {
   private workbook!: Workbook;
   
-  public async downloadAllStudents(datosEstudiantes: Estudiante[]): Promise<void> {
+  public async downloadStudents(datosEstudiantes: Estudiante[]): Promise<void> {
     this.workbook = new Workbook();
 
     // CREAMOS LA PRIMERA HOJA
@@ -123,5 +124,49 @@ export class ComunicadorExcelService {
       const blob = new Blob([data]);
       fs.saveAs(blob, 'EstudiantesGeneral.xlsx');
     });
+  }
+
+  public async uploadStudents(datosEstudiantes: string): Promise<Estudiante[]> {
+    this.workbook = new Workbook();
+    const content = await this.workbook.xlsx.readFile(datosEstudiantes);
+
+    const worksheet = content.worksheets[1]
+    const rowStartIndex = 3;
+    const numberOfRows = worksheet.rowCount - 2;
+    
+    const rows = worksheet.getRows(rowStartIndex, numberOfRows) ?? [];
+    var estudiantes: Estudiante[] = [];
+
+    for (let i = 0; i < rows.length; i++){
+      var nombreCompleto = this.separarNombre(rows[i].getCell(2).toString())
+      var estudiante = new Estudiante(
+        rows[i].getCell(5).toString(),
+        nombreCompleto[0],
+        nombreCompleto[1],
+        nombreCompleto[2],
+        rows[i].getCell(3).toString(),
+        rows[i].getCell(4).toString(),
+        TSede.CA,
+        '');
+    }
+    return estudiantes;
+  }
+
+  private separarNombre(nombre: string): string[]{
+    var nombreCompleto: string[] = [];
+    var step = 0;
+
+    for (var i = 0; i < nombre.length; i++){
+      if (nombre.charAt(i) == ' '){
+        var name = '';
+        for (step; step < i; step++){
+          name.concat(nombre.charAt(step))
+        }
+        nombreCompleto.push(name);
+      }
+
+    }
+
+    return nombreCompleto;
   }
 }

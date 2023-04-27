@@ -12,6 +12,9 @@ export class HomeEstudiantesComponent {
   constructor(
     private excelService: ComunicadorExcelService
   ) {}
+
+  file = '';
+
   descargarExcel(): void {
     var estudiantes: Estudiante[] = [];
     estudiantes.push(new 
@@ -23,6 +26,17 @@ export class HomeEstudiantesComponent {
     estudiantes.push(new 
       Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
        "elmiguelin@gmail.com", "88888888", TSede.SJ, "1234"));
-    this.excelService.downloadAllStudents(estudiantes);
+    this.excelService.downloadStudents(estudiantes);
+  }
+
+  onEnter(value: string){
+    this.file = value;
+  }
+
+  async cargarExcel(): Promise<void> {
+    var estudiantes = await this.excelService.uploadStudents(this.file);
+    for (var i = 0; i < estudiantes.length; i++){
+      console.log(estudiantes[i].getId())
+    }
   }
 }

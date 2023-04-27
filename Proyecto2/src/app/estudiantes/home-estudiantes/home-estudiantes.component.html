@@ -139,13 +139,13 @@
 
                             <div class="col">
                                 <div class="form-outline">
-                                    <input type="file" id="deal_name" name="deal_name" class="form-control" />
+                                    <input #file type="file" id="deal_name" name="deal_name" class="form-control" (change)="onEnter(file.value)"/>
                                     <label class="form-label">Subir Archivo</label>
                                 </div>
                             </div>
 
                             <div class="col">
-                                <button type="submit" class="btn text-white"
+                                <button type="submit" class="btn text-white" (click)="cargarExcel()"
                                     style="background-color: #13293D;">Consultar Datos</button>
                             </div>
                         </div>
