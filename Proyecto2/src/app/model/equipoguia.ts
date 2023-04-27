@@ -1,4 +1,6 @@
-class EquipoGuia {
+import { Profesor } from "./profesor";
+
+export class EquipoGuia {
     private miembros: Array<Profesor>;
     private año: number;
     private semestre: number;

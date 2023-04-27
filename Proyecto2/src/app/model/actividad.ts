@@ -1,4 +1,11 @@
-class Actividad {
+import { Comentario } from "./comentario";
+import { Evidencia } from "./evidencia";
+import { Profesor } from "./profesor";
+import { TEstado } from "./testado";
+import { TIndoleActividad } from "./tindoleactividad";
+import { TModalidad } from "./tmodalidad";
+
+export class Actividad {
     private semana: number;
     private tipo: TIndoleActividad;
     private nombre: string;

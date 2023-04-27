@@ -11,12 +11,12 @@ interface TSedeValue {
     SC: { codigo: 'SC', descripcion: 'Campus tecnológico local cartago' }
   }
   
-  enum TSede {
-    CA,
-    SJ,
-    LI,
-    AL,
-    SC
+export enum TSede {
+    CA = "CA",
+    SJ = "SJ",
+    LI = "LI",
+    AL = "AL",
+    SC = "SC"
   }
   
   const sedeSeleccionada: TSede = TSede.AL;

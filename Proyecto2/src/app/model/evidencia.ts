@@ -1,4 +1,4 @@
-class Evidencia {
+export class Evidencia {
     private id: number;
     private asistencia: Array<string>;
     private link: string;

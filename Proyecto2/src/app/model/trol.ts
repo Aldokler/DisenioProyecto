@@ -1,3 +1,4 @@
-enum TRol {
-    GUIA, COORDINADOR
+export enum TRol {
+    GUIA = "GUIA",
+    COORDINADOR = "COORDINADOR"
 }

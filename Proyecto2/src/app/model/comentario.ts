@@ -1,4 +1,6 @@
-class Comentario {
+import { Profesor } from "./profesor";
+
+export class Comentario {
     private mensaje: string;
     private emisor: Profesor;
     private fechaHora: Date;

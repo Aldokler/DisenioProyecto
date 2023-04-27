@@ -1,4 +1,8 @@
-class Profesor extends Usuario {
+import { TRol } from "./trol";
+import { TSede } from "./tsede";
+import { Usuario } from "./usuario";
+
+export class Profesor extends Usuario {
     private telefonoOficina: string;
     private fotografia: string;
     private rol: TRol;

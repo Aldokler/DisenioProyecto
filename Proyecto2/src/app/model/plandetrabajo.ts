@@ -1,4 +1,7 @@
-class PlanDeTrabajo {
+import { Actividad } from "./actividad";
+import { EquipoGuia } from "./equipoguia";
+
+export class PlanDeTrabajo {
     private id: number;
     private año: number;
     private semestre: number;

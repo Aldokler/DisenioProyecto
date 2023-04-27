@@ -1,4 +1,7 @@
-class Estudiante extends Usuario {
+import { TSede } from "./tsede";
+import { Usuario } from "./usuario";
+
+export class Estudiante extends Usuario {
 
     public constructor ( 
         id: string,

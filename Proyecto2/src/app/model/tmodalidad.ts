@@ -1,3 +1,4 @@
-enum TModalidad {
-    PRESENCIAL, REMOTA
+export enum TModalidad {
+    PRESENCIAL = "PRESENCIAL",
+    REMOTA = "REMOTA"
 }

@@ -1,4 +1,6 @@
-class Usuario {
+import { TSede } from "./tsede";
+
+export class Usuario {
     protected id: string;
     protected nombre: string;
     protected apellido1: string;

@@ -1,4 +1,7 @@
-class Administrativo extends Usuario {
+import { TSede } from "./tsede";
+import { Usuario } from "./usuario";
+
+export class Administrativo extends Usuario {
     private telefonoOficina: string;
 
     public constructor ( 

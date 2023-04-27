@@ -28,6 +28,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Comandos extras para descarga y configuración del proyecto
 
+npm install -g @angular/cli
 npm i xlsx
 npm i exceljs file-saver
 npm i -D @types/file-saver
+npm install --save stream
+npm install --save-dev @types/node
