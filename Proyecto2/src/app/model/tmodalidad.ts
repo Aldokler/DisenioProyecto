@@ -1,0 +1,3 @@
+enum TModalidad {
+    PRESENCIAL, REMOTA
+}

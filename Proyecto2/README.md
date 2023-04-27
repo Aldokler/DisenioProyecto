@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Comandos extras para descarga y configuración del proyecto
+
+npm i xlsx
+npm i exceljs file-saver
+npm i -D @types/file-saver
