@@ -22,6 +22,7 @@ import { CrearEquipoComponent } from './equipoGuia/componentes/crear-equipo/crea
 import { RegistrarProfesorGuiaComponent } from './equipoGuia/componentes/registrar-profesor-guia/registrar-profesor-guia.component';
 import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-baja.component';
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
+import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equ
     RegistrarProfesorGuiaComponent,
     DarDeBajaComponent,
     ConsultarEquipoComponent,
+    VerActividadesPlanDeTrabajoComponent,
 
   ],
   imports: [

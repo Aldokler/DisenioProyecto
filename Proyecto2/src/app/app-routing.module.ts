@@ -22,7 +22,7 @@ import { CrearEquipoComponent } from './equipoGuia/componentes/crear-equipo/crea
 import { RegistrarProfesorGuiaComponent } from './equipoGuia/componentes/registrar-profesor-guia/registrar-profesor-guia.component';
 import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-baja.component';
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
-
+import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
 //Rutas de navegación
 const routes: Routes = [
     {path: '',redirectTo: "login", pathMatch: "full"},
@@ -38,6 +38,7 @@ const routes: Routes = [
     {path: 'crear-actividad-plan-de-trabajo',component: CrearActividadPlanDeTrabajoComponent},
     {path: 'agregar-modificar-evidencia-plan-de-trabajo',component: AgregarModificarEvidenciaPlanDeTrabajoComponent},
     {path: 'ver-plan-de-trabajo',component: VerPlanDeTrabajoComponent},
+    {path: 'ver-actividades-plan-de-trabajo',component: VerActividadesPlanDeTrabajoComponent},
 
     {path: 'home-profesores',component: HomeProfesoresComponent},
     {path: 'editar-profesores',component: EditarProfesoresComponent},

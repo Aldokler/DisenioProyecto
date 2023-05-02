@@ -1,0 +1,276 @@
+<body>
+    <nav class="navbar navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+                aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+        style="background-color: #2B546A;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Aquí coloca el contenido del menú -->
+            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
+
+            <ul>
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-profesores']">
+                            <p style="color: white;">Profesores</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-estudiantes']">
+                            <p style="color: white;">Estudiantes</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-equipo-guia']">
+                            <p style="color: white;">Equipo Guía</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li class="mt-5">
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset ">
+                            <p style="color: white;">Cerrar Sesión</p>
+                        </a>
+                    </h5>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="mb-4 mt-4">
+        <div class="container">
+
+
+            <div class="d-flex align-items-center pb-1 ">
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/ver-plan-de-trabajo']">
+                    <img src="assets/imagenes/regresar.png" alt="">
+                    <span class="h5 fw-bold ml-3">REGRESAR</span>
+                </a>
+            </div>
+
+            <section class="mb-4">
+                <div class="container mt-4">
+
+                    <div class="card mb-4">
+                        <h5 class="card-header" style="background-color: #E2EFF8;">
+                            Bienvenida de primeros ingresos 2023
+                        </h5>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Tipo: Motivacionales
+                            </h4>
+                            <div class="card-text">
+                                Semana: 1 &nbsp;&nbsp;&nbsp;
+                                25 de febrero
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ver y hacer comentarios -->
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse_comments" aria-expanded="false"
+                        style="background-color: #13293D; color: white;">
+                        Comentarios
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;" data-bs-toggle="modal"
+                        data-bs-target="#registration_commentary">
+                        Comentar
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2 " type="button"
+                        style="background-color: #13293D; color: white;">
+                        <a href="" class="text-decoration-none text-reset" [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
+                        
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#observacion" aria-expanded="false"
+                        style="background-color: #13293D; color: white;">
+                        Observación
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;">
+                        <a href="" class="text-decoration-none text-reset"
+                            [routerLink]="['/agregar-modificar-evidencia-plan-de-trabajo']">
+                            Agregar/Modificar evidencia
+                        </a>
+                    </button>
+
+                    <button class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;">
+                        Cancelar Actividad
+                    </button>
+
+                    <div class="collapse" id="collapse_comments">
+                        <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
+                            <div class="card mb-4">
+
+                                <div class="card-header" style="background-color: #E2EFF8;">
+                                    <img src="assets/imagenes/usuario.png" alt="Generic placeholder image"
+                                        class="img-fluid rounded-circle border border-white border-3 me-2"
+                                        style="width: 40px;">
+                                    Bryan Castro
+                                </div>
+
+                                <div class="card-body">
+                                    <p>muy bueno</p>
+                                </div>
+                                <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                    Fecha de publicación: 24/05/2004 &nbsp;&nbsp;&nbsp;
+
+                                    <!-- ver respuestas y realizar comentarios -->
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse_answers"
+                                        aria-expanded="false" style="background-color: #13293D; color: white;">Ver
+                                        respuestas</button>
+
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        style="background-color: #13293D; color: white;" data-bs-toggle="modal"
+                                        data-bs-target="#registration_commentary_answer">Reponder comentario</button>
+
+                                    <div class="collapse" id="collapse_answers">
+                                        <div class="mt-4"
+                                            style="height: 400px; display: block; overflow: auto; position: relative;">
+                                            <div class="card mb-4">
+
+                                                <div class="card-header" style="background-color: #E2EFF8; ">
+                                                    <img src="assets/imagenes/usuario.png"
+                                                        alt="Generic placeholder image"
+                                                        class="img-fluid rounded-circle border border-white border-3 me-2"
+                                                        style="width: 40px;">
+                                                    Mario Castro
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <p> bueno</p>
+                                                </div>
+                                                <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                                    Fecha de publicación: 24/05/2004
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="observacion">
+                        <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
+                            <div class="card mb-4">
+
+                                <div class="card-body">
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="oberservacion" name="observacion" required
+                                            class="form-control form-control-lg" style="background-color: #E2EFF8;" />
+                                    </div>
+
+                                    <button type="submit" class="btn text-white"
+                                        style="background-color: #13293D;">Agregar Observación</button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </section>
+
+
+    <!-- Pop up para realizar un comentario -->
+    <div class="modal fade" id="registration_commentary" tabindex="-1" aria-labelledby="registration_commentary"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background-color: #E2EFF8;">
+                    <h1 class="modal-title fs-5">Realizar comentario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form onsubmit="">
+                    <div class="modal-body">
+                        <div class="form-outline mb-4">
+                            <label class="form-label">Comentario</label>
+                            <input type="text" id="register_commentary" name="register_commentary" class="form-control"
+                                required />
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn text-white"
+                            style="background-color: #13293D;">Comentar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop up para responder un comentario -->
+    <div class="modal fade" id="registration_commentary_answer" tabindex="-1"
+        aria-labelledby="registration_commentary_answer" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background-color: #E2EFF8;">
+                    <h1 class="modal-title fs-5">Responder comentario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form onsubmit="">
+                    <div class="modal-body">
+                        <div class="form-outline mb-4">
+                            <label class="form-label">Comentario</label>
+                            <input type="text" id="registration_commentary_answer" name="registration_commentary_answer"
+                                class="form-control" required />
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn text-white"
+                            style="background-color: #13293D;">Responder</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
