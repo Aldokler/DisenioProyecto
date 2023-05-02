@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-excel.service';
 import { Estudiante } from 'src/app/model/estudiante';
 import { TSede } from 'src/app/model/tsede';
@@ -8,12 +8,18 @@ import { TSede } from 'src/app/model/tsede';
   templateUrl: './home-estudiantes.component.html',
   styleUrls: ['./home-estudiantes.component.css']
 })
+
 export class HomeEstudiantesComponent {
+  /*
+  @ViewChild("file", {
+    read: ElementRef
+  }) file: ElementRef;*/
+
+  fileName = '';
+
   constructor(
     private excelService: ComunicadorExcelService
-  ) {}
-
-  file = '';
+  ){}
 
   descargarExcel(): void {
     var estudiantes: Estudiante[] = [];
@@ -26,17 +32,43 @@ export class HomeEstudiantesComponent {
     estudiantes.push(new 
       Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
        "elmiguelin@gmail.com", "88888888", TSede.SJ, "1234"));
+    estudiantes.push(new 
+      Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
+       "elmiguelin@gmail.com", "88888888", TSede.AL, "1234"));
+    estudiantes.push(new 
+      Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
+       "elmiguelin@gmail.com", "88888888", TSede.SC, "1234"));
     this.excelService.downloadStudents(estudiantes);
+    //console.log(this.excelService.separarSede(estudiantes))
   }
 
-  onEnter(value: string){
-    this.file = value;
-  }
+  /*
+  onFileSelected(event: any) {
 
+    const file:File = event.target.files[0];
+
+    if (file) {
+
+        this.fileName = file.name;
+
+        const formData = new FormData();
+
+        formData.append("thumbnail", file);
+
+        const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+        upload$.subscribe();
+    }
+}
+*/
   async cargarExcel(): Promise<void> {
-    var estudiantes = await this.excelService.uploadStudents(this.file);
+    /*
+    let excel = this.file.nativeElement.files;
+    var estudiantes = await this.excelService.uploadStudents(excel);
     for (var i = 0; i < estudiantes.length; i++){
       console.log(estudiantes[i].getId())
     }
+    */
   }
+  
 }

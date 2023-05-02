@@ -7,117 +7,109 @@ import { TSede } from 'src/app/model/tsede';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ComunicadorExcelService {
   private workbook!: Workbook;
   
   public async downloadStudents(datosEstudiantes: Estudiante[]): Promise<void> {
     this.workbook = new Workbook();
+    var estudiantes = this.separarSede(datosEstudiantes);
 
-    // CREAMOS LA PRIMERA HOJA
-    const sheet = this.workbook.addWorksheet('Estudiantes');
+    for (var hoja = 0; hoja < Object.keys(TSede).length; hoja++){
 
-    // ESTABLECEMOS EL ANCHO Y ESTILO DE LAS COLUMNAS
-    sheet.getColumn('B').width = 45;
-    sheet.getColumn('C').width = 35;
-    sheet.getColumn('D').width = 20;
-    sheet.getColumn('E').width = 20;
-    sheet.getColumn('F').width = 10;
+      // CREAMOS LA PRIMERA HOJA
+      const sheet = this.workbook.addWorksheet(Object.keys(TSede)[hoja]);
 
-    //CREAMOS LOS TITULOS PARA LA CABECERA
-    const headerRow = sheet.getRow(2);
-    // ESTAMOS JALANDO TODAS LAS COLUMNAS DE ESA FILA, "A","B","C"..etc
-    headerRow.values = [
-      '', // column A
-      'Nombre Completo', // column B
-      'Correo Electrónico', // column C
-      'Celular', // column D
-      'Carné', // column E
-      'Sede', // column F
-    ];
+      // ESTABLECEMOS EL ANCHO Y ESTILO DE LAS COLUMNAS
+      sheet.getColumn('B').width = 45;
+      sheet.getColumn('C').width = 35;
+      sheet.getColumn('D').width = 20;
+      sheet.getColumn('E').width = 20;
 
-    headerRow.font = { bold: true, size: 14 };
-
-    //COLOR Y BORDES DE LOS HEADERS
-    sheet.getCell('B2').border = {
-      top: {style:'thin'},
-      left: {style:'thin'},
-      bottom: {style:'thin'},
-      right: {style:'thin'}
-    }
-    sheet.getCell('B2').fill = {
-      type: 'pattern',
-      pattern:'solid',
-      fgColor:{argb:'FF9BF095'},
-    }
-    sheet.getCell('C2').border = {
-      top: {style:'thin'},
-      left: {style:'thin'},
-      bottom: {style:'thin'},
-      right: {style:'thin'}
-    }
-    sheet.getCell('C2').fill = {
-      type: 'pattern',
-      pattern:'solid',
-      fgColor:{argb:'FFF78B86'},
-    }
-    sheet.getCell('D2').border = {
-      top: {style:'thin'},
-      left: {style:'thin'},
-      bottom: {style:'thin'},
-      right: {style:'thin'}
-    }
-    sheet.getCell('D2').fill = {
-      type: 'pattern',
-      pattern:'solid',
-      fgColor:{argb:'FF86DDF7'},
-    }
-    sheet.getCell('E2').border = {
-      top: {style:'thin'},
-      left: {style:'thin'},
-      bottom: {style:'thin'},
-      right: {style:'thin'}
-    }
-    sheet.getCell('E2').fill = {
-      type: 'pattern',
-      pattern:'solid',
-      fgColor:{argb:'FFD086F7'},
-    }
-    sheet.getCell('F2').border = {
-      top: {style:'thin'},
-      left: {style:'thin'},
-      bottom: {style:'thin'},
-      right: {style:'thin'}
-    }
-    sheet.getCell('F2').fill = {
-      type: 'pattern',
-      pattern:'solid',
-      fgColor:{argb:'FF8886F7'},
-    }
-
-    // INSERTAMOS LOS DATOS EN LAS RESPECTIVAS COLUMNAS
-    const rowsToInsert = sheet.getRows(3, datosEstudiantes.length)!;
-
-    for (let i = 0; i < rowsToInsert.length; i++) {
-      const estudiante = datosEstudiantes[i]; // obtenemos el item segun el index de la iteracion (recorrido)
-      const row = rowsToInsert[i]; // obtenemos la primera fila segun el index de la iteracion (recorrido)
-
-      //  los valores de itemData seran asignados a "row" (fila actual en la iteracion)
-
-      row.values = [
+      //CREAMOS LOS TITULOS PARA LA CABECERA
+      const headerRow = sheet.getRow(2);
+      // ESTAMOS JALANDO TODAS LAS COLUMNAS DE ESA FILA, "A","B","C"..etc
+      headerRow.values = [
         '', // column A
-        estudiante.getNombre() + ' ' + estudiante.getApellido1() + ' ' + estudiante.getApellido2(), // column B
-        estudiante.getCorreoElectronico(), // column C
-        estudiante.getCelular(), // column D
-        estudiante.getId(), // column E
-        estudiante.getSede(), // column F
+        'Nombre Completo', // column B
+        'Correo Electrónico', // column C
+        'Celular', // column D
+        'Carné', // column E
       ];
 
-      row.getCell('B').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
-      row.getCell('C').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
-      row.getCell('D').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
-      row.getCell('E').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
-      row.getCell('F').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
+      headerRow.font = { bold: true, size: 14 };
 
+      //COLOR Y BORDES DE LOS HEADERS
+      sheet.getCell('B2').border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      sheet.getCell('B2').fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{argb:'FF9BF095'},
+      }
+      sheet.getCell('C2').border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      sheet.getCell('C2').fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{argb:'FFF78B86'},
+      }
+      sheet.getCell('D2').border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      sheet.getCell('D2').fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{argb:'FF86DDF7'},
+      }
+      sheet.getCell('E2').border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      }
+      sheet.getCell('E2').fill = {
+        type: 'pattern',
+        pattern:'solid',
+        fgColor:{argb:'FFD086F7'},
+      }
+
+      // INSERTAMOS LOS DATOS EN LAS RESPECTIVAS COLUMNAS
+      if (estudiantes[hoja].length != 0){
+        const rowsToInsert = sheet.getRows(3, estudiantes[hoja].length)!;
+  
+        for (let i = 0; i < rowsToInsert.length; i++) {
+          const estudiante = estudiantes[hoja][i]; // obtenemos el item segun el index de la iteracion (recorrido)
+          const row = rowsToInsert[i]; // obtenemos la primera fila segun el index de la iteracion (recorrido)
+  
+          //  los valores de itemData seran asignados a "row" (fila actual en la iteracion)
+  
+          row.values = [
+            '', // column A
+            estudiante.getNombre() + ' ' + estudiante.getApellido1() + ' ' + estudiante.getApellido2(), // column B
+            estudiante.getCorreoElectronico(), // column C
+            estudiante.getCelular(), // column D
+            estudiante.getId(), // column E
+          ];
+  
+          row.getCell('B').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
+          row.getCell('C').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
+          row.getCell('D').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
+          row.getCell('E').border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} };
+  
+        }
+      }
     }
 
     this.workbook.xlsx.writeBuffer().then((data) => {
@@ -125,6 +117,8 @@ export class ComunicadorExcelService {
       fs.saveAs(blob, 'EstudiantesGeneral.xlsx');
     });
   }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   public async uploadStudents(datosEstudiantes: string): Promise<Estudiante[]> {
     this.workbook = new Workbook();
@@ -152,6 +146,8 @@ export class ComunicadorExcelService {
     return estudiantes;
   }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   private separarNombre(nombre: string): string[]{
     var nombreCompleto: string[] = [];
     var step = 0;
@@ -168,5 +164,27 @@ export class ComunicadorExcelService {
     }
 
     return nombreCompleto;
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public separarSede(datosEstudiantes: Estudiante[]): Estudiante[][]{
+    var estudiantes: Estudiante[][] = [];
+    //Añade listas vacías de acuerdo al número de sede
+    var sedes = Object.keys(TSede);
+    for (var s = 0; s < sedes.length; s++){ estudiantes.push([])}
+
+    for (var i = 0; i < datosEstudiantes.length; i++){
+      var estudiante = datosEstudiantes[i];
+      var sede = estudiante.getSede();
+      for (var s = 0; s < sedes.length; s++){
+        if (estudiante.getSede() == sedes[s]){
+          estudiantes[s].push(estudiante);
+          break;
+        }
+      }
+    }
+
+    return estudiantes;
   }
 }
