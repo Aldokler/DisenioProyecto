@@ -1,6 +1,7 @@
 {
   "name": "proyecto-disenno",
   "version": "0.0.0",
+  "main" : "index.js",
   "scripts": {
     "dev": "nodemon/index.js",
     "ng": "ng",

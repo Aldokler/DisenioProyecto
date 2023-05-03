@@ -71,7 +71,7 @@ function gfet((req, res) =>{){
     });
 };
 */
-
+/*
 server.post("/api/profesor/add", (req, res) =>{
     let details = {
         ID: req.body.ID,
@@ -146,6 +146,6 @@ server.put("/api/profesor/update/:id", (req, res) => {
       }
     });
   });
-
+*/
 
 module.exports= conexion;
