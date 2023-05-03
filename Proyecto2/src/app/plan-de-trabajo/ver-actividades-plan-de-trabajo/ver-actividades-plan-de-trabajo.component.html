@@ -85,31 +85,32 @@
                     </div>
 
                     <!-- ver y hacer comentarios -->
-                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                    <button *ngIf="tipoUsuario === 'GUIA'" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapse_comments" aria-expanded="false"
                         style="background-color: #13293D; color: white;">
                         Comentarios
                     </button>
 
-                    <button class="btn btn-outline-secondary me-2" type="button"
+                    <button *ngIf="tipoUsuario === 'GUIA'" class="btn btn-outline-secondary me-2" type="button"
                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
                         data-bs-target="#registration_commentary">
                         Comentar
                     </button>
 
-                    <button class="btn btn-outline-secondary me-2 " type="button"
+                    
+                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2 " type="button"
                         style="background-color: #13293D; color: white;">
                         <a href="" class="text-decoration-none text-reset" [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
                         
                     </button>
 
-                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
                         data-bs-target="#observacion" aria-expanded="false"
                         style="background-color: #13293D; color: white;">
                         Observación
                     </button>
 
-                    <button class="btn btn-outline-secondary me-2" type="button"
+                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2" type="button"
                         style="background-color: #13293D; color: white;">
                         <a href="" class="text-decoration-none text-reset"
                             [routerLink]="['/agregar-modificar-evidencia-plan-de-trabajo']">
@@ -117,7 +118,7 @@
                         </a>
                     </button>
 
-                    <button class="btn btn-outline-secondary me-2" type="button"
+                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2" type="button"
                         style="background-color: #13293D; color: white;">
                         Cancelar Actividad
                     </button>

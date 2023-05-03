@@ -59,7 +59,7 @@
         <div class="container">
 
 
-            <div class="d-flex align-items-center pb-1 " >
+            <div class="d-flex align-items-center pb-1 ">
                 <a href="" class="text-decoration-none text-reset" [routerLink]="['/home']">
                     <img src="assets/imagenes/regresar.png" alt="">
                     <span class="h5 fw-bold ml-3">REGRESAR</span>
@@ -93,9 +93,10 @@
                                 style="background-color: #13293D;">Filtrar</button>
                         </div>
 
-                        <div class="col">
-                            <button type="" class="btn text-white me-2"
-                                style="background-color: #13293D;"><a href="" class="text-decoration-none text-reset" [routerLink]="['/crear-plan-de-trabajo']">Crear plan de trabajo </a> </button>
+                        <div *ngIf="tipoUsuario === 'COORDINADOR'" class="col">
+                            <button type="" class="btn text-white me-2" style="background-color: #13293D;"><a href=""
+                                    class="text-decoration-none text-reset"
+                                    [routerLink]="['/crear-plan-de-trabajo']">Crear plan de trabajo </a> </button>
                         </div>
 
                     </div>
@@ -105,21 +106,26 @@
             <section class="mb-4">
                 <div class="container mt-4">
 
-                    <div class="card mb-4">
-                        <h5 class="card-header" style="background-color: #E2EFF8;">
-                            Plan 1
-                        </h5>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Semestre: 1 &nbsp;&nbsp;&nbsp;
-                                año: 2021
+                    <!--AQUI SE CREA CADA PLAN DE TRABAJO QUE HAYA -->
+                    <div *ngFor="let plan of planesDeTrabajo">
+                        <div class="card mb-4">
+                            <h5 class="card-header" style="background-color: #E2EFF8;">
+                                Plan {{ plan.id }}
+                            </h5>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    Semestre: {{ plan.semestre }} &nbsp;&nbsp;&nbsp;
+                                    año: {{ plan.anio }}
+                                </div>
+                                <a href="" class="btn btn-outline-secondary mt-2"
+                                    style="background-color: #13293D; color: #E2EFF8;"
+                                    [routerLink]="['/ver-plan-de-trabajo']">Ver
+                                    más detalles</a>
                             </div>
-                            <a href="" class="btn btn-outline-secondary mt-2"
-                                style="background-color: #13293D; color: #E2EFF8;" 
-                                [routerLink]="['/ver-plan-de-trabajo']">Ver
-                                más detalles</a>
                         </div>
                     </div>
+
+                    <!--AQUI TERMINA -->
 
                 </div>
             </section>

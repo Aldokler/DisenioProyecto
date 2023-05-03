@@ -22,14 +22,13 @@
                             </div>
           
                             <div class="form-outline mb-4">
-                                <label class="form-label fw-bold">Contraseña</label>
-
-                                <div class="input-group">
-                                    <input type="password" id="contraseña" name="contraseña" class="form-control form-control-lg" required style="background-color: #E2EFF8;" aria-describedby="ver-contrasena">
-                                    <button class="btn btn-outline-secondary" type="button" id="ver-contrasena">
-                                      <i class="bi bi-eye"></i>
-                                    </button>
-                                </div>           
+                              <label class="form-label fw-bold">Contraseña</label>
+                              <div class="input-group">
+                                <input #contrasenaInput type="password" id="contraseña" name="contraseña" class="form-control form-control-lg" required style="background-color: #E2EFF8;">
+                                <button (click)="verContrasena()" class="btn btn-outline-secondary" type="button">
+                                  <i [ngClass]="contrasenaInput.type === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                                </button>
+                              </div>           
                             </div>
           
                             <div class="mb-4 d-flex justify-content-center">

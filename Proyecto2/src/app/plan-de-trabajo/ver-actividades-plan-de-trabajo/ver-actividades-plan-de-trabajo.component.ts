@@ -7,5 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./ver-actividades-plan-de-trabajo.component.css']
 })
 export class VerActividadesPlanDeTrabajoComponent {
+  tipoUsuario: string;
+
+  constructor() {
+    // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
+    this.tipoUsuario = 'GUIA';
+  }
 
 }
