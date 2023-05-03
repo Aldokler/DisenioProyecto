@@ -35,3 +35,4 @@ npm i -D @types/file-saver
 npm install --save stream
 npm install --save-dev @types/node
 npm install --save @angular/material
+npm install express mysql
