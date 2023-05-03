@@ -22,6 +22,8 @@ export class Controlador {
     private adminEstudiante = new AdminEstudiante()
     private adminProfesores = new AdminProfesores()
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public getEstudiante(carne:number): Estudiante{
         return this.adminEstudiante.getEstudiante(carne)
     }
@@ -34,6 +36,8 @@ export class Controlador {
     public cargarListaEstudiantes(link: String){
         this.adminEstudiante.cargarListaEstudiantes(link)
     }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public getProfesor(id: String): Profesor{
         return this.adminProfesores.getProfesor(id)
@@ -49,27 +53,74 @@ export class Controlador {
         return this.adminAdministrativos.getAdministrativo(id)
     }
 
-    public crearEquipo(equipo: EquipoGuia){}
-    public agregarProfesor(profesor: Profesor){}
-    public sacarProfesor(id: String){}
-    public definirCoordinador(id: String){}
-    public verMiembrosEquipo(){}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public crearActividad(actividad: Actividad){}
-    public modificarDatosActividad(actividad: Actividad){}
-    public subirEvidencia(evidencia: Evidencia){}
-    public modificarEvidencia(id: number){}
-    public comentarActividad(comentario: Comentario){}
-    public responderComentario(comentario: Comentario){}
-    public agregarObservacion(observacion: String, fecha: Date){}
+    public crearEquipo(equipo: EquipoGuia): boolean{
+        return this.adminEquipoGuia.crearEquipo(equipo)
+    }
+    public agregarProfesor(profesor: Profesor){
+        this.adminEquipoGuia.agregarProfesor(profesor)
+    }
+    public sacarProfesor(id: String): boolean{
+        return this.adminEquipoGuia.sacarProfesor(id)
+    }
+    public definirCoordinador(id: String): boolean{
+        return this.adminEquipoGuia.definirCoordinador(id)
+    }
+    public verMiembrosEquipo(): EquipoGuia{
+        return this.adminEquipoGuia.verMiembrosEquipo()
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public crearActividad(actividad: Actividad): boolean{
+        return this.adminActividad.crearActividad(actividad)
+    }
+    public modificarDatosActividad(actividad: Actividad): boolean{
+        return this.adminActividad.modificarDatosActividad(actividad)
+    }
+    public subirEvidencia(evidencia: Evidencia): boolean{
+        return this.adminActividad.subirEvidencia(evidencia)
+    }
+    public modificarEvidencia(id: number): boolean{
+        return this.adminActividad.modificarEvidencia(id)
+    }
+    public comentarActividad(comentario: Comentario){
+        this.adminActividad.comentarActividad(comentario)
+    }
+    public responderComentario(comentario: Comentario){
+        this.adminActividad.responderComentario(comentario)
+    }
+    public agregarObservacion(observacion: String, fecha: Date){
+        this.adminActividad.agregarObservacion(observacion, fecha)
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    public crearPlanTrabajo(plan: PlanDeTrabajo){}
-    public consultarProximaActividad(id: String){}
-    public verPlanDeTrabajo(){}
-    public marcarActividadRealizada(id: String){}
-    public cancelarActividad(id: String){}
-    public publicarActividad(id: String){}
-    public registrarActividad(actividad: Actividad){}
+    public crearPlanTrabajo(plan: PlanDeTrabajo): boolean{
+        return this.adminPlanDeTrabajo.crearPlanTrabajo(plan)
+    }
+    public consultarProximaActividad(id: String): Actividad{
+        return this.adminPlanDeTrabajo.consultarProximaActividad(id)
+    }
+    public verPlanDeTrabajo(): PlanDeTrabajo{
+        return this.adminPlanDeTrabajo.verPlanDeTrabajo()
+    }
+    public marcarActividadRealizada(id: String): boolean{
+        return this.adminPlanDeTrabajo.marcarActividadRealizada(id)
+    }
+    public cancelarActividad(id: String): boolean{
+        return this.adminPlanDeTrabajo.cancelarActividad(id)
+    }
+    public publicarActividad(id: String): boolean{
+        return this.adminPlanDeTrabajo.publicarActividad(id)
+    }
+    public registrarActividad(actividad: Actividad): boolean{
+        return this.adminPlanDeTrabajo.registrarActividad(actividad)
+    }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //?
     public cambiarContraseña(correo:String){}
 }
