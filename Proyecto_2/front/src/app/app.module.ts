@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +27,7 @@ import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
 import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,11 +51,13 @@ import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-acti
     ConsultarEquipoComponent,
     VerActividadesPlanDeTrabajoComponent,
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

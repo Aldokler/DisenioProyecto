@@ -23,6 +23,7 @@ import { RegistrarProfesorGuiaComponent } from './equipoGuia/componentes/registr
 import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-baja.component';
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
 import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
+
 //Rutas de navegación
 const routes: Routes = [
     {path: '',redirectTo: "login", pathMatch: "full"},
@@ -30,6 +31,7 @@ const routes: Routes = [
     {path: 'login',component: LoginComponent},
     {path: 'recuperacion',component: RecuperacionComponent},
     {path: 'home',component: HomeComponent},
+
 
     {path: 'crear-plan-de-trabajo',component: CrearPlanDeTrabajoComponent},
     {path: 'home-plan-de-trabajo',component: HomePlanDeTrabajoComponent},
