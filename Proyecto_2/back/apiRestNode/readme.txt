@@ -8,3 +8,9 @@ conexion a la base
     user: 'usuario',
     password: 'usuario',
     database: 'TECsystem'
+    
+crear usuario en la base 
+
+DROP USER if exists usuario@localhost;
+CREATE USER usuario@localhost IDENTIFIED BY 'usuario';
+GRANT ALL ON TECsystem.* TO usuario@localhost ;
