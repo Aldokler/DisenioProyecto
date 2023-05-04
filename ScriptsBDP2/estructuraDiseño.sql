@@ -1,3 +1,6 @@
+CREATE DATABASE proyectodisenio;
+USE proyectodisenio;
+
 CREATE TABLE `tsede` (
   `Codigo` varchar(2) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
@@ -136,7 +139,7 @@ CREATE TABLE `asistencia` (
 
 CREATE TABLE `comentario` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `Mensaje` varchar(45) NOT NULL,
+  `Mensaje` varchar(500) NOT NULL,
   `FechaHora` datetime NOT NULL,
   `Emisor` varchar(45) NOT NULL,
   `ActividadID` int DEFAULT NULL,
@@ -175,6 +178,6 @@ CREATE TABLE `equipo_guía_x_profesor` (
   KEY `IDProfesor_idx` (`IDProfesor`),
   CONSTRAINT `IDEquipoGuia` FOREIGN KEY (`IDEquipoGuia`) REFERENCES `equipo_guía` (`ID`),
   CONSTRAINT `IDProfesor_EGXP` FOREIGN KEY (`IDProfesor`) REFERENCES `profesor` (`ID`)
-)
+);
 
 COMMIT;

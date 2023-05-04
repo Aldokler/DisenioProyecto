@@ -67,3 +67,5 @@ BEGIN
     Order by a.Sede, a.Apellido1, a.Apellido2, a.Nombre;
 END$$
 DELIMITER ;
+
+COMMIT;
