@@ -1,8 +1,8 @@
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: 'ssmsql00',
+    user: 'usuario',
+    password: 'usuario',
     database: 'TECsystem'
   })
   
