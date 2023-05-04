@@ -1,0 +1,128 @@
+<body>
+
+    <nav class="navbar navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+                aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+        style="background-color: #2B546A;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Aquí coloca el contenido del menú -->
+            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
+
+            <ul>
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-plan-de-trabajo']">
+                            <p style="color: white;">Plan de Trabajo</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-profesores']">
+                            <p style="color: white;">Profesores</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-equipo-guia']">
+                            <p style="color: white;">Equipo Guía</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li class="mt-5">
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset ">
+                            <p style="color: white;">Cerrar Sesión</p>
+                        </a>
+                    </h5>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="d-flex align-items-center pb-1 mb-4 mt-4">
+            <a href="" class="text-decoration-none text-reset" [routerLink]="['/ver-plan-de-trabajo']">
+                <img src="assets/imagenes/regresar.png" alt="">
+                <span class="h5 fw-bold ml-3">AGREGAR/MODIFICAR EVIDENCIA</span>
+            </a>
+        </div>
+
+        <div class="card ">
+
+            <div class="card-body">
+                <div class="carousel slide " data-bs-interval="false" id="evidencia_fotos">
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                            <img class="d-block card-img mx-auto" style="height: 400px; width: 400px;"
+                                src="assets/imagenes/evidencia.png">
+                            <div class="carousel-caption d-none d-md-block">
+                                <button class="btn btn-danger" onclick="">Eliminar</button>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <img class="d-block w-100 card-img mx-auto" style="height: 400px"
+                                src="">
+                            <div class="carousel-caption d-none d-md-block">
+                                <button class="btn btn-danger" onclick="">Eliminar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#evidencia_fotos"
+                        data-bs-slide="prev" style="background-color: #E2EFF8;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#evidencia_fotos"
+                        data-bs-slide="next" style="background-color: #E2EFF8;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+
+                </div>
+
+                <div class="mt-4">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-outline mb-2">
+                                    <input type="file" id="photos" name="photos" accept=".jpg,.png" class="form-control"
+                                        style="width: 350px" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-outline">
+                                    <input type="text" id="" name="" class="form-control" placeholder="Link" style="background-color: #E2EFF8;"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn text-white" style="background-color: #2B546A;">Guardar</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>

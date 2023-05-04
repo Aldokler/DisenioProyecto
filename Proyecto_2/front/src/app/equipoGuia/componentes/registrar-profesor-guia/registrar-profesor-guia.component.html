@@ -1,0 +1,146 @@
+<body>
+    <nav class="navbar navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+                aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+        style="background-color: #2B546A;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Aquí coloca el contenido del menú -->
+            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
+
+            <ul>
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-plan-de-trabajo']">
+                            <p style="color: white;">Plan de Trabajo</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-profesores']">
+                            <p style="color: white;">Profesores</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-estudiantes']">
+                            <p style="color: white;">Estudiantes</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li class="mt-5">
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset ">
+                            <p style="color: white;">Cerrar Sesión</p>
+                        </a>
+                    </h5>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="mb-4 mt-4">
+        <div class="container">
+            <div class="d-flex align-items-center pb-1 ">
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-equipo-guia']">
+                    <img src="assets/imagenes/regresar.png" alt="">
+                    <span class="h5 fw-bold ml-3">REGISTRAR PROFESOR GUÍA</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col col-xl-10">
+
+                    <div class="card" style="border-radius: 1rem;">
+
+                        <form enctype="multipart/form-data" method="POST" action="/register">
+                            <div class="row g-0" >
+
+                                <div class="col-md-6 col-lg-6 d-none d-md-block">
+                                    <div class="card-body p-4 p-lg-5 text-black">
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Código del Campus</label>
+                                            <input type="text" id="" name="" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Correo Electrónico </label>
+                                            <input type="text" id="" name="" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Teléfono Celular </label>
+                                            <input type="text" id="" name="" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                                    <div class="card-body p-4 p-lg-5 text-black">
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Nombre del Profesor </label>
+                                            <input type="text" id="" name="" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Teléfono Oficina </label>
+                                            <input type="text" id="" name="" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Subir Foto</label>
+                                            <input type="file" id="" name="" accept=".jpg,.png"
+                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
+                                        </div>
+
+
+                                        <div class="btn-group">
+
+                                            <div class="pt-1 mb-4 me-4">
+                                                <button class="btn btn-dark btn-lg btn-block" type="submit"
+                                                    style="background-color: #13293D;">Registrar Profesor</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>

@@ -1,0 +1,6 @@
+export enum TEstado {
+    PLANEADA = "PLANEADA",
+    NOTIFICADA = "NOTIFICADA",
+    REALIZADA = "REALIZADA",
+    CANCELADA = "CANCELADA"
+}

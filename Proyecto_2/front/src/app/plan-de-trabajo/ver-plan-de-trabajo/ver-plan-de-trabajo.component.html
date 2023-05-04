@@ -1,0 +1,133 @@
+<body>
+    <nav class="navbar navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+                aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+        style="background-color: #2B546A;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Aquí coloca el contenido del menú -->
+            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
+
+            <ul>
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-profesores']">
+                            <p style="color: white;">Profesores</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-estudiantes']">
+                            <p style="color: white;">Estudiantes</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-equipo-guia']">
+                            <p style="color: white;">Equipo Guía</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li class="mt-5">
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset ">
+                            <p style="color: white;">Cerrar Sesión</p>
+                        </a>
+                    </h5>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="mb-4 mt-4">
+        <div class="container">
+
+
+            <div class="d-flex align-items-center pb-1 " >
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-plan-de-trabajo']">
+                    <img src="assets/imagenes/regresar.png" alt="">
+                    <span class="h5 fw-bold ml-3">REGRESAR</span>
+                </a>
+            </div>
+
+            <div class="col mt-5">
+                <form onsubmit="">
+                    <div class="row">
+                        <div class="col">
+                            <select class="form-select me-2" name="opcion1" id="opcion1">
+                                <option value="1">Semestre</option>
+                                <option value="2">1</option>
+                                <option value="3">2</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select me-2" name="opcion2" id="opcion2">
+                                <option value="">Año</option>
+                                <option value="1">2018</option>
+                                <option value="2">2019</option>
+                                <option value="3">2020</option>
+                                <option value="4">2021</option>
+                                <option value="5">2022</option>
+                                <option value="6">2023</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <button type="submit" class="btn text-white me-2"
+                                style="background-color: #13293D;">Filtrar</button>
+                        </div>
+
+                        <div *ngIf="tipoUsuario === 'COORDINADOR'" class="col">
+                            <button type="" class="btn text-white me-2 "
+                                style="background-color: #13293D;"><a href="" class="text-decoration-none text-reset" [routerLink]="['/crear-actividad-plan-de-trabajo']">Crear Actividad </a></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <section class="mb-4">
+                <div class="container mt-4">
+
+                    <div class="card mb-4">
+                        <h5 class="card-header" style="background-color: #E2EFF8;">
+                            Actividad 1: Bienvenida de primeros ingresos 2023
+                        </h5>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Tipo: Motivacionales
+                            </h4>
+                            <div class="card-text">
+                                Semana: 1 &nbsp;&nbsp;&nbsp;
+                                25 de febrero
+                            </div>
+                            <a href="" class="btn btn-outline-secondary mt-2"
+                                style="background-color: #13293D; color: #E2EFF8;" 
+                                [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                más detalles</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+</body>
