@@ -1,9 +1,9 @@
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'usuario',
-    password: 'usuario',
-    database: 'TECsystem'
+    host: 'proyecto-disenio-persistencia.mysql.database.azure.com',
+    user: 'David',
+    password: 'Adm!n123',
+    database: 'proyectodisenio'
   })
   
   connection.connect((err) =>{
