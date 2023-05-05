@@ -7,7 +7,7 @@ const conexion = require('./config/conexion');
 // gestion profesores
 //get profesores
 router.get('/profesores', (request, response)=>{
-    let sql = "call getProfesores ()";
+    let sql = "call getProfesores()";
     conexion.query(sql, (error, rows, fields)=>{
         if(error){
             throw error;
@@ -43,7 +43,7 @@ module.exports= router;
 router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
-    let sql = 'call addProfesor (?,?,?,?,?,?,?,?,?,?,?)';
+    let sql = 'call addProfesor(?,?,?,?,?,?,?,?,?,?,?)';
     conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
         Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto], (error, rows, fields)=>{
         if(error){
@@ -84,7 +84,7 @@ router.put('/profesores/:id', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'Profesor agregado' })
+            response.json({status: 'Profesor modificado' })
         }
     })
 });
