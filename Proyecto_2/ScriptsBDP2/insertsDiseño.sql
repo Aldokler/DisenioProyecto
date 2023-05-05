@@ -123,3 +123,24 @@ BEGIN
 END$$
 
 COMMIT;
+
+drop procedure if exists updateProfesor;
+DELIMITER $$
+CREATE PROCEDURE updateProfesor (vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vFoto longblob, vRol varchar(45))
+BEGIN
+		UPDATE usuario INNER JOIN profesor ON profesor.ID = usuario.ID
+		SET
+		usuario.Nombre = vNombre,
+		usuario.Apellido1 = vApellido1,
+		usuario.Apellido2 = vApellido2 ,
+		usuario.CorreoElectronico = vCorreoElectronico ,
+		usuario.Celular  = vCelular,
+		usuario.Contraseña = vContraseña,
+		usuario.Sede = vSede,
+		profesor.TelefonoOficina = vTelefonoOficina,
+        profesor.Fotografia =  vFoto,
+		profesor.Rol = vRol
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END$$
+DELIMITER ;

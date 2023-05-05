@@ -58,14 +58,26 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getProfesores;
 DELIMITER $$
 CREATE PROCEDURE getProfesores ()
 BEGIN
-	select a.Nombre, a.Apellido1, a.Apellido2, a.CorreoElectronico, b.ID
+	select *
     from usuario a, profesor b
     where a.ID = b.ID
     Order by a.Sede, a.Apellido1, a.Apellido2, a.Nombre;
 END$$
 DELIMITER ;
 
+drop procedure if exists getProfesoresByID;
+DELIMITER $$
+CREATE PROCEDURE getProfesoresByID (IN pID varchar(50))
+BEGIN
+	select * from usuario join profesor on profesor.ID = pID where usuario.ID = pID ;
+END$$
+
+
+DELIMITER ;
+
 COMMIT;
+
