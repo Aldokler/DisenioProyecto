@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminProfesores } from '../controller/AdminProfesores';
+import { ApiService } from '../controller/DAO/SERVICES/api.service';
 
 
 @Component({
@@ -7,8 +9,14 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  constructor(private router: Router){}
+export class LoginComponent implements OnInit{
+
+  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores){}
+
+  ngOnInit(): void {
+    this.adm.getprofes();
+  }
+  
 
   inputContrasena!: HTMLInputElement;
   verContrasenaIcono = 'bi-eye';

@@ -1,3 +1,5 @@
+const { Profesor } = require('../profesor');
+
 const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
@@ -11,7 +13,10 @@ router.get('/profesores', (request, response)=>{
             throw error;
         }
         else{
-            response.json(rows)
+            const profesores = rows[0].map(row => 
+                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
+                //profesores.forEach(profesor => console.log(profesor.getSede()));
+                response.json({profesores})
         }
     })
 });
@@ -27,7 +32,8 @@ router.get('/profesores/:id', (request, response)=>{
             throw error;
         }
         else{
-            response.json(rows)
+            
+            response.send(rows);
         }
     })
 });

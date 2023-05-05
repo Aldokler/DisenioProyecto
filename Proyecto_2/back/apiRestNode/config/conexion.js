@@ -1,5 +1,11 @@
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
+  /*
+    host: 'persistencia.mysql.database.azure.com',
+    user: 'David',
+    password: 'Adm!n123',
+    database: 'proyectodisenio'
+    */
     host: 'localhost',
     user: 'usuario',
     password: 'usuario',

@@ -1,8 +1,12 @@
+import { Injectable } from "@angular/core";
 import { Profesor } from "../model/profesor";
 import { TRol } from "../model/trol";
 import { TSede } from "../model/tsede";
 import { ApiService } from "./DAO/SERVICES/api.service";
 
+@Injectable({
+    providedIn: 'root'
+  })
 export class AdminProfesores{
 
     constructor(private DAO: ApiService){}
@@ -17,18 +21,8 @@ export class AdminProfesores{
         return []
     }
 
-    public get(){
-        console.log('4');
-    }
     public getprofes(){
-        this.DAO.getProfesores().subscribe(
-            res => {
-                console.log(res);
-            },
-            err => {
-                console.log(err);
-            }
-        );
+        this.DAO.getProfesores();
     }
     public verificarCorreoExistente(correo: String): boolean{
         return true
