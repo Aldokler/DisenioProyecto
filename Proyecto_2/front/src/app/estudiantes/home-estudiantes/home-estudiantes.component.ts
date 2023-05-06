@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-excel.service';
+import { ControladorService } from 'src/app/controller/controlador.service';
 import { Estudiante } from 'src/app/model/estudiante';
+import { Profesor } from 'src/app/model/profesor';
 import { TSede } from 'src/app/model/tsede';
 
 @Component({
@@ -18,7 +20,8 @@ export class HomeEstudiantesComponent {
   fileName = '';
 
   constructor(
-    private excelService: ComunicadorExcelService
+    private excelService: ComunicadorExcelService,
+    private controller: ControladorService
   ){}
 
   descargarExcel(): void {
@@ -42,13 +45,14 @@ export class HomeEstudiantesComponent {
   }
 
   async cargarExcel(): Promise<void> {
-    /*
-    let excel = this.file.nativeElement.files;
-    var estudiantes = await this.excelService.uploadStudents(excel);
-    for (var i = 0; i < estudiantes.length; i++){
-      console.log(estudiantes[i].getId())
-    }
-    */
+    var lista = this.controller.getProfesores()
+    lista.then((resultado: Profesor[] | undefined) => {
+      if (resultado) {
+        console.log(resultado)
+      }
+    }).catch((error: any) => {
+        console.error(error);
+    });
   }
   
 }

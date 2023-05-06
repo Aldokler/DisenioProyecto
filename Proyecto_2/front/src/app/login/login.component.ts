@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores){}
 
-  ngOnInit(): void {
-    this.adm.getprofes();
-  }
+  ngOnInit(): void {}
   
 
   inputContrasena!: HTMLInputElement;

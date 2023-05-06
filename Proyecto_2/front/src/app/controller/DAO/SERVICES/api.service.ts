@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { retry } from 'rxjs';
+import { Profesor } from 'src/app/model/profesor';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +11,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
  
-  //get profesores
-  getProfesores(){
-    const data =  this.http.get(this.url + '/profesores');
-    data.forEach(profesor => console.log(profesor));
-    return data;
-    }
-
-
+  public async getProfesores(){
+    return await this.http.get<Profesor[]>(this.url + '/profesores').toPromise()
+  }
 
 }
