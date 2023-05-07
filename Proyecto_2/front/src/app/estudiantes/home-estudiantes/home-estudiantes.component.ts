@@ -45,14 +45,16 @@ export class HomeEstudiantesComponent {
   }
 
   async cargarExcel(): Promise<void> {
-    var lista = this.controller.getProfesores()
-    lista.then((resultado: Profesor[] | undefined) => {
-      if (resultado) {
-        console.log(resultado)
+    var profes: Profesor[] = []
+    await this.controller.getProfesores().then((x: Profesor[] | undefined) => {
+      if (x) {
+        profes = x
       }
     }).catch((error: any) => {
         console.error(error);
     });
+    
+    console.log(profes)
   }
   
 }
