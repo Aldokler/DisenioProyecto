@@ -19,7 +19,10 @@ export class HomeProfesoresComponent {
 
   ngOnInit(): void {
     this.controller.getProfesores().pipe(
-      tap(res => console.log(res[0])) 
+      tap(res => res.forEach(element => {
+        element.setNombre(" II" + element.getNombre())
+        console.log(element.getId() + element.getNombre())
+      })) 
     ).subscribe()
   }
 }
