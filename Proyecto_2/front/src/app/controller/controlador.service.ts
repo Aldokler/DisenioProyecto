@@ -14,6 +14,7 @@ import { AdminEstudiante } from "./AdminEstudiante";
 import { AdminPlanDeTrabajo } from "./AdminPlanDeTrabajo";
 import { AdminProfesores } from "./AdminProfesores";
 import { ApiService } from "./DAO/SERVICES/api.service";
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -55,7 +56,7 @@ export class ControladorService {
   public editarDatosProfesor(id: String): boolean{
       return this.adminProfesores.editarDatosProfesor(id)
   }
-  public getProfesores(): Promise<Profesor[] | undefined>{
+  public getProfesores(): Observable<Profesor[]>{
       return this.adminProfesores.getProfesores()
   }
 

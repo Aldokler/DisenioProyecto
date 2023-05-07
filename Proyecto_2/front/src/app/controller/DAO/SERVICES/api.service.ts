@@ -11,8 +11,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
  
-  public async getProfesores(){
-    return await this.http.get<Profesor[]>(this.url + '/profesores').toPromise()
+  public getProfesores(){
+    return this.http.get(this.url + '/profesores')
   }
 
 }

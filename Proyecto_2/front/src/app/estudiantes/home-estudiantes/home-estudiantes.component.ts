@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-excel.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Estudiante } from 'src/app/model/estudiante';
-import { Profesor } from 'src/app/model/profesor';
 import { TSede } from 'src/app/model/tsede';
 
 @Component({
@@ -44,17 +43,7 @@ export class HomeEstudiantesComponent {
     this.excelService.downloadStudents(estudiantes);
   }
 
-  async cargarExcel(): Promise<void> {
-    var profes: Profesor[] = []
-    await this.controller.getProfesores().then((x: Profesor[] | undefined) => {
-      if (x) {
-        profes = x
-      }
-    }).catch((error: any) => {
-        console.error(error);
-    });
-    
-    console.log(profes)
+  cargarExcel() {
   }
   
 }

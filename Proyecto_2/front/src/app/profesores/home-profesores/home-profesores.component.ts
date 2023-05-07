@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
+import { ControladorService } from 'src/app/controller/controlador.service';
+import { Profesor } from 'src/app/model/profesor';
 
 @Component({
   selector: 'app-home-profesores',
@@ -7,4 +10,16 @@ import { Component } from '@angular/core';
 })
 export class HomeProfesoresComponent {
 
+
+  constructor(
+    private controller: ControladorService
+  ) {}
+
+  public profes: Profesor[] = [];
+
+  ngOnInit(): void {
+    this.controller.getProfesores().pipe(
+      tap(res => console.log(res[0])) 
+    ).subscribe()
+  }
 }
