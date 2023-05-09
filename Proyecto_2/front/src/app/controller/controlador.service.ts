@@ -35,10 +35,10 @@ export class ControladorService {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public getEstudiante(carne:number): Estudiante{
+  public getEstudiante(carne:number): Observable<Estudiante>{
       return this.adminEstudiante.getEstudiante(carne)
   }
-  public getEstudiantes(sede: String = ''): Estudiante[]{
+  public getEstudiantes(sede: String = ''): Observable<Estudiante[]>{
       return this.adminEstudiante.getEstudiantes(sede)
   }
   public editarEstudiante(datosEstudiante: Estudiante): boolean{
@@ -50,7 +50,7 @@ export class ControladorService {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public getProfesor(id: String): Profesor{
+  public getProfesor(id: String): Observable<Profesor>{
       return this.adminProfesores.getProfesor(id)
   }
   public editarDatosProfesor(id: String): boolean{
@@ -60,7 +60,7 @@ export class ControladorService {
       return this.adminProfesores.getProfesores()
   }
 
-  public getAdministrativo(id: String): Administrativo{
+  public getAdministrativo(id: String): Observable<Administrativo>{
       return this.adminAdministrativos.getAdministrativo(id)
   }
 
@@ -78,7 +78,7 @@ export class ControladorService {
   public definirCoordinador(id: String): boolean{
       return this.adminEquipoGuia.definirCoordinador(id)
   }
-  public verMiembrosEquipo(): EquipoGuia{
+  public verMiembrosEquipo(): Observable<EquipoGuia>{
       return this.adminEquipoGuia.verMiembrosEquipo()
   }
 
@@ -111,11 +111,11 @@ export class ControladorService {
   public crearPlanTrabajo(plan: PlanDeTrabajo): boolean{
       return this.adminPlanDeTrabajo.crearPlanTrabajo(plan)
   }
-  public consultarProximaActividad(id: String): Actividad{
+  public consultarProximaActividad(id: String): Observable<Actividad>{
       return this.adminPlanDeTrabajo.consultarProximaActividad(id)
   }
-  public verPlanDeTrabajo(): PlanDeTrabajo{
-      return this.adminPlanDeTrabajo.verPlanDeTrabajo()
+  public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
+      return this.adminPlanDeTrabajo.verPlanDeTrabajo(id)
   }
   public marcarActividadRealizada(id: String): boolean{
       return this.adminPlanDeTrabajo.marcarActividadRealizada(id)

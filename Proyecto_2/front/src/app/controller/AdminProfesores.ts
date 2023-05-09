@@ -3,7 +3,7 @@ import { Profesor } from "../model/profesor";
 import { TRol } from "../model/trol";
 import { TSede } from "../model/tsede";
 import { ApiService } from "./DAO/SERVICES/api.service";
-import { Observable, map } from "rxjs";
+import { Observable, Subject, map } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +12,8 @@ export class AdminProfesores{
 
     constructor(private DAO: ApiService){}
 
-    public getProfesor(id: String): Profesor{
-        return new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)
+    public getProfesor(id: String): Observable<Profesor>{
+        return new Subject
     }
     public editarDatosProfesor(id: String): boolean{
         return true

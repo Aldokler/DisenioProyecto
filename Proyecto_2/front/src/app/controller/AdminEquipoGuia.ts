@@ -1,5 +1,7 @@
+import { Observable } from "rxjs/internal/Observable";
 import { EquipoGuia } from "../model/equipoguia";
 import { Profesor } from "../model/profesor";
+import { Subject } from "rxjs";
 
 export class AdminEquipoGuia{
     public crearEquipo(equipo: EquipoGuia): boolean{
@@ -12,7 +14,7 @@ export class AdminEquipoGuia{
     public definirCoordinador(id: String): boolean{
         return true
     }
-    public verMiembrosEquipo(): EquipoGuia{
-        return new EquipoGuia([], 0, 0)
+    public verMiembrosEquipo(): Observable<EquipoGuia>{
+        return new Subject
     }
 }
