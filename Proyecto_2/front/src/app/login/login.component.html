@@ -48,17 +48,3 @@
           </section>
 
     </body>
-    
-    <script>
-        var verContrasena = document.getElementById("ver-contrasena");
-        var inputContrasena = document.querySelector("[type='password']");
-        verContrasena.addEventListener("click", function () {
-        if (inputContrasena.type === "password") {
-            inputContrasena.type = "text";
-            verContrasena.innerHTML = "<i class='bi bi-eye-slash'></i>";
-        } else {
-            inputContrasena.type = "password";
-            verContrasena.innerHTML = "<i class='bi bi-eye'></i>";
-        }
-        });
-    </script>

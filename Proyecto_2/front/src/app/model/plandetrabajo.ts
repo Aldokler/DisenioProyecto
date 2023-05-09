@@ -3,20 +3,20 @@ import { EquipoGuia } from "./equipoguia";
 
 export class PlanDeTrabajo {
     private id: number;
-    private año: number;
+    private annio: number;
     private semestre: number;
     private itinerarioActividades: Array<Actividad>;
     private creador: EquipoGuia;
 
     constructor(
         id: number,
-        año: number,
+        annio: number,
         semestre: number,
         itinerarioActividades: Array<Actividad>,
         creador: EquipoGuia
     ) {
         this.id = id
-        this.año = año
+        this.annio = annio
         this.semestre = semestre
         this.itinerarioActividades = itinerarioActividades
         this.creador = creador
@@ -30,12 +30,12 @@ export class PlanDeTrabajo {
         this.id = id;
     }
 
-    public getAñO(): number {
-        return this.año;
+    public getAnnio(): number {
+        return this.annio;
     }
 
-    public setAñO(año: number): void {
-        this.año = año;
+    public setAnnio(annio: number): void {
+        this.annio = annio;
     }
 
     public getSemestre(): number {

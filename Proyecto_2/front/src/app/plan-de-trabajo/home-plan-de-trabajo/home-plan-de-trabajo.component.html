@@ -110,12 +110,12 @@
                     <div *ngFor="let plan of planesDeTrabajo">
                         <div class="card mb-4">
                             <h5 class="card-header" style="background-color: #E2EFF8;">
-                                Plan {{ plan.id }}
+                                Plan {{ plan.getId() }}
                             </h5>
                             <div class="card-body">
                                 <div class="card-text">
-                                    Semestre: {{ plan.semestre }} &nbsp;&nbsp;&nbsp;
-                                    año: {{ plan.anio }}
+                                    Semestre: {{ plan.getSemestre()}} &nbsp;&nbsp;&nbsp;
+                                    año: {{ plan.getAnnio }}
                                 </div>
                                 <a href="" class="btn btn-outline-secondary mt-2"
                                     style="background-color: #13293D; color: #E2EFF8;"
