@@ -17,6 +17,10 @@ export class AdminPlanDeTrabajo{
     public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
         return new Subject
     }
+
+    public verPlanesDeTrabajo(){
+
+    }
     public marcarActividadRealizada(id: String): boolean{
         return true
     }

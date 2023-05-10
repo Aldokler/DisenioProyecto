@@ -109,24 +109,23 @@
 
         <div class="card mt-4 mb-4">
             <div class="card-body">
-
-                <div class="row mb-3 mt-3 text-center">
+            <!--  aqui se hacen los estudiantes -->
+                <div  *ngFor="let  estudiante of estudiantes" class="row mb-3 mt-3 text-center">
                     <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">Sharon Chacón</h5>
+                                <h5 class="card-title">{{estudiante.getNombre}}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
                                 <a href="" class="btn text-white" style="background-color: #13293D;"
                                     [routerLink]="['/editar-estudiantes']">Editar</a>
-
                             </div>
-
                         </div>
-
-                    </div>
+                    </div>  
                 </div>
+            <!--  -->
+
             </div>
         </div>
 

@@ -93,7 +93,7 @@
                                 style="background-color: #13293D;">Filtrar</button>
                         </div>
 
-                        <div *ngIf="tipoUsuario === 'COORDINADOR'" class="col">
+                        <div class="col">
                             <button type="" class="btn text-white me-2" style="background-color: #13293D;"><a href=""
                                     class="text-decoration-none text-reset"
                                     [routerLink]="['/crear-plan-de-trabajo']">Crear plan de trabajo </a> </button>
@@ -107,7 +107,7 @@
                 <div class="container mt-4">
 
                     <!--AQUI SE CREA CADA PLAN DE TRABAJO QUE HAYA -->
-                    <div *ngFor="let plan of planesDeTrabajo">
+                    <div *ngFor="let plan of planes">
                         <div class="card mb-4">
                             <h5 class="card-header" style="background-color: #E2EFF8;">
                                 Plan {{ plan.getId() }}

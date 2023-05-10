@@ -117,6 +117,10 @@ export class ControladorService {
   public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
       return this.adminPlanDeTrabajo.verPlanDeTrabajo(id)
   }
+
+  public verPlanesDeTrabajo(){
+}
+
   public marcarActividadRealizada(id: String): boolean{
       return this.adminPlanDeTrabajo.marcarActividadRealizada(id)
   }

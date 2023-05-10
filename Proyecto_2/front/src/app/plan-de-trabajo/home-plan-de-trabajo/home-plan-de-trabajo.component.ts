@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
+import { ControladorService } from 'src/app/controller/controlador.service';
 import { Router } from '@angular/router';
 import { PlanDeTrabajo } from 'src/app/model/plandetrabajo';
+import { Usuario } from 'src/app/model/usuario';
 
 @Component({
   selector: 'app-home-plan-de-trabajo',
@@ -8,14 +11,14 @@ import { PlanDeTrabajo } from 'src/app/model/plandetrabajo';
   styleUrls: ['./home-plan-de-trabajo.component.css']
 })
 export class HomePlanDeTrabajoComponent {
-  tipoUsuario: string;
-  usuario: string;
 
-  public planesDeTrabajo : PlanDeTrabajo[] = [];
+  constructor(
+    private controller: ControladorService
+  ) {}
+  public planes : PlanDeTrabajo[] = [];
 
-  constructor() {
-    // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
-    this.tipoUsuario = 'GUIA';
-    this.usuario= 'bryan'
+  ngOnInit(): void {
+    
   }
+
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
 import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-excel.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Estudiante } from 'src/app/model/estudiante';
@@ -23,6 +24,8 @@ export class HomeEstudiantesComponent {
     private controller: ControladorService
   ){}
 
+  public estudiantes: Estudiante[] = [];
+
   descargarExcel(): void {
     var estudiantes: Estudiante[] = [];
     estudiantes.push(new 
@@ -44,6 +47,14 @@ export class HomeEstudiantesComponent {
   }
 
   cargarExcel() {
+  }
+
+  ngOnInit(): void {
+    this.controller.getEstudiantes().pipe(
+      tap(res => {
+       this.estudiantes = res;
+      })
+    ).subscribe()
   }
   
 }
