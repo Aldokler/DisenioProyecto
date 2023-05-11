@@ -60,7 +60,7 @@ DELIMITER ;
 
 drop procedure if exists getProfesores;
 DELIMITER $$
-CREATE PROCEDURE getProfesores ()
+CREATE PROCEDURE getProfesores()
 BEGIN
 	select *
     from usuario a, profesor b
@@ -75,9 +75,22 @@ CREATE PROCEDURE getProfesoresByID (IN pID varchar(50))
 BEGIN
 	select * from usuario join profesor on profesor.ID = pID where usuario.ID = pID ;
 END$$
-
-
 DELIMITER ;
 
+drop procedure if exists consultarEquipoGuia;
+DELIMITER $$
+CREATE PROCEDURE consultarEquipoGuia(IN pID varchar(50))
+BEGIN
+	select * from equipo_guía_x_profesor join profesor on profesor.ID = IDProfesor join usuario on usuario.ID=IDProfesor where IDEquipoGuia = pID;
+END$$
+DELIMITER ;
+
+drop procedure if exists getEquiposGuia;
+DELIMITER $$
+CREATE PROCEDURE getEquiposGuia()
+BEGIN
+	select * from equipo_guía;
+END$$
+DELIMITER ;
 COMMIT;
 

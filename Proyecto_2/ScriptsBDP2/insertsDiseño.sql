@@ -19,7 +19,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE addProfesor (vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(45), vFoto longblob)
+CREATE PROCEDURE addProfesor(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(45), vFoto longblob)
 BEGIN
 	INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
 	VALUES (vID, vNombre, vApellido1, vApellido2, vCorreoElectronico, vCelular, vContraseña, vSede);
@@ -41,7 +41,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE addEquipoGuía (vAño int, vSemestre int)
+CREATE PROCEDURE addEquipoGuía(vAño int, vSemestre int)
 BEGIN
 	INSERT INTO equipo_guía (Año, Semestre)
 	VALUES (vAño, vSemestre);

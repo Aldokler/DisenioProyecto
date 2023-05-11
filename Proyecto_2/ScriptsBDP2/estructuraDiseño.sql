@@ -1,3 +1,4 @@
+drop database if exists proyectodisenio;
 CREATE DATABASE proyectodisenio;
 USE proyectodisenio;
 
