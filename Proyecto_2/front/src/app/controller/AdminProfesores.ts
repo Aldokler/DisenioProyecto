@@ -12,14 +12,12 @@ export class AdminProfesores{
 
     constructor(private DAO: ApiService){}
 
-    public addProfesor(profesor: Profesor): boolean{
-        var response = ''
-        this.DAO.addProfesor(profesor).pipe(
+    public addProfesor(profesor: Profesor): Observable<boolean>{
+        return this.DAO.addProfesor(profesor).pipe(
             map((data:any) => {
-                response = data.status
+                return data.status == 'Profesor agregado'
             })
         )
-        return response == 'Profesor agregado'
     }
 
     public getProfesor(id: String): Observable<Profesor>{
@@ -43,14 +41,12 @@ export class AdminProfesores{
         );
     }
 
-    public editarDatosProfesor(profesor: Profesor): boolean{
-        var response = ''
-        this.DAO.modificarProfesor(profesor).pipe(
+    public editarDatosProfesor(profesor: Profesor): Observable<boolean>{
+        return this.DAO.modificarProfesor(profesor).pipe(
             map((data:any) => {
-                response = data.status
+                return data.status == 'Profesor modificado'
             })
         )
-        return response == 'Profesor modificado'
     }
     public getProfesores(): Observable<Profesor[]>{
         return this.DAO.getProfesores().pipe(
