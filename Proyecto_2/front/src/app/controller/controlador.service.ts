@@ -50,11 +50,14 @@ export class ControladorService {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  public addProfesor(profesor: Profesor): boolean{
+    return this.adminProfesores.addProfesor(profesor)
+  }
   public getProfesor(id: String): Observable<Profesor>{
       return this.adminProfesores.getProfesor(id)
   }
-  public editarDatosProfesor(id: String): boolean{
-      return this.adminProfesores.editarDatosProfesor(id)
+  public editarDatosProfesor(profesor: Profesor): boolean{
+      return this.adminProfesores.editarDatosProfesor(profesor)
   }
   public getProfesores(): Observable<Profesor[]>{
       return this.adminProfesores.getProfesores()
