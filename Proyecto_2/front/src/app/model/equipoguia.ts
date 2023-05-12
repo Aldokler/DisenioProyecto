@@ -1,14 +1,24 @@
 import { Profesor } from "./profesor";
 
 export class EquipoGuia {
+    private id: number;
     private miembros: Array<Profesor>;
     private año: number;
     private semestre: number;
 
-    constructor(miembros: Array<Profesor>, año: number, semestre: number) {
+    constructor(id: number, miembros: Array<Profesor>, año: number, semestre: number) {
+        this.id = id
         this.miembros = miembros
         this.año = año
         this.semestre = semestre
+    }
+
+    public getId(): number {
+        return this.id
+    }
+
+    public setId(id: number): void {
+        this.id = id
     }
 
     public getMiembros(): Array<Profesor> {

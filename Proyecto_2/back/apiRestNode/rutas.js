@@ -7,7 +7,7 @@ const conexion = require('./config/conexion');
 
 
 // Equipo Guía
-//get equipos
+//get equipos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/equipo_guia', (request, response)=>{
     let sql = "call getEquiposGuia()";
     conexion.query(sql, (error, rows, fields)=>{
@@ -23,7 +23,7 @@ router.get('/equipo_guia', (request, response)=>{
 });
 
 
-// Consultar conformación del equipo de profesores guía
+// Consultar conformación del equipo de profesores guía +++++++++++++++++++
 router.get('/equipo_guia/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call consultarEquipoGuia(?);";
@@ -39,7 +39,7 @@ router.get('/equipo_guia/:id', (request, response)=>{
     })
 });
 
-// crear equipo de profesores guía
+// crear equipo de profesores guía +++++++++++++++++++++++++++++++++++++++++
 router.post('/equipo_guia', (request, response)=>{
     const {año, semestre} = request.body;
     let sql = 'call addEquipoGuía(?,?)';
@@ -53,7 +53,7 @@ router.post('/equipo_guia', (request, response)=>{
     })
 });
 
-// agregar profesores guía al equipo
+// agregar profesores guía al equipo ++++++++++++++++++++++++++++++++++++++++
 router.post('/equipo_guia/profesor', (request, response)=>{
     const {IDEquipoGuia, IDProfesor} = request.body;
     let sql = 'call addEquipoGuiaXProfesor(?,?)';
@@ -66,7 +66,7 @@ router.post('/equipo_guia/profesor', (request, response)=>{
         }
     })
 });
-// definir coordinador
+// definir coordinador ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.put('/equipo_guia/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "UPDATE profesor SET Rol = 'Coordinador' where ID = ?;";
@@ -81,7 +81,7 @@ router.put('/equipo_guia/:id', (request, response)=>{
 });
 
 
-//sacar profesor del equipo
+//sacar profesor del equipo +++++++++++++++++++++++++++++++++++++++++++++++++
 router.delete('/equipo_guia/:id', (request, response)=>{
     const {id} = request.params;
     const {IDProfesor} = request.body;
@@ -98,7 +98,7 @@ router.delete('/equipo_guia/:id', (request, response)=>{
 
 
 // gestion profesores
-//get profesores
+//get profesores ---------------------------------------------------------
 router.get('/profesores', (request, response)=>{
     let sql = "call getProfesores()";
     conexion.query(sql, (error, rows, fields)=>{
@@ -115,7 +115,7 @@ router.get('/profesores', (request, response)=>{
 });
 
 
-//get profesor por ID
+//get profesor por ID -----------------------------------------------------
 router.get('/profesores/:id', (request, response)=>{
     console.log()
     const {id} = request.params;
@@ -133,7 +133,7 @@ router.get('/profesores/:id', (request, response)=>{
 });
 module.exports= router;
 
-// crear profesor
+// crear profesor-----------------------------------------------------------
 router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
@@ -149,7 +149,7 @@ router.post('/profesores', (request, response)=>{
     })
 });
 
-//eliminar profesor por ID
+//eliminar profesor por ID -----------------------------------------------
 router.delete('/profesores/:id', (request, response)=>{
     console.log()
     const {id} = request.params;
@@ -166,7 +166,7 @@ router.delete('/profesores/:id', (request, response)=>{
 module.exports= router;
 
 
-// modificar profesor
+// modificar profesor ---------------------------------------------------
 router.put('/profesores/:id', (request, response)=>{
     const {id} = request.params;
     const {Nombre, Apellido1, Apellido2, CorreoElectronico , 

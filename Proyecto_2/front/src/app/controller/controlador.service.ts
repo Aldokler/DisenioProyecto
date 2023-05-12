@@ -29,7 +29,7 @@ export class ControladorService {
   private adminActividad = new AdminActividad()
   private adminAdministrativos = new AdminAdministrativos()
   private adminPlanDeTrabajo = new AdminPlanDeTrabajo()
-  private adminEquipoGuia = new AdminEquipoGuia()
+  private adminEquipoGuia = new AdminEquipoGuia(this.DAO)
   private adminEstudiante = new AdminEstudiante()
   private adminProfesores = new AdminProfesores(this.DAO)
 
@@ -69,20 +69,23 @@ export class ControladorService {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public crearEquipo(equipo: EquipoGuia): boolean{
+  public getEquiposGuia(): Observable<EquipoGuia[]>{
+    return this.adminEquipoGuia.getEquiposGuia()
+  }
+  public crearEquipo(equipo: EquipoGuia): Observable<boolean>{
       return this.adminEquipoGuia.crearEquipo(equipo)
   }
-  public agregarProfesor(profesor: Profesor){
-      this.adminEquipoGuia.agregarProfesor(profesor)
+  public agregarProfesor(idEG: String, idP: String): Observable<boolean>{
+      return this.adminEquipoGuia.agregarProfesor(idEG, idP)
   }
-  public sacarProfesor(id: String): boolean{
-      return this.adminEquipoGuia.sacarProfesor(id)
+  public sacarProfesor(idEG: String, idP: String): Observable<boolean>{
+      return this.adminEquipoGuia.sacarProfesor(idEG, idP)
   }
-  public definirCoordinador(id: String): boolean{
-      return this.adminEquipoGuia.definirCoordinador(id)
+  public definirCoordinador(profesor: Profesor): Observable<boolean>{
+      return this.adminEquipoGuia.definirCoordinador(profesor)
   }
-  public verMiembrosEquipo(): Observable<EquipoGuia>{
-      return this.adminEquipoGuia.verMiembrosEquipo()
+  public getProfesoresDeEquipoGuia(id: String): Observable<Profesor[]>{
+      return this.adminEquipoGuia.getProfesoresDeEquipoGuia(id)
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

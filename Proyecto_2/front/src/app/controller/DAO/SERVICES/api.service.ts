@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Profesor } from 'src/app/model/profesor';
+import { EquipoGuia } from 'src/app/model/equipoguia';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,32 @@ export class ApiService {
   url = '/api/'
   constructor(private http: HttpClient) { }
 
- 
+  public getEquiposGuia(){
+    return this.http.get(this.url + 'equipo_guia')
+  }
+
+  public getProfesoresDeEquipoGuia(id: String){
+    return this.http.get(this.url + 'equipo_guia/' +id)
+  }
+
+  public addEquipoGuia(equipo: EquipoGuia){
+    return this.http.post(this.url + 'equipo_guia', equipo)
+  }
+
+  public addProfesorToEquipoGuia(idEG: String, idP: String){
+    return this.http.post(this.url + 'equipo_guia/profesor', {idEG, idP})
+  }
+
+  public defCoordinador(profesor: Profesor){
+    return this.http.put(this.url + 'equipo_guia/' + profesor.getId(), profesor)
+  }
+
+  public kickProfesor(idEG: String, idP: String){
+    return this.http.delete(this.url + 'equipo_guia/' + idEG, {body: idP})
+  }
+
+//--------------------------------------------------------------------------
+
   public getProfesores(){
     return this.http.get(this.url + 'profesores')
   }
