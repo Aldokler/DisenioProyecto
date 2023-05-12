@@ -1,6 +1,6 @@
 {
     "/api/*":{
-        "target" : "http://localhost:3000/",
+        "target" : "http://proyecto-disenio-backend.scm.azurewebsites.net/",
         "secure" : "false",
         "logLevel": "debug"
     }
