@@ -21,16 +21,7 @@ export class HomeProfesoresComponent {
 
   public profes: Profesor[] = [];
 
-
-  usuario1:Usuario = new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA);
-  usuario2:Usuario = new Administrativo('', '', '', '', '', '', TSede.CA, '', '');
-
   ngOnInit(): void {
-    this.controller.getProfesor("SJ-01").pipe(
-      tap(res => {
-       let profesor = res;
-      })
-    ).subscribe()
 
     this.controller.getProfesores().pipe(
       tap(res => {
@@ -38,8 +29,5 @@ export class HomeProfesoresComponent {
       })
     ).subscribe()
 
-    if( this.usuario1 instanceof Profesor){
-      console.log("hola");
-    }
   }
 }

@@ -65,7 +65,7 @@
             <div class="card-body">
 
                 <div class="row mb-3 mt-3 text-center">
-
+                <!--Aqui se hace un nuevo profesor de trabajo-->
                     <div *ngFor="let  profe of profes" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
@@ -78,22 +78,16 @@
 
                                 <p class="card-text">{{ profe.getId() }} </p>
 
-                                <a href="" class="btn text-white" style="background-color: #13293D;" [routerLink]="['/editar-profesores']">Editar</a>
+                                <a href="" class="btn text-white" style="background-color: #13293D;"
+                                    [routerLink]="['/editar-profesores']">Editar</a>
                             </div>
                         </div>
                     </div>
-
-
-                    
-
+                    <!----------------------------------------------------->
 
                 </div>
 
-                
-
             </div>
-
-
 
         </div>
     </div>

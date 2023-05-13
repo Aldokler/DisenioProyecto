@@ -31,6 +31,7 @@ var Estudiante = /** @class */ (function (_super) {
     Estudiante.prototype.getNombre = function () {
         return this.nombre;
     };
+    
     Estudiante.prototype.setNombre = function (nombre) {
         this.nombre = nombre;
     };

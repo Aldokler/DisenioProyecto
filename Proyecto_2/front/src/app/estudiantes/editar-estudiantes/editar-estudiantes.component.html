@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form enctype="multipart/form-data" method="POST" action="/register">
+                        <form onsubmit="" enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -80,13 +80,13 @@
                                         <div class="form-outline mb-4">
                                             <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
                                             <label class="form-label ">Cambiar foto</label>
-                                            <input type="file" id="" name="" accept=".jpg,.png"
+                                            <input type="file" #foto id="foto" name="foto" accept=".jpg,.png"
                                                 class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Carné</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" #carne id="carne" name="carne" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 
@@ -94,7 +94,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Correo Electrónico</label>
-                                            <input type="email" id="" name="" required
+                                            <input type="email" #correoElectronico id="correoElectronico" name="correoElectronico" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 
@@ -102,7 +102,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Teléfono Celular</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" #telefono id="telefono" name="telefono" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 
@@ -116,7 +116,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" #nombre id="nombre" name="nombre" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 
@@ -124,7 +124,7 @@
                                         
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Primer Apellido</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" #primerApellido id="primerApellido" name="primerApellido" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 
@@ -132,7 +132,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Segundo Apellido</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" #segundoApellido id="segundoApellido" name="segundoApellido" required
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
 

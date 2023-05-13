@@ -157,32 +157,27 @@
                                 <th>Nombre</th>
                                 <th>Correo Electrónico</th>
                                 <th>Celular</th>
-                                <th>Carné</th>
                                 <th>Sede</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
-                            <tr>
+                            <tr *ngFor="let  estudiante of estudiantes">
                                 <td>
-                                    <p>Sharon Chacón</p>
+                                    <p>{{ estudiante.getNombre }}</p>
                                 </td>
 
                                 <td>
-                                    <p>sharon@gmail.com</p>
+                                    <p>{{ estudiante.getCorreoElectronico }}</p>
                                 </td>
 
                                 <td>
-                                    <p>88677668</p>
+                                    <p>{{ estudiante.getCelular }}</p>
                                 </td>
 
                                 <td>
-                                    <p>2021008083</p>
-                                </td>
-
-                                <td>
-                                    <p>SJ</p>
+                                    <p>{{ estudiante.getSede }}</p>
                                 </td>
                             </tr>
 

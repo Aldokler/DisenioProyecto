@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form enctype="multipart/form-data" method="POST" action="/register">
+                        <form onclick="" enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0" >
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -79,27 +79,20 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
-                                            <input type="text" id="name" name="name" required
+                                            <input type="text" id="nombre" name="nombre" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
                                         <label class="form-label">Tipo de actividad</label>
-                                        <select class="form-select mb-4" name="" id="" required style="background-color: #E2EFF8;">
-                                            <option value=""></option>
+                                        <select class="form-select mb-4" name="tipodeActividad" id="tipodeActividad" required style="background-color: #E2EFF8;">
+                                            <option *ngFor="  " value=""></option>
 
-                                            <option value="">
-
-                                            </option>
 
                                         </select>
 
                                         <label class="form-label">Responsables</label>
                                         <select class="form-select mb-4" name="" id="" required style="background-color: #E2EFF8;">
-                                            <option value=""></option>
-
-                                            <option value="">
-
-                                            </option>
+                                            <option *ngFor="  " value=""></option>
 
                                         </select>
 
@@ -109,13 +102,13 @@
 
                                         <div class="btn-group">
 
-                                            <button class="btn btn-dark btn-lg btn-block ml-4">Remoto</button>
+                                            <button onclick="" class="btn btn-dark btn-lg btn-block ml-4">Remoto</button>
 
                                             <div class="form-outline mb-5 ml-3">
                                                 <div id=""></div>
                                             </div>
 
-                                            <button class="btn btn-dark btn-lg btn-block ml-5">Presencial</button>
+                                            <button onclick="" class="btn btn-dark btn-lg btn-block ml-5">Presencial</button>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -124,7 +117,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Enlace</label>
-                                            <input type="text" id="" name="" required
+                                            <input type="text" id="enlace" name="enlace" required
                                                 class="form-control form-control-lg"  style="background-color: #E2EFF8;"/>
                                         </div>
 
@@ -136,11 +129,7 @@
                                         <label class="form-label">Semana</label>
                                         <select class="form-select mb-4" name="id_type" id="id_type" required style="background-color: #E2EFF8;">
 
-                                            <option value=""></option>
-
-                                            <option value="">
-
-                                            </option>
+                                            <option *ngFor="  " value=""></option>
 
                                         </select>
 
@@ -150,7 +139,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha</label>
-                                            <input type="date" id="" name="" required
+                                            <input type="date" id="fecha" name="fecha" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
@@ -162,13 +151,13 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha de publicación</label>
-                                            <input type="date" id="" name="" required
+                                            <input type="date" id="fechadePublicacion" name="fechadePublicacion" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Subir afiche</label>
-                                            <input type="file" id="" name="" accept=".jpg,.png"
+                                            <input type="file" id="afiche" name="afiche" accept=".jpg,.png"
                                                 class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
                                         </div>
 

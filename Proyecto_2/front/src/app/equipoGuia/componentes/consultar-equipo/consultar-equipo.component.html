@@ -99,13 +99,13 @@
 
         <div class="card mt-4 mb-4">
             <div class="card-body">
-
-                <div class="row mb-3 mt-3 text-center">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                <!--Aqui se hace un nuevo equipo de trabajo-->
+                <div  class="row mb-3 mt-3 text-center">
+                    <div *ngFor="let equipoguia of equiposguia" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">Jose Castro</h5>
+                                <h5 class="card-title">{{ equipoguia }}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
                                 <p class="card-text">jcastro@gmail.com</p>
@@ -126,6 +126,9 @@
                         </div>
 
                     </div>
+
+                    <!----------------------------------------------------->
+                    
                 </div>
 
             </div>
