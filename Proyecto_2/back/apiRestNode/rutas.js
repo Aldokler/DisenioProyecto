@@ -16,7 +16,7 @@ router.get('/equipo_guia', (request, response)=>{
         }
         else{
             const equipos = rows[0].map(row => 
-                new EquipoGuia(row.Año, row.Semestre));
+                new EquipoGuia(row.ID,[],row.Año, row.Semestre));
                 response.json({equipos})
         }
     })
