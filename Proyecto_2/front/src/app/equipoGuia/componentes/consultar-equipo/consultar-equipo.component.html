@@ -63,26 +63,22 @@
         </div>
 
         <div class="col mt-5">
-            <form onsubmit="">
+            <form onsubmit="filterEquiposGuia(annioFiltrar.value, semestre.value)">
                 <div class="row">
 
                     <div class="col">
                         <select class="form-select me-2" name="opcion2" id="opcion2">
-                            <option value="">Semestre</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                            <option #semestre value="1">1</option>
+                            <option #semestre value="2">2</option>
                         </select>
                     </div>
 
                     <div class="col">
-                        <select class="form-select me-2" name="opcion2" id="opcion2">
-                            <option value="">Año</option>
-                            <option value="1">2018</option>
-                            <option value="2">2019</option>
-                            <option value="3">2020</option>
-                            <option value="4">2021</option>
-                            <option value="5">2022</option>
-                            <option value="6">2023</option>
+                        <select class="form-select me-2" name="opcion2" id="opcion2" aria-placeholder="año">
+                            <option #annioFiltrar value="1971">1971</option>
+
+                            <option #annioFiltrar *ngFor="let equipoguia of equiposguia" ></option>
+
                         </select>
                     </div>
 
@@ -101,15 +97,14 @@
             <div class="card-body">
                 <!--Aqui se hace un nuevo equipo de trabajo-->
                 <div  class="row mb-3 mt-3 text-center">
-                    <div *ngFor="let equipoguia of equiposguia" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                    <div *ngFor="let equipoguia of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
                                 <h5 class="card-title">{{ equipoguia.getId() }}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
-                                <p class="card-text">jcastro@gmail.com</p>
-
+                                <p class="card-text">{{ equipoguia.getCorreoElectronico() }}</p>
 
                                 <p class="card-text">AL-03 </p>
 

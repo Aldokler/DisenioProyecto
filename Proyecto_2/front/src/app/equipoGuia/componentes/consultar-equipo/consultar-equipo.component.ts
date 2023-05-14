@@ -4,6 +4,7 @@ import { EquipoGuia } from 'src/app/model/equipoguia';
 import { tap } from 'rxjs';
 import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
+import { Profesor } from 'src/app/model/profesor';
 
 
 
@@ -18,15 +19,31 @@ export class ConsultarEquipoComponent {
   ) { }
 
   public equiposguia: EquipoGuia[] = [];
+  listaEquipo : Profesor[] = [];
 
   ngOnInit(): void {
 
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
-        console.log(res);
+        let hola = this.equiposguia[0].getId();
+        this.controller.getProfesoresDeEquipoGuia(hola).pipe(
+          tap(res1 =>{
+            this.listaEquipo = res1;
+          }
+          )
+        ).subscribe()
       })
     ).subscribe()
     
   }
+
+  // Función para filtrar los equipos guía según el año y semestre seleccionados
+  public filterEquiposGuia(annioFiltrar:number, semestre:number) {
+    this.equiposguia = this.equiposguia.filter((equipo) => {
+      return equipo.getAño() === annioFiltrar && equipo.getSemestre() === semestre;
+    });
+    console.log(this.equiposguia);
+  }
+
 }

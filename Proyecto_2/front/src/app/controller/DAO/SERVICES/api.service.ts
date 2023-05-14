@@ -15,7 +15,7 @@ export class ApiService {
     return this.http.get(this.url + 'equipo_guia')
   }
 
-  public getProfesoresDeEquipoGuia(id: String){
+  public getProfesoresDeEquipoGuia(id: Number){
     return this.http.get(this.url + 'equipo_guia/' +id)
   }
 
