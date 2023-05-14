@@ -144,4 +144,8 @@ export class ControladorService {
 
   //?
   public cambiarContraseña(correo:String){}
+  
+  public sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

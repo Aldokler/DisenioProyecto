@@ -20,14 +20,15 @@ export class ConsultarEquipoComponent {
 
   public equiposguia: EquipoGuia[] = [];
   listaEquipo: Profesor[] = [];
+  public errorMessage: String = '';
 
   ngOnInit(): void {
 
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
-        let hola = this.equiposguia[0].getId();
-        this.controller.getProfesoresDeEquipoGuia(hola).pipe(
+        let actual = this.equiposguia[0].getId();
+        this.controller.getProfesoresDeEquipoGuia(actual).pipe(
           tap(res1 => {
             this.listaEquipo = res1;
           }
@@ -45,18 +46,31 @@ export class ConsultarEquipoComponent {
     this.equiposguia = this.equiposguia.filter((equipo) => {
       return equipo.getAño() == annioFiltrarNumber && equipo.getSemestre() == semestreFiltrarNumber;
     });
-    let hola = this.equiposguia[0].getId();
-    this.controller.getProfesoresDeEquipoGuia(hola).pipe(
-      tap(res1 => {
-        this.listaEquipo = res1;
-      }
-      )
-    ).subscribe()
+    if (this.equiposguia.length == 1){
+      let actual = this.equiposguia[0].getId();
+      this.controller.getProfesoresDeEquipoGuia(actual).pipe(
+        tap(res1 => {
+          this.listaEquipo = res1;
+        }
+        )
+      ).subscribe()
+      this.errorMessage = ''
+    } else { 
+      this.errorMessage = 'No existen equipos guía para el periodo indicado'
+      this.controller.sleep(4000).then(() => { this.errorMessage = '' });
+    }
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
       })
     ).subscribe()
   }
+
+  public onFadeOut() {
+    if (!this.errorMessage) {
+      this.errorMessage = ''
+    }
+  }
+  
 
 }
