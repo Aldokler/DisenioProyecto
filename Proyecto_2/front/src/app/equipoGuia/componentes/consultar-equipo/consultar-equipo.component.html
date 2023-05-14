@@ -94,6 +94,10 @@
 
         <div class="card mt-4 mb-4">
             <div class="card-body">
+                <div class="text-center alert alert-danger fade" [ngClass]="{'show': errorMessage}"
+                    role="alert" *ngIf="errorMessage" (transitionend)="onFadeOut()">
+                {{ errorMessage }}
+                </div>
                 <!--Aqui se hace un nuevo equipo de trabajo-->
                 <div  class="row mb-3 mt-3 text-center">
                     <div *ngFor="let equipoguia of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
