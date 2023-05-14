@@ -61,19 +61,19 @@
                 <span class="h5 fw-bold ml-3">CREAR EQUIPO</span>
             </a>
         </div>
-
+        <form (submit)="guardarEquipo(semestre.value,annio.value); $event.preventDefault()">
         <div class="col mt-5">
-            <form onsubmit="">
+            
                 <div class="row">
                     
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" id="" name="" class="form-control" placeholder="Año" />
+                            <input #annio type="text" id="annio" name="annio" class="form-control" placeholder="Año" />
                         </div>
                     </div>
 
                     <div class="col">
-                        <select class="form-select me-2" name="opcion2" id="opcion2">
+                        <select #semestre class="form-select me-2" name="opcion2" id="opcion2">
                             <option value="">Semestre</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -82,14 +82,14 @@
 
 
                     <div class="col">
-                        <button type="" class="btn text-white " style="background-color: #13293D;">
+                        <button type="submit" class="btn text-white " style="background-color: #13293D;">
                             Agregar Equipo
                         </button>
 
                     </div>
 
                 </div>
-            </form>
+            
         </div>
         <div class="card mt-4 mb-4">
             <div class="card-body">
@@ -99,32 +99,34 @@
                 </div>
 
                 <div class="row mb-3 mt-3 text-center">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+
+
+                    <div *ngFor="let profesor of profes" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">Jose Castro</h5>
+                                <h5 #profesorNombre class="card-title">{{profesor.getNombre()}}</h5>
                                 
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
-                                <p class="card-text">jcastro@gmail.com</p>
+                                <p #profesorCorreoElectronico class="card-text">{{profesor.getCorreoElectronico()}}</p>
 
-                                <p class="card-text">AL-03 </p>
+                                <p #profesorId class="card-text">{{profesor.getId()}} </p>
 
-                                <a href="" class="btn text-white" style="background-color: #13293D;">Seleccionar</a>
-
+                                <button class="btn text-white me-2" style="background-color: #13293D;">
+                                    Seleccionar
+                                </button>
                             </div>
-
                         </div>
-
                     </div>
+                    
+
                 </div>
 
             </div>
 
-
-
         </div>
+    </form>
 
     </div>
 </body>
