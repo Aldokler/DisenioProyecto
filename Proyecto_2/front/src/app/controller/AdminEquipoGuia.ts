@@ -56,7 +56,7 @@ export class AdminEquipoGuia{
     public getProfesoresDeEquipoGuia(id: Number): Observable<Profesor[]>{
         return this.DAO.getProfesoresDeEquipoGuia(id).pipe(
             map((data: any) => { 
-                const profesoresJson = data.profesores;
+                const profesoresJson = data.profesor;
                 return profesoresJson.map((profesorJson: any) => {
                     return new Profesor(
                         profesorJson.id,

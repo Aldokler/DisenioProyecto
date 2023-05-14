@@ -19,7 +19,7 @@ export class ConsultarEquipoComponent {
   ) { }
 
   public equiposguia: EquipoGuia[] = [];
-  listaEquipo : Profesor[] = [];
+  listaEquipo: Profesor[] = [];
 
   ngOnInit(): void {
 
@@ -28,21 +28,30 @@ export class ConsultarEquipoComponent {
         this.equiposguia = res;
         let hola = this.equiposguia[0].getId();
         this.controller.getProfesoresDeEquipoGuia(hola).pipe(
-          tap(res1 =>{
+          tap(res1 => {
             this.listaEquipo = res1;
           }
           )
         ).subscribe()
       })
     ).subscribe()
-    
+
   }
 
   // Función para filtrar los equipos guía según el año y semestre seleccionados
-  public filterEquiposGuia(annioFiltrar:number, semestre:number) {
+  public filterEquiposGuia(annioFiltrar: string, semestre: string) {
+    const annioFiltrarNumber = parseInt(annioFiltrar);
+    const semestreFiltrarNumber = parseInt(semestre);
     this.equiposguia = this.equiposguia.filter((equipo) => {
-      return equipo.getAño() === annioFiltrar && equipo.getSemestre() === semestre;
+      return equipo.getAño() === annioFiltrarNumber && equipo.getSemestre() === semestreFiltrarNumber;
     });
+    let hola = this.equiposguia[0].getId();
+    this.controller.getProfesoresDeEquipoGuia(hola).pipe(
+      tap(res1 => {
+        this.listaEquipo = res1;
+      }
+      )
+    ).subscribe()
     console.log(this.equiposguia);
   }
 

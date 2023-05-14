@@ -63,7 +63,7 @@
         </div>
 
         <div class="col mt-5">
-            <form onsubmit="filterEquiposGuia(annioFiltrar.value, semestre.value)">
+            <form (submit)="filterEquiposGuia(annioFiltrar.value, semestre.value); $event.preventDefault()">
                 <div class="row">
 
                     <div class="col">
@@ -76,8 +76,7 @@
                     <div class="col">
                         <select class="form-select me-2" name="opcion2" id="opcion2" aria-placeholder="año">
                             <option #annioFiltrar value="1971">1971</option>
-
-                            <option #annioFiltrar *ngFor="let equipoguia of equiposguia" ></option>
+                            <option #annioFiltrar value="2022">2022</option>
 
                         </select>
                     </div>
