@@ -94,8 +94,8 @@
 
         <div class="card mt-4 mb-4">
             <div class="card-body">
-                <div class="text-center alert alert-danger fade" [ngClass]="{'show': errorMessage}"
-                    role="alert" *ngIf="errorMessage" (transitionend)="onFadeOut()">
+                <div class="text-center alert alert-danger fade show" [ngClass]="{'fade': !showError, 'show': showError}" role="alert"
+                    *ngIf="errorMessage">
                 {{ errorMessage }}
                 </div>
                 <!--Aqui se hace un nuevo equipo de trabajo-->

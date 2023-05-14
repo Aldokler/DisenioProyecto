@@ -21,6 +21,7 @@ export class ConsultarEquipoComponent {
   public equiposguia: EquipoGuia[] = [];
   listaEquipo: Profesor[] = [];
   public errorMessage: String = '';
+  public showError: boolean = false;
 
   ngOnInit(): void {
 
@@ -57,7 +58,14 @@ export class ConsultarEquipoComponent {
       this.errorMessage = ''
     } else { 
       this.errorMessage = 'No existen equipos guía para el periodo indicado'
-      this.controller.sleep(4000).then(() => { this.errorMessage = '' });
+      this.showError = true;
+  
+      setTimeout(() => {
+        this.showError = false;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 750);
+      }, 4000);
     }
     this.controller.getEquiposGuia().pipe(
       tap(res => {
