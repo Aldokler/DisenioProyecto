@@ -2,10 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EquipoGuia = void 0;
 var EquipoGuia = /** @class */ (function () {
-    function EquipoGuia(año, semestre) {
+    function EquipoGuia(id, miembros, año, semestre) {
+        this.id = id;
+        this.miembros = miembros;
         this.año = año;
         this.semestre = semestre;
     }
+    EquipoGuia.prototype.getId = function () {
+        return this.id;
+    };
+    EquipoGuia.prototype.setId = function (id) {
+        this.id = id;
+    };
     EquipoGuia.prototype.getMiembros = function () {
         return this.miembros;
     };
