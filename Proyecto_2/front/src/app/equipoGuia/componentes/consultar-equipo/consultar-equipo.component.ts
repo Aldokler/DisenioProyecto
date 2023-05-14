@@ -43,14 +43,8 @@ export class ConsultarEquipoComponent {
     const annioFiltrarNumber = parseInt(annioFiltrar);
     const semestreFiltrarNumber = parseInt(semestre);
     this.equiposguia = this.equiposguia.filter((equipo) => {
-      return equipo.getAño() == annioFiltrarNumber ;
+      return equipo.getAño() == annioFiltrarNumber && equipo.getSemestre() == semestreFiltrarNumber;
     });
-    this.equiposguia = this.equiposguia.filter((equipo) => {
-      return equipo.getSemestre() == semestreFiltrarNumber;
-    });
-    console.log(annioFiltrarNumber);
-    console.log(semestreFiltrarNumber);
-    console.log(this.equiposguia);
     let hola = this.equiposguia[0].getId();
     this.controller.getProfesoresDeEquipoGuia(hola).pipe(
       tap(res1 => {
@@ -58,7 +52,11 @@ export class ConsultarEquipoComponent {
       }
       )
     ).subscribe()
-    console.log(this.equiposguia);
+    this.controller.getEquiposGuia().pipe(
+      tap(res => {
+        this.equiposguia = res;
+      })
+    ).subscribe()
   }
 
 }

@@ -12,12 +12,10 @@ export class AdminEquipoGuia{
         return this.DAO.getEquiposGuia().pipe(
             map((data: any) => { 
                 const json = data.equipos;
-                let i = 0;
-                return json.map((equipo: any) => {
-                    i++
+                return json.map((json: any) => {
                     return new EquipoGuia(
-                        i,
-                        [],
+                        json.id,
+                        json.miembros,
                         json.año,
                         json.semestre
                     )
