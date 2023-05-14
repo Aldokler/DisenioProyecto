@@ -84,7 +84,7 @@ export class ControladorService {
   public definirCoordinador(profesor: Profesor): Observable<boolean>{
       return this.adminEquipoGuia.definirCoordinador(profesor)
   }
-  public getProfesoresDeEquipoGuia(id: String): Observable<Profesor[]>{
+  public getProfesoresDeEquipoGuia(id: Number): Observable<Profesor[]>{
       return this.adminEquipoGuia.getProfesoresDeEquipoGuia(id)
   }
 
