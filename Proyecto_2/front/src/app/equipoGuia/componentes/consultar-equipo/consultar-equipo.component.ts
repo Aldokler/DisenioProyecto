@@ -24,6 +24,7 @@ export class ConsultarEquipoComponent {
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
+        console.log(res);
       })
     ).subscribe()
     
