@@ -16,6 +16,7 @@ export class CrearEquipoComponent {
   ) {}
 
   public profes: Profesor[] = [];
+  public profesoresSeleccionados: Profesor[] = [];
 
   ngOnInit(): void {
     
@@ -27,6 +28,10 @@ export class CrearEquipoComponent {
     ).subscribe()
   }
 guardarEquipo(semestre:string,annio:string){
+
+}
+
+public seleccionarProfesor(profesor: Profesor) {
 
 }
   

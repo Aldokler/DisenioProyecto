@@ -30,6 +30,7 @@ export class AdminEquipoGuia{
             })
         )
     }
+
     public agregarProfesor(idEG: String, idP: String): Observable<boolean>{
         return this.DAO.addProfesorToEquipoGuia(idEG, idP).pipe(
             map((data:any) => {
