@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Profesor } from 'src/app/model/profesor';
 import { EquipoGuia } from 'src/app/model/equipoguia';
+import { TIndoleActividad } from 'src/app/model/tindoleactividad';
+import { TModalidad } from 'src/app/model/tmodalidad';
+import { TEstado } from 'src/app/model/testado';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,33 @@ export class ApiService {
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
+  public addPlanDeTrabajo(año: number, semestre: number, creador: number){
+    return this.http.post(this.url + 'plan_trabajo', {año, semestre, creador})
+  }
+
+  public getPlanes(){
+    return this.http.get(this.url + 'plan_trabajo')
+  }
+
+  public getActividadesofPlan(id: number){
+    return this.http.get(this.url + 'plan_trabajo/' + id)
+  }
+
+  public getActividad(id: number){
+    return this.http.get(this.url + 'plan_trabajo/actividad/' + id)
+  }
+
+  public addActividad(nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number){
+    return this.http.post(this.url + 'plan_trabajo/actividad', {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID})
+  }
+
+  public modificarActividad(id: number, nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado){
+    return this.http.put(this.url + 'plan_trabajo/actividad/' + id, {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, estado})
+  }
+
+  public addObservacion(id: number, observacion: string){
+    return this.http.put(this.url + 'plan_trabajo/actividad/cancelar/' + id, observacion)
+  }
 
 
 //-------------------------------------------------------------------------------------------------------------------------------

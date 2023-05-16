@@ -32,7 +32,7 @@ router.get('/login', (request, response)=>{
 
 // Plan de Trabajo
 
-// crear plan de trabajo ---------------------------------------------
+// crear plan de trabajo ---------------------------------------------***
 router.post('/plan_trabajo', (request, response)=>{
     const {año, semestre, creador} = request.body;
     let sql = 'call addPlan (?,?,?)';
@@ -48,7 +48,7 @@ router.post('/plan_trabajo', (request, response)=>{
 });
 
 
-// get planes ---------------------------------------------
+// get planes ---------------------------------------------***
 router.get('/plan_trabajo', (request, response)=>{
     let sql = "call getPlanes()";
     conexion.query(sql, (error, rows, fields)=>{
@@ -64,7 +64,7 @@ router.get('/plan_trabajo', (request, response)=>{
 });
 
 
-// get actividades de un plan ---------------------------------------------
+// get actividades de un plan ---------------------------------------------***
 router.get('/plan_trabajo/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getActividadesofPlan(?);";
@@ -99,7 +99,7 @@ router.get('/plan_trabajo/:pplan', (request, response)=>{
 });
 */
 
-// get actividad by ID ---------------------------------------------
+// get actividad by ID ---------------------------------------------***
 router.get('/plan_trabajo/actividad/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "select * from actividad where ID = ?;";
@@ -118,7 +118,7 @@ router.get('/plan_trabajo/actividad/:id', (request, response)=>{
 
 
 
-// crear actividad de plan de trabajo ---------------------------------------------
+// crear actividad de plan de trabajo ---------------------------------------------***
 router.post('/plan_trabajo/actividad', (request, response)=>{
     const {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID} = request.body;
     let sql = 'call addActividad (?,?,?,?,?,?,?,?)';
@@ -146,7 +146,7 @@ router.put('/plan_trabajo/actividad/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Actividad modificada' })
+            response.json({status: '0' })
         }
     })
 });

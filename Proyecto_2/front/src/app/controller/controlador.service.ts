@@ -28,9 +28,9 @@ export class ControladorService {
     private DAO: ApiService
   ){}
 
-  private adminActividad = new AdminActividad()
+  private adminActividad = new AdminActividad(this.DAO)
   private adminAdministrativos = new AdminAdministrativos(this.DAO)
-  private adminPlanDeTrabajo = new AdminPlanDeTrabajo()
+  private adminPlanDeTrabajo = new AdminPlanDeTrabajo(this.DAO)
   private adminEquipoGuia = new AdminEquipoGuia(this.DAO)
   private adminEstudiante = new AdminEstudiante()
   private adminProfesores = new AdminProfesores(this.DAO)
@@ -92,12 +92,14 @@ export class ControladorService {
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  public crearActividad(actividad: Actividad): boolean{
-      return this.adminActividad.crearActividad(actividad)
+  public getActividad(id: number): Observable<Actividad>{
+    return this.adminActividad.getActividad(id)
   }
-  public modificarDatosActividad(actividad: Actividad): boolean{
-      return this.adminActividad.modificarDatosActividad(actividad)
+  public crearActividad(actividad: Actividad, plan: number): Observable<boolean>{
+      return this.adminActividad.crearActividad(actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), plan)
+  }
+  public modificarDatosActividad(id: number, actividad: Actividad): Observable<boolean>{
+      return this.adminActividad.modificarDatosActividad(id, actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), actividad.getEstado())
   }
   public subirEvidencia(evidencia: Evidencia): boolean{
       return this.adminActividad.subirEvidencia(evidencia)
@@ -111,14 +113,14 @@ export class ControladorService {
   public responderComentario(comentario: Comentario){
       this.adminActividad.responderComentario(comentario)
   }
-  public agregarObservacion(observacion: String, fecha: Date){
-      this.adminActividad.agregarObservacion(observacion, fecha)
+  public agregarObservacion(id: number, observacion: string){
+      this.adminActividad.agregarObservacion(id, observacion)
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
-  public crearPlanTrabajo(plan: PlanDeTrabajo): boolean{
-      return this.adminPlanDeTrabajo.crearPlanTrabajo(plan)
+  public crearPlanTrabajo(año: number, semestre: number, creador: number): Observable<boolean>{
+      return this.adminPlanDeTrabajo.crearPlanTrabajo(año, semestre, creador)
   }
   public consultarProximaActividad(id: String): Observable<Actividad>{
       return this.adminPlanDeTrabajo.consultarProximaActividad(id)
@@ -126,9 +128,12 @@ export class ControladorService {
   public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
       return this.adminPlanDeTrabajo.verPlanDeTrabajo(id)
   }
-
-  public verPlanesDeTrabajo(){
-}
+  public verPlanesDeTrabajo(): Observable<PlanDeTrabajo[]>{
+    return this.adminPlanDeTrabajo.verPlanesDeTrabajo()
+  }
+  public getActividadesofPlan(id: number): Observable<Actividad[]>{
+    return this.adminPlanDeTrabajo.getActividadesofPlan(id)
+  }
 
   public marcarActividadRealizada(id: String): boolean{
       return this.adminPlanDeTrabajo.marcarActividadRealizada(id)
