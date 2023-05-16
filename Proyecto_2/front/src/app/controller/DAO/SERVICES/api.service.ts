@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Profesor } from 'src/app/model/profesor';
 import { EquipoGuia } from 'src/app/model/equipoguia';
 
@@ -10,6 +10,16 @@ export class ApiService {
 
   url = '/api/'
   constructor(private http: HttpClient) { }
+
+  public getAdministrativo(id: String){
+    return this.http.get(this.url + 'administrativo/' +id)
+  }
+
+  public login(user: string, pass: string){
+    return this.http.get(this.url + 'login?user=' + user + '&pass=' + pass)
+  }
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
   public getEquiposGuia(){
     return this.http.get(this.url + 'equipo_guia')
@@ -41,7 +51,7 @@ export class ApiService {
     return this.http.get(this.url + 'equipo_guia_id/' + año + '/' + semestre)
   }
 
-//--------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------
 
   public getProfesores(){
     return this.http.get(this.url + 'profesores')

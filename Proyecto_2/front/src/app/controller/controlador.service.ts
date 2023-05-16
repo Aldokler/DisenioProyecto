@@ -29,12 +29,12 @@ export class ControladorService {
   ){}
 
   private adminActividad = new AdminActividad()
-  private adminAdministrativos = new AdminAdministrativos()
+  private adminAdministrativos = new AdminAdministrativos(this.DAO)
   private adminPlanDeTrabajo = new AdminPlanDeTrabajo()
   private adminEquipoGuia = new AdminEquipoGuia(this.DAO)
   private adminEstudiante = new AdminEstudiante()
   private adminProfesores = new AdminProfesores(this.DAO)
-  private adminLogin = new login()
+  private adminLogin = new login(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -146,8 +146,8 @@ export class ControladorService {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //?
-    public ingresar(correo: String, contraseña: String): Usuario{
-        return this.adminLogin.ingresar(correo, contraseña)
+    public ingresar(Usuario: string, Contraseña: string): Observable<Boolean>{
+        return this.adminLogin.ingresar(Usuario, Contraseña)
     }
     public cambiarContraseña(correo:String): boolean{
         return this.adminLogin.cambiarContraseña(correo)
