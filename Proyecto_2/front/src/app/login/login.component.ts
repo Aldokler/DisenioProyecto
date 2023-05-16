@@ -59,11 +59,13 @@ export class LoginComponent implements OnInit{
             this.pasarDatos.loginUser = Profe
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
+            this.router.navigate(['/home']);
           } else if (Admin){
             console.log(Admin)
             this.pasarDatos.loginUser = Admin
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
+            this.router.navigate(['/home']);
           } else {
             console.log("Unexpected error ocurred, deleting Win32...")
           }
