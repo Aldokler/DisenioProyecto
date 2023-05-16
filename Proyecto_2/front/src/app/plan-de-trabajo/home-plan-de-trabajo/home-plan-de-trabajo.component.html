@@ -67,24 +67,19 @@
             </div>
 
             <div class="col mt-5">
-                <form onsubmit="">
+                <form (submit)="filterPlanes(annioFiltrar.value, semestre.value); $event.preventDefault()">
                     <div class="row">
                         <div class="col">
-                            <select class="form-select me-2" name="opcion1" id="opcion1">
+                            <select #semestre class="form-select me-2" name="semestre" id="semestre">
                                 <option value="1">Semestre</option>
                                 <option value="2">1</option>
                                 <option value="3">2</option>
                             </select>
                         </div>
                         <div class="col">
-                            <select class="form-select me-2" name="opcion2" id="opcion2">
-                                <option value="">Año</option>
-                                <option value="1">2018</option>
-                                <option value="2">2019</option>
-                                <option value="3">2020</option>
-                                <option value="4">2021</option>
-                                <option value="5">2022</option>
-                                <option value="6">2023</option>
+                            <select #annioFiltrar class="form-select me-2" name="annioFiltrar" id="annioFiltrar">
+                                <option *ngFor="let anio of annios" value="{{anio}}">{{anio}}</option>
+
                             </select>
                         </div>
 

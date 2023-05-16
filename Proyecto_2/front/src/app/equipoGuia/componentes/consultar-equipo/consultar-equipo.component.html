@@ -99,20 +99,20 @@
                 </div>
                 <!--Aqui se hace un nuevo equipo de trabajo-->
                 <div  class="row mb-3 mt-3 text-center">
-                    <div *ngFor="let equipoguia of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                    <div *ngFor="let profesorCoordinador of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">{{ equipoguia.getId() }}</h5>
+                                <h5 class="card-title">{{ profesorCoordinador.getId() }}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
-                                <p class="card-text">{{ equipoguia.getCorreoElectronico() }}</p>
+                                <p class="card-text">{{ profesorCoordinador.getCorreoElectronico() }}</p>
 
-                                <p class="card-text">{{ equipoguia.getNombre() + ' ' + equipoguia.getApellido1() }}</p>
+                                <p class="card-text">{{ profesorCoordinador.getNombre() + ' ' + profesorCoordinador.getApellido1() }}</p>
 
                                 <button class="btn text-white me-2"
-                                        [style.background-color]="profesoresSeleccionados.includes(equipoguia) ? '#ADD8E6' : '#13293D'"
-                                        (click)="seleccionarProfesores(equipoguia)">
+                                        [style.background-color]="profesoresSeleccionados.includes(profesorCoordinador) ? '#ADD8E6' : '#13293D'"
+                                        (click)="seleccionarCoordinador(profesorCoordinador)">
                                         Seleccionar coordinador
                                     </button>
 
