@@ -9,6 +9,7 @@ import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { tap } from 'rxjs';
 import { Profesor } from '../model/profesor';
+import { PasarDatosService } from '../pasar-datos.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit{
   mostrarHomeComponent = false;
   errorMessage: string = "";
 
-  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
+  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService, private pasarDatos:PasarDatosService){}
 
 
   ngOnInit(): void {
