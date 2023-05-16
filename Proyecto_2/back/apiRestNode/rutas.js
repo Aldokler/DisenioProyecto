@@ -2,6 +2,7 @@ const { Profesor } = require('../model/profesor');
 const {EquipoGuia} = require('../model/equipoguia');
 const {PlanDeTrabajo} = require('../model/plandetrabajo');
 const {Actividad} = require('../model/actividad');
+const {Administrativo} = require('../model/administrativo');
 
 
 const router = require('express').Router();
@@ -316,6 +317,25 @@ router.get('/profesores/:id', (request, response)=>{
             const profesor = rows[0].map(row => 
                 new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
                 response.json({profesor})
+        }
+    })
+});
+
+
+//get administrativo por ID -----------------------------------------------------
+router.get('/administrativo/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call getAdmByID(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const administrativo = rows[0].map(row => 
+                new Administrativo(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina));
+                response.json({administrativo})
         }
     })
 });
