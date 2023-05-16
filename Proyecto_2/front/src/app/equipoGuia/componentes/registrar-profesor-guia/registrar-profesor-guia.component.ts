@@ -21,10 +21,16 @@ export class RegistrarProfesorGuiaComponent {
   public rolProfesor: TRol = TRol.GUIA;
 
   registrarProfesor(
-    codigoCampus: String, correoElectronico: string,telefonoCelular: string,nombreProfesor: string,telefonoOficina: string,fotoProfesor: string) {
+    codigoCampus: String, correoElectronico: string,telefonoCelular: string,nombreProfesor: string,telefonoOficina: string,fotoProfesor: string, primerApellido:string,segundoApellido:string) {
     const codigoCampusEnum: TSede = TSede[codigoCampus as keyof typeof TSede];
-    const profesor: Profesor = new Profesor("",nombreProfesor,"","",correoElectronico,telefonoCelular,codigoCampusEnum,"",telefonoOficina,fotoProfesor,this.rolProfesor);
+    const profesor: Profesor = new Profesor("",nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,codigoCampusEnum,"1234",telefonoOficina,fotoProfesor,this.rolProfesor);
     console.log(profesor);
-    this.controller.addProfesor(profesor)
+    this.controller.addProfesor(profesor).pipe(
+      tap(res => {
+        if (res){
+          console.log("hola")
+        }
+      })
+    ).subscribe()
   }
 }

@@ -62,8 +62,38 @@
             </a>
         </div>
 
-        
+        <form>
+            <div class="row">
+
+                <div class="col">
+                    <select #semestre class="form-select me-2" name="opcion2" id="opcion2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select #annioFiltrar class="form-select me-2" name="opcion2" id="opcion2"
+                        aria-placeholder="año">
+                        <option value="1971">1971</option>
+                        <option value="2003">2003</option>
+                        <option value="2022">2022</option>
+
+                    </select>
+                </div>
+
+                <div class="col">
+                    <button type="submit" class="btn text-white me-2" style="background-color: #13293D;">
+                        Filtrar
+                    </button>
+
+                </div>
+
+            </div>
+        </form>
+
         <div class="card mt-4 mb-4">
+
             <div class="card-body">
 
                 <div class="d-flex align-items-center pb-1">
@@ -71,17 +101,19 @@
                 </div>
 
                 <div class="row mb-3 mt-3 text-center">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+
+
+                    <div *ngFor="let profesores of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">Jose Castro</h5>
-                                
+                                <h5 class="card-title">{{profesores.getId()}}</h5>
+
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
-                                <p class="card-text">jcastro@gmail.com</p>
+                                <p class="card-text">{{profesores.getCorreoElectronico()}}</p>
 
-                                <p class="card-text">AL-03 </p>
+                                <p class="card-text">{{profesores.getNombre()}} </p>
 
                                 <a href="" class="btn text-white" style="background-color: #13293D;">Dar de Baja</a>
 
@@ -90,6 +122,10 @@
                         </div>
 
                     </div>
+
+                    
+
+
                 </div>
 
             </div>

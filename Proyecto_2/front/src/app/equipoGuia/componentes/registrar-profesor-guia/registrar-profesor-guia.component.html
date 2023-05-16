@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form (submit)="registrarProfesor(codigoCampus.value,correoElectronico.value,telefonoCelular.value,nombreProfesor.value,telefonoOficina.value,fotoProfesor.value); $event.preventDefault()" enctype="multipart/form-data" method="POST" action="/register">
+                        <form (submit)="registrarProfesor(codigoCampus.value,correoElectronico.value,telefonoCelular.value,nombreProfesor.value,telefonoOficina.value,fotoProfesor.value, primerApellido.value,segundorApellido.value); $event.preventDefault()" enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0" >
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -101,6 +101,12 @@
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Teléfono Oficina </label>
+                                            <input #telefonoOficina type="text" id="telefonoOficina" name="telefonoOficina" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -113,8 +119,14 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <label class="form-label">Teléfono Oficina </label>
-                                            <input #telefonoOficina type="text" id="telefonoOficina" name="telefonoOficina" required
+                                            <label class="form-label">Primer Apellido </label>
+                                            <input #primerApellido type="text" id="primerApellido" name="primerApellido" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Segundo Apellido </label>
+                                            <input #segundorApellido type="text" id="segundorApellido" name="segundorApellido" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 

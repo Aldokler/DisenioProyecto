@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Administrativo } from 'src/app/model/administrativo';
@@ -40,6 +40,7 @@ export class CrearEquipoComponent {
   }
 
   guardarEquipo(semestre: string, annio: string) {
+
     this.semestreEntero = parseInt(semestre);
     this.annioEntero = parseInt(annio);
     if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
