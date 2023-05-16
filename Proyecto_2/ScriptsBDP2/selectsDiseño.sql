@@ -107,3 +107,15 @@ BEGIN
     RETURN id_result;
 END$$
 DELIMITER ;
+
+
+drop procedure if exists getEquipoGuiaByYearSemester;
+DELIMITER $$
+CREATE PROCEDURE getEquipoGuiaByYearSemester(vAño INT, vSemestre INT)
+BEGIN
+	select ID from equipo_guía where Año = vAño and Semestre = vSemestre;
+END$$
+DELIMITER ;
+
+
+call getEquipoGuiaByYearSemester(2022,2);

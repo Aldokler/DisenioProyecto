@@ -97,6 +97,21 @@ router.delete('/equipo_guia/:id', (request, response)=>{
 });
 
 
+//get ID de equipo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/equipo_guia_id', (request, response)=>{
+    const {año, semestre} = request.body;
+    let sql = "call getEquipoGuiaByYearSemester(?,?);";
+    conexion.query(sql, [año, semestre], (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            const id = rows[0]
+            response.json({id})
+        }
+    })
+});
+
 // gestion profesores
 //get profesores ---------------------------------------------------------
 router.get('/profesores', (request, response)=>{
