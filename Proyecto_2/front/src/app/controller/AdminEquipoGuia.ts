@@ -1,7 +1,7 @@
 import { Observable } from "rxjs/internal/Observable";
 import { EquipoGuia } from "../model/equipoguia";
 import { Profesor } from "../model/profesor";
-import { Subject, Subscription, map, tap } from "rxjs";
+import { Subject, Subscription, concatMap, forkJoin, map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { TSede } from "../model/tsede";
 import { TRol } from "../model/trol";
@@ -27,17 +27,22 @@ export class AdminEquipoGuia {
         );
     }
     public crearEquipo(equipo: EquipoGuia) {
-        this.DAO.addEquipoGuia(equipo)
-        this.getEquipoGuiaByYearSemester(equipo.getAño(), equipo.getSemestre()).pipe(
-            tap(res => {
-                console.log(res)
-                for (let profe of equipo.getMiembros()) {
-                    console.log(profe.getId())
-                    this.agregarProfesor(res, profe.getId()).toPromise().then( () => console.log("working?"))
-                }
-            })
-        ).toPromise().then( () => console.log("aja?") )
-    }
+        this.DAO.addEquipoGuia(equipo).pipe(
+          concatMap(() => {
+            return this.getEquipoGuiaByYearSemester(equipo.getAño(), equipo.getSemestre());
+          }),
+          tap((res) => {
+            console.log(res);
+            const agregarProfesoresPromises = equipo.getMiembros().map((profe) => {
+              console.log(profe.getId());
+              return this.agregarProfesor(res, profe.getId()).toPromise().then(()=>{console.log("Tasdasd")});
+            });
+            return forkJoin(agregarProfesoresPromises);
+          })
+        ).subscribe(() => {
+          console.log("Trabajo completado");
+        });
+      }
 
     public agregarProfesor(idEG: Number, idP: String): Observable<boolean> {
         return this.DAO.addProfesorToEquipoGuia(idEG, idP).pipe(
