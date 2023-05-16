@@ -14,7 +14,7 @@ import { AdminEstudiante } from "./AdminEstudiante";
 import { AdminPlanDeTrabajo } from "./AdminPlanDeTrabajo";
 import { AdminProfesores } from "./AdminProfesores";
 import { ApiService } from "./DAO/SERVICES/api.service";
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { login } from './login';
 import { Usuario } from '../model/usuario';
 
@@ -75,7 +75,7 @@ export class ControladorService {
   public getEquiposGuia(): Observable<EquipoGuia[]>{
     return this.adminEquipoGuia.getEquiposGuia()
   }
-  public crearEquipo(equipo: EquipoGuia): Observable<boolean>{
+  public crearEquipo(equipo: EquipoGuia){
       return this.adminEquipoGuia.crearEquipo(equipo)
   }
   public agregarProfesor(idEG: Number, idP: String): Observable<boolean>{
@@ -161,5 +161,9 @@ export class ControladorService {
   
   public sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  public getEquipoGuiaByYearSemester(año: Number, semestre: Number): Observable<Number> {
+      return this.adminEquipoGuia.getEquipoGuiaByYearSemester(año, semestre)
   }
 }

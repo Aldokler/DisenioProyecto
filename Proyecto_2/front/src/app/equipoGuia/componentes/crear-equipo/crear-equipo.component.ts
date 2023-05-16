@@ -46,11 +46,7 @@ export class CrearEquipoComponent {
     if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
 
       const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero);
-      this.controller.crearEquipo(equipo).pipe(
-        tap(res => {
-          if (res){ console.log("Eureka!")}
-        })
-      ).subscribe()
+      this.controller.crearEquipo(equipo)
     };
   }
 

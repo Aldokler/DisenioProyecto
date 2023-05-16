@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   public addProfesorToEquipoGuia(idEG: Number, idP: String){
-    return this.http.post(this.url + 'equipo_guia/profesor', {idEG, idP})
+    return this.http.post(this.url + 'equipo_guia/profesor', {body: idEG, idP})
   }
 
   public defCoordinador(profesor: Profesor){
@@ -35,6 +35,10 @@ export class ApiService {
 
   public kickProfesor(idEG: Number, idP: String){
     return this.http.delete(this.url + 'equipo_guia/' + idEG, {body: idP})
+  }
+
+  public getEquipoGuiaByYearSemester(año: Number, semestre: Number){
+    return this.http.get(this.url + 'equipo_guia_id/' + año + '/' + semestre)
   }
 
 //--------------------------------------------------------------------------
