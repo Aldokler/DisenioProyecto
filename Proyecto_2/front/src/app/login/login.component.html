@@ -11,6 +11,8 @@
 
                 <form (submit)="evaluarUsuario(correoUsuario.value,contrasenaInput.value)" method="POST" action="/login">
 
+                  
+
                   <div class="d-flex justify-content-center mb-3 pb-1">
                     <span class="h1 fw-bold mb-0">INICIO DE SESIÓN</span>
                   </div>
@@ -41,6 +43,8 @@
                   <a href="/recuperacion.html"
                     class=" text-primary-1000:hover fw-bold d-flex justify-content-center text-decoration-none text-reset"
                     [routerLink]="['/recuperacion']">¿Olvidaste tu contraseña?</a>
+
+                    <app-home *ngIf="mostrarHomeComponent" [correoUsuario]="correoUsuario.value" [contrasenaInput]="contrasenaInput.value"></app-home>
                 </form>
 
               </div>

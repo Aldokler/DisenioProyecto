@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminProfesores } from '../controller/AdminProfesores';
 import { ApiService } from '../controller/DAO/SERVICES/api.service';
+import { ControladorService } from 'src/app/controller/controlador.service';
+import { Usuario } from 'src/app/model/usuario';
+import { Administrativo } from 'src/app/model/administrativo';
+import { TRol } from 'src/app/model/trol';
+import { TSede } from 'src/app/model/tsede';
 
 
 @Component({
@@ -10,15 +15,19 @@ import { ApiService } from '../controller/DAO/SERVICES/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
+  mostrarHomeComponent = false;
 
-  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores){}
+  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
+
 
   ngOnInit(): void {
 
   }
 
   evaluarUsuario(correoUsuario:string,contrasenaInput:string){
-
+    const usuario = this.controller.ingresar(correoUsuario,contrasenaInput);
+    this.mostrarHomeComponent = true;
+    
   }
 
 
