@@ -45,7 +45,7 @@ export class CrearEquipoComponent {
     this.annioEntero = parseInt(annio);
     if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
 
-      const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero);
+      const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero, this.profesoresSeleccionados[0]);
       this.controller.crearEquipo(equipo)
     };
   }

@@ -3,6 +3,8 @@ import { EquipoGuia } from "../model/equipoguia";
 import { Profesor } from "../model/profesor";
 import { Subject, Subscription, map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
+import { TSede } from "../model/tsede";
+import { TRol } from "../model/trol";
 
 export class AdminEquipoGuia {
 
@@ -17,7 +19,8 @@ export class AdminEquipoGuia {
                         json.id,
                         json.miembros,
                         json.año,
-                        json.semestre
+                        json.semestre,
+                        new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)
                     )
                 });
             })
