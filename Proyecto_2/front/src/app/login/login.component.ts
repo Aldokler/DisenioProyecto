@@ -20,8 +20,9 @@ import { PasarDatosService } from '../pasar-datos.service';
 export class LoginComponent implements OnInit{
   mostrarHomeComponent = false;
   errorMessage: string = "";
+  private pasarDatos:PasarDatosService = PasarDatosService.getInstance()
 
-  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService, private pasarDatos:PasarDatosService){}
+  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
 
 
   ngOnInit(): void {
@@ -55,8 +56,14 @@ export class LoginComponent implements OnInit{
           }).catch()
           if (Profe) {
             console.log(Profe)
+            this.pasarDatos.loginUser = Profe
+            //--------------------------------------------------------------------------------------------------------------
+            this.mostrarHomeComponent = true;
           } else if (Admin){
             console.log(Admin)
+            this.pasarDatos.loginUser = Admin
+            //--------------------------------------------------------------------------------------------------------------
+            this.mostrarHomeComponent = true;
           } else {
             console.log("Unexpected error ocurred, deleting Win32...")
           }
@@ -65,13 +72,6 @@ export class LoginComponent implements OnInit{
         }
       })
     ).subscribe()
-
-    /*const usuario: Usuario = this.controller.ingresar(correoUsuario, contrasenaInput);
-    if (usuario) {
-      this.mostrarHomeComponent = true;
-    } else {
-      ;
-    }*/
   }
 
   inputContrasena!: HTMLInputElement;
