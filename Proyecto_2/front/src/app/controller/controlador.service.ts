@@ -75,10 +75,10 @@ export class ControladorService {
   public crearEquipo(equipo: EquipoGuia): Observable<boolean>{
       return this.adminEquipoGuia.crearEquipo(equipo)
   }
-  public agregarProfesor(idEG: String, idP: String): Observable<boolean>{
+  public agregarProfesor(idEG: Number, idP: String): Observable<boolean>{
       return this.adminEquipoGuia.agregarProfesor(idEG, idP)
   }
-  public sacarProfesor(idEG: String, idP: String): Observable<boolean>{
+  public sacarProfesor(idEG: Number, idP: String): Observable<boolean>{
       return this.adminEquipoGuia.sacarProfesor(idEG, idP)
   }
   public definirCoordinador(profesor: Profesor): Observable<boolean>{
