@@ -20,6 +20,7 @@ export class ConsultarEquipoComponent {
 
   public equiposguia: EquipoGuia[] = [];
   listaEquipo: Profesor[] = [];
+  public profesoresSeleccionados: Profesor[] = [];
   public errorMessage: String = '';
   public showError: boolean = false;
 
@@ -80,5 +81,17 @@ export class ConsultarEquipoComponent {
     }
   }
   
+  seleccionarProfesores(profesor: Profesor) {
+    if (this.profesoresSeleccionados.includes(profesor)) {
+      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
+    } else {
+      this.profesoresSeleccionados.push(profesor);
+    }
+    console.log(this.profesoresSeleccionados);
+    for(const profesor of this.profesoresSeleccionados){
+      //this.controller.sacarProfesor(,profesor.getId());
+    }
+    
+  }
 
 }

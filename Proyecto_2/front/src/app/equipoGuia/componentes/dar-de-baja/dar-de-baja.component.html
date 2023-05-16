@@ -105,9 +105,9 @@
 
                     <div *ngFor="let profesores of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
-                            <div class="card-body" style="background-color: #E2EFF8;">
+                            <div *ngIf="profesores.getRol()  == 'COORDINADOR'; else otroBloque " class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">{{profesores.getId()}}</h5>
+                                <h5 class="card-title">{{profesores.getRol()}}</h5>
 
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
@@ -115,16 +115,38 @@
 
                                 <p class="card-text">{{profesores.getNombre()}} </p>
 
-                                <a href="" class="btn text-white" style="background-color: #13293D;">Dar de Baja</a>
+                                <button class="btn text-white me-2"
+                                        [style.background-color]="profesoresSeleccionados.includes(profesores) ? '#ADD8E6' : '#13293D'"
+                                        (click)="seleccionarProfesores(profesores)">
+                                        Dar de baja a coordinador
+                                    </button>
 
                             </div>
+
+                            <ng-template #otroBloque>
+                                <!-- Contenido si el rol no es 'Coordinador' -->
+                                <div class="card-body" style="background-color: #E2EFF8;">
+
+                                    <h5 class="card-title">{{profesores.getId()}}</h5>
+    
+                                    <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
+    
+                                    <p class="card-text">{{profesores.getCorreoElectronico()}}</p>
+    
+                                    <p class="card-text">{{profesores.getNombre()}}  {{profesores.getApellido1()}} </p>
+    
+                                    <button class="btn text-white me-2"
+                                        [style.background-color]="profesoresSeleccionados.includes(profesores) ? '#ADD8E6' : '#13293D'"
+                                        (click)="seleccionarProfesores(profesores)">
+                                        Dar de baja
+                                    </button>
+    
+                                </div>
+                            </ng-template>
 
                         </div>
 
                     </div>
-
-                    
-
 
                 </div>
 

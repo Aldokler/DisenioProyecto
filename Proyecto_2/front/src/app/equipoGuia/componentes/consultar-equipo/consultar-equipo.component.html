@@ -112,13 +112,11 @@
 
                                 <p class="card-text">{{ equipoguia.getNombre() + ' ' + equipoguia.getApellido1() }}</p>
 
-                                <button type="submit" class="btn text-white me-2" style="background-color: #13293D;">
-                                    Seleccionar
-                                </button>
-
-                                <button type="submit" class="btn text-white me-2" style="background-color: #13293D;">
-                                    Seleccionar Coordinador
-                                </button>
+                                <button class="btn text-white me-2"
+                                        [style.background-color]="profesoresSeleccionados.includes(equipoguia) ? '#ADD8E6' : '#13293D'"
+                                        (click)="seleccionarProfesores(equipoguia)">
+                                        Seleccionar coordinador
+                                    </button>
 
                             </div>
 

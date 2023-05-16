@@ -13,8 +13,14 @@ export class LoginComponent implements OnInit{
 
   constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores){}
 
-  ngOnInit(): void {}
-  
+  ngOnInit(): void {
+
+  }
+
+  evaluarUsuario(correoUsuario:string,contrasenaInput:string){
+
+  }
+
 
   inputContrasena!: HTMLInputElement;
   verContrasenaIcono = 'bi-eye';

@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
+import { TRol } from 'src/app/model/trol';
 
 @Component({
   selector: 'app-dar-de-baja',
@@ -19,6 +20,7 @@ export class DarDeBajaComponent {
 
   public equiposguia: EquipoGuia[] = [];
   listaEquipo: Profesor[] = [];
+  public profesoresSeleccionados: Profesor[] = [];
   public errorMessage: String = '';
   public showError: boolean = false;
 
@@ -76,5 +78,19 @@ export class DarDeBajaComponent {
       this.errorMessage = ''
     }
   }
+
+  seleccionarProfesores(profesor: Profesor) {
+    if (this.profesoresSeleccionados.includes(profesor)) {
+      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
+    } else {
+      this.profesoresSeleccionados.push(profesor);
+    }
+    console.log(this.profesoresSeleccionados);
+    for(const profesor of this.profesoresSeleccionados){
+      //this.controller.sacarProfesor(,profesor.getId());
+    }
+    
+  }
+
 
 }
