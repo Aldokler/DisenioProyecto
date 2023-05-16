@@ -19,12 +19,11 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE getActividadesofPlan (pID int)
+drop procedure if exists getActividadesofPlan;
+CREATE PROCEDURE getActividadesofPlan(pID int)
 BEGIN
-	select a.Nombre, a.Semana, a.Tipo, a.FechaHora
-    from actividad a, plan_de_trabajo b
-    where a.PlanID = pID
-    Order by a.FechaHora;
+	select * from actividad where PlanID = pID
+    Order by FechaHora;
 END$$
 DELIMITER ;
 
@@ -117,5 +116,22 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getPlanes;
+DELIMITER $$
+CREATE PROCEDURE getPlanes()
+BEGIN
+	select * from plan_de_trabajo;
+END$$
+DELIMITER ;
+COMMIT;
 
-call getEquipoGuiaByYearSemester(2022,2);
+drop procedure if exists getNextActividad;
+DELIMITER $$
+CREATE PROCEDURE getNextActividad(IN pplan int, IN pfecha datetime)
+BEGIN
+	select * from actividad where PlanID = pplan AND FechaHora >= pfecha
+	ORDER BY FechaHora LIMIT 1;
+END$$
+DELIMITER ;
+
+call getNextActividad(1,'1971-05-15 03:00:00');

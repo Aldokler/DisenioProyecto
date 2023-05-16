@@ -1,9 +1,152 @@
 const { Profesor } = require('../model/profesor');
 const {EquipoGuia} = require('../model/equipoguia');
+const {PlanDeTrabajo} = require('../model/plandetrabajo');
+const {Actividad} = require('../model/actividad');
+
 
 const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
+
+// Plan de Trabajo
+
+// crear plan de trabajo ---------------------------------------------
+router.post('/plan_trabajo', (request, response)=>{
+    const {año, semestre, creador} = request.body;
+    let sql = 'call addPlan (?,?,?)';
+    conexion.query(sql, [año, semestre, creador], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+
+// get planes ---------------------------------------------
+router.get('/plan_trabajo', (request, response)=>{
+    let sql = "call getPlanes()";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            const planes = rows[0].map(row => 
+                new PlanDeTrabajo(row.ID, row.Año, row.Semestre, [], row.Creador));
+                response.json({planes})
+        }
+    })
+});
+
+
+// get actividades de un plan ---------------------------------------------
+router.get('/plan_trabajo/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getActividadesofPlan(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const actividades = rows[0].map(row => 
+                new Actividad(row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividades})
+        }
+    })
+});
+/*
+// get proxima actividad de un plan ---------------------------------------------
+router.get('/plan_trabajo/:pplan', (request, response)=>{
+    const {pplan} = request.params;
+    const {pfecha} = request.body;
+    let sql = "call getNextActividad(?,?);";
+    conexion.query(sql, [pplan, pfecha], (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            const actividad = rows[0].map(row => 
+                new Actividad(row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividad})
+        }
+    })
+});
+*/
+
+// get actividad by ID ---------------------------------------------
+router.get('/plan_trabajo/actividad/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "select * from actividad where ID = ?;";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const actividad = rows.map(row => 
+                new Actividad(row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividad})
+        }
+    })
+});
+
+
+
+// crear actividad de plan de trabajo ---------------------------------------------
+router.post('/plan_trabajo/actividad', (request, response)=>{
+    const {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID} = request.body;
+    let sql = 'call addActividad (?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+
+
+// modificar actividad ---------------------------------------------------
+router.put('/plan_trabajo/actividad/:id', (request, response)=>{
+    const {id} = request.params;
+    const {nombre,semana,fechaHora,diasAnunciar,link,tipo,modalidad,estado} = request.body;
+    let sql = 'call updateActividad(?,?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [id,nombre,semana,fechaHora,diasAnunciar,link,tipo,modalidad,estado], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Actividad modificada' })
+        }
+    })
+});
+
+
+// agregar observacion ---------------------------------------------------
+router.put('/plan_trabajo/actividad/cancelar/:id', (request, response)=>{
+    const {id} = request.params;
+    const {observacion} = request.body;
+    let sql = 'UPDATE actividad SET Observacion = ? where ID = ?;';
+    conexion.query(sql, [observacion, id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Actividad modificada' })
+        }
+    })
+});
+
+
 
 
 // Equipo Guía
@@ -12,7 +155,8 @@ router.get('/equipo_guia', (request, response)=>{
     let sql = "call getEquiposGuia()";
     conexion.query(sql, (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             const equipos = rows[0].map(row => 
@@ -29,7 +173,8 @@ router.get('/equipo_guia/:id', (request, response)=>{
     let sql = "call consultarEquipoGuia(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             const profesor = rows[0].map(row => 
@@ -46,6 +191,7 @@ router.post('/equipo_guia', (request, response)=>{
     conexion.query(sql, [año, semestre], (error, rows, fields)=>{
         if(error){
             console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: '0' })
@@ -60,6 +206,7 @@ router.post('/equipo_guia/profesor', (request, response)=>{
     conexion.query(sql, [IDEquipoGuia, IDProfesor], (error, rows, fields)=>{
         if(error){
             console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: '0' })
@@ -73,6 +220,7 @@ router.put('/equipo_guia/:id', (request, response)=>{
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
             console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: '0' })
@@ -88,7 +236,8 @@ router.delete('/equipo_guia/:id', (request, response)=>{
     let sql = "call sacarProfesor(?,?);";
     conexion.query(sql, [IDProfesor, id], (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: '0' })
@@ -103,7 +252,8 @@ router.get('/equipo_guia_id', (request, response)=>{
     let sql = "call getEquipoGuiaByYearSemester(?,?);";
     conexion.query(sql, [año, semestre], (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             const id = rows[0]
@@ -118,7 +268,8 @@ router.get('/profesores', (request, response)=>{
     let sql = "call getProfesores()";
     conexion.query(sql, (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             const profesores = rows[0].map(row => 
@@ -137,7 +288,8 @@ router.get('/profesores/:id', (request, response)=>{
     let sql = "call getProfesoresByID(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             const profesor = rows[0].map(row => 
@@ -157,6 +309,7 @@ router.post('/profesores', (request, response)=>{
         Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto], (error, rows, fields)=>{
         if(error){
             console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: 'Profesor agregado' })
@@ -171,7 +324,8 @@ router.delete('/profesores/:id', (request, response)=>{
     let sql = "call deleteProfesor(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
-            throw error;
+            console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: 'Profesor eliminado' })
@@ -191,6 +345,7 @@ router.put('/profesores/:id', (request, response)=>{
         Celular , Contraseña , Sede , TelefonoOficina, Foto, Rol], (error, rows, fields)=>{
         if(error){
             console.log(error);
+            response.json({status: '-1' });
         }
         else{
             response.json({status: 'Profesor modificado' })
