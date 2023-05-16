@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Administrativo } from 'src/app/model/administrativo';
@@ -40,12 +40,19 @@ export class CrearEquipoComponent {
   }
 
   guardarEquipo(semestre: string, annio: string) {
+
     this.semestreEntero = parseInt(semestre);
     this.annioEntero = parseInt(annio);
     if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
 
       const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero);
-      this.controller.crearEquipo(equipo)
+      this.controller.crearEquipo(equipo).pipe(
+        tap(res => {
+          if (res){
+            console.log("hola")
+          }
+        })
+      ).subscribe()
     };
   }
 

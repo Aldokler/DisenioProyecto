@@ -48,7 +48,7 @@ router.post('/equipo_guia', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'equipo agregado' })
+            response.json({status: '0' })
         }
     })
 });
