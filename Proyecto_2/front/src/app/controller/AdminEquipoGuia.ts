@@ -24,18 +24,9 @@ export class AdminEquipoGuia{
         );
     }
     public crearEquipo(equipo: EquipoGuia): Observable<boolean>{
-        this.DAO.addEquipoGuia(equipo).pipe(
-            map((data:any) => {
-                return data.status == '0'
-            })
-        )
-        const profes = equipo.getMiembros()
-        for (let profe of profes){
-            this.DAO.addProfesorToEquipoGuia(equipo.getId(), profe.getId()).pipe(
-                map((data:any) => {
-                    return data.status == '0'
-                })
-            )
+        this.DAO.addEquipoGuia(equipo).subscribe()
+        for (let profe of equipo.getMiembros()){
+            this.DAO.addProfesorToEquipoGuia(equipo.getId(), profe.getId()).subscribe()
         }
         return this.getProfesoresDeEquipoGuia(equipo.getId()).pipe(
             map((data:any) => {

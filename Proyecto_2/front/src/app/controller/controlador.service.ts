@@ -15,6 +15,8 @@ import { AdminPlanDeTrabajo } from "./AdminPlanDeTrabajo";
 import { AdminProfesores } from "./AdminProfesores";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { Observable } from 'rxjs';
+import { login } from './login';
+import { Usuario } from '../model/usuario';
 
 
 @Injectable({
@@ -32,6 +34,7 @@ export class ControladorService {
   private adminEquipoGuia = new AdminEquipoGuia(this.DAO)
   private adminEstudiante = new AdminEstudiante()
   private adminProfesores = new AdminProfesores(this.DAO)
+  private adminLogin = new login()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -143,7 +146,18 @@ export class ControladorService {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //?
-  public cambiarContraseña(correo:String){}
+    public ingresar(correo: String, contraseña: String): Usuario{
+        return this.adminLogin.ingresar(correo, contraseña)
+    }
+    public cambiarContraseña(correo:String): boolean{
+        return this.adminLogin.cambiarContraseña(correo)
+    }
+    public solicitarCambioContraseña(correo: String): boolean{
+        return this.adminLogin.solicitarCambioContraseña(correo)
+    }
+    public verificarCodigo(codigo: String): boolean{
+        return this.adminLogin.verificarCodigo(codigo)
+    }
   
   public sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));

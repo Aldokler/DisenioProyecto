@@ -94,3 +94,28 @@ END$$
 DELIMITER ;
 COMMIT;
 
+DELIMITER $$
+CREATE FUNCTION getEquipoGuiaByYearSemester(vAño INT, vSemestre INT) RETURNS INT
+BEGIN
+    DECLARE id_result INT;
+    
+    SELECT id INTO id_result
+    FROM equipo_guía
+    WHERE Año = vAño AND Semestre = vSemestre
+    LIMIT 1;
+    
+    RETURN id_result;
+END$$
+DELIMITER ;
+
+
+drop procedure if exists getEquipoGuiaByYearSemester;
+DELIMITER $$
+CREATE PROCEDURE getEquipoGuiaByYearSemester(vAño INT, vSemestre INT)
+BEGIN
+	select ID from equipo_guía where Año = vAño and Semestre = vSemestre;
+END$$
+DELIMITER ;
+
+
+call getEquipoGuiaByYearSemester(2022,2);

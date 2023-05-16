@@ -62,7 +62,7 @@ router.post('/equipo_guia/profesor', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'miembro agregado' })
+            response.json({status: '0' })
         }
     })
 });
@@ -75,7 +75,7 @@ router.put('/equipo_guia/:id', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'Profesor coordinador' })
+            response.json({status: '0' })
         }
     })
 });
@@ -91,11 +91,26 @@ router.delete('/equipo_guia/:id', (request, response)=>{
             throw error;
         }
         else{
-            response.json({status: 'Profesor eliminado del equipo' })
+            response.json({status: '0' })
         }
     })
 });
 
+
+//get ID de equipo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/equipo_guia_id', (request, response)=>{
+    const {año, semestre} = request.body;
+    let sql = "call getEquipoGuiaByYearSemester(?,?);";
+    conexion.query(sql, [año, semestre], (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            const id = rows[0]
+            response.json({id})
+        }
+    })
+});
 
 // gestion profesores
 //get profesores ---------------------------------------------------------
