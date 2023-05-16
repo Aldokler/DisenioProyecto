@@ -62,7 +62,7 @@
             </a>
         </div>
 
-        <form>
+        <form (submit)="filterEquiposGuia(annioFiltrar.value, semestre.value); $event.preventDefault()">
             <div class="row">
 
                 <div class="col">

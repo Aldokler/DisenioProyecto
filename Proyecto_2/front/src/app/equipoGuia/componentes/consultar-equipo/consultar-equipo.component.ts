@@ -24,6 +24,7 @@ export class ConsultarEquipoComponent {
   public profesoresSeleccionados: Profesor[] = [];
   public errorMessage: String = '';
   public showError: boolean = false;
+  public equipoGuiaId: number = 0; // Variable para almacenar el ID del equipo guía
 
   ngOnInit(): void {
 
@@ -56,6 +57,7 @@ export class ConsultarEquipoComponent {
     });
     if (this.equiposguia.length == 1){
       let actual = this.equiposguia[0].getId();
+      this.equipoGuiaId = actual
       this.controller.getProfesoresDeEquipoGuia(actual).pipe(
         tap(res1 => {
           this.listaEquipo = res1;
@@ -87,17 +89,20 @@ export class ConsultarEquipoComponent {
     }
   }
   
-  seleccionarProfesores(profesor: Profesor) {
-    if (this.profesoresSeleccionados.includes(profesor)) {
-      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
-    } else {
-      this.profesoresSeleccionados.push(profesor);
-    }
+  seleccionarCoordinador(profesor: Profesor) {
+    //añadir el ID del equipo guia 
+    console.log(this.equiposguia);
     console.log(this.profesoresSeleccionados);
-    for(const profesor of this.profesoresSeleccionados){
-      //this.controller.sacarProfesor(,profesor.getId());
-    }
-    
-  }
+    console.log(this.equipoGuiaId);
+    console.log(profesor.getId());
+
+    this.controller.definirCoordinador(this.equipoGuiaId,profesor.getId()).pipe(
+      tap(res => {
+        if(res){
+          console.log("hola");
+        }
+      })
+    ).subscribe()
+}
 
 }
