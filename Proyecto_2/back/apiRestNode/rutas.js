@@ -8,6 +8,27 @@ const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 
+// Ingresar
+
+// login ---------------------------------------------
+// devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
+router.get('/login', (request, response)=>{
+    const {Usuario, Contraseña} = request.body;
+    let sql = "call login(?,?)";
+    conexion.query(sql, [Usuario, Contraseña],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+
+
+
+
 // Plan de Trabajo
 
 // crear plan de trabajo ---------------------------------------------

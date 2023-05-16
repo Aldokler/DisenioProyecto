@@ -125,13 +125,23 @@ END$$
 DELIMITER ;
 COMMIT;
 
+drop procedure if exists login;
+DELIMITER $$
+CREATE PROCEDURE login(IN vusername varchar(45), IN vpassword varchar(45))
+BEGIN
+	DECLARE check_user bool;
+	select if(count(ID) = 1, true, false) into check_user from usuario where Contraseña = vpassword AND ID = vusername;
+    select check_user;
+END$$
+DELIMITER ;
+
+
+
 drop procedure if exists getNextActividad;
 DELIMITER $$
-CREATE PROCEDURE getNextActividad(IN pplan int, IN pfecha datetime)
+CREATE PROCEDURE getNextActividad(IN pplan int, IN pplan datetime)
 BEGIN
 	select * from actividad where PlanID = pplan AND FechaHora >= pfecha
 	ORDER BY FechaHora LIMIT 1;
 END$$
 DELIMITER ;
-
-call getNextActividad(1,'1971-05-15 03:00:00');
