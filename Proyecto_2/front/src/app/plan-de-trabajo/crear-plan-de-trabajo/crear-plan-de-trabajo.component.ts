@@ -30,7 +30,7 @@ export class CrearPlanDeTrabajoComponent {
     const semestreNumber = parseInt(semestre);
     const planDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, annioNumber, semestreNumber, this.actividades, this.creador);
 
-    this.controller.crearPlanTrabajo(planDeTrabajo).pipe(
+    this.controller.crearPlanTrabajo(planDeTrabajo.getAnnio(),planDeTrabajo.getSemestre(),this.creador.getId()).pipe(
       tap(res => {
         if (res) {
           console.log("hola")

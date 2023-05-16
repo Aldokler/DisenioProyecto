@@ -34,9 +34,9 @@ export class HomePlanDeTrabajoComponent {
           return self.indexOf(value) === index;
         });
         let actual = this.planes[0].getId();
-        this.controller.verPlanDeTrabajo(actual).pipe(
+        this.controller.verPlanDeTrabajo("").pipe(
           tap(res1 => {
-            this.listaPlanDeTrabajo = res1;
+            //this.listaPlanDeTrabajo = res1;
           }
           )
         ).subscribe()
@@ -53,7 +53,7 @@ public filterPlanes(annioFiltrar: string, semestre: string) {
   });
   if (this.planes.length == 1) {
     let actual = this.planes[0].getId();
-    this.controller.verPlanesDeTrabajo(actual).pipe(
+    this.controller.verPlanesDeTrabajo().pipe(
       tap(res1 => {
         this.listaPlanDeTrabajo = res1;
       }
