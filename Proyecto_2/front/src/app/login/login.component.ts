@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
+import { PasarDatosService } from '../pasar-datos.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit{
   mostrarHomeComponent = false;
   errorMessage: string = "";
 
-  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
+  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService, private pasarDatos:PasarDatosService){}
 
 
   ngOnInit(): void {
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit{
       return;
     }
 
-    const usuario: Usuario = this.controller.ingresar(correoUsuario, contrasenaInput);
+    this.pasarDatos.loginUser = this.controller.ingresar(correoUsuario, contrasenaInput);
     if (usuario) {
       this.mostrarHomeComponent = true;
     } else {
