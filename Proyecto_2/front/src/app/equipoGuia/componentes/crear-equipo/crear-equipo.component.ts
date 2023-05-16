@@ -4,6 +4,7 @@ import { ControladorService } from 'src/app/controller/controlador.service';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
 import { Usuario } from 'src/app/model/usuario';
+import { EquipoGuia } from 'src/app/model/equipoguia';
 
 @Component({
   selector: 'app-crear-equipo',
@@ -13,26 +14,39 @@ import { Usuario } from 'src/app/model/usuario';
 export class CrearEquipoComponent {
   constructor(
     private controller: ControladorService
-  ) {}
+  ) { }
 
   public profes: Profesor[] = [];
   public profesoresSeleccionados: Profesor[] = [];
+  public id: number = 0;
+  public semestreEntero: number = 0;
+  public annioEntero: number = 0;
 
   ngOnInit(): void {
-    
-
     this.controller.getProfesores().pipe(
       tap(res => {
-       this.profes = res;
+        this.profes = res;
       })
     ).subscribe()
   }
-guardarEquipo(semestre:string,annio:string){
 
-}
+  seleccionarProfesores(profesor: Profesor) {
+    if (this.profesoresSeleccionados.includes(profesor)) {
+      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
+    } else {
+      this.profesoresSeleccionados.push(profesor);
+    }
+    console.log(this.profesoresSeleccionados);
+  }
 
-public seleccionarProfesor(profesor: Profesor) {
+  guardarEquipo(semestre: string, annio: string) {
+    this.semestreEntero = parseInt(semestre);
+    this.annioEntero = parseInt(annio);
+    if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
 
-}
-  
+      const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero);
+      this.controller.crearEquipo(equipo)
+    };
+  }
+
 }

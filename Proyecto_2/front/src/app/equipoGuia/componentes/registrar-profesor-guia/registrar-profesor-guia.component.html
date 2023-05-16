@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form enctype="multipart/form-data" method="POST" action="/register">
+                        <form (submit)="registrarProfesor(codigoCampus.value,correoElectronico.value,telefonoCelular.value,nombreProfesor.value,telefonoOficina.value,fotoProfesor.value); $event.preventDefault()" enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0" >
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -79,19 +79,25 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Código del Campus</label>
-                                            <input type="text" id="" name="" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                            <select #codigoCampus class="form-select me-2" name="codigoCampus" id="codigoCampus" name="codigoCampus" required style="background-color: #E2EFF8;">
+                                                <option value=""></option>
+                                                <option value="CA">CA</option>
+                                                <option value="SJ">SJ</option>
+                                                <option value="LI">LI</option>
+                                                <option value="AL">AL</option>
+                                                <option value="SC">SC</option>
+                                            </select>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Correo Electrónico </label>
-                                            <input type="text" id="" name="" required
+                                            <input #correoElectronico type="text" id="correoEletronico" name="correoEletronico" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Teléfono Celular </label>
-                                            <input type="text" id="" name="" required
+                                            <input #telefonoCelular type="text" id="telefonoCelular" name="telefonoCelular" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
@@ -102,13 +108,13 @@
                                     <div class="card-body p-4 p-lg-5 text-black">
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre del Profesor </label>
-                                            <input type="text" id="" name="" required
+                                            <input #nombreProfesor type="text" id="nombreProfesor" name="nombreProfesor" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Teléfono Oficina </label>
-                                            <input type="text" id="" name="" required
+                                            <input #telefonoOficina type="text" id="telefonoOficina" name="telefonoOficina" required
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
                                         </div>
 
@@ -116,8 +122,8 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Subir Foto</label>
-                                            <input type="file" id="" name="" accept=".jpg,.png"
-                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
+                                            <input #fotoProfesor type="file" id="fotoProfesor" name="fotoProfesor" accept=".jpg,.png"
+                                                class="form-control form-control-lg"  style="background-color: #E2EFF8;"/>
                                         </div>
 
 
