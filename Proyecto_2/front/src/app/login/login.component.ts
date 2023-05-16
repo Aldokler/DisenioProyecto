@@ -16,6 +16,7 @@ import { TSede } from 'src/app/model/tsede';
 })
 export class LoginComponent implements OnInit{
   mostrarHomeComponent = false;
+  errorMessage: string = "";
 
   constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
 
@@ -24,12 +25,19 @@ export class LoginComponent implements OnInit{
 
   }
 
-  evaluarUsuario(correoUsuario:string,contrasenaInput:string){
-    const usuario = this.controller.ingresar(correoUsuario,contrasenaInput);
-    this.mostrarHomeComponent = true;
-    
-  }
+  evaluarUsuario(correoUsuario: string, contrasenaInput: string) {
+    if (!correoUsuario || !contrasenaInput) {
+      this.errorMessage = 'Por favor, complete todos los campos';
+      return;
+    }
 
+    const usuario: Usuario = this.controller.ingresar(correoUsuario, contrasenaInput);
+    if (usuario) {
+      this.mostrarHomeComponent = true;
+    } else {
+      this.errorMessage = 'Credenciales incorrectas';
+    }
+  }
 
   inputContrasena!: HTMLInputElement;
   verContrasenaIcono = 'bi-eye';
