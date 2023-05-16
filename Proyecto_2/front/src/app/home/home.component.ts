@@ -22,7 +22,7 @@ export class HomeComponent {
     this.contrasenaInput = '';
   }
   ngOnInit(): void {
-    this.miUsuario = this.controller.ingresar(this.correoUsuario, this.contrasenaInput);
+    /*this.miUsuario =*/ this.controller.ingresar(this.correoUsuario, this.contrasenaInput);
   }
 
 }

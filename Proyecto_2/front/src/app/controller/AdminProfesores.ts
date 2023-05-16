@@ -22,21 +22,25 @@ export class AdminProfesores{
 
     public getProfesor(id: String): Observable<Profesor>{
         return this.DAO.getProfesor(id).pipe(
-            map((data: any) => { 
+            map((data: any) => {
                 const profesorJson = data.profesor[0];
-                return new Profesor(
-                    profesorJson.id,
-                    profesorJson.nombre,
-                    profesorJson.apellido1,
-                    profesorJson.apellido2,
-                    profesorJson.correoElectronico,
-                    profesorJson.celular,
-                    profesorJson.sede,
-                    profesorJson.contraseña,
-                    profesorJson.telefonoOficina,
-                    profesorJson.fotografia,
-                    profesorJson.rol
-                );
+                if (profesorJson == undefined){
+                    return new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)
+                } else {
+                    return new Profesor(
+                        profesorJson.id,
+                        profesorJson.nombre,
+                        profesorJson.apellido1,
+                        profesorJson.apellido2,
+                        profesorJson.correoElectronico,
+                        profesorJson.celular,
+                        profesorJson.sede,
+                        profesorJson.contraseña,
+                        profesorJson.telefonoOficina,
+                        profesorJson.fotografia,
+                        profesorJson.rol
+                    );
+                }
             })
         );
     }

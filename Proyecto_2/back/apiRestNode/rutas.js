@@ -14,9 +14,9 @@ const conexion = require('./config/conexion');
 // login ---------------------------------------------
 // devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
 router.get('/login', (request, response)=>{
-    const {Usuario, Contraseña} = request.body;
+    const {user, pass} = request.query;
     let sql = "call login(?,?)";
-    conexion.query(sql, [Usuario, Contraseña],(error, rows, fields)=>{
+    conexion.query(sql, [user, pass],(error, rows, fields)=>{
         if(error){
             console.log(error);response.json({status: '-1' });
         }
@@ -253,10 +253,10 @@ router.put('/equipo_guia/defCor', (request, response)=>{
 
 //sacar profesor del equipo +++++++++++++++++++++++++++++++++++++++++++++++++
 router.delete('/equipo_guia/:id', (request, response)=>{
-    const {id} = request.params;
-    const {IDProfesor} = request.body;
+    const {idEG} = request.params;
+    const {idP} = request.body;
     let sql = "call sacarProfesor(?,?);";
-    conexion.query(sql, [IDProfesor, id], (error, rows, fields)=>{
+    conexion.query(sql, [idP, idEG], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
