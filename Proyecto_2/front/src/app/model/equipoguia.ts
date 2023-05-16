@@ -5,12 +5,14 @@ export class EquipoGuia {
     private miembros: Array<Profesor>;
     private año: number;
     private semestre: number;
+    private coordinador: Profesor
 
-    constructor(id: number, miembros: Array<Profesor>, año: number, semestre: number) {
+    constructor(id: number, miembros: Array<Profesor>, año: number, semestre: number, coordinador: Profesor) {
         this.id = id
         this.miembros = miembros
         this.año = año
         this.semestre = semestre
+        this.coordinador = coordinador
     }
 
     public getId(): number {
@@ -43,6 +45,14 @@ export class EquipoGuia {
 
     public setSemestre(semestre: number): void {
         this.semestre = semestre;
+    }
+
+    public getCoordinador(): Profesor {
+        return this.coordinador;
+    }
+
+    public setCoordinador(coordinador: Profesor): void {
+        this.coordinador = coordinador;
     }
 
 }

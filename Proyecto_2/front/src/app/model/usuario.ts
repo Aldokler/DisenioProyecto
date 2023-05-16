@@ -1,6 +1,6 @@
 import { TSede } from "./tsede";
 
-export class Usuario {
+export abstract class Usuario {
     protected id: string;
     protected nombre: string;
     protected apellido1: string;
@@ -29,5 +29,37 @@ export class Usuario {
         this.sede = sede;
         this.contraseña = contraseña;
     }
+
+    abstract getId(): string;
+
+    abstract setId(id: string): void ;
+
+    abstract getNombre(): string;
+
+    abstract setNombre(nombre: string): void ;
+
+    abstract getApellido1(): string ;
+
+    abstract setApellido1(apellido1: string): void ;
+
+    abstract getApellido2(): string ;
+
+    abstract setApellido2(apellido2: string): void ;
+
+    abstract getCorreoElectronico(): string ;
+
+    abstract setCorreoElectronico(correoElectronico: string): void ;
+
+    abstract getCelular(): string;
+
+    abstract setCelular(celular: string): void;
+
+    abstract getSede(): TSede;
+
+    abstract setSede(sede: TSede): void ;
+
+    abstract getContraseñA(): string;
+
+    abstract setContraseñA(contraseña: string): void;
 
 }

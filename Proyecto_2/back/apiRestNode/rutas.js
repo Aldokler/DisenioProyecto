@@ -214,10 +214,10 @@ router.post('/equipo_guia/profesor', (request, response)=>{
     })
 });
 // definir coordinador ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.put('/equipo_guia/:id', (request, response)=>{
-    const {id} = request.params;
-    let sql = "UPDATE profesor SET Rol = 'Coordinador' where ID = ?;";
-    conexion.query(sql, [id], (error, rows, fields)=>{
+router.put('/equipo_guia/defCor', (request, response)=>{
+    const {IDEquipoGuia, IDProfesor} = request.body;
+    let sql = 'call defEquipoGuiaCoordinador(?,?)';
+    conexion.query(sql, [IDEquipoGuia, IDProfesor], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -247,17 +247,17 @@ router.delete('/equipo_guia/:id', (request, response)=>{
 
 
 //get ID de equipo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/equipo_guia_id', (request, response)=>{
-    const {año, semestre} = request.body;
+router.get('/equipo_guia_id/:annio/:semestre', (request, response)=>{
+    const {annio, semestre} = request.params;
     let sql = "call getEquipoGuiaByYearSemester(?,?);";
-    conexion.query(sql, [año, semestre], (error, rows, fields)=>{
+    conexion.query(sql, [annio, semestre], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
             const id = rows[0]
-            response.json({id})
+            response.json(id)
         }
     })
 });
