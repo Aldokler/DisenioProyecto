@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
 import { TRol } from 'src/app/model/trol';
+import { TSede } from 'src/app/model/tsede';
 
 @Component({
   selector: 'app-dar-de-baja',
@@ -22,20 +23,24 @@ export class DarDeBajaComponent {
   public annios: Number[] = [];
   listaEquipo: Profesor[] = [];
   public profesoresSeleccionados: Profesor[] = [];
+  public profe:Profesor = new Profesor("","","","","","",TSede.CA,"","","",TRol.GUIA);
   public errorMessage: String = '';
   public showError: boolean = false;
+  public equipoGuiaId: number = 0; // Variable para almacenar el ID del equipo guía
 
   ngOnInit(): void {
 
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
+        
         this.annios = this.equiposguia.map(value => {
           return value.getAnnio()
         }).filter((value, index, self) => {
           return self.indexOf(value) === index;
         });
         let actual = this.equiposguia[0].getId();
+        this.equipoGuiaId = this.equiposguia[0].getId(); // Guardar el ID del primer equipo guía
         this.controller.getProfesoresDeEquipoGuia(actual).pipe(
           tap(res1 => {
             this.listaEquipo = res1;
@@ -54,6 +59,7 @@ export class DarDeBajaComponent {
     });
     if (this.equiposguia.length == 1){
       let actual = this.equiposguia[0].getId();
+      this.equipoGuiaId = actual
       this.controller.getProfesoresDeEquipoGuia(actual).pipe(
         tap(res1 => {
           this.listaEquipo = res1;
@@ -86,16 +92,19 @@ export class DarDeBajaComponent {
   }
 
   seleccionarProfesores(profesor: Profesor) {
-    if (this.profesoresSeleccionados.includes(profesor)) {
-      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
-    } else {
-      this.profesoresSeleccionados.push(profesor);
-    }
-    console.log(this.profesoresSeleccionados);
-    for(const profesor of this.profesoresSeleccionados){
-      //this.controller.sacarProfesor(,profesor.getId());
-    }
-    
+      //añadir el ID del equipo guia 
+      console.log(this.equiposguia);
+      console.log(this.profesoresSeleccionados);
+      console.log(this.equipoGuiaId);
+      console.log(profesor.getId());
+
+      this.controller.sacarProfesor(this.equipoGuiaId,profesor.getId()).pipe(
+        tap(res => {
+          if(res){
+            console.log("hola");
+          }
+        })
+      ).subscribe()
   }
 
 

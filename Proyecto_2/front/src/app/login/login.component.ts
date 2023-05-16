@@ -33,11 +33,7 @@ export class LoginComponent implements OnInit{
     }
 
     this.pasarDatos.loginUser = this.controller.ingresar(correoUsuario, contrasenaInput);
-    if (usuario) {
-      this.mostrarHomeComponent = true;
-    } else {
-      this.errorMessage = 'Credenciales incorrectas';
-    }
+    
   }
 
   inputContrasena!: HTMLInputElement;
