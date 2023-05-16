@@ -26,11 +26,11 @@ export class ApiService {
   }
 
   public addProfesorToEquipoGuia(idEG: Number, idP: String){
-    return this.http.post(this.url + 'equipo_guia/profesor', {body: idEG, idP})
+    return this.http.post(this.url + 'equipo_guia/profesor', {idEG, idP})
   }
 
-  public defCoordinador(profesor: Profesor){
-    return this.http.put(this.url + 'equipo_guia/' + profesor.getId(), profesor)
+  public defCoordinador(idEG: Number, idP: String){
+    return this.http.put(this.url + 'equipo_guia/defCor', {idEG, idP})
   }
 
   public kickProfesor(idEG: Number, idP: String){

@@ -67,10 +67,10 @@ router.post('/equipo_guia/profesor', (request, response)=>{
     })
 });
 // definir coordinador ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.put('/equipo_guia/:id', (request, response)=>{
-    const {id} = request.params;
-    let sql = "UPDATE profesor SET Rol = 'Coordinador' where ID = ?;";
-    conexion.query(sql, [id], (error, rows, fields)=>{
+router.put('/equipo_guia/defCor', (request, response)=>{
+    const {IDEquipoGuia, IDProfesor} = request.body;
+    let sql = 'call defEquipoGuiaCoordinador(?,?)';
+    conexion.query(sql, [IDEquipoGuia, IDProfesor], (error, rows, fields)=>{
         if(error){
             console.log(error);
         }

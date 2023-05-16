@@ -53,8 +53,8 @@ export class AdminEquipoGuia {
             })
         )
     }
-    public definirCoordinador(profesor: Profesor): Observable<boolean> {
-        return this.DAO.defCoordinador(profesor).pipe(
+    public definirCoordinador(idEG: Number, idP: String): Observable<boolean> {
+        return this.DAO.defCoordinador(idEG, idP).pipe(
             map((data: any) => {
                 return data.status == '0'
             })

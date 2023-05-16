@@ -144,3 +144,13 @@ BEGIN
     COMMIT;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+drop procedure if exists defEquipoGuiaCoordinador;
+CREATE PROCEDURE defEquipoGuiaCoordinador (vIDEquipoGuia int, vIDProfesor varchar(45))
+BEGIN
+	UPDATE equipo_guía
+    SET IDCoordinador = vIDProfesor
+    WHERE ID = vIDEquipoGuia;
+    COMMIT;
+END$$
