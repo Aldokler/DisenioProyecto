@@ -20,10 +20,12 @@ export class ApiService {
   }
 
   public addEquipoGuia(equipo: EquipoGuia){
-    return this.http.post(this.url + 'equipo_guia', equipo)
+    const año = equipo.getAño()
+    const semestre = equipo.getSemestre()
+    return this.http.post(this.url + 'equipo_guia', { año , semestre })
   }
 
-  public addProfesorToEquipoGuia(idEG: String, idP: String){
+  public addProfesorToEquipoGuia(idEG: Number, idP: String){
     return this.http.post(this.url + 'equipo_guia/profesor', {idEG, idP})
   }
 
@@ -31,7 +33,7 @@ export class ApiService {
     return this.http.put(this.url + 'equipo_guia/' + profesor.getId(), profesor)
   }
 
-  public kickProfesor(idEG: String, idP: String){
+  public kickProfesor(idEG: Number, idP: String){
     return this.http.delete(this.url + 'equipo_guia/' + idEG, {body: idP})
   }
 

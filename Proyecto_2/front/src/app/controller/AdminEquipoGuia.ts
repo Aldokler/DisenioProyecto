@@ -1,7 +1,7 @@
 import { Observable } from "rxjs/internal/Observable";
 import { EquipoGuia } from "../model/equipoguia";
 import { Profesor } from "../model/profesor";
-import { Subject, map } from "rxjs";
+import { Subject, map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 
 export class AdminEquipoGuia{
@@ -24,21 +24,34 @@ export class AdminEquipoGuia{
         );
     }
     public crearEquipo(equipo: EquipoGuia): Observable<boolean>{
-        return this.DAO.addEquipoGuia(equipo).pipe(
+        this.DAO.addEquipoGuia(equipo).pipe(
             map((data:any) => {
                 return data.status == '0'
             })
         )
+        const profes = equipo.getMiembros()
+        for (let profe of profes){
+            this.DAO.addProfesorToEquipoGuia(equipo.getId(), profe.getId()).pipe(
+                map((data:any) => {
+                    return data.status == '0'
+                })
+            )
+        }
+        return this.getProfesoresDeEquipoGuia(equipo.getId()).pipe(
+            map((data:any) => {
+                return data.length != 0
+            })
+        )
     }
 
-    public agregarProfesor(idEG: String, idP: String): Observable<boolean>{
+    public agregarProfesor(idEG: Number, idP: String): Observable<boolean>{
         return this.DAO.addProfesorToEquipoGuia(idEG, idP).pipe(
             map((data:any) => {
                 return data.status == '0'
             })
         )
     }
-    public sacarProfesor(idEG: String, idP: String): Observable<boolean>{
+    public sacarProfesor(idEG: Number, idP: String): Observable<boolean>{
         return this.DAO.kickProfesor(idEG, idP).pipe(
             map((data:any) => {
                 return data.status == '0'
