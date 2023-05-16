@@ -28,7 +28,7 @@ export class AdminPlanDeTrabajo{
                 return json.map((json: any) => {
                     return new PlanDeTrabajo(
                         json.id,
-                        json.año,
+                        json.annio,
                         json.semestre,
                         [],
                         json.creador
