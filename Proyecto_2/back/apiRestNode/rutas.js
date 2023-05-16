@@ -48,7 +48,7 @@ router.post('/equipo_guia', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'equipo agregado' })
+            response.json({status: '0' })
         }
     })
 });
@@ -62,7 +62,7 @@ router.post('/equipo_guia/profesor', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'miembro agregado' })
+            response.json({status: '0' })
         }
     })
 });
@@ -75,7 +75,7 @@ router.put('/equipo_guia/:id', (request, response)=>{
             console.log(error);
         }
         else{
-            response.json({status: 'Profesor coordinador' })
+            response.json({status: '0' })
         }
     })
 });
@@ -91,7 +91,7 @@ router.delete('/equipo_guia/:id', (request, response)=>{
             throw error;
         }
         else{
-            response.json({status: 'Profesor eliminado del equipo' })
+            response.json({status: '0' })
         }
     })
 });
