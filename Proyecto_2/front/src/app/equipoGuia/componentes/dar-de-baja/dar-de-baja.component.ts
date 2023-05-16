@@ -19,6 +19,7 @@ export class DarDeBajaComponent {
   ) { }
 
   public equiposguia: EquipoGuia[] = [];
+  public annios: Number[] = [];
   listaEquipo: Profesor[] = [];
   public profesoresSeleccionados: Profesor[] = [];
   public errorMessage: String = '';
@@ -29,6 +30,11 @@ export class DarDeBajaComponent {
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
+        this.annios = this.equiposguia.map(value => {
+          return value.getAnnio()
+        }).filter((value, index, self) => {
+          return self.indexOf(value) === index;
+        });
         let actual = this.equiposguia[0].getId();
         this.controller.getProfesoresDeEquipoGuia(actual).pipe(
           tap(res1 => {
@@ -44,7 +50,7 @@ export class DarDeBajaComponent {
     const annioFiltrarNumber = parseInt(annioFiltrar);
     const semestreFiltrarNumber = parseInt(semestre);
     this.equiposguia = this.equiposguia.filter((equipo) => {
-      return equipo.getAño() == annioFiltrarNumber && equipo.getSemestre() == semestreFiltrarNumber;
+      return equipo.getAnnio() == annioFiltrarNumber && equipo.getSemestre() == semestreFiltrarNumber;
     });
     if (this.equiposguia.length == 1){
       let actual = this.equiposguia[0].getId();

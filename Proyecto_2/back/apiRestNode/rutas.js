@@ -222,9 +222,9 @@ router.post('/equipo_guia', (request, response)=>{
 
 // agregar profesores guía al equipo ++++++++++++++++++++++++++++++++++++++++
 router.post('/equipo_guia/profesor', (request, response)=>{
-    const {IDEquipoGuia, IDProfesor} = request.body;
+    const {idEG, idP} = request.body;
     let sql = 'call addEquipoGuiaXProfesor(?,?)';
-    conexion.query(sql, [IDEquipoGuia, IDProfesor], (error, rows, fields)=>{
+    conexion.query(sql, [idEG, idP], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

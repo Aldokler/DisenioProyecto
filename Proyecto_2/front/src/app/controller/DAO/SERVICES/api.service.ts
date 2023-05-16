@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   public addEquipoGuia(equipo: EquipoGuia){
-    const año = equipo.getAño()
+    const año = equipo.getAnnio()
     const semestre = equipo.getSemestre()
     return this.http.post(this.url + 'equipo_guia', { año , semestre })
   }

@@ -31,7 +31,7 @@ export class EquipoGuia {
         this.miembros = miembros;
     }
 
-    public getAño(): number {
+    public getAnnio(): number {
         return this.año;
     }
 

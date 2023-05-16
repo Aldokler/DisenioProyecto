@@ -61,7 +61,7 @@
                 <span class="h5 fw-bold ml-3">CREAR EQUIPO</span>
             </a>
         </div>
-        <form (submit)="guardarEquipo(semestre.value,annio.value); $event.preventDefault()">
+        <form>
             <div class="col mt-5">
 
                 <div class="row">
@@ -82,7 +82,8 @@
 
 
                     <div class="col">
-                        <button type="submit" class="btn text-white " style="background-color: #13293D;">
+                        <button type="button" class="btn text-white " style="background-color: #13293D;"
+                        (click)="guardarEquipo(semestre.value, annio.value)">
                             Agregar Equipo
                         </button>
 

@@ -29,7 +29,7 @@ export class AdminEquipoGuia {
     public crearEquipo(equipo: EquipoGuia) {
         this.DAO.addEquipoGuia(equipo).pipe(
           concatMap(() => {
-            return this.getEquipoGuiaByYearSemester(equipo.getAño(), equipo.getSemestre());
+            return this.getEquipoGuiaByYearSemester(equipo.getAnnio(), equipo.getSemestre());
           }),
           tap((res) => {
             console.log(res);
