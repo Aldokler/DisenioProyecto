@@ -141,7 +141,7 @@ router.put('/plan_trabajo/actividad/cancelar/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Actividad modificada' })
+            response.json({status: 'Actividad modificada'})
         }
     })
 });
