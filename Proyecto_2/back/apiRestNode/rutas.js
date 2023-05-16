@@ -253,10 +253,10 @@ router.put('/equipo_guia/defCor', (request, response)=>{
 
 //sacar profesor del equipo +++++++++++++++++++++++++++++++++++++++++++++++++
 router.delete('/equipo_guia/:id', (request, response)=>{
-    const {id} = request.params;
-    const {IDProfesor} = request.body;
+    const {idEG} = request.params;
+    const {idP} = request.body;
     let sql = "call sacarProfesor(?,?);";
-    conexion.query(sql, [IDProfesor, id], (error, rows, fields)=>{
+    conexion.query(sql, [idP, idEG], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
