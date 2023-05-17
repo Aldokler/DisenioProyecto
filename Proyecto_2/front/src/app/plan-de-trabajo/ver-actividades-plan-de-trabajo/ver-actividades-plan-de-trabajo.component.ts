@@ -22,16 +22,6 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
 export class VerActividadesPlanDeTrabajoComponent {
   tipoUsuario: string;
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
-
-  public fecha = new Date(2023, 4, 16, 12, 30, 45);
-  public fechacancelacion = new Date(2023, 4, 16, 12, 30, 45);
-  public fechapublicar = new Date(2023, 4, 16, 12, 30, 45);
-  public evidencia: Evidencia = new Evidencia(0, [], "");
-  public actividadPlanDeTrabajo: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
-    "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
-    this.evidencia, [], this.fechacancelacion, "", this.fechapublicar);
-  public emisor: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "1234", "", "", TRol.GUIA);
-  public comentario: Comentario = new Comentario(0, "", this.emisor, this.fecha, 0, 0);
   public comentarios: Comentario[] = [];
 
   constructor(private controller: ControladorService) {
