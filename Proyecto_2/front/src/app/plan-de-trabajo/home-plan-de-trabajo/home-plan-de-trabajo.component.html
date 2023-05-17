@@ -112,10 +112,13 @@
                                     Semestre: {{ plan.getSemestre()}} &nbsp;&nbsp;&nbsp;
                                     año: {{ plan.getAnnio() }}
                                 </div>
-                                <a href="" class="btn btn-outline-secondary mt-2"
-                                    style="background-color: #13293D; color: #E2EFF8;"
-                                    [routerLink]="['/ver-plan-de-trabajo']">Ver
-                                    más detalles</a>
+
+
+                                <button type="submit" class="btn text-white me-2"
+                                style="background-color: #13293D;" [routerLink]="['/ver-plan-de-trabajo']" 
+                                [queryParams]="{ plan: plan.getId() }" >Ver
+                                más detalles</button>
+
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,14 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { PlanDeTrabajo } from 'src/app/model/plandetrabajo';
+import { Usuario } from 'src/app/model/usuario';
+import { Administrativo } from 'src/app/model/administrativo';
+import { Profesor } from 'src/app/model/profesor';
+import { tap } from 'rxjs';
+import { ControladorService } from 'src/app/controller/controlador.service';
+import { Actividad } from 'src/app/model/actividad';
 
 @Component({
   selector: 'app-ver-plan-de-trabajo',
@@ -7,10 +16,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./ver-plan-de-trabajo.component.css']
 })
 export class VerPlanDeTrabajoComponent {
-  tipoUsuario: string;
 
-  constructor() {
-    // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
-    this.tipoUsuario = 'GUIA';
+  public actividades: Actividad[] = [];
+  plan: PlanDeTrabajo = new PlanDeTrabajo(0,0,0,[],"");
+
+  constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.plan = params['plan'];
+      // Aquí puedes realizar otras acciones con el plan recibido
+    });
+  }
+  
+
 }

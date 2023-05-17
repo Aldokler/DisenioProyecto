@@ -15,7 +15,7 @@ import { Profesor } from 'src/app/model/profesor';
 export class HomePlanDeTrabajoComponent {
 
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService,private router: Router
   ) { }
 
   public planes: PlanDeTrabajo[] = [];
@@ -34,6 +34,7 @@ export class HomePlanDeTrabajoComponent {
           return self.indexOf(value) === index;
         });
         let actual = this.planes[0].getId();
+
         this.controller.verPlanDeTrabajo("").pipe(
           tap(res1 => {
             //this.listaPlanDeTrabajo = res1;
@@ -45,44 +46,48 @@ export class HomePlanDeTrabajoComponent {
   }
 
   // Función para filtrar los equipos guía según el año y semestre seleccionados
-public filterPlanes(annioFiltrar: string, semestre: string) {
-  const annioFiltrarNumber = parseInt(annioFiltrar);
-  const semestreFiltrarNumber = parseInt(semestre);
-  this.planes = this.planes.filter((plan) => {
-    return plan.getAnnio() == annioFiltrarNumber && plan.getSemestre() == semestreFiltrarNumber;
-  });
-  if (this.planes.length == 1) {
-    let actual = this.planes[0].getId();
-    this.controller.verPlanesDeTrabajo().pipe(
-      tap(res1 => {
-        this.listaPlanDeTrabajo = res1;
-      }
-      )
-    ).subscribe()
-    this.errorMessage = ''
-  } else {
-    this.errorMessage = 'No existen planes de trabajo para el periodo indicado'
-    this.showError = true;
+  public filterPlanes(annioFiltrar: string, semestre: string) {
+    const annioFiltrarNumber = parseInt(annioFiltrar);
+    const semestreFiltrarNumber = parseInt(semestre);
+    this.planes = this.planes.filter((plan) => {
+      return plan.getAnnio() == annioFiltrarNumber && plan.getSemestre() == semestreFiltrarNumber;
+    });
+    if (this.planes.length == 1) {
+      let actual = this.planes[0].getId();
+      this.controller.verPlanesDeTrabajo().pipe(
+        tap(res1 => {
+          this.listaPlanDeTrabajo = res1;
+        }
+        )
+      ).subscribe()
+      this.errorMessage = ''
+    } else {
+      this.errorMessage = 'No existen planes de trabajo para el periodo indicado'
+      this.showError = true;
 
-    setTimeout(() => {
-      this.showError = false;
       setTimeout(() => {
-        this.errorMessage = '';
-      }, 750);
-    }, 4000);
+        this.showError = false;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 750);
+      }, 4000);
+    }
+    this.controller.verPlanesDeTrabajo().pipe(
+      tap(res => {
+        this.planes = res;
+      })
+    ).subscribe()
   }
-  this.controller.verPlanesDeTrabajo().pipe(
-    tap(res => {
-      this.planes = res;
-    })
-  ).subscribe()
-}
 
-public onFadeOut() {
-  if (!this.errorMessage) {
-    this.errorMessage = ''
+  public onFadeOut() {
+    if (!this.errorMessage) {
+      this.errorMessage = ''
+    }
   }
-}
+
+  verDetallesPlan(id: string) {
+    this.router.navigate(['/ver-plan-de-trabajo', id]);
+  }
 
 }
 
