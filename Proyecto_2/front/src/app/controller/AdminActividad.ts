@@ -74,7 +74,8 @@ export class AdminActividad{
                     json.mensaje,
                     json.emisor,
                     json.fechaHora,
-                    json.comentarioOriginals
+                    json.comentarioOriginal,
+                    json.actividadId
                 )
             });
         })
@@ -91,7 +92,8 @@ export class AdminActividad{
                     json.mensaje,
                     json.emisor,
                     json.fechaHora,
-                    json.comentarioOriginals
+                    json.comentarioOriginal,
+                    json.actividadId
                 )
             });
         })

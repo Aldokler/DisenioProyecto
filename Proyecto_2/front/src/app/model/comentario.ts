@@ -5,20 +5,23 @@ export class Comentario {
     private mensaje: string;
     private emisor: Profesor;
     private fechaHora: Date;
-    private comentarioOriginal: Comentario;
+    private comentarioOriginal: number;
+    private actividadId: number;
 
     constructor(
         id: number,
         mensaje: string,
         emisor: Profesor,
         fechaHora: Date,
-        comentarioOriginal: Comentario
+        comentarioOriginal: number,
+        actividadId: number
     ) {
         this.id = id
         this.mensaje = mensaje
         this.emisor = emisor
         this.fechaHora = fechaHora
         this.comentarioOriginal = comentarioOriginal
+        this.actividadId = actividadId
     }
 
     public getId(): number {
@@ -53,12 +56,20 @@ export class Comentario {
         this.fechaHora = fechaHora;
     }
 
-    public getComentarioOriginal(): Comentario {
+    public getComentarioOriginal(): number {
         return this.comentarioOriginal;
     }
 
-    public setComentarioOriginal(comentarioOriginal: Comentario): void {
+    public setComentarioOriginal(comentarioOriginal: number): void {
         this.comentarioOriginal = comentarioOriginal;
+    }
+
+    public getActividadId(): number {
+        return this.actividadId;
+    }
+
+    public setActividadId(actividadId: number): void {
+        this.actividadId = actividadId;
     }
 
 }
