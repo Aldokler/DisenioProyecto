@@ -187,5 +187,7 @@ INSERT INTO comentario (Mensaje, FechaHora, Emisor, ComentarioOriginal)
 VALUES ('Qué es Pixar?', '1971-04-15 6:30:00', 'AL-03', 1);
 INSERT INTO comentario (Mensaje, FechaHora, Emisor)
 VALUES ('Qué es Pixar?', '1971-04-15 6:30:00', 'AL-03');
+INSERT INTO comentario (Mensaje, FechaHora, Emisor,ActividadID,ComentarioOriginal)
+VALUES ('Qusssé essss ddd?', '1971-04-15 6:30:00', 'AL-03', 1, 1);
 
 COMMIT;

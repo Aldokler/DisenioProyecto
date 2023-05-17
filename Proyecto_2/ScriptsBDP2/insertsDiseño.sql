@@ -22,6 +22,8 @@ drop procedure if exists addProfesor;
 DELIMITER $$
 CREATE PROCEDURE addProfesor(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(45), vFoto longblob)
 BEGIN
+	-- DECLARE con int;
+    -- Select 
 	INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
 	VALUES (vID, vNombre, vApellido1, vApellido2, vCorreoElectronico, vCelular, vContraseña, vSede);
 	INSERT INTO profesor (ID, TelefonoOficina, Fotografia, Rol)
@@ -90,6 +92,8 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+drop procedure if exists addComentario;
 DELIMITER $$
 CREATE PROCEDURE addComentario (vMensaje varchar(45), vFechaHora datetime, vEmisor varchar(45), vActividadID int)
 BEGIN
@@ -98,11 +102,13 @@ BEGIN
     COMMIT;
 END$$
 DELIMITER ;
+
+drop procedure if exists addReply;
 DELIMITER $$
-CREATE PROCEDURE addReply (vMensaje varchar(45), vFechaHora datetime, vEmisor varchar(45), vComentarioOriginal int)
+CREATE PROCEDURE addReply (vMensaje varchar(45), vFechaHora datetime, vEmisor varchar(45), vActividadID int, vComentarioOriginal int)
 BEGIN
-	INSERT INTO comentario (Mensaje, FechaHora, Emisor, ComentarioOriginal)
-	VALUES (vMensaje, vFechaHora, vEmisor, vComentarioOriginal);
+	INSERT INTO comentario (Mensaje, FechaHora, Emisor, ActividadID, ComentarioOriginal)
+	VALUES (vMensaje, vFechaHora, vEmisor, vComentarioOriginal, vComentarioOriginal);
     COMMIT;
 END$$
 DELIMITER ;
@@ -146,8 +152,8 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
 drop procedure if exists defEquipoGuiaCoordinador;
+DELIMITER $$
 CREATE PROCEDURE defEquipoGuiaCoordinador (vIDEquipoGuia int, vIDProfesor varchar(45))
 BEGIN
 	UPDATE equipo_guía

@@ -1,10 +1,18 @@
+drop procedure if exists getComentariosO;
 DELIMITER $$
-CREATE PROCEDURE getComentarios (pID int)
+CREATE PROCEDURE getComentariosO(IN pIDact int)
 BEGIN
-	select b.Mensaje, b.FechaHora, b.Emisor
-    from actividad a, comentario b
-    where a.ID = pID
-    Order by b.FechaHora;
+	select * from comentario where ActividadID = pIDact AND ComentarioOriginal is null
+    Order by comentario.FechaHora;
+END$$
+DELIMITER ;
+
+drop procedure if exists getComentariosR;
+DELIMITER $$
+CREATE PROCEDURE getComentariosR(IN pIDcoment int)
+BEGIN
+	select * from comentario where ComentarioOriginal = pIDcoment
+    Order by comentario.FechaHora;
 END$$
 DELIMITER ;
 
@@ -18,8 +26,9 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
+
 drop procedure if exists getActividadesofPlan;
+DELIMITER $$
 CREATE PROCEDURE getActividadesofPlan(pID int)
 BEGIN
 	select * from actividad where PlanID = pID
@@ -149,9 +158,10 @@ DELIMITER ;
 
 drop procedure if exists getNextActividad;
 DELIMITER $$
-CREATE PROCEDURE getNextActividad(IN pplan int, IN pplan datetime)
+CREATE PROCEDURE getNextActividad(IN pplan int, IN pfewcha datetime)
 BEGIN
 	select * from actividad where PlanID = pplan AND FechaHora >= pfecha
 	ORDER BY FechaHora LIMIT 1;
 END$$
 DELIMITER ;
+

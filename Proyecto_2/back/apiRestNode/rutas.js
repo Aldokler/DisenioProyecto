@@ -70,6 +70,36 @@ router.get('/equipo_guia/actividad/comentariosR/:id', (request, response)=>{
     })
 });
 
+// comentar actividad ---------------------------------------------***
+router.post('/equipo_guia/actividad/comentarios/', (request, response)=>{
+    const {Mensaje, FechaHora, Emisor, ActividadID} = request.body;
+    let sql = 'call addComentario (?,?,?,?)';
+    conexion.query(sql, [Mensaje, FechaHora, Emisor, ActividadID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+// responder comentario de actividad ---------------------------------------------***
+router.post('/equipo_guia/actividad/comentariosR/', (request, response)=>{
+    const {Mensaje, FechaHora, Emisor, ActividadID, ComentarioOriginal} = request.body;
+    let sql = 'call addReply (?,?,?,?,?)';
+    conexion.query(sql, [Mensaje, FechaHora, Emisor, ActividadID, ComentarioOriginal], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
 
 // crear plan de trabajo ---------------------------------------------***
 router.post('/plan_trabajo', (request, response)=>{

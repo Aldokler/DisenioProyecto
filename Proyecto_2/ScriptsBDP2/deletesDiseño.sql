@@ -41,8 +41,8 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
 drop procedure if exists sacarProfesor;
+DELIMITER $$
 CREATE PROCEDURE sacarProfesor(profeID varchar(45), equipoID int)
 BEGIN
 	DELETE FROM actividad_x_profesor where IDProfesor = profeID;
