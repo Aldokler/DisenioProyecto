@@ -164,6 +164,15 @@ CREATE TABLE `dias_recordatorio` (
   CONSTRAINT `Actividad` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`)
 );
 
+
+CREATE TABLE coordinador(
+equipoID int,
+profeID varchar(45),
+primary key(equipoID,profeID),
+CONSTRAINT FOREIGN KEY (equipoID) REFERENCES equipo_guía(ID),
+CONSTRAINT FOREIGN KEY (profeID) REFERENCES profesor(ID)
+);
+
 CREATE TABLE `actividad_x_profesor` (
   `IDActividad` int NOT NULL,
   `IDProfesor` varchar(45) NOT NULL,

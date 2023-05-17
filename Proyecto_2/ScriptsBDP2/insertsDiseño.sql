@@ -156,8 +156,7 @@ drop procedure if exists defEquipoGuiaCoordinador;
 DELIMITER $$
 CREATE PROCEDURE defEquipoGuiaCoordinador (vIDEquipoGuia int, vIDProfesor varchar(45))
 BEGIN
-	UPDATE equipo_guía
-    SET IDCoordinador = vIDProfesor
-    WHERE ID = vIDEquipoGuia;
+	UPDATE coordinador SET profeID = vIDProfesor where equipoID = vIDEquipoGuia;
     COMMIT;
 END$$
+
