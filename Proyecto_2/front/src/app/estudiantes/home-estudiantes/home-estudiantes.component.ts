@@ -4,6 +4,7 @@ import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-exce
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Estudiante } from 'src/app/model/estudiante';
 import { TSede } from 'src/app/model/tsede';
+import { PasarDatosService } from 'src/app/pasar-datos.service';
 
 @Component({
   selector: 'app-home-estudiantes',
@@ -13,16 +14,16 @@ import { TSede } from 'src/app/model/tsede';
 
 export class HomeEstudiantesComponent {
 
+  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
   fileName = '';
 
   constructor(
-    private excelService: ComunicadorExcelService,
     private controller: ControladorService
   ){}
 
   public estudiantes: Estudiante[] = [];
 
-  descargarExcel(): void {
+  descargarExcel(): void {/*
     var estudiantes: Estudiante[] = [];
     estudiantes.push(new 
       Estudiante("2020023569", "David", "Pastor", "Barrientos",
@@ -38,8 +39,8 @@ export class HomeEstudiantesComponent {
        "elmiguelin@gmail.com", "88888888", TSede.AL, "1234"));
     estudiantes.push(new 
       Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
-       "elmiguelin@gmail.com", "88888888", TSede.SC, "1234"));
-    this.excelService.downloadStudents(estudiantes);
+       "elmiguelin@gmail.com", "88888888", TSede.SC, "1234"));*/
+    this.controller.downloadStudents(this.estudiantes);
   }
 
   cargarExcel() {
@@ -47,19 +48,16 @@ export class HomeEstudiantesComponent {
 
   handleFileInput(event: any){
     const file = event.target.files[0]
-    console.log(file)
-    this.excelService.uploadStudents(file).then(students => {
+    let fileReader = new FileReader()
+    fileReader.readAsBinaryString(file)
+    this.controller.uploadStudents(fileReader).then(students => {
       this.estudiantes = students
-      console.log(this.estudiantes)
+      this.pasarDatos.estudiantes = students
     }).catch()
   }
 
   ngOnInit(): void {
-    this.controller.getEstudiantes().pipe(
-      tap(res => {
-       this.estudiantes = res;
-      })
-    ).subscribe()
+    this.estudiantes = this.pasarDatos.estudiantes
   }
   
 }

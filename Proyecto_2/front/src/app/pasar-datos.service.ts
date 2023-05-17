@@ -40,6 +40,9 @@ export class PasarDatosService {
      "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, 
      this.evidencia,[], this.fechacancelacion, "", this.fechapublicar);
 
+  public planesDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, 0, 0, [],this.creador);
+  public estudiantes: Estudiante[] = []
+  public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
 
 }
 
