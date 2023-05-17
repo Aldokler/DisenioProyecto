@@ -56,6 +56,10 @@ export class ApiService {
     return this.http.get(this.url + '/equipo_guia/actividad/comentarios/' + id)
   }
 
+  public getReplies(id: number){
+    return this.http.get(this.url + '/equipo_guia/actividad/comentariosR/' + id)
+  }
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
