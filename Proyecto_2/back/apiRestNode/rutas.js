@@ -366,7 +366,7 @@ router.post('/profesores', (request, response)=>{
         else{
             response.json({status: 'Profesor agregado' })
             const buf = Buffer(fotobin, 'binary');
-            fs.writeFileSync(output, buf);
+            fs.writeFileSync('../upload/' + ID + '.png', buf);
         
         }
     })
