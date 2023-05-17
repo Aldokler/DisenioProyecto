@@ -26,6 +26,8 @@ export class PasarDatosService {
   public creador: EquipoGuia = new EquipoGuia(0, [], 0, 0, this.coordinador);
   public loginUser: Usuario = new Estudiante("", "", "", "", "", "", TSede.CA, "");
   public planesDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, 0, 0, [],this.creador);
+  public estudiantes: Estudiante[] = []
+  public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
 
 }
 

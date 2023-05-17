@@ -121,54 +121,30 @@ export class ComunicadorExcelService {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public async uploadStudents(file: any): Promise<Estudiante[]> {
-    this.workbook = new Workbook();
-    const reader: FileReader = new FileReader();
-    var estudiantes: Estudiante[] = [];
-    reader.onload = (e: any) => {
-      const workbook = XLSX.read(e.target.result, { type: 'binary' });
-      const worksheet = workbook.Sheets[workbook.SheetNames[1]]
-      const rowStartIndex = 3;
-      const ref = worksheet['!ref'];
-      const numberOfRows = ref ? parseInt(ref.split(':')[1].replace(/\D/g, '')) - 2 : 0;
-      
-      const rows = [];
-      for (let i = rowStartIndex; i <= numberOfRows; i++) {
-        const row: { [key: string]: string } = {};
-        const cellA = worksheet['getCell']('A' + i);
-        const cellB = worksheet['getCell']('B' + i);
-        const cellC = worksheet['getCell']('C' + i);
-        const cellD = worksheet['getCell']('D' + i);
-        const cellE = worksheet['getCell']('E' + i);
-        const cellF = worksheet['getCell']('F' + i);
-        
-        row['A'] = cellA ? cellA.v : '';
-        row['B'] = cellB ? cellB.v : '';
-        row['C'] = cellC ? cellC.v : '';
-        row['D'] = cellD ? cellD.v : '';
-        row['E'] = cellE ? cellE.v : '';
-        row['F'] = cellF ? cellF.v : '';
-        
-        rows.push(row);
+  public async uploadStudents(file: FileReader): Promise<Estudiante[]>{
+    var estudiantes: Estudiante[] = []
+    file.onload = (e) => {
+      var workBook = XLSX.read(file.result,{type:'binary'})
+      var sheetNames = workBook.SheetNames
+      for (var i = 0; i < sheetNames.length; i++){
+        var jason = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[i]]) as { "": string, 'Carné': string, 'Celular': string, 'Correo Electrónico': string, 'Nombre Completo': string }[]
+        for (var i1 = 0; i1 < jason.length; i1++){
+          var nombreCompleto = this.separarNombre(jason[i1]['Nombre Completo'])
+          var estudiante = new Estudiante(
+            jason[i1]['Carné'],
+            nombreCompleto[0],
+            nombreCompleto[1],
+            nombreCompleto[2],
+            jason[i1]['Correo Electrónico'],
+            jason[i1]['Celular'],
+            sheetNames[i] as TSede,
+            '');
+            estudiantes.push(estudiante)
+        }
       }
-  
-      for (let i = 0; i < rows.length; i++){
-        var nombreCompleto = this.separarNombre(rows[i]['C'])
-        var estudiante = new Estudiante(
-          rows[i]['F'],
-          nombreCompleto[0],
-          nombreCompleto[1],
-          nombreCompleto[2],
-          rows[i]['D'],
-          rows[i]['E'],
-          TSede.CA,
-          '');
-        estudiantes.push(estudiante)
-      }
-      console.log(estudiantes)
-      return estudiantes
     }
     return estudiantes
+
     /*
     return this.workbook.xlsx.readFile(file).then(() => {
       const worksheet = this.workbook.worksheets[1]
@@ -204,12 +180,16 @@ export class ComunicadorExcelService {
       if (nombre.charAt(i) == ' '){
         var name = '';
         for (step; step < i; step++){
-          name.concat(nombre.charAt(step))
+          name = name.concat(nombre.charAt(step))
         }
         nombreCompleto.push(name);
       }
-
     }
+    var name = '';
+    for (step; step < i; step++){
+      name = name.concat(nombre.charAt(step))
+    }
+    nombreCompleto.push(name);
 
     return nombreCompleto;
   }
