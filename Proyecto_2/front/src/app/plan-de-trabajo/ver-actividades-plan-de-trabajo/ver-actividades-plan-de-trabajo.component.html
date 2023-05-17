@@ -75,11 +75,11 @@
                         </h5>
                         <div class="card-body">
                             <h4 class="card-title">
-                                Tipo: Motivacionales
+                                Tipo: {{ this.pasarDatos.actividadPlanDeTrabajo.getTipo() }}
                             </h4>
                             <div class="card-text">
-                                Semana: 1 &nbsp;&nbsp;&nbsp;
-                                25 de febrero
+                                Semana: {{ this.pasarDatos.actividadPlanDeTrabajo.getSemana() }} &nbsp;&nbsp;&nbsp;
+                                {{ this.pasarDatos.actividadPlanDeTrabajo.getFechaHora() }}
                             </div>
                         </div>
                     </div>
