@@ -253,7 +253,7 @@ router.put('/equipo_guia/defCor', (request, response)=>{
 
 
 //sacar profesor del equipo +++++++++++++++++++++++++++++++++++++++++++++++++
-router.delete('/equipo_guia/:id', (request, response)=>{
+router.delete('/equipo_guia/:idEG', (request, response)=>{
     const {idEG} = request.params;
     const {idP} = request.body;
     let sql = "call sacarProfesor(?,?);";
