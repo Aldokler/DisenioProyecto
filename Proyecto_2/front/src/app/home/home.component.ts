@@ -6,6 +6,8 @@ import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { ApiService } from '../controller/DAO/SERVICES/api.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
+import { PasarDatosService } from '../pasar-datos.service';
+import { Profesor } from '../model/profesor';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +15,13 @@ import { ControladorService } from 'src/app/controller/controlador.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  @Input() correoUsuario: string;
-  @Input() contrasenaInput: string;
   miUsuario: Usuario | null = null;
+  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
 
-  constructor(private controller: ControladorService) {
-    this.correoUsuario = '';
-    this.contrasenaInput = '';
-  }
+
+  constructor(private controller: ControladorService) {}
   ngOnInit(): void {
-    /*this.miUsuario =*/ this.controller.ingresar(this.correoUsuario, this.contrasenaInput);
+    console.log(this.pasarDatos.loginUser instanceof Profesor);
   }
 
 }

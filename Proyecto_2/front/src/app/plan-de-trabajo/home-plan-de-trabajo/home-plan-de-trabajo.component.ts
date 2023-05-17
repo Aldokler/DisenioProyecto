@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit , Input } from '@angular/core';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { PlanDeTrabajo } from 'src/app/model/plandetrabajo';
 import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
+import { PasarDatosService } from 'src/app/pasar-datos.service';
+
 
 @Component({
   selector: 'app-home-plan-de-trabajo',
@@ -15,7 +17,7 @@ import { Profesor } from 'src/app/model/profesor';
 export class HomePlanDeTrabajoComponent {
 
   constructor(
-    private controller: ControladorService,private router: Router
+    private controller: ControladorService
   ) { }
 
   public planes: PlanDeTrabajo[] = [];
@@ -23,6 +25,7 @@ export class HomePlanDeTrabajoComponent {
   listaPlanDeTrabajo: PlanDeTrabajo[] = [];
   public errorMessage: String = '';
   public showError: boolean = false;
+  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
 
   ngOnInit(): void {
     this.controller.verPlanesDeTrabajo().pipe(
@@ -85,9 +88,6 @@ export class HomePlanDeTrabajoComponent {
     }
   }
 
-  verDetallesPlan(id: string) {
-    this.router.navigate(['/ver-plan-de-trabajo', id]);
-  }
 
 }
 

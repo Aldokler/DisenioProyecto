@@ -17,18 +17,6 @@ import { Actividad } from 'src/app/model/actividad';
 })
 export class VerPlanDeTrabajoComponent {
 
-  public actividades: Actividad[] = [];
-  plan: PlanDeTrabajo = new PlanDeTrabajo(0,0,0,[],"");
-
-  constructor(private controller: ControladorService, private route: ActivatedRoute) {
-  }
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.plan = params['plan'];
-      // Aquí puedes realizar otras acciones con el plan recibido
-    });
-  }
   
 
 }
