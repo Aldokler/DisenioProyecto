@@ -13,6 +13,10 @@ import { EquipoGuia } from 'src/app/model/equipoguia';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
+import { TModalidad } from 'src/app/model/tmodalidad';
+import { TEstado } from 'src/app/model/testado';
+import { TIndoleActividad } from 'src/app/model/tindoleactividad';
+import { Evidencia } from 'src/app/model/evidencia';
 
 @Component({
   selector: 'app-ver-plan-de-trabajo',
@@ -23,7 +27,8 @@ export class VerPlanDeTrabajoComponent {
 
   public actividades: Actividad[] = [];
   public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
-  
+  public actividadSeleccionada: Actividad[] = []
+
   
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
@@ -39,7 +44,9 @@ export class VerPlanDeTrabajoComponent {
     
   }
 
-  ngOnUpdate(){
+
+  guardarActividad(actividad: Actividad) {
+    this.pasarDatos.actividadPlanDeTrabajo = actividad;
 
   }
   

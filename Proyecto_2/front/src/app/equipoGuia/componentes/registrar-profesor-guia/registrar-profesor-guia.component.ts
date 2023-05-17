@@ -19,18 +19,28 @@ export class RegistrarProfesorGuiaComponent {
 
 
   public rolProfesor: TRol = TRol.GUIA;
+  nombreArchivo:String = "";
 
   registrarProfesor(
-    codigoCampus: String, correoElectronico: string,telefonoCelular: string,nombreProfesor: string,telefonoOficina: string,fotoProfesor: string, primerApellido:string,segundoApellido:string) {
+    codigoCampus: String, correoElectronico: string, telefonoCelular: string, nombreProfesor: string, telefonoOficina: string, fotoProfesor: string, primerApellido: string, segundoApellido: string) {
     const codigoCampusEnum: TSede = TSede[codigoCampus as keyof typeof TSede];
-    const profesor: Profesor = new Profesor("",nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,codigoCampusEnum,"1234",telefonoOficina,fotoProfesor,this.rolProfesor);
+    const profesor: Profesor = new Profesor("algo", nombreProfesor, primerApellido, segundoApellido, correoElectronico, telefonoCelular, codigoCampusEnum, "1234", telefonoOficina, fotoProfesor, this.rolProfesor);
     console.log(profesor);
     this.controller.addProfesor(profesor).pipe(
       tap(res => {
-        if (res){
+        if (res) {
           console.log("hola")
+          console.log(fotoProfesor);
         }
       })
     ).subscribe()
   }
+
+ /* handleFileInput(event: any) {
+    const file = event.target.files[0]
+    console.log(file)
+    var ruta = URL.createObjectURL(file);
+    console.log(ruta);
+  }*/
+
 }
