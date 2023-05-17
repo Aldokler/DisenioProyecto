@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Actividad = void 0;
 var Actividad = /** @class */ (function () {
-    function Actividad(semana, tipo, nombre, fechaHora, responsables, diasAnunciar, diasRecordatorio, modalidad, link, afiche, estado, evidencia, comentarios, fechaCancelacion, observacion, fechaAPublicar) {
+    function Actividad(id, semana, tipo, nombre, fechaHora, responsables, diasAnunciar, diasRecordatorio, modalidad, link, afiche, estado, evidencia, comentarios, fechaCancelacion, observacion, fechaAPublicar) {
+        this.id = id;
         this.semana = semana;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -20,6 +21,12 @@ var Actividad = /** @class */ (function () {
         this.observacion = observacion;
         this.fechaAPublicar = fechaAPublicar;
     }
+    Actividad.prototype.getId = function () {
+        return this.id;
+    };
+    Actividad.prototype.setId = function (id) {
+        this.id = id;
+    };
     Actividad.prototype.getSemana = function () {
         return this.semana;
     };

@@ -30,7 +30,12 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   ngOnInit() {
+<<<<<<< HEAD
     console.log("IDD" + this.pasarDatos.actividadPlanDeTrabajo.getId());
+=======
+    console.log(this.pasarDatos.actividadPlanDeTrabajo)
+    console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
+>>>>>>> a90c801ddcb05f7a1bfe5f3b5608d090acb0e58d
     this.controller.getComentarios(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
       tap(res => {
         this.comentarios = res;
