@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Comentario = void 0;
 var Comentario = /** @class */ (function () {
-    function Comentario(id, mensaje, emisor, fechaHora, comentarioOriginal) {
+    function Comentario(id, mensaje, emisor, fechaHora, comentarioOriginal, actividadId) {
         this.id = id;
         this.mensaje = mensaje;
         this.emisor = emisor;
         this.fechaHora = fechaHora;
         this.comentarioOriginal = comentarioOriginal;
+        this.actividadId = actividadId;
     }
     Comentario.prototype.getId = function () {
         return this.id;
@@ -38,6 +39,12 @@ var Comentario = /** @class */ (function () {
     };
     Comentario.prototype.setComentarioOriginal = function (comentarioOriginal) {
         this.comentarioOriginal = comentarioOriginal;
+    };
+    Comentario.prototype.getActividadId = function () {
+        return this.actividadId;
+    };
+    Comentario.prototype.setActividadId = function (actividadId) {
+        this.actividadId = actividadId;
     };
     return Comentario;
 }());

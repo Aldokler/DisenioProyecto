@@ -46,7 +46,7 @@ router.get('/equipo_guia/actividad/comentarios/:id', (request, response)=>{
         }
         else{
             const comentarios = rows[0].map(row => 
-                new Comentario(row.ID, row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
+                new Comentario(row.ID, row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal, row.ActividadID));
                 response.json({comentarios})
         }
     })
@@ -63,7 +63,7 @@ router.get('/equipo_guia/actividad/comentariosR/:id', (request, response)=>{
         }
         else{
             const comentarios = rows[0].map(row => 
-                new Comentario(row.ID,row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
+                new Comentario(row.ID,row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal, row.ActividadID));
                 response.json({comentarios})
         }
     })

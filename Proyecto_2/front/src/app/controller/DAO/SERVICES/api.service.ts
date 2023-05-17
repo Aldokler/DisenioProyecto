@@ -5,6 +5,7 @@ import { EquipoGuia } from 'src/app/model/equipoguia';
 import { TIndoleActividad } from 'src/app/model/tindoleactividad';
 import { TModalidad } from 'src/app/model/tmodalidad';
 import { TEstado } from 'src/app/model/testado';
+import { Comentario } from 'src/app/model/comentario';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,14 @@ export class ApiService {
 
   public getReplies(id: number){
     return this.http.get(this.url + '/equipo_guia/actividad/comentariosR/' + id)
+  }
+
+  public addComentarios(comentario: Comentario){
+    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {comentario})
+  }
+
+  public addReplies(comentario: Comentario){
+    return this.http.post(this.url + '/equipo_guia/actividad/comentariosR/' , {comentario})
   }
 
 
