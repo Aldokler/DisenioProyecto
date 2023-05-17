@@ -103,6 +103,9 @@ export class ControladorService {
   public modificarDatosActividad(id: number, actividad: Actividad): Observable<boolean>{
       return this.adminActividad.modificarDatosActividad(id, actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), actividad.getEstado())
   }
+  public getComentarios(id: number): Observable<Comentario[]>{
+    return this.adminActividad.getComentarios(id)
+  }
   public subirEvidencia(evidencia: Evidencia): boolean{
       return this.adminActividad.subirEvidencia(evidencia)
   }

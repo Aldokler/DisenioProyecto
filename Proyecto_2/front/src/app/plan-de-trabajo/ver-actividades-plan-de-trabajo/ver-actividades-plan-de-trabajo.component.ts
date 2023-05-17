@@ -22,7 +22,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   ngOnInit() {
     this.controller.getActividad(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
       tap(res => {
-       this.actividades = res;
+       //this.actividades = res;
       })
     ).subscribe()
     console.log("este es el plan que se escogió");

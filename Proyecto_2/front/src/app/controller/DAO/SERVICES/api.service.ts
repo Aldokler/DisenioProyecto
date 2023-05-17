@@ -52,6 +52,10 @@ export class ApiService {
     return this.http.put(this.url + 'plan_trabajo/actividad/cancelar/' + id, observacion)
   }
 
+  public getComentarios(id: number){
+    return this.http.get(this.url + '/equipo_guia/actividad/comentarios/' + id)
+  }
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
