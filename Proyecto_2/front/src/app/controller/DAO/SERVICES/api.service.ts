@@ -78,7 +78,7 @@ export class ApiService {
   }
 
   public kickProfesor(idEG: Number, idP: String){
-    return this.http.delete(this.url + 'equipo_guia/' + idEG, {body: idP})
+    return this.http.delete(this.url + 'equipo_guia/' + idEG + '?idP=' + idP)
   }
 
   public getEquipoGuiaByYearSemester(año: Number, semestre: Number){

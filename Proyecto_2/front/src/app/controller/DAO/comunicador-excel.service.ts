@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Workbook, Worksheet } from 'exceljs';
 import * as fs from 'file-saver';
+import * as XLSX from 'xlsx';
 import { Estudiante } from 'src/app/model/estudiante';
 import { TSede } from 'src/app/model/tsede';
 
@@ -120,30 +121,77 @@ export class ComunicadorExcelService {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  public async uploadStudents(datosEstudiantes: string): Promise<Estudiante[]> {
+  public async uploadStudents(file: any): Promise<Estudiante[]> {
     this.workbook = new Workbook();
-    const content = await this.workbook.xlsx.readFile(datosEstudiantes);
-
-    const worksheet = content.worksheets[1]
-    const rowStartIndex = 3;
-    const numberOfRows = worksheet.rowCount - 2;
-    
-    const rows = worksheet.getRows(rowStartIndex, numberOfRows) ?? [];
+    const reader: FileReader = new FileReader();
     var estudiantes: Estudiante[] = [];
-
-    for (let i = 0; i < rows.length; i++){
-      var nombreCompleto = this.separarNombre(rows[i].getCell(2).toString())
-      var estudiante = new Estudiante(
-        rows[i].getCell(5).toString(),
-        nombreCompleto[0],
-        nombreCompleto[1],
-        nombreCompleto[2],
-        rows[i].getCell(3).toString(),
-        rows[i].getCell(4).toString(),
-        TSede.CA,
-        '');
+    reader.onload = (e: any) => {
+      const workbook = XLSX.read(e.target.result, { type: 'binary' });
+      const worksheet = workbook.Sheets[workbook.SheetNames[1]]
+      const rowStartIndex = 3;
+      const ref = worksheet['!ref'];
+      const numberOfRows = ref ? parseInt(ref.split(':')[1].replace(/\D/g, '')) - 2 : 0;
+      
+      const rows = [];
+      for (let i = rowStartIndex; i <= numberOfRows; i++) {
+        const row: { [key: string]: string } = {};
+        const cellA = worksheet['getCell']('A' + i);
+        const cellB = worksheet['getCell']('B' + i);
+        const cellC = worksheet['getCell']('C' + i);
+        const cellD = worksheet['getCell']('D' + i);
+        const cellE = worksheet['getCell']('E' + i);
+        const cellF = worksheet['getCell']('F' + i);
+        
+        row['A'] = cellA ? cellA.v : '';
+        row['B'] = cellB ? cellB.v : '';
+        row['C'] = cellC ? cellC.v : '';
+        row['D'] = cellD ? cellD.v : '';
+        row['E'] = cellE ? cellE.v : '';
+        row['F'] = cellF ? cellF.v : '';
+        
+        rows.push(row);
+      }
+  
+      for (let i = 0; i < rows.length; i++){
+        var nombreCompleto = this.separarNombre(rows[i]['C'])
+        var estudiante = new Estudiante(
+          rows[i]['F'],
+          nombreCompleto[0],
+          nombreCompleto[1],
+          nombreCompleto[2],
+          rows[i]['D'],
+          rows[i]['E'],
+          TSede.CA,
+          '');
+        estudiantes.push(estudiante)
+      }
+      console.log(estudiantes)
+      return estudiantes
     }
-    return estudiantes;
+    return estudiantes
+    /*
+    return this.workbook.xlsx.readFile(file).then(() => {
+      const worksheet = this.workbook.worksheets[1]
+      const rowStartIndex = 3;
+      const numberOfRows = worksheet.rowCount - 2;
+      
+      const rows = worksheet.getRows(rowStartIndex, numberOfRows) ?? [];
+      var estudiantes: Estudiante[] = [];
+  
+      for (let i = 0; i < rows.length; i++){
+        var nombreCompleto = this.separarNombre(rows[i].getCell(2).toString())
+        var estudiante = new Estudiante(
+          rows[i].getCell(5).toString(),
+          nombreCompleto[0],
+          nombreCompleto[1],
+          nombreCompleto[2],
+          rows[i].getCell(3).toString(),
+          rows[i].getCell(4).toString(),
+          TSede.CA,
+          '');
+      }
+      return estudiantes;
+    }).catch()*/
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

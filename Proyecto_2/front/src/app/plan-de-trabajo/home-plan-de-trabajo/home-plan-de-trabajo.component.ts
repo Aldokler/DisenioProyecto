@@ -1,4 +1,4 @@
-import { Component,OnInit , Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Router } from '@angular/router';
@@ -22,10 +22,12 @@ export class HomePlanDeTrabajoComponent {
 
   public planes: PlanDeTrabajo[] = [];
   public annios: Number[] = [];
-  listaPlanDeTrabajo: PlanDeTrabajo[] = [];
+  listaPlanesDeTrabajo: PlanDeTrabajo[] = [];
+  public planesDeTrabajoSeleccionados: PlanDeTrabajo[] = [];
   public errorMessage: String = '';
   public showError: boolean = false;
-  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
+  public actual: any;
 
   ngOnInit(): void {
     this.controller.verPlanesDeTrabajo().pipe(
@@ -52,20 +54,20 @@ export class HomePlanDeTrabajoComponent {
   public filterPlanes(annioFiltrar: string, semestre: string) {
     const annioFiltrarNumber = parseInt(annioFiltrar);
     const semestreFiltrarNumber = parseInt(semestre);
-    this.planes = this.planes.filter((plan) => {
-      return plan.getAnnio() == annioFiltrarNumber && plan.getSemestre() == semestreFiltrarNumber;
+
+    // Filtrar los planes por semestre y año
+    const planesFiltrados = this.planes.filter((plan) => {
+      return plan.getAnnio() === annioFiltrarNumber && plan.getSemestre() === semestreFiltrarNumber;
     });
-    if (this.planes.length == 1) {
-      let actual = this.planes[0].getId();
-      this.controller.verPlanesDeTrabajo().pipe(
-        tap(res1 => {
-          this.listaPlanDeTrabajo = res1;
-        }
-        )
-      ).subscribe()
-      this.errorMessage = ''
+
+    if (planesFiltrados.length >= 1) {
+      // Si hay planes filtrados, asignarlos a 'listaPlanesDeTrabajo'
+      this.listaPlanesDeTrabajo = planesFiltrados;
+      console.log(this.listaPlanesDeTrabajo);
+      this.errorMessage = '';
     } else {
-      this.errorMessage = 'No existen planes de trabajo para el periodo indicado'
+      // Si no hay planes o hay más de uno, mostrar mensaje de error
+      this.errorMessage = 'No existen planes de trabajo para el periodo indicado';
       this.showError = true;
 
       setTimeout(() => {
@@ -75,11 +77,6 @@ export class HomePlanDeTrabajoComponent {
         }, 750);
       }, 4000);
     }
-    this.controller.verPlanesDeTrabajo().pipe(
-      tap(res => {
-        this.planes = res;
-      })
-    ).subscribe()
   }
 
   public onFadeOut() {
@@ -88,6 +85,10 @@ export class HomePlanDeTrabajoComponent {
     }
   }
 
+  guardarDatosPlanes(plan: PlanDeTrabajo) {
+    this.pasarDatos.planesDeTrabajo = plan;
+
+  }
 
 }
 

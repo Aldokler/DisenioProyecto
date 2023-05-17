@@ -104,19 +104,17 @@
 
             <section class="mb-4">
                 <div class="container mt-4">
-
                     <div class="card mb-4">
                         <h5 class="card-header" style="background-color: #E2EFF8;">
-                            Actividad 1: Bienvenida de primeros ingresos 2023
-                            
+                            Actividad: nombre
                         </h5>
                         <div class="card-body">
                             <h4 class="card-title">
-                                Tipo: Motivacionales
+                                Tipo: actividad
                             </h4>
                             <div class="card-text">
                                 Semana: 1 &nbsp;&nbsp;&nbsp;
-                                25 de febrero
+                                24 de3 enero
                             </div>
                             <a href="" class="btn btn-outline-secondary mt-2"
                                 style="background-color: #13293D; color: #E2EFF8;" 
@@ -124,6 +122,27 @@
                                 más detalles</a>
                         </div>
                     </div>
+
+                    <div *ngFor="let actividad of actividades" class="card mb-4">
+                        <h5 class="card-header" style="background-color: #E2EFF8;">
+                            Actividad: {{actividad.getNombre()}}
+                        </h5>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Tipo: {{actividad.getTipo()}}
+                            </h4>
+                            <div class="card-text">
+                                Semana: {{actividad.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                {{actividad.getFechaHora()}}
+                            </div>
+                            <a href="" class="btn btn-outline-secondary mt-2"
+                                style="background-color: #13293D; color: #E2EFF8;" 
+                                [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                más detalles</a>
+                        </div>
+                    </div>
+
+                    
 
                 </div>
             </section>
