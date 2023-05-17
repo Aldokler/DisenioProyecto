@@ -110,12 +110,12 @@
         <div class="card mt-4 mb-4">
             <div class="card-body">
             <!--  aqui se hacen los estudiantes -->
-                <div  *ngFor="let  estudiante of estudiantes" class="row mb-3 mt-3 text-center">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                <div class="row mb-3 mt-3 text-center">
+                    <div *ngFor="let  estudiante of estudiantes" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">{{estudiante.getNombre}}</h5>
+                                <h5 class="card-title">{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }} {{ estudiante.getNombre() }}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
                                 <a href="" class="btn text-white" style="background-color: #13293D;"
@@ -165,19 +165,19 @@
 
                             <tr *ngFor="let  estudiante of estudiantes">
                                 <td>
-                                    <p>{{ estudiante.getNombre }}</p>
+                                    <p>{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }} {{ estudiante.getNombre() }}</p>
                                 </td>
 
                                 <td>
-                                    <p>{{ estudiante.getCorreoElectronico }}</p>
+                                    <p>{{ estudiante.getCorreoElectronico() }}</p>
                                 </td>
 
                                 <td>
-                                    <p>{{ estudiante.getCelular }}</p>
+                                    <p>{{ estudiante.getCelular() }}</p>
                                 </td>
 
                                 <td>
-                                    <p>{{ estudiante.getSede }}</p>
+                                    <p>{{ estudiante.getSede() }}</p>
                                 </td>
                             </tr>
 

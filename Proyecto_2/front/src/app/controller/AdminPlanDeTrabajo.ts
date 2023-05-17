@@ -45,6 +45,7 @@ export class AdminPlanDeTrabajo{
                 const json = data.actividades;
                 return json.map((json: any) => {
                     return new Actividad(
+                        json.id,
                         json.semana,
                         json.tipo,
                         json.nombre,

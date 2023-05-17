@@ -17,6 +17,7 @@ import { ApiService } from "./DAO/SERVICES/api.service";
 import { Observable, Subscription } from 'rxjs';
 import { login } from './login';
 import { Usuario } from '../model/usuario';
+import { ComunicadorExcelService } from './DAO/comunicador-excel.service';
 
 
 @Injectable({
@@ -35,6 +36,7 @@ export class ControladorService {
   private adminEstudiante = new AdminEstudiante()
   private adminProfesores = new AdminProfesores(this.DAO)
   private adminLogin = new login(this.DAO)
+  private excelService = new ComunicadorExcelService()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,5 +172,13 @@ export class ControladorService {
 
   public getEquipoGuiaByYearSemester(año: Number, semestre: Number): Observable<Number> {
       return this.adminEquipoGuia.getEquipoGuiaByYearSemester(año, semestre)
+  }
+
+  public async uploadStudents(file: FileReader): Promise<Estudiante[]> {
+    return this.excelService.uploadStudents(file)
+  }
+
+  public async downloadStudents(datosEstudiantes: Estudiante[]): Promise<void> {
+    return this.excelService.downloadStudents(datosEstudiantes)
   }
 }

@@ -67,31 +67,7 @@
             </div>
 
             <div class="col mt-5">
-                <form onsubmit="">
                     <div class="row">
-                        <div class="col">
-                            <select class="form-select me-2" name="opcion1" id="opcion1">
-                                <option value="1">Semestre</option>
-                                <option value="2">1</option>
-                                <option value="3">2</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select me-2" name="opcion2" id="opcion2">
-                                <option value="">Año</option>
-                                <option value="1">2018</option>
-                                <option value="2">2019</option>
-                                <option value="3">2020</option>
-                                <option value="4">2021</option>
-                                <option value="5">2022</option>
-                                <option value="6">2023</option>
-                            </select>
-                        </div>
-
-                        <div class="col">
-                            <button type="submit" class="btn text-white me-2"
-                                style="background-color: #13293D;">Filtrar</button>
-                        </div>
 
                         <div class="col">
                             <button type="" class="btn text-white me-2 "
@@ -99,29 +75,10 @@
                         </div>
 
                     </div>
-                </form>
             </div>
 
             <section class="mb-4">
                 <div class="container mt-4">
-                    <div class="card mb-4">
-                        <h5 class="card-header" style="background-color: #E2EFF8;">
-                            Actividad: nombre
-                        </h5>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                Tipo: actividad
-                            </h4>
-                            <div class="card-text">
-                                Semana: 1 &nbsp;&nbsp;&nbsp;
-                                24 de3 enero
-                            </div>
-                            <a href="" class="btn btn-outline-secondary mt-2"
-                                style="background-color: #13293D; color: #E2EFF8;" 
-                                [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                más detalles</a>
-                        </div>
-                    </div>
 
                     <div *ngFor="let actividad of actividades" class="card mb-4">
                         <h5 class="card-header" style="background-color: #E2EFF8;">
@@ -136,7 +93,8 @@
                                 {{actividad.getFechaHora()}}
                             </div>
                             <a href="" class="btn btn-outline-secondary mt-2"
-                                style="background-color: #13293D; color: #E2EFF8;" 
+                            [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
+                            (click)="guardarActividad(actividad)" 
                                 [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
                                 más detalles</a>
                         </div>

@@ -6,6 +6,7 @@ import { TIndoleActividad } from "./tindoleactividad";
 import { TModalidad } from "./tmodalidad";
 
 export class Actividad {
+    private id: number;
     private semana: number;
     private tipo: TIndoleActividad;
     private nombre: string;
@@ -24,6 +25,7 @@ export class Actividad {
     private fechaAPublicar: Date;
 
     constructor(
+        id: number,
         semana: number,
         tipo: TIndoleActividad,
         nombre: string,
@@ -41,6 +43,7 @@ export class Actividad {
         observacion: string,
         fechaAPublicar: Date
     ) {
+        this.id = id
         this.semana = semana
         this.tipo = tipo
         this.nombre = nombre
@@ -57,6 +60,14 @@ export class Actividad {
         this.fechaCancelacion = fechaCancelacion
         this.observacion = observacion
         this.fechaAPublicar = fechaAPublicar
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(id: number): void {
+        this.id = id;
     }
 
     public getSemana(): number {

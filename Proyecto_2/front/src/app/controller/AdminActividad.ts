@@ -17,9 +17,10 @@ export class AdminActividad{
                 console.log(data.actividad[0])
                 const json = data.actividad[0];
                 if (json == undefined){
-                    return new Actividad(0, TIndoleActividad.TECNICO, '', new Date, [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], new Date, '', new Date)
+                    return new Actividad(0, 0, TIndoleActividad.TECNICO, '', new Date, [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], new Date, '', new Date)
                 } else {
                     return new Actividad(
+                        json.id,
                         json.semana,
                         json.tipo,
                         json.nombre,

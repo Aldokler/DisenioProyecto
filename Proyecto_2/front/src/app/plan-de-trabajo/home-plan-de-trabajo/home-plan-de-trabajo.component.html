@@ -105,14 +105,14 @@
                 <div class="container mt-4">
 
                     <!--AQUI SE CREA CADA PLAN DE TRABAJO QUE HAYA -->
-                    <div *ngFor="let plan of listaPlanesDeTrabajo">
+                    <div *ngFor="let plan of planes">
                         <div class="card mb-4">
                             <h5 class="card-header" style="background-color: #E2EFF8;">
                                 Plan {{ plan.getId() }}
                             </h5>
                             <div class="card-body">
                                 <div class="card-text">
-                                    Semestre: {{ plan.getSemestre()}} &nbsp;&nbsp;&nbsp;
+                                    Semestre: {{ plan.getSemestre() }} &nbsp;&nbsp;&nbsp;
                                     año: {{ plan.getAnnio() }}
                                 </div>
 
