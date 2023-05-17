@@ -12,10 +12,6 @@ import { TSede } from 'src/app/model/tsede';
 })
 
 export class HomeEstudiantesComponent {
-  /*
-  @ViewChild("file", {
-    read: ElementRef
-  }) file: ElementRef;*/
 
   fileName = '';
 
@@ -47,6 +43,15 @@ export class HomeEstudiantesComponent {
   }
 
   cargarExcel() {
+  }
+
+  handleFileInput(event: any){
+    const file = event.target.files[0]
+    console.log(file)
+    this.excelService.uploadStudents(file).then(students => {
+      this.estudiantes = students
+      console.log(this.estudiantes)
+    }).catch()
   }
 
   ngOnInit(): void {
