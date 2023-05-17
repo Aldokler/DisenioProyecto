@@ -3,6 +3,7 @@ const {EquipoGuia} = require('../model/equipoguia');
 const {PlanDeTrabajo} = require('../model/plandetrabajo');
 const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
+const {Comentario} = require('../model/comentario');
 const fs = require('fs');
 
 
@@ -32,6 +33,25 @@ router.get('/login', (request, response)=>{
 
 
 // Plan de Trabajo
+
+
+// ver comentarios principales +++++++++++++++++++
+router.get('/equipo_guia/actividad/comentarios/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getComentariosO(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const comentarios = rows[0].map(row => 
+                new Comentario(row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
+                response.json({comentarios})
+        }
+    })
+});
+
 
 // crear plan de trabajo ---------------------------------------------***
 router.post('/plan_trabajo', (request, response)=>{
