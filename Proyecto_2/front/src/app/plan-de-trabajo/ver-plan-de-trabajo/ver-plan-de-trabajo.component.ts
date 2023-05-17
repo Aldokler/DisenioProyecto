@@ -12,6 +12,7 @@ import { Actividad } from 'src/app/model/actividad';
 import { EquipoGuia } from 'src/app/model/equipoguia';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
+import { PasarDatosService } from 'src/app/pasar-datos.service';
 
 @Component({
   selector: 'app-ver-plan-de-trabajo',
@@ -21,16 +22,21 @@ import { TSede } from 'src/app/model/tsede';
 export class VerPlanDeTrabajoComponent {
 
   public actividades: Actividad[] = [];
-  plan: PlanDeTrabajo = new PlanDeTrabajo(0,0,0,[],new EquipoGuia(0, [], 0, 0, new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)));
-
+  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  
+  
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.plan = params['plan'];
-      // Aquí puedes realizar otras acciones con el plan recibido
-    });
+    this.actividades = this.pasarDatos.planesDeTrabajo.getId()
+    console.log("este es el plan que se escogió");
+    console.log(this.pasarDatos.planesDeTrabajo);
+    
+  }
+
+  ngOnUpdate(){
+
   }
   
 
