@@ -76,8 +76,11 @@ export class AdminActividad{
 
     public getComentarios(id: number): Observable<Comentario[]>{
       return this.DAO.getComentarios(id).pipe(
+        
         map((data: any) => {
+            console.log(data)
             const json = data.comentarios;
+            console.log(json);
             return json.map((json: any) => {
                 return new Comentario(
                     json.id,

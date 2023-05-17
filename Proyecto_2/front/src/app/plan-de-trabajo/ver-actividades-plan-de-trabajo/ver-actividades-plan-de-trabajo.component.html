@@ -85,8 +85,8 @@
                     </div>
 
                     <!-- ver y hacer comentarios -->
-                    <button *ngIf="tipoUsuario === 'GUIA'" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapse_comments" aria-expanded="false"
+                    <button *ngIf="tipoUsuario === 'GUIA'" class="btn btn-outline-secondary me-2" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse_comments" aria-expanded="false"
                         style="background-color: #13293D; color: white;">
                         Comentarios
                     </button>
@@ -97,15 +97,16 @@
                         Comentar
                     </button>
 
-                    
+
                     <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2 " type="button"
                         style="background-color: #13293D; color: white;">
-                        <a href="" class="text-decoration-none text-reset" [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
-                        
+                        <a href="" class="text-decoration-none text-reset"
+                            [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
+
                     </button>
 
-                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#observacion" aria-expanded="false"
+                    <button *ngIf="tipoUsuario === 'COORDINADOR'" class="btn btn-outline-secondary me-2" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#observacion" aria-expanded="false"
                         style="background-color: #13293D; color: white;">
                         Observación
                     </button>
@@ -125,24 +126,26 @@
 
                     <div class="collapse" id="collapse_comments">
                         <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
-                            <div class="card mb-4">
+                <!-- empieza comentario ---------------------->
+
+                            <div *ngFor="let comentario of comentarios; let i = index" class="card mb-4">
 
                                 <div class="card-header" style="background-color: #E2EFF8;">
                                     <img src="assets/imagenes/usuario.png" alt="Generic placeholder image"
                                         class="img-fluid rounded-circle border border-white border-3 me-2"
                                         style="width: 40px;">
-                                    Bryan Castro
+                                        {{comentario.getEmisor()}}
                                 </div>
 
                                 <div class="card-body">
-                                    <p>muy bueno</p>
+                                    <p>{{comentario.getMensaje()}}</p>
                                 </div>
                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                    Fecha de publicación: 24/05/2004 &nbsp;&nbsp;&nbsp;
+                                    Fecha de publicación: {{comentario.getFechaHora()}}  &nbsp;&nbsp;&nbsp;
 
                                     <!-- ver respuestas y realizar comentarios -->
                                     <button class="btn btn-outline-secondary me-2" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse_answers"
+                                        data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_answers_' + i"
                                         aria-expanded="false" style="background-color: #13293D; color: white;">Ver
                                         respuestas</button>
 
@@ -150,7 +153,8 @@
                                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
                                         data-bs-target="#registration_commentary_answer">Reponder comentario</button>
 
-                                    <div class="collapse" id="collapse_answers">
+                                    <!-- aqui se responde -->
+                                    <div class="collapse" [id]="'collapse_answers_' + i">
                                         <div class="mt-4"
                                             style="height: 400px; display: block; overflow: auto; position: relative;">
                                             <div class="card mb-4">
@@ -172,24 +176,24 @@
 
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
-
-
+                                    <!-- aqui termina una respuesta -->
                                 </div>
 
                             </div>
+                    <!-- aqui termina un comentario------------------------ -->
 
                         </div>
+
                     </div>
 
 
+                            
 
 
-
-
-                    
+                    </div>
 
 
                     <div class="collapse" id="observacion">
@@ -211,11 +215,10 @@
                             </div>
                         </div>
 
-                    </div>
                 </div>
-
             </section>
         </div>
+   
     </section>
 
 
