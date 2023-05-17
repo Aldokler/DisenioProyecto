@@ -38,6 +38,7 @@ export class VerActividadesPlanDeTrabajoComponent {
       tap(res => {
        this.actividadPlanDeTrabajo = res;
        
+       //this.actividades = res;
       })
 
     ).subscribe()

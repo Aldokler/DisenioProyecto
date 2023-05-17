@@ -36,10 +36,9 @@ export class PasarDatosService {
   public fechacancelacion = new Date(2023, 4, 16, 12, 30, 45);
   public fechapublicar = new Date(2023, 4, 16, 12, 30, 45);
   public evidencia: Evidencia = new Evidencia(0, [], "");
-  public actividadPlanDeTrabajo: Actividad = new Actividad(0,0, TIndoleActividad.MOTIVACIONAL,
+  public actividadPlanDeTrabajo: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
      "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, 
      this.evidencia,[], this.fechacancelacion, "", this.fechapublicar);
-
   public estudiantes: Estudiante[] = []
   public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
 

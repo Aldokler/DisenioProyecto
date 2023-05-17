@@ -46,7 +46,25 @@ router.get('/equipo_guia/actividad/comentarios/:id', (request, response)=>{
         }
         else{
             const comentarios = rows[0].map(row => 
-                new Comentario(row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
+                new Comentario(row.ID, row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
+                response.json({comentarios})
+        }
+    })
+});
+
+// ver respuestas a un comentario +++++++++++++++++++
+router.get('/equipo_guia/actividad/comentariosR/:id', (request, response)=>{
+    const {id} = request.params;
+    const {idComent} = request.body;
+    let sql = "call getComentariosR(?,?);";
+    conexion.query(sql, [id,idComent], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const comentarios = rows[0].map(row => 
+                new Comentario(row.ID,row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal));
                 response.json({comentarios})
         }
     })
