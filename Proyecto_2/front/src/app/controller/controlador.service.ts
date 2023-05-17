@@ -106,6 +106,9 @@ export class ControladorService {
   public getComentarios(id: number): Observable<Comentario[]>{
     return this.adminActividad.getComentarios(id)
   }
+  public getReplies(id: number): Observable<Comentario[]>{
+    return this.adminActividad.getReplies(id)
+  }
   public subirEvidencia(evidencia: Evidencia): boolean{
       return this.adminActividad.subirEvidencia(evidencia)
   }

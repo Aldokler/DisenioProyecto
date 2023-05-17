@@ -55,9 +55,8 @@ router.get('/equipo_guia/actividad/comentarios/:id', (request, response)=>{
 // ver respuestas a un comentario +++++++++++++++++++
 router.get('/equipo_guia/actividad/comentariosR/:id', (request, response)=>{
     const {id} = request.params;
-    const {idComent} = request.body;
-    let sql = "call getComentariosR(?,?);";
-    conexion.query(sql, [id,idComent], (error, rows, fields)=>{
+    let sql = "call getComentariosR(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
