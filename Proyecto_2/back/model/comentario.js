@@ -2,12 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Comentario = void 0;
 var Comentario = /** @class */ (function () {
-    function Comentario(mensaje, emisor, fechaHora, comentarioOriginal) {
+    function Comentario(id, mensaje, emisor, fechaHora, comentarioOriginal) {
+        this.id = id;
         this.mensaje = mensaje;
         this.emisor = emisor;
         this.fechaHora = fechaHora;
         this.comentarioOriginal = comentarioOriginal;
     }
+    Comentario.prototype.getId = function () {
+        return this.id;
+    };
+    Comentario.prototype.setId = function (id) {
+        this.id = id;
+    };
     Comentario.prototype.getMensaje = function () {
         return this.mensaje;
     };
