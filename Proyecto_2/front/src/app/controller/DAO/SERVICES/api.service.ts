@@ -61,11 +61,11 @@ export class ApiService {
     return this.http.get(this.url + '/equipo_guia/actividad/comentariosR/' + id)
   }
 
-  public addComentarios(comentario: Comentario){
-    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {comentario})
+  public addComentario(Mensaje: string, Emisor: string, FechaHora: Date,ActividadID: number){
+    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {Mensaje, FechaHora, Emisor, ActividadID})
   }
 
-  public addReplies(comentario: Comentario){
+  public addReplie(comentario: Comentario){
     return this.http.post(this.url + '/equipo_guia/actividad/comentariosR/' , {comentario})
   }
 

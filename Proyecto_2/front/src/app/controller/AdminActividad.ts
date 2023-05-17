@@ -6,6 +6,7 @@ import { ApiService } from "./DAO/SERVICES/api.service";
 import { TIndoleActividad } from "../model/tindoleactividad";
 import { TModalidad } from "../model/tmodalidad";
 import { TEstado } from "../model/testado";
+import { Profesor } from "../model/profesor";
 
 export class AdminActividad{
 
@@ -49,6 +50,15 @@ export class AdminActividad{
             })
         )
     }
+
+    public comentarActividad(mensaje: string, emisor: string, fechaHora: Date,actividadId: number){
+        return this.DAO.addComentario(mensaje, emisor, fechaHora, actividadId).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
+    }
+
     public modificarDatosActividad(id: number, nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado): Observable<boolean>{
         return this.DAO.modificarActividad(id, nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, estado).pipe(
             map((data: any) => {
@@ -74,7 +84,7 @@ export class AdminActividad{
                     json.mensaje,
                     json.emisor,
                     json.fechaHora,
-                    json.comentarioOriginal,
+                    json.comentarioOriginals,
                     json.actividadId
                 )
             });
@@ -92,7 +102,7 @@ export class AdminActividad{
                     json.mensaje,
                     json.emisor,
                     json.fechaHora,
-                    json.comentarioOriginal,
+                    json.comentarioOriginals,
                     json.actividadId
                 )
             });
@@ -108,6 +118,6 @@ export class AdminActividad{
     public modificarEvidencia(id: number): boolean{
         return true
     }
-    public comentarActividad(comentario: Comentario){}
+    
     public responderComentario(comentario: Comentario){}
 }
