@@ -9,6 +9,9 @@ import { Profesor } from 'src/app/model/profesor';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Actividad } from 'src/app/model/actividad';
+import { EquipoGuia } from 'src/app/model/equipoguia';
+import { TRol } from 'src/app/model/trol';
+import { TSede } from 'src/app/model/tsede';
 
 @Component({
   selector: 'app-ver-plan-de-trabajo',
@@ -18,7 +21,7 @@ import { Actividad } from 'src/app/model/actividad';
 export class VerPlanDeTrabajoComponent {
 
   public actividades: Actividad[] = [];
-  plan: PlanDeTrabajo = new PlanDeTrabajo(0,0,0,[],"");
+  plan: PlanDeTrabajo = new PlanDeTrabajo(0,0,0,[],new EquipoGuia(0, [], 0, 0, new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)));
 
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
