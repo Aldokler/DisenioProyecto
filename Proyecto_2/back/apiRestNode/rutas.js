@@ -348,6 +348,8 @@ function readImage(Image){
     return buf;
 }
 
+
+
 const output = 'output.png';
 
 // crear profesor-----------------------------------------------------------
@@ -355,7 +357,7 @@ router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
     const fotobin = readImage(Foto);       
-    console.log(fotobin);
+    //console.log(fotobin);
     let sql = 'call addProfesor(?,?,?,?,?,?,?,?,?,?,?)';
     conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
         Celular , Contraseña , Sede , TelefonoOficina, Rol, fotobin], (error, rows, fields)=>{
