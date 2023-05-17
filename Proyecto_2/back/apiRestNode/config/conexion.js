@@ -3,7 +3,8 @@ const connection = mysql.createConnection({
     host: 'proyecto-disenio-persistencia.mysql.database.azure.com',
     user: 'David',
     password: 'Adm!n123',
-    database: 'proyectodisenio'
+    database: 'proyectodisenio',
+    timezone : "utc" 
     })
   
   connection.connect((err) =>{
@@ -14,7 +15,6 @@ const connection = mysql.createConnection({
         console.log('Conexión a base establecida')
     }
   })
-  
   
 
   module.exports= connection;

@@ -3,6 +3,7 @@ const {EquipoGuia} = require('../model/equipoguia');
 const {PlanDeTrabajo} = require('../model/plandetrabajo');
 const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
+const fs = require('fs');
 
 
 const router = require('express').Router();
@@ -341,19 +342,32 @@ router.get('/administrativo/:id', (request, response)=>{
 });
 module.exports= router;
 
+function readImage(Image){
+    const bitmap = fs.readFileSync(Image);
+    const buf = new Buffer(bitmap);
+    return buf;
+}
+
+const output = 'output.png';
+
 // crear profesor-----------------------------------------------------------
 router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
+    const fotobin = readImage(Foto);       
+    console.log(fotobin);
     let sql = 'call addProfesor(?,?,?,?,?,?,?,?,?,?,?)';
     conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
-        Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto], (error, rows, fields)=>{
+        Celular , Contraseña , Sede , TelefonoOficina, Rol, fotobin], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
             response.json({status: 'Profesor agregado' })
+            const buf = Buffer(fotobin, 'binary');
+            fs.writeFileSync(output, buf);
+        
         }
     })
 });

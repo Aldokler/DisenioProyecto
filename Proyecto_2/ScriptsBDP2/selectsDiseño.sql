@@ -76,6 +76,16 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getAdmByID;
+DELIMITER $$
+CREATE PROCEDURE getAdmByID (IN pID varchar(50))
+BEGIN
+	select * from usuario join administrativo on administrativo.ID = pID where usuario.ID = pID ;
+END$$
+DELIMITER ;
+
+call getAdmByID('ADM-01');
+
 drop procedure if exists consultarEquipoGuia;
 DELIMITER $$
 CREATE PROCEDURE consultarEquipoGuia(IN pID varchar(50))
