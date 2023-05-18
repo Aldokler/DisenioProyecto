@@ -16,6 +16,7 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
   templateUrl: './modificar-actividad-plan-de-trabajo.component.html',
   styleUrls: ['./modificar-actividad-plan-de-trabajo.component.css']
 })
+
 export class ModificarActividadPlanDeTrabajoComponent {
 
   constructor(
@@ -30,10 +31,23 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public profes: Profesor[] = [];
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
-  
+  fechaUsar:string = "";
+  fechaMientras:Date = new Date();
+  HoraUsar:Date = new Date();
+  fechapublicacionUsar:Date = new Date();
+
 
   ngOnInit(): void {
     this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo
+    this.fechaMientras = this.actividadUsar.getFechaHora()
+    const fecha = new Date(this.fechaMientras);
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1; // Los meses se indexan desde 0, por eso se suma 1
+    const anio = fecha.getFullYear();
+
+    this.fechaUsar = `${dia < 10 ? '0' + dia : dia}/${mes < 10 ? '0' + mes : mes}/${anio}`;
+    console.log(this.fechaMientras)
+
   }
 
   seleccionarProfesores(profesor: Profesor) {
