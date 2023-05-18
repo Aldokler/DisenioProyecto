@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form  enctype="multipart/form-data" method="POST" action="/register">
+                        <form  enctype="multipart/form-data" method="POST" action="/register" (submit)="crearPlanDeTrabajo(fecha.value, semestre.value, annio.value, codigodeEquipo.value)">
                             <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -92,11 +92,11 @@
                                         <label class="form-label">Semestre</label>
                                         <select class="form-select mb-4" #semestre name="semestre" id="semestre" required
                                             style="background-color: #E2EFF8;">
-                                            <option value="">
+                                            <option value="1">
                                                 1
                                             </option>
 
-                                            <option value="">
+                                            <option value="2">
                                                 2
                                             </option>
 
@@ -127,7 +127,7 @@
                                         <div class="btn-group d-flex align-items-center">
 
                                             <div class="pt-1 mb-4 me-4">
-                                                <button (submit)="crearPlanDeTrabajo(fecha.value,semestre.value,annio.value,codigodeEquipo.value)" class="btn btn-dark btn-lg btn-block" type="button"
+                                                <button  class="btn btn-dark btn-lg btn-block" type="submit"
                                                     style="background-color: #13293D;">Crear</button>
                                             </div>
 

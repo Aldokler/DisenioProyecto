@@ -40,6 +40,7 @@ export class HomePlanDeTrabajoComponent {
     this.controller.verPlanesDeTrabajo().pipe(
       tap(res => {
         this.planes = res;
+        this.listaPlanesDeTrabajo = res
         this.annios = this.planes.map(value => {
           return value.getAnnio()
         }).filter((value, index, self) => {

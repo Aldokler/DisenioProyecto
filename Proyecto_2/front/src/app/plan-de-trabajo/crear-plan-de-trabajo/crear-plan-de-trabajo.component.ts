@@ -26,11 +26,14 @@ export class CrearPlanDeTrabajoComponent {
   public creador: EquipoGuia = new EquipoGuia(0, this.miembros, 0, 0, this.coordinador);
 
   crearPlanDeTrabajo(fecha: string, semestre: string, annio: string, codigodeEquipo: string) {
+    /*
     const annioNumber = parseInt(annio);
     const semestreNumber = parseInt(semestre);
     const planDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, annioNumber, semestreNumber, this.actividades, this.creador);
+    console.log(planDeTrabajo)*/
+    console.log("hola")
 
-    this.controller.crearPlanTrabajo(planDeTrabajo.getAnnio(),planDeTrabajo.getSemestre(),this.creador.getId()).pipe(
+    this.controller.crearPlanTrabajo(parseInt(annio), parseInt(semestre), parseInt(codigodeEquipo)).pipe(
       tap(res => {
         if (res) {
           console.log("hola")
