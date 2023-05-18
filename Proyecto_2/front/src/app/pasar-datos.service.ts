@@ -41,6 +41,6 @@ export class PasarDatosService {
      this.evidencia,[], this.fechacancelacion, "", this.fechapublicar);
   public estudiantes: Estudiante[] = []
   public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
-
+public guardarProfesor: Profesor =new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
 }
 

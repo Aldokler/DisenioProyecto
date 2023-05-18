@@ -47,8 +47,9 @@ export class VerPlanDeTrabajoComponent {
 
   guardarActividad(actividad: Actividad) {
     this.pasarDatos.actividadPlanDeTrabajo = actividad;
-
   }
+
+
   
 
 }
