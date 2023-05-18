@@ -68,6 +68,21 @@ router.post('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
     })
 });
 
+//eliminar asistencia -----------------------------------------------
+router.delete('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call eliminarAsistencia(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Asistencia eliminada' })
+        }
+    })
+});
+
 
 // Ingresar
 
