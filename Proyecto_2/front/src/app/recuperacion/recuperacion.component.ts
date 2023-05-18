@@ -67,11 +67,10 @@ export class RecuperacionComponent {
     }else{
       this.codigoValidado =false
     }
-
   }
 
   guardarNuevaContrasena(nuevaContrasena:string){
-    
+    this.controller.cambiarContraseña(this.correoIngresado, nuevaContrasena).subscribe()
   }
 
 }
