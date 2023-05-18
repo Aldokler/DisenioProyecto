@@ -59,9 +59,9 @@ export class CrearActividadPlanDeTrabajoComponent {
     const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
     console.log("entra ")
     if (this.remotoSelected === true) {
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],"","",fechaPublicar);
     }else{
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],"","",fechaPublicar);
     }
 
     console.log(this.actividadGuardar);
