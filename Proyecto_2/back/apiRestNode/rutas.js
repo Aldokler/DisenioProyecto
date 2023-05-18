@@ -11,16 +11,6 @@ const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const corsOptions = {
-    origin: 'http://localhost:4200', // Reemplaza con la URL de tu aplicación Angular
-    optionsSuccessStatus: 200 // Algunos navegadores requieren que se especifique el código de estado de éxito explícitamente
-  };
-  
-  // Aplica el middleware de CORS
-  router.use(cors(corsOptions));
-
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes utilizar otro proveedor de correo
@@ -32,8 +22,8 @@ const transporter = nodemailer.createTransport({
 
 
 // Ruta para enviar el correo electrónico
-router.post('/enviar-correo/:destinatario/:asunto/:contenido', (req, res) => {
-    const { destinatario, asunto, contenido } = req.params;
+router.post('/enviar-correo', (req, res) => {
+    const { destinatario, asunto, contenido } = req.body;
   
     // Configura los detalles del correo electrónico
     const mailOptions = {
@@ -50,7 +40,7 @@ router.post('/enviar-correo/:destinatario/:asunto/:contenido', (req, res) => {
         res.status(500).json({ error: 'Error al enviar el correo' });
       } else {
         console.log('Correo enviado:', info.response);
-        res.status(200).json({ message: 'Correo enviado exitosamente' });
+        res.status(200).json({ message: '0' });
       }
     });
   });
