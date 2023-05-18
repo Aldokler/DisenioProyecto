@@ -77,4 +77,8 @@ export class VerActividadesPlanDeTrabajoComponent {
     this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(),observacion)
   }
 
+  guardarDeNuevoActividad(){
+    this.pasarDatos.actividadPlanDeTrabajo = this.pasarDatos.actividadPlanDeTrabajo
+  }
+
 }

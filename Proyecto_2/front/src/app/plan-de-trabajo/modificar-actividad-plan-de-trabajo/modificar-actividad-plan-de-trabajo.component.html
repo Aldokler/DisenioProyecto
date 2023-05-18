@@ -72,7 +72,7 @@
                     <div class="card" style="border-radius: 1rem;">
 
                         <form enctype="multipart/form-data" method="POST" action="/register">
-                            <div class="row g-0" >
+                            <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
                                     <div class="card-body p-4 p-lg-5 text-black">
@@ -80,42 +80,66 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
                                             <input type="text" id="name" name="name" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;" value="{{actividadUsar.getNombre()}}"/>
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getNombre()}}" />
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Tipo de actividad</label>
+
+                                            <input type="text" id="name" name="name" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getTipo()}}" />
                                         </div>
 
-                                        <label class="form-label">Tipo de actividad</label>
-                                        <select class="form-select mb-4" name="" id="" required style="background-color: #E2EFF8;">
-                                            <option value=""></option>
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse_comments"
+                                            aria-expanded="false" style="background-color: #13293D; color: white;">
+                                            Responsables
+                                        </button>
 
-                                            <option value="">
+                                        <div class="collapse" id="collapse_comments">
+                                            <div class="mt-4"
+                                                style="height: 400px; display: block; overflow: auto; position: relative;">
 
-                                            </option>
+                                                <div *ngFor="let profesor of profes" class="card mb-4">
 
-                                        </select>
+                                                    <div class="card-header" style="background-color: #E2EFF8;">
+                                                        {{profesor.getNombre()}}
+                                                    </div>
+                                                    <div class="card-footer text-muted"
+                                                        style="background-color: #E2EFF8;">
+                                                        <button class="btn text-white me-2"
+                                                            [style.background-color]="profesoresSeleccionados.includes(profesor) ? '#ADD8E6' : '#13293D'"
+                                                            (click)="seleccionarProfesores(profesor)">
+                                                            Seleccionar
+                                                        </button>
+                                                    </div>
 
-                                        <label class="form-label">Responsables</label>
-                                        <select class="form-select mb-4" name="" id="" required style="background-color: #E2EFF8;">
-                                            <option value=""></option>
+                                                </div>
+                                            </div>
 
-                                            <option value="">
-
-                                            </option>
-
-                                        </select>
+                                        </div>
 
                                         <div class="form-outline mb-4">
                                             <div id="id_type_input"></div>
                                         </div>
 
                                         <div class="btn-group">
-
-                                            <button class="btn btn-dark btn-lg btn-block ml-4">Remoto</button>
+                                            <button #remoto class="btn btn-dark btn-lg ml-4" value="remoto"
+                                                [style.background-color]="remotoSelected ? '#ADD8E6' : '#13293D'"
+                                                (click)="selectRemoto()">
+                                                Remoto
+                                            </button>
 
                                             <div class="form-outline mb-5 ml-3">
                                                 <div id=""></div>
                                             </div>
 
-                                            <button class="btn btn-dark btn-lg btn-block ml-5">Presencial</button>
+                                            <button #presencial class="btn btn-dark btn-lg ml-4" value="presencial"
+                                                [style.background-color]="presencialSelected ? '#ADD8E6' : '#13293D'"
+                                                (click)="selectPresencial()">
+                                                Presencial
+                                            </button>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -125,7 +149,8 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Enlace</label>
                                             <input type="text" id="" name="" required
-                                                class="form-control form-control-lg"  style="background-color: #E2EFF8;" value="{{actividadUsar.getLink()}}"/>
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getLink()}}" />
                                         </div>
 
                                     </div>
@@ -134,15 +159,9 @@
                                 <div class="col-md-6 col-lg-6 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
                                         <label class="form-label">Semana</label>
-                                        <select class="form-select mb-4" name="id_type" id="id_type" required style="background-color: #E2EFF8;">
-
-                                            <option value=""></option>
-
-                                            <option value="">
-
-                                            </option>
-
-                                        </select>
+                                        <input type="text" id="name" name="name" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getSemana()}}" />
 
                                         <div class="form-outline mb-4">
                                             <div id=""></div>
@@ -151,25 +170,29 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha</label>
                                             <input type="date" id="" name="" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getFechaHora()}}"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Hora</label>
                                             <input type="time" id="hora" name="hora"
-                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;">
+                                                class="form-control form-control-lg" required
+                                                style="background-color: #E2EFF8;">
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha de publicación</label>
                                             <input type="date" id="" name="" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getFechaAPublicar()}}" />
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Subir afiche</label>
                                             <input type="file" id="" name="" accept=".jpg,.png"
-                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
+                                                class="form-control form-control-lg" required
+                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getAfiche()}}"/>
                                         </div>
 
 

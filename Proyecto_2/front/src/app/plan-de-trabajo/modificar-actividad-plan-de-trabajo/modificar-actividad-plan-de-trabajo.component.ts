@@ -26,13 +26,32 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public fecha = new Date(2023, 4, 16, 12, 30, 45);
   public evidenciar: Evidencia = new Evidencia(0, [], "");
   public actividadUsar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidenciar, [], this.fecha, "", this.fecha);
+  public profesoresSeleccionados: Profesor[] = [];
+  public profes: Profesor[] = [];
+  remotoSelected: boolean = false;
+  presencialSelected: boolean = false;
+  
 
   ngOnInit(): void {
-    this.controller.getActividad(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
-      tap(res => {
-        this.actividadUsar = res;
-        console.log(this.actividadUsar)
-      })
-    ).subscribe()
+    this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo
+  }
+
+  seleccionarProfesores(profesor: Profesor) {
+    if (this.profesoresSeleccionados.includes(profesor)) {
+      this.profesoresSeleccionados = this.profesoresSeleccionados.filter(p => p !== profesor);
+    } else {
+      this.profesoresSeleccionados.push(profesor);
+    }
+    console.log(this.profesoresSeleccionados);
+  }
+
+  selectRemoto() {
+    this.remotoSelected = true;
+    this.presencialSelected = false;
+  }
+
+  selectPresencial() {
+    this.remotoSelected = false;
+    this.presencialSelected = true;
   }
 }
