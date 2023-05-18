@@ -43,8 +43,8 @@ export class AdminActividad{
             })
         );
     }
-    public crearActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number): Observable<boolean>{
-        return this.DAO.addActividad(nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID).pipe(
+    public crearActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number, fechaPublicar: string): Observable<boolean>{
+        return this.DAO.addActividad(nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID, fechaPublicar).pipe(
             map((data: any) => {
                 return data.status == '0'
             })
