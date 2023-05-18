@@ -23,6 +23,7 @@ export class RecuperacionComponent {
   codigoAleatorio = ""
   codigoValidado = false;
   correoIngresado = "";
+  errorMessage: string = "";
 
   constructor(private controller: ControladorService) { }
 
@@ -49,27 +50,35 @@ export class RecuperacionComponent {
     this.codigoAleatorio = this.generarCodigoAleatorio(8)
     const codigo = "El código de recuperación es: " + this.codigoAleatorio
 
-    this.controller.notificar(correoElectronico, asunto, codigo).pipe(
-      tap(res => {
-       if (res) { console.log("lorem ipsum sit dolor amet") }
-      })
-    ).subscribe()
-    
-    this.controller.notificar(correoElectronico, asunto, codigo)
-    this.correoEnviado = true; // Deshabilitar el primer formulario
+
+    if (this.controller.verificarUsuario(correoElectronico)) {
+      this.controller.notificar(correoElectronico, asunto, codigo).pipe(
+        tap(res => {
+          if (res) { console.log("lorem ipsum sit dolor amet") }
+        })
+      ).subscribe()
+
+      this.controller.notificar(correoElectronico, asunto, codigo)
+      this.correoEnviado = true; // Deshabilitar el primer formulario
+    } else {
+      this.errorMessage = 'Correo no se encuentra registrado'
+      console.log("correo no se encuentra registrado")
+      this.correoEnviado = false;
+    }
+
   }
 
-  validarCodigo(codigoRecuperacion:string){
+  validarCodigo(codigoRecuperacion: string) {
     console.log(codigoRecuperacion)
     console.log(this.codigoAleatorio)
-    if(codigoRecuperacion == this.codigoAleatorio){
-      this.codigoValidado =true
-    }else{
-      this.codigoValidado =false
+    if (codigoRecuperacion == this.codigoAleatorio) {
+      this.codigoValidado = true
+    } else {
+      this.codigoValidado = false
     }
   }
 
-  guardarNuevaContrasena(nuevaContrasena:string){
+  guardarNuevaContrasena(nuevaContrasena: string) {
     this.controller.cambiarContraseña(this.correoIngresado, nuevaContrasena).subscribe()
   }
 
