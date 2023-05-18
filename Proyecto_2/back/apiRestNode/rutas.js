@@ -5,13 +5,45 @@ const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
 const fs = require('fs');
-
+const nodemailer = require('nodemailer');
 
 const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
 
+const transporter = nodemailer.createTransport({
+    service: 'Gmail', // Puedes utilizar otro proveedor de correo
+    auth: {
+      user: 'comunicador.proyecto@gmail.com',
+      pass: 'jqmxozrbixxukugq'
+    }
+  });
+
+
+// Ruta para enviar el correo electrónico
+router.post('/enviar-correo', (req, res) => {
+    const { destinatario, asunto, contenido } = req.body;
+  
+    // Configura los detalles del correo electrónico
+    const mailOptions = {
+      from: 'comunicador.proyecto@gmail.com',
+      to: destinatario,
+      subject: asunto,
+      text: contenido
+    };
+  
+    // Envía el correo electrónico
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log('Error al enviar el correo:', error);
+        res.status(500).json({ error: 'Error al enviar el correo' });
+      } else {
+        console.log('Correo enviado:', info.response);
+        res.status(200).json({ message: 'Correo enviado exitosamente' });
+      }
+    });
+  });
 
 
 

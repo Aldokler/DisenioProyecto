@@ -2,7 +2,7 @@ require('./config/conexion');
  express = require('express')
 const port = (process.env.port || 3000)
 const bodyParser = require('body-parser');
-
+const nodemailer = require('nodemailer');
 // express
 const app = express()
 
@@ -19,7 +19,6 @@ app.set('port',port)
 
 //rutas
 app.use('/api', require('./rutas'))
-
 
 
 

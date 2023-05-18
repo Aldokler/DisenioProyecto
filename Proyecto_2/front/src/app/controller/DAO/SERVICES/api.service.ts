@@ -144,5 +144,9 @@ export class ApiService {
     return this.http.put(this.url + 'profesores/'+ profesor.getId(), profesor);
   }
 
+  public enviarCorreo(correo: any) {
+    return this.http.post(this.url + 'enviar-correo', correo);
+  }
+
 
 }
