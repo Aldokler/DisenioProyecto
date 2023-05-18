@@ -145,6 +145,7 @@ export class ApiService {
   }
 
   public enviarCorreo( destinatario: string, asunto: string, contenido: string) {
+    console.log("api" + destinatario)
     return this.http.post(this.url + 'enviar-correo', { destinatario, asunto, contenido });
   }
 

@@ -32,8 +32,8 @@ const transporter = nodemailer.createTransport({
 
 
 // Ruta para enviar el correo electrónico
-router.post('/enviar-correo/:destinatario/:asunto/:contenido', (req, res) => {
-    const { destinatario, asunto, contenido } = req.params;
+router.post('/enviar-correo', (req, res) => {
+    const { destinatario, asunto, contenido } = req.body;
   
     // Configura los detalles del correo electrónico
     const mailOptions = {
@@ -146,10 +146,10 @@ router.get('/login', (request, response)=>{
 
 // ver correo de usuario ---------------------------------------------
 // devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
-router.get('/login', (request, response)=>{
-    const {user, pass} = request.query;
-    let sql = "call login(?,?)";
-    conexion.query(sql, [user, pass],(error, rows, fields)=>{
+router.get('/recuperacion/:correo', (request, response)=>{
+    const {correo} = request.params;
+    let sql = "call check_user(?)";
+    conexion.query(sql, [correo],(error, rows, fields)=>{
         if(error){
             console.log(error);response.json({status: '-1' });
         }
