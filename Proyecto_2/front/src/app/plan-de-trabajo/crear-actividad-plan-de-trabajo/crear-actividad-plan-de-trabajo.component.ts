@@ -57,6 +57,7 @@ export class CrearActividadPlanDeTrabajoComponent {
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
     const fechaDate = new Date(fecha);
+    console.log(fechaDate);
     const fechaPublicar = new Date(fechaPublicacion);
     if (this.remotoSelected === true) {
       this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);

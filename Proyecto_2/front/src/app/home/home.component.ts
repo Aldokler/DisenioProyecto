@@ -8,6 +8,7 @@ import { ApiService } from '../controller/DAO/SERVICES/api.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { PasarDatosService } from '../pasar-datos.service';
 import { Profesor } from '../model/profesor';
+import { provideCloudflareLoader } from '@angular/common';
 
 @Component({
   selector: 'app-home',

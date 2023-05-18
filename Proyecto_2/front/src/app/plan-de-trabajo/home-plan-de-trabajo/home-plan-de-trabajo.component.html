@@ -87,7 +87,7 @@
                                 style="background-color: #13293D;">Filtrar</button>
                         </div>
 
-                        <div class="col">
+                        <div *ngIf="tipoDeUsuario  == 'Profesor' " class="col">
                             <button type="button" class="btn text-white me-2" style="background-color: #13293D;"><a
                                     href="" class="text-decoration-none text-reset"
                                     [routerLink]="['/crear-plan-de-trabajo']">Crear plan de trabajo </a> </button>

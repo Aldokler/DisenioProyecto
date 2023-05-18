@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form onclick="" enctype="multipart/form-data" method="POST" action="/register">
+                        <form  enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -211,8 +211,9 @@
                                             <div class="pt-1 mb-4 me-4">
                                                 <button
                                                     (submit)="guardarActividad(nombreActividad.value,tipoActividad.value,enlace.value,semana.value,fecha.value,hora.value,fechaPublicacion.value,afiche.value)"
-                                                    class="btn btn-dark btn-lg btn-block" type="submit"
-                                                    style="background-color: #13293D;">Registrar actividad</button>
+                                                    class="btn btn-dark btn-lg btn-block" type="text"
+                                                    style="background-color: #13293D;">Registrar actividad
+                                                </button>
                                             </div>
 
                                         </div>

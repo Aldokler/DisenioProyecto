@@ -28,8 +28,15 @@ export class HomePlanDeTrabajoComponent {
   public showError: boolean = false;
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public actual: any;
+  public tipoDeUsuario: string = "";
+
 
   ngOnInit(): void {
+    if(this.pasarDatos.loginUser instanceof Profesor){
+      this.tipoDeUsuario = "Profesor"
+    }else{
+      this.tipoDeUsuario ="Administrativo"
+    }
     this.controller.verPlanesDeTrabajo().pipe(
       tap(res => {
         this.planes = res;
