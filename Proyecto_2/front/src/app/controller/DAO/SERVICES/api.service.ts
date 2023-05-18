@@ -149,5 +149,12 @@ export class ApiService {
     return this.http.post(this.url + 'enviar-correo', { destinatario, asunto, contenido });
   }
 
+  public verificarCorreo(correo: String){
+    return this.http.get(this.url + 'recuperacion/' + correo)
+  }
+
+  public cambiarContraseña(correo: String, password: string){
+    return this.http.put(this.url + 'usuario?correo=' + correo + '&password=' + password, {})
+  }
 
 }
