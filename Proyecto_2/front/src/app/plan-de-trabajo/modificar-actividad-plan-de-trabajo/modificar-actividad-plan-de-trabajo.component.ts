@@ -31,21 +31,6 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public profes: Profesor[] = [];
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
-<<<<<<< HEAD
-  fechaUsar:string = "";
-  fechaMientras:string = "";
-  HoraUsar:Date = new Date();
-  fechapublicacionUsar:Date = new Date();
-
-
-  ngOnInit(): void {
-    this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo
-    this.fechaMientras = ''
-    const fecha = new Date(this.fechaMientras);
-    const dia = fecha.getDate();
-    const mes = fecha.getMonth() + 1; // Los meses se indexan desde 0, por eso se suma 1
-    const anio = fecha.getFullYear();
-=======
   fechaUsar: string = "";
   fechaMientras: string = "";
   HoraUsar: Date = new Date();
@@ -58,7 +43,6 @@ export class ModificarActividadPlanDeTrabajoComponent {
 
 
   ngOnInit(): void {
->>>>>>> 27cba4c57bd80bc6b39e153f7d67b675c9b96dc0
 
     this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo;
 
