@@ -112,8 +112,11 @@ export class ApiService {
     return this.http.get(this.url + 'profesores/' +id)
   }
 
-  public addProfesor(profesor: Profesor){
-    return this.http.post(this.url + 'profesores', profesor );
+  public addProfesor(ID: string, Nombre: string, Apellido1: string, Apellido2: string, CorreoElectronico: string , 
+    Celular: string , Contraseña: string , Sede: string , TelefonoOficina: string, Rol: string, Foto:Buffer){
+    console.log(Foto)
+    return this.http.post(this.url + 'profesores', {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
+      Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} );
   }
 
   public deleteProfesor(id: String){

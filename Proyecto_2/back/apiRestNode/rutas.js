@@ -10,6 +10,7 @@ const fs = require('fs');
 const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
+const bodyParser = require('body-parser');
 
 // Ingresar
 
@@ -455,11 +456,10 @@ const output = 'output.png';
 router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
-    const fotobin = readImage(Foto);       
-    console.log(Foto);
+    const fotobin = Buffer.from(Foto.data);      
     let sql = 'call addProfesor(?,?,?,?,?,?,?,?,?,?,?)';
     conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
-        Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto], (error, rows, fields)=>{
+        Celular , Contraseña , Sede , TelefonoOficina, Rol, fotobin], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

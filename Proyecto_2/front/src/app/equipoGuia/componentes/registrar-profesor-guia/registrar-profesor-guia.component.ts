@@ -31,7 +31,7 @@ export class RegistrarProfesorGuiaComponent {
   registrarProfesor(
     codigoCampus: String, correoElectronico: string, telefonoCelular: string, nombreProfesor: string, telefonoOficina: string, fotoProfesor: string, primerApellido: string, segundoApellido: string) {
     const codigoCampusEnum: TSede = TSede[codigoCampus as keyof typeof TSede];
-    const profesor: Profesor = new Profesor("LI-616",nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,codigoCampusEnum,"1234",telefonoOficina,this.imageBuffer,this.rolProfesor);
+    const profesor: Profesor = new Profesor("LI-666",nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,codigoCampusEnum,"1234",telefonoOficina,this.imageBuffer,this.rolProfesor);
     console.log(profesor);
     this.controller.addProfesor(profesor).pipe(
       tap(res => {

@@ -13,7 +13,19 @@ export class AdminProfesores{
     constructor(private DAO: ApiService){}
 
     public addProfesor(profesor: Profesor): Observable<boolean>{
-        return this.DAO.addProfesor(profesor).pipe(
+        return this.DAO.addProfesor(
+            profesor.getId(),
+            profesor.getNombre(),
+            profesor.getApellido1(),
+            profesor.getApellido2(),
+            profesor.getCorreoElectronico(),
+            profesor.getCelular(),
+            profesor.getContraseñA(),
+            profesor.getSede(),
+            profesor.getTelefonoOficina(),
+            profesor.getRol(),
+            profesor.getFotografia()
+        ).pipe(
             map((data:any) => {
                 return data.status == 'Profesor agregado'
             })
@@ -25,7 +37,7 @@ export class AdminProfesores{
             map((data: any) => {
                 const profesorJson = data.profesor[0];
                 if (profesorJson == undefined){
-                    return new Profesor('', '', '', '', '', '', TSede.CA, '', '', '', TRol.GUIA)
+                    return new Profesor('', '', '', '', '', '', TSede.CA, '', '', new Buffer(''), TRol.GUIA)
                 } else {
                     return new Profesor(
                         profesorJson.id,
