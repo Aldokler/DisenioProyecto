@@ -62,7 +62,7 @@
             </a>
         </div>
 
-        <div class="col mt-5">
+        <div *ngIf="tipoDeUsuario  == 'Profesor' || tipoDeUsuario  == 'Coordinador' " class="col mt-5">
             <form onsubmit="">
                 <div class="row">
                     <div class="col">
@@ -107,7 +107,7 @@
             </form>
         </div>
 
-        <div class="card mt-4 mb-4">
+        <div *ngIf="tipoDeUsuario  == 'Profesor' || tipoDeUsuario  == 'Coordinador' " class="card mt-4 mb-4">
             <div class="card-body">
             <!--  aqui se hacen los estudiantes -->
                 <div class="row mb-3 mt-3 text-center">
@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <section class="mb-4 mt-4">
+        <section *ngIf="tipoDeUsuario  == 'Administrativo' " class="mb-4 mt-4">
             <div class="container">
 
                 <div class="mt-3">

@@ -36,7 +36,12 @@ export class VerPlanDeTrabajoComponent {
 
   ngOnInit() {
     if(this.pasarDatos.loginUser instanceof Profesor){
-      this.tipoDeUsuario = "Profesor"
+      if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
+        console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
+        this.tipoDeUsuario = "Coordinador"
+      }else{
+        this.tipoDeUsuario = "Profesor"
+      }
     }else{
       this.tipoDeUsuario ="Administrativo"
     }

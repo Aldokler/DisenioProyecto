@@ -24,16 +24,16 @@
     </div>
   
     <div class="container">
-        <div class="d-flex align-items-center pb-1 mb-4 mt-4">
+        <div  class="d-flex align-items-center pb-1 mb-4 mt-4">
             <a href="" class="text-decoration-none text-reset" [routerLink]="['/home']">
                 <img src="assets/imagenes/regresar.png" alt="">
                 <span class="h5 fw-bold ml-3">EQUIPO GUÍA</span>
             </a>
         </div>
   
-      <div class="row">
+      <div class="row justify-content-center">
   
-        <div class="col-md-3 rounded-lg" >
+        <div *ngIf="tipoDeUsuario  == 'Administrativo' " class="col-md-3 rounded-lg" >
           <a href="" class="text-decoration-none text-reset" [routerLink]="['/crear-equipo']">
             <div class="card">
               <div class="card-body rounded" style="background-color: #E2EFF8; height: 400px;" >
@@ -44,7 +44,7 @@
           </a>
         </div>
   
-        <div class="col-md-3 rounded-lg" >
+        <div *ngIf="tipoDeUsuario  == 'Administrativo' " class="col-md-3 rounded-lg" >
           <a href="" class="text-decoration-none text-reset" [routerLink]="['/registrar-profesor-guia']">
             <div class="card">
               <div class="card-body " style="background-color: #E2EFF8; height: 400px;">
@@ -55,7 +55,7 @@
           </a>  
         </div>
   
-        <div class="col-md-3 rounded-lg" >
+        <div *ngIf="tipoDeUsuario  == 'Administrativo' " class="col-md-3 rounded-lg" >
           <a href="" class="text-decoration-none text-reset" [routerLink]="['/dar-de-baja']">
             <div class="card">
               <div class="card-body" style="background-color: #E2EFF8; height: 400px;">
@@ -66,7 +66,7 @@
           </a>
         </div>
   
-        <div class="col-md-3 " >
+        <div *ngIf="tipoDeUsuario  == 'Profesor' || tipoDeUsuario  == 'Administrativo' || tipoDeUsuario  == 'Coordinador'" class="col-md-3 " >
           <a href="" class="text-decoration-none text-reset" [routerLink]="['/consultar-equipo']">
             <div class="card">
               <div class="card-body " style="background-color: #E2EFF8; height: 400px;" >

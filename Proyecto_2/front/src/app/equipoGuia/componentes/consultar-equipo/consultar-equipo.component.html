@@ -110,7 +110,7 @@
 
                                 <p class="card-text">{{ profesorCoordinador.getNombre() + ' ' + profesorCoordinador.getApellido1() }}</p>
 
-                                <button class="btn text-white me-2"
+                                <button *ngIf="tipoDeUsuario === 'Administrativo' "  class="btn text-white me-2"
                                         [style.background-color]="profesoresSeleccionados.includes(profesorCoordinador) ? '#ADD8E6' : '#13293D'"
                                         (click)="seleccionarCoordinador(profesorCoordinador)">
                                         Seleccionar coordinador

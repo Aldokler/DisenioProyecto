@@ -3,6 +3,7 @@ import { tap } from 'rxjs';
 import { ComunicadorExcelService } from 'src/app/controller/DAO/comunicador-excel.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Estudiante } from 'src/app/model/estudiante';
+import { Profesor } from 'src/app/model/profesor';
 import { TSede } from 'src/app/model/tsede';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
 
@@ -16,6 +17,7 @@ export class HomeEstudiantesComponent {
 
   public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
   fileName = '';
+  public tipoDeUsuario: string = "";
 
   constructor(
     private controller: ControladorService
@@ -58,6 +60,18 @@ export class HomeEstudiantesComponent {
 
   ngOnInit(): void {
     this.estudiantes = this.pasarDatos.estudiantes
+
+    if(this.pasarDatos.loginUser instanceof Profesor){
+      if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
+        console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
+        this.tipoDeUsuario = "Coordinador"
+      }else{
+        this.tipoDeUsuario = "Profesor"
+      }
+
+    }else{
+      this.tipoDeUsuario ="Administrativo"
+    }
   }
   
 }
