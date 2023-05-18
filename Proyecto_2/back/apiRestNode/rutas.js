@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 // Ruta para enviar el correo electrónico
 router.post('/enviar-correo', (req, res) => {
-    const { destinatario, asunto, contenido } = req.body;
+    const { destinatario, asunto, contenido } = req.query;
   
     // Configura los detalles del correo electrónico
     const mailOptions = {

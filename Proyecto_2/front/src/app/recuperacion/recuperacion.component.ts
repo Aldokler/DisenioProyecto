@@ -18,15 +18,33 @@ import { PasarDatosService } from '../pasar-datos.service';
 })
 export class RecuperacionComponent {
 
-  private pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  private pasarDatos: PasarDatosService = PasarDatosService.getInstance()
 
-  constructor(private controller: ControladorService){}
+  constructor(private controller: ControladorService) { }
 
   ngOnInit(): void {
 
   }
 
-  enviarCorreo(correoElectronico:string){
-    
+  generarCodigoAleatorio(longitud: number): string {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let codigo = '';
+
+    for (let i = 0; i < longitud; i++) {
+      const indice = Math.floor(Math.random() * caracteres.length);
+      codigo += caracteres.charAt(indice);
+    }
+
+    return codigo;
   }
+
+  enviarCorreo(correoElectronico: string) {
+    console.log(correoElectronico)
+    const asunto = "Recuperación de constraseña"
+    const codigoAleatorio = this.generarCodigoAleatorio(8)
+    const codigo = "El código de recuperación es: " + codigoAleatorio
+
+    this.controller.notificar(correoElectronico, asunto, codigo)
+  }
+
 }
