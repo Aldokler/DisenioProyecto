@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form  enctype="multipart/form-data" method="POST" action="/register" (ngSubmit)="guardarActividad(nombreActividad.value,tipoActividad.value,enlace.value,semana.value,fecha.value,hora.value,fechaPublicacion.value,afiche.value)">
+                        <form  enctype="multipart/form-data" method="POST" action="/register" >
                             <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -210,7 +210,7 @@
 
                                             <div class="pt-1 mb-4 me-4">
                                                 <button
-                                                    class="btn btn-dark btn-lg btn-block" type="submit"
+                                                    class="btn btn-dark btn-lg btn-block" type="button" (click)="guardarActividad(nombreActividad.value,tipoActividad.value,enlace.value,semana.value,fecha.value,hora.value,fechaPublicacion.value,afiche.value)"
                                                     style="background-color: #13293D;">Registrar actividad
                                                 </button>
                                             </div>
