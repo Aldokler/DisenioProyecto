@@ -115,8 +115,8 @@ export class ControladorService {
   public modificarEvidencia(id: number): boolean{
       return this.adminActividad.modificarEvidencia(id)
   }
-  public comentarActividad(mensaje: string, emisor: string, fechaHora: Date, comentarioOriginal: number,actividadId: number){
-      this.adminActividad.comentarActividad(mensaje, emisor, fechaHora, actividadId)
+  public comentarActividad(comentario: Comentario){
+      this.adminActividad.comentarActividad(comentario)
   }
   public responderComentario(comentario: Comentario){
       this.adminActividad.responderComentario(comentario)
