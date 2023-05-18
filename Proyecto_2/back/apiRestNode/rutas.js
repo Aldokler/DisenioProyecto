@@ -294,9 +294,9 @@ router.get('/plan_trabajo/actividad/:id', (request, response)=>{
 
 // crear actividad de plan de trabajo ---------------------------------------------***
 router.post('/plan_trabajo/actividad', (request, response)=>{
-    const {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID} = request.body;
-    let sql = 'call addActividad (?,?,?,?,?,?,?,?)';
-    conexion.query(sql, [nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID], (error, rows, fields)=>{
+    const {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID, fechaPublicar} = request.body;
+    let sql = 'call addActividad (?,?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID,fechaPublicar], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
