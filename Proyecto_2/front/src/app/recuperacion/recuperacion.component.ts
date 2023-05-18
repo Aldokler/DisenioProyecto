@@ -85,4 +85,21 @@ export class RecuperacionComponent {
     this.controller.cambiarContraseña(this.correoIngresado, nuevaContrasena).subscribe()
   }
 
+  nuevaContrasena!: HTMLInputElement;
+  verContrasenaIcono = 'bi-eye';
+
+  ngAfterViewInit() {
+    this.nuevaContrasena = document.querySelector('[type="password"]') as HTMLInputElement;
+  }
+
+  verContrasena(): void {
+    if (this.nuevaContrasena && this.nuevaContrasena.type === 'password') {
+      this.nuevaContrasena.type = 'text';
+      this.verContrasenaIcono = 'bi-eye-slash';
+    } else if (this.nuevaContrasena) {
+      this.nuevaContrasena.type = 'password';
+      this.verContrasenaIcono = 'bi-eye';
+    }
+  }
+
 }
