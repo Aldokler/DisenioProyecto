@@ -10,38 +10,38 @@ export class Actividad {
     private semana: number;
     private tipo: TIndoleActividad;
     private nombre: string;
-    private fechaHora: Date;
+    private fechaHora: string;
     private responsables: Array<Profesor>;
     private diasAnunciar: number;
-    private diasRecordatorio: Array<Date>;
+    private diasRecordatorio: Array<string>;
     private modalidad: TModalidad;
     private link: string;
     private afiche: string;
     private estado: TEstado;
     private evidencia: Evidencia;
     private comentarios: Array<Comentario>;
-    private fechaCancelacion: Date;
+    private fechaCancelacion: string;
     private observacion: string;
-    private fechaAPublicar: Date;
+    private fechaAPublicar: string;
 
     constructor(
         id: number,
         semana: number,
         tipo: TIndoleActividad,
         nombre: string,
-        fechaHora: Date,
+        fechaHora: string,
         responsables: Array<Profesor>,
         diasAnunciar: number,
-        diasRecordatorio: Array<Date>,
+        diasRecordatorio: Array<string>,
         modalidad: TModalidad,
         link: string,
         afiche: string,
         estado: TEstado,
         evidencia: Evidencia,
         comentarios: Array<Comentario>,
-        fechaCancelacion: Date,
+        fechaCancelacion: string,
         observacion: string,
-        fechaAPublicar: Date
+        fechaAPublicar: string
     ) {
         this.id = id
         this.semana = semana
@@ -94,11 +94,11 @@ export class Actividad {
         this.nombre = nombre;
     }
 
-    public getFechaHora(): Date {
+    public getFechaHora(): string {
         return this.fechaHora;
     }
 
-    public setFechaHora(fechaHora: Date): void {
+    public setFechaHora(fechaHora: string): void {
         this.fechaHora = fechaHora;
     }
 
@@ -118,11 +118,11 @@ export class Actividad {
         this.diasAnunciar = diasAnunciar;
     }
 
-    public getDiasRecordatorio(): Array<Date> {
+    public getDiasRecordatorio(): Array<string> {
         return this.diasRecordatorio;
     }
 
-    public setDiasRecordatorio(diasRecordatorio: Array<Date>): void {
+    public setDiasRecordatorio(diasRecordatorio: Array<string>): void {
         this.diasRecordatorio = diasRecordatorio;
     }
 
@@ -174,11 +174,11 @@ export class Actividad {
         this.comentarios = comentarios;
     }
 
-    public getFechaCancelacion(): Date {
+    public getFechaCancelacion(): string {
         return this.fechaCancelacion;
     }
 
-    public setFechaCancelacion(fechaCancelacion: Date): void {
+    public setFechaCancelacion(fechaCancelacion: string): void {
         this.fechaCancelacion = fechaCancelacion;
     }
 
@@ -190,11 +190,11 @@ export class Actividad {
         this.observacion = observacion;
     }
 
-    public getFechaAPublicar(): Date {
+    public getFechaAPublicar(): string {
         return this.fechaAPublicar;
     }
 
-    public setFechaAPublicar(fechaAPublicar: Date): void {
+    public setFechaAPublicar(fechaAPublicar: string): void {
         this.fechaAPublicar = fechaAPublicar;
     }
 

@@ -25,7 +25,7 @@ export class CrearActividadPlanDeTrabajoComponent {
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public fecha = new Date(2023, 4, 16, 12, 30, 45);
   public evidencia: Evidencia = new Evidencia(0, [], "");
-  public actividadGuardar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidencia, [], this.fecha, "", this.fecha);
+  public actividadGuardar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidencia, [], '', "", '');
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
   tipoDeModalidad: TModalidad = TModalidad.PRESENCIAL
@@ -50,22 +50,21 @@ export class CrearActividadPlanDeTrabajoComponent {
     } else {
       this.profesoresSeleccionados.push(profesor);
     }
-    console.log(this.profesoresSeleccionados);
   }
 
   guardarActividad(nombreActividad: string, tipoActividad: string, enlace: string, semana: string, fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
-    const fechaDate = new Date(fecha);
-    console.log(fechaDate);
-    const fechaPublicar = new Date(fechaPublicacion);
+    const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
+    const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
     if (this.remotoSelected === true) {
       this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
     }else{
       this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
     }
 
-    this.controller.crearActividad(this.actividadGuardar,this.pasarDatos.planesDeTrabajo.getId());
+    console.log(this.actividadGuardar);
+    this.controller.crearActividad(this.actividadGuardar,this.pasarDatos.planesDeTrabajo.getId()).subscribe();
   }
 
   selectRemoto() {

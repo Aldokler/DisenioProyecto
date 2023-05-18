@@ -26,7 +26,7 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public fecha = new Date(2023, 4, 16, 12, 30, 45);
   public evidenciar: Evidencia = new Evidencia(0, [], "");
-  public actividadUsar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", this.fecha, [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidenciar, [], this.fecha, "", this.fecha);
+  public actividadUsar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidenciar, [], '', "", '');
   public profesoresSeleccionados: Profesor[] = [];
   public profes: Profesor[] = [];
   remotoSelected: boolean = false;
