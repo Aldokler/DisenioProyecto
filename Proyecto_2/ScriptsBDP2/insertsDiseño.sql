@@ -129,7 +129,7 @@ BEGIN
     COMMIT;
 END$$
 
-COMMIT;
+
 
 drop procedure if exists updateProfesor;
 DELIMITER $$
@@ -160,3 +160,67 @@ BEGIN
     COMMIT;
 END$$
 
+drop procedure if exists subirLink;
+DELIMITER $$
+CREATE PROCEDURE subirLink(vActividadID int, vLink varchar(50))
+BEGIN
+    declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		UPDATE evidencia SET Link = vLink WHERE ID = evidencia_ID;
+	else
+		INSERT INTO evidencia (Link) VALUES (vLink);
+		select max(ID) into evidencia_ID from evidencia;
+		UPDATE actividad SET Evidencia = evidencia_ID WHERE ID = vActividadID;
+	end if;
+    COMMIT;
+END$$
+
+drop procedure if exists cambiarLink;
+DELIMITER $$
+CREATE PROCEDURE cambiarLink(vActividadID int, vLink varchar(50))
+BEGIN
+	declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		UPDATE evidencia SET Link = vLink WHERE ID = evidencia_ID;
+	end if;
+    COMMIT;
+END$$
+
+
+drop procedure if exists subirAsistencia;
+DELIMITER $$
+CREATE PROCEDURE subirAsistencia(vActividadID int, Imagen blob)
+BEGIN
+	declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		INSERT INTO asistencia (Imagen, EvidenciaID) VALUES (binary(vImagen), evidencia_ID);
+	end if;
+    COMMIT;
+    
+END$$
+
+drop procedure if exists getAsistencia;
+DELIMITER $$
+CREATE PROCEDURE getAsistencia(vActividadID int)
+BEGIN
+	declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		SELECT * FROM asistencia WHERE EvidenciaID = evidencia_ID;
+	end if;
+    COMMIT;
+END$$
+
+
+
+
+
+
+COMMIT;
