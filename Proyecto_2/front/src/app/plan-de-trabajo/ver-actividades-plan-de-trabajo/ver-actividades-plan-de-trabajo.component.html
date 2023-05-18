@@ -144,41 +144,42 @@
                                     Fecha de publicación: {{comentario.getFechaHora()}}  &nbsp;&nbsp;&nbsp;
 
                                     <!-- ver respuestas y realizar comentarios -->
-                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                    <button (click)="generarComentarios(comentario)" class="btn btn-outline-secondary me-2" type="button"
                                         data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_answers_' + i"
                                         aria-expanded="false" style="background-color: #13293D; color: white;">Ver
                                         respuestas</button>
 
-                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                    <button  class="btn btn-outline-secondary me-2" type="button"
                                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
-                                        data-bs-target="#registration_commentary_answer">Reponder comentario</button>
+                                        data-bs-target="#registration_commentary_answer">Responder comentario</button>
 
                                     <!-- aqui se responde -->
                                     <div class="collapse" [id]="'collapse_answers_' + i">
                                         <div class="mt-4"
                                             style="height: 400px; display: block; overflow: auto; position: relative;">
-                                            <div class="card mb-4">
-
-                                                <div class="card-header" style="background-color: #E2EFF8; ">
+                                            <div *ngFor="let respuesta of respuestaComentarios" class="card mb-4">
+<!-- aqui se responde -->
+                                                <div  class="card-header" style="background-color: #E2EFF8; ">
                                                     <img src="assets/imagenes/usuario.png"
                                                         alt="Generic placeholder image"
                                                         class="img-fluid rounded-circle border border-white border-3 me-2"
                                                         style="width: 40px;">
-                                                    Mario Castro
+                                                        {{respuesta.getEmisor()}}
                                                 </div>
 
                                                 <div class="card-body">
-                                                    <p> bueno</p>
+                                                    <p> {{respuesta.getMensaje()}}</p>
                                                 </div>
                                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                                    Fecha de publicación: 24/05/2004
+                                                    {{respuesta.getFechaHora()}}
                                                 </div>
 
                                             </div>
-
+<!-- aqui se responde -->
 
                                         </div>
                                     </div>
+                                    
                                     <!-- aqui termina una respuesta -->
                                 </div>
 
@@ -237,7 +238,7 @@
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
-                            <input type="text" id="register_commentary" name="register_commentary" class="form-control"
+                            <input #comentario type="text" id="register_commentary" name="register_commentary" class="form-control"
                                 required />
 
                         </div>
@@ -246,7 +247,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn text-white"
+                        <button (submit)="guardarComentario(comentario.value)" type="submit" class="btn text-white"
                             style="background-color: #13293D;">Comentar</button>
                     </div>
 
@@ -270,7 +271,7 @@
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
-                            <input type="text" id="registration_commentary_answer" name="registration_commentary_answer"
+                            <input #respuestaComentario type="text" id="registration_commentary_answer" name="registration_commentary_answer"
                                 class="form-control" required />
 
                         </div>
@@ -279,7 +280,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn text-white"
+                        <button (submit)="responderComentario(respuestaComentario.value)" type="text" class="btn text-white"
                             style="background-color: #13293D;">Responder</button>
                     </div>
 
