@@ -23,6 +23,10 @@ export class ApiService {
     return this.http.get(this.url + 'login?user=' + user + '&pass=' + pass)
   }
 
+  public revisarCoordinador(profesorId: string){
+    return this.http.get(this.url + '/coordinador/' + profesorId)
+  }
+
 //-------------------------------------------------------------------------------------------------------------------------------
 
   public addPlanDeTrabajo(año: number, semestre: number, creador: number){

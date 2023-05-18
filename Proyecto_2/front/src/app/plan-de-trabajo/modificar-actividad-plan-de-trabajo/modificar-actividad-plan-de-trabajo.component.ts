@@ -73,6 +73,8 @@ export class ModificarActividadPlanDeTrabajoComponent {
     const minutos = this.fechaNueva.substring(14, 16).toString();
     this.hora = hora;
     this.minutos = minutos;
+    this.hora = "05";
+    this.minutos = "05";
     console.log(hora)
     console.log(minutos)
 

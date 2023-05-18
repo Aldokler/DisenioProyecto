@@ -195,4 +195,9 @@ export class ControladorService {
   public async downloadStudents(datosEstudiantes: Estudiante[]): Promise<void> {
     return this.excelService.downloadStudents(datosEstudiantes)
   }
+
+  public revisarCoordinador(profesorId: string): Observable<Boolean>{
+    return this.adminEquipoGuia.revisarCoordinador(profesorId)
+}
+
 }
