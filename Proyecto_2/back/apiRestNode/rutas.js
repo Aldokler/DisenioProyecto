@@ -424,18 +424,19 @@ router.post('/profesores', (request, response)=>{
     const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
            Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto} = request.body;
     const fotobin = readImage(Foto);       
-    //console.log(fotobin);
+    console.log(Foto);
     let sql = 'call addProfesor(?,?,?,?,?,?,?,?,?,?,?)';
     conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
-        Celular , Contraseña , Sede , TelefonoOficina, Rol, fotobin], (error, rows, fields)=>{
+        Celular , Contraseña , Sede , TelefonoOficina, Rol, Foto], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
             response.json({status: 'Profesor agregado' })
+            /*
             const buf = Buffer(fotobin, 'binary');
-            fs.writeFileSync('../upload/' + ID + '.png', buf);
+            fs.writeFileSync('../upload/' + ID + '.png', buf);*/
         
         }
     })

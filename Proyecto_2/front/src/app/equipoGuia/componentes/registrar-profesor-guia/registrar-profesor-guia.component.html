@@ -134,8 +134,12 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Subir Foto</label>
-                                            <input  #fotoProfesor type="text" id="fotoProfesor" name="fotoProfesor" accept=".jpg,.png"
+                                            <input  #fotoProfesor input (change)="handleFileInput($event)" type="file" id="fotoProfesor" name="fotoProfesor" accept=".jpg,.png"
                                              class="form-control form-control-lg"  style="background-color: #E2EFF8;"/>
+                                        </div>
+
+                                        <div>
+                                            <img width="280px" [src]="imagenPrevia" alt="">
                                         </div>
 
 
