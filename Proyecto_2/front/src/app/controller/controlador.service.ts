@@ -38,7 +38,7 @@ export class ControladorService {
   private adminProfesores = new AdminProfesores(this.DAO)
   private adminLogin = new login(this.DAO)
   private excelService = new ComunicadorExcelService()
-  private notificador = new NotificadorCorreo()
+  private notificador = new NotificadorCorreo(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -182,8 +182,8 @@ export class ControladorService {
         return this.adminLogin.verificarCodigo(codigo)
     }
 
-    public notificar(emisor: String, destino: String, mensaje: String): void{
-      this.notificador.notificar(emisor,destino, mensaje)
+    public notificar(destinatario: string, asunto: string, contenido: string): void{
+      this.notificador.notificar(destinatario, asunto, contenido)
     }
   
   public sleep(ms: number) {

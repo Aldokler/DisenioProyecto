@@ -1,3 +1,3 @@
 export abstract class Notificador {
-    abstract notificar(emisor: String, destino: String, mensaje: String): void
+    abstract notificar(destinatario: string, asunto: string, contenido: string): void
 }
