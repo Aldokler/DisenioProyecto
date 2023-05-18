@@ -19,6 +19,9 @@ import { PasarDatosService } from '../pasar-datos.service';
 export class RecuperacionComponent {
 
   private pasarDatos: PasarDatosService = PasarDatosService.getInstance()
+  correoEnviado = false;
+  codigoAleatorio = ""
+  codigoValidado = false;
 
   constructor(private controller: ControladorService) { }
 
@@ -41,10 +44,20 @@ export class RecuperacionComponent {
   enviarCorreo(correoElectronico: string) {
     console.log(correoElectronico)
     const asunto = "Recuperación de constraseña"
-    const codigoAleatorio = this.generarCodigoAleatorio(8)
-    const codigo = "El código de recuperación es: " + codigoAleatorio
+    this.codigoAleatorio = this.generarCodigoAleatorio(8)
+    const codigo = "El código de recuperación es: " + this.codigoAleatorio
 
     this.controller.notificar(correoElectronico, asunto, codigo)
+    this.correoEnviado = true; // Deshabilitar el primer formulario
+  }
+
+  validarCodigo(codigoRecuperacion:string){
+    if(codigoRecuperacion == this.codigoAleatorio){
+      this.codigoValidado =true
+    }else{
+      this.codigoValidado =false
+    }
+
   }
 
 }
