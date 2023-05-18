@@ -11,6 +11,7 @@ app.use(express.json())
 //configurar
 app.set('port',port)
 
+
 //rutas
 app.use('/api', require('./rutas'))
 
