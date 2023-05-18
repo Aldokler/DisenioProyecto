@@ -1,8 +1,9 @@
+drop procedure if exists addActividad;
 DELIMITER $$
-CREATE PROCEDURE addActividad (vNombre varchar(45), vSemana int, vFechaHora date, vDiasAnunciar int, vLink varchar(45), vTipoactividad varchar(45), vModalidad varchar(45), vPlanID int)
+CREATE PROCEDURE addActividad (vNombre varchar(45), vSemana int, vFechaHora date, vDiasAnunciar int, vLink varchar(45), vTipoactividad varchar(45), vModalidad varchar(45), vPlanID int, vFechaPublicar date)
 BEGIN
-	INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-	VALUES (vNombre, vSemana, vFechaHora, vDiasAnunciar, vLink, vTipoactividad, vModalidad, 'Planeada', vPlanID);
+	INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+	VALUES (vNombre, vSemana, vFechaHora, vDiasAnunciar, vLink, vTipoactividad, vModalidad, 'Planeada', vPlanID, vFechaPublicar);
     COMMIT;
 END$$
 DELIMITER ;
@@ -205,18 +206,16 @@ BEGIN
     
 END$$
 
-drop procedure if exists getAsistencia;
+
+drop procedure if exists cambiarContraseña;
 DELIMITER $$
-CREATE PROCEDURE getAsistencia(vActividadID int)
+CREATE PROCEDURE cambiarContraseña(IN vcorreo varchar(45),IN vpass varchar(45))
 BEGIN
-	declare evidencia_ID int;
-    
-    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
-    if(evidencia_ID) is not null then
-		SELECT * FROM asistencia WHERE EvidenciaID = evidencia_ID;
-	end if;
+	UPDATE usuario SET Contraseña = vpass WHERE CorreoElectronico = vcorreo;
     COMMIT;
 END$$
+
+
 
 
 
