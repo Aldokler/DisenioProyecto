@@ -24,8 +24,8 @@
 
                   <div class="form-outline mb-4 ">
                     <label class="form-label fw-bold d-flex justify-content-center">Correo de recuperación</label>
-                    <input type="email" id="correo" name="correo" required class="form-control form-control-lg"
-                      style="background-color: #E2EFF8;" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                    <input #correoElectronico type="email" id="correo" name="correo" required class="form-control form-control-lg"
+                      style="background-color: #E2EFF8;" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" (click)="enviarCorreo(correoElectronico.value)" />
                   </div>
 
                   <div class="mb-4 d-flex justify-content-center ">
