@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as nodemailer from 'nodemailer';
+import { transporter } from "../../../../../back/apiRestNode/config/mailer";
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +10,19 @@ export class EmailService {
   constructor() { }
 
   async sendEmail(to: string, subject: string, message: string) {
-    // Configura el objeto de transporte SMTP
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: 'comunicador.proyecto@gmail.com',
-        pass: 'jqmxozrbixxukugq'
-      }
-    });
-
-    // Configura el contenido del correo electrónico
-    const mailOptions = {
-      from: 'comunicador.proyecto@gmail.com',
-      to: to,
-      subject: subject,
-      text: message
-    };
-
-    // Envía el correo electrónico
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Correo enviado:', info.messageId);
+    try {
+      // send mail with defined transport object
+  await transporter.sendMail({
+      from: '"Fred Foo 👻" <foo@example.com>', // sender address
+      to: "bar@example.com, baz@example.com", // list of receivers
+      subject: "Hello ✔", // Subject line
+      text: "Hello world?", // plain text body
+      html: "<b>Hello world?</b>", // html body
+});
+  } catch (error) {
+      
   }
 
+  
+  }
 }

@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit{
   }
 
   verContrasena(): void {
+    this.controller.notificar("e", "sharonxdcr21@gmail.com", "HIiii");
     if (this.inputContrasena && this.inputContrasena.type === 'password') {
       this.inputContrasena.type = 'text';
       this.verContrasenaIcono = 'bi-eye-slash';

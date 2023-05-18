@@ -18,6 +18,7 @@ import { Observable, Subscription } from 'rxjs';
 import { login } from './login';
 import { Usuario } from '../model/usuario';
 import { ComunicadorExcelService } from './DAO/comunicador-excel.service';
+import { NotificadorCorreo } from './NotificadorCorreo';
 
 
 @Injectable({
@@ -37,6 +38,7 @@ export class ControladorService {
   private adminProfesores = new AdminProfesores(this.DAO)
   private adminLogin = new login(this.DAO)
   private excelService = new ComunicadorExcelService()
+  private notificador = new NotificadorCorreo()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -178,6 +180,10 @@ export class ControladorService {
     }
     public verificarCodigo(codigo: String): boolean{
         return this.adminLogin.verificarCodigo(codigo)
+    }
+
+    public notificar(emisor: String, destino: String, mensaje: String): void{
+      this.notificador.notificar(emisor,destino, mensaje)
     }
   
   public sleep(ms: number) {
