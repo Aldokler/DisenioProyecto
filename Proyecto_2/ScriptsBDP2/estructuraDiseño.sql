@@ -99,6 +99,7 @@ CREATE TABLE `plan_de_trabajo` (
   CONSTRAINT `Creador` FOREIGN KEY (`Creador`) REFERENCES `equipo_guía` (`ID`)
 );
 
+
 CREATE TABLE `actividad` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
@@ -114,6 +115,7 @@ CREATE TABLE `actividad` (
   `Modalidad` varchar(45) NOT NULL,
   `Estado` varchar(45) NOT NULL,
   `PlanID` int NOT NULL,
+  `FechaAPublicar` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `idActividad_UNIQUE` (`ID`),
   KEY `Evidencia_idx` (`Evidencia`),

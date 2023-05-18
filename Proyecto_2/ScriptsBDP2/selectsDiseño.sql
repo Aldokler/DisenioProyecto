@@ -194,3 +194,13 @@ BEGIN
 	end if;
     COMMIT;
 END$$
+
+drop procedure if exists check_user;
+DELIMITER $$
+CREATE PROCEDURE check_user(IN vcorreo varchar(45))
+BEGIN
+	DECLARE check_user bool;
+	select if(count(ID) = 1, true, false) into check_user from usuario where CorreoElectronico = vcorreo;
+    select check_user;
+END$$
+DELIMITER ;

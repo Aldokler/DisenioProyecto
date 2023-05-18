@@ -11,6 +11,7 @@ const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
+const { response } = require('express');
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes utilizar otro proveedor de correo
@@ -145,6 +146,22 @@ router.get('/recuperacion/:correo', (request, response)=>{
         }
         else{
             response.json(rows[0][0])
+        }
+    })
+});
+
+
+// cambiar contraseña
+router.put('/usuario', (request, response)=>{
+    const {correo, password} = request.query;
+    let sql = 'call cambiarContraseña(?,?)';
+    conexion.query(sql, [correo, password], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Contraseña modificada' })
         }
     })
 });

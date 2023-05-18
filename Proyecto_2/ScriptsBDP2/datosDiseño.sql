@@ -143,18 +143,18 @@ INSERT INTO evidencia (Link)
 VALUES ('www.drive.com/algovaacá');
 
 #--------------------------------- actividad -----------------------
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Cómo hace Pixar sus películas?', 8, '1971-04-15 3:45:00', 3, 'www.quenoecistelinterweb.com', 'Técnico', 'Presencial', 'Realizada', 1);
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Charla sobre ensamblador', 14, '1971-05-15 19:00:00', 3, 'www.quenoecistelinterweb.com', 'Técnico', 'Presencial', 'Cancelada', 1);
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Técnicas de organización del tiempo', 3, '2022-04-15 6:59:59', 14, 'www.puntualidad.com', 'Vida Estudiantil', 'Presencial', 'Realizada', 2);
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Introducción a D&D', 4, '2022-09-27 3:00:00', 3, 'www.fantasyrpg.com', 'Recreación', 'Remota', 'Realizada', 3);
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Cómo usar la biblioteca', 1, '2022-08-12 9:00:00', 3, 'www.libtec.com', 'Orientadora', 'Remota', 'Realizada', 3);
-INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID)
-VALUES ('Charla sobre el feminismo', 12, '2022-10-12 9:00:00', 3, 'www.mequedesinideas.com', 'Motivacional', 'Remota', 'Cancelada', 3);
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Cómo hace Pixar sus películas?', 8, '1971-04-15 3:45:00', 3, 'www.quenoecistelinterweb.com', 'Técnico', 'Presencial', 'Realizada', 1, '1971-04-15 3:45:00');
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Charla sobre ensamblador', 14, '1971-05-15 19:00:00', 3, 'www.quenoecistelinterweb.com', 'Técnico', 'Presencial', 'Cancelada', 1, '1971-04-15 3:45:00');
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Técnicas de organización del tiempo', 3, '2022-04-15 6:59:59', 14, 'www.puntualidad.com', 'Vida Estudiantil', 'Presencial', 'Realizada', 2, '1971-04-15 3:45:00');
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Introducción a D&D', 4, '2022-09-27 3:00:00', 3, 'www.fantasyrpg.com', 'Recreación', 'Remota', 'Realizada', 3, '1971-04-15 3:45:00');
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Cómo usar la biblioteca', 1, '2022-08-12 9:00:00', 3, 'www.libtec.com', 'Orientadora', 'Remota', 'Realizada', 3, '1971-04-15 3:45:00');
+INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
+VALUES ('Charla sobre el feminismo', 12, '2022-10-12 9:00:00', 3, 'www.mequedesinideas.com', 'Motivacional', 'Remota', 'Cancelada', 3, '1971-04-15 3:45:00');
 
 #--------------------------------- actividadXprofe -----------------------
 INSERT INTO actividad_x_profesor (IDActividad, IDProfesor)
@@ -192,6 +192,8 @@ VALUES ('Qusssé essss ddd?', '1971-04-15 6:30:00', 'AL-03', 1, 1);
 
 
 INSERT INTO coordinador (equipoID, profeID)
-VALUES (1, 'AL-03');
+VALUES (2, 'AL-03');
+INSERT INTO coordinador (equipoID, profeID)
+VALUES (1, 'SJ-01');
 
 COMMIT;
