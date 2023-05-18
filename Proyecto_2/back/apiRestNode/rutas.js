@@ -12,6 +12,45 @@ const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
 
+
+
+// subir link -----------------------------------------------------------
+router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
+    const {id} = request.params;
+    const {link} = request.body;  
+    let sql = 'call subirLink(?,?)';
+    conexion.query(sql, [id, link], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Link agregado' })
+            
+        
+        }
+    })
+});
+
+// subir asistencia -----------------------------------------------------------
+router.post('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
+    const{id} = request.params;
+    const {Foto} = request.body;
+    const fotobin = Buffer.from(Foto.data);      
+    let sql = 'call subirAsistencia(?,?)';
+    conexion.query(sql, [id,fotobin], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Asistencia agregada' })
+        
+        }
+    })
+});
+
+
 // Ingresar
 
 // login ---------------------------------------------
