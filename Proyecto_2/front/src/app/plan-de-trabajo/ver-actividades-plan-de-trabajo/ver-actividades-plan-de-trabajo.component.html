@@ -203,11 +203,11 @@
 
                                 <div class="card-body">
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="oberservacion" name="observacion" required
+                                        <input #observacion type="text" id="oberservacion" name="observacion" required
                                             class="form-control form-control-lg" style="background-color: #E2EFF8;" />
                                     </div>
 
-                                    <button type="submit" class="btn text-white"
+                                    <button (submit)="agregarObservacion(observacion.value)" type="submit" class="btn text-white"
                                         style="background-color: #13293D;">Agregar Observación</button>
                                 </div>
 

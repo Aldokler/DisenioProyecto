@@ -58,7 +58,7 @@
     <section class="mb-4 mt-4">
         <div class="container">
             <div class="d-flex align-items-center pb-1 ">
-                <a href="" class="text-decoration-none text-reset" [routerLink]="['/ver-plan-de-trabajo']">
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/ver-actividades-plan-de-trabajo']">
                     <img src="assets/imagenes/regresar.png" alt="">
                     <span class="h5 fw-bold ml-3">MODIFICAR ACTIVIDAD</span>
                 </a>
@@ -80,7 +80,7 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
                                             <input type="text" id="name" name="name" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"/>
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;" value="{{actividadUsar.getNombre()}}"/>
                                         </div>
 
                                         <label class="form-label">Tipo de actividad</label>
@@ -125,7 +125,7 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Enlace</label>
                                             <input type="text" id="" name="" required
-                                                class="form-control form-control-lg"  style="background-color: #E2EFF8;"/>
+                                                class="form-control form-control-lg"  style="background-color: #E2EFF8;" value="{{actividadUsar.getLink()}}"/>
                                         </div>
 
                                     </div>
