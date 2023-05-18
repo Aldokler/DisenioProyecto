@@ -120,9 +120,8 @@ router.get('/coordinador/:id', (request, response)=>{
 
 // coordinador---------------------------------------------
 // devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
-router.get('/coordinadorE/:id', (request, response)=>{
-    const {id} = request.params;
-    const {equipo} = request.body
+router.get('/coordinadorE/:id/:equipo', (request, response)=>{
+    const {id, equipo} = request.params;
     let sql = "call check_coordinador_Equipo(?,?)";
     conexion.query(sql, [id,equipo],(error, rows, fields)=>{
         if(error){

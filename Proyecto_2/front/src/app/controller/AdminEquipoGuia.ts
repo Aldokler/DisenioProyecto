@@ -103,4 +103,12 @@ export class AdminEquipoGuia {
             })
         )
     }
+
+    public revisarCoordinadorEquipo(profesorId: string, equipoId: string): Observable<Boolean>{
+        return this.DAO.revisarCoordinadorEquipo(profesorId, equipoId).pipe(
+            map((data:any) => {
+                return data.check_user
+            })
+        )
+    }
 }
