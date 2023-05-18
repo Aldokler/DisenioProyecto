@@ -32,15 +32,12 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
 
     if(this.pasarDatos.loginUser instanceof Profesor){
       this.tipoDeUsuario = "Profesor"
     }else{
       this.tipoDeUsuario ="Administrativo"
     }
->>>>>>> 1975978cb267c114cbc03d5e00a139f13dfb2b59
     console.log(this.pasarDatos.actividadPlanDeTrabajo)
     console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
     this.controller.getComentarios(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(

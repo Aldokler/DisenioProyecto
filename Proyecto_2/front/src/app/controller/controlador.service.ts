@@ -160,6 +160,7 @@ export class ControladorService {
 
   //?
     public ingresar(Usuario: string, Contraseña: string): Observable<Boolean>{
+       
         return this.adminLogin.ingresar(Usuario, Contraseña)
     }
     public cambiarContraseña(correo:String): boolean{

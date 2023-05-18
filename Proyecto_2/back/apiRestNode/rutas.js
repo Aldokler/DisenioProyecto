@@ -29,6 +29,38 @@ router.get('/login', (request, response)=>{
 });
 
 
+// coordinador---------------------------------------------
+// devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
+router.get('/coordinador/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call check_coordinador(?)";
+    conexion.query(sql, [id],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+// coordinador---------------------------------------------
+// devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
+router.get('/coordinadorE/:id', (request, response)=>{
+    const {id} = request.params;
+    const {equipo} = request.body
+    let sql = "call check_coordinador_Equipo(?,?)";
+    conexion.query(sql, [id,equipo],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+
 
 
 
