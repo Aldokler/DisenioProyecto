@@ -182,3 +182,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getAsistencia;
+DELIMITER $$
+CREATE PROCEDURE getAsistencia(vActividadID int)
+BEGIN
+	declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		SELECT * FROM asistencia WHERE EvidenciaID = evidencia_ID;
+	end if;
+    COMMIT;
+END$$
