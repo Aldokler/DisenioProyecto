@@ -198,6 +198,12 @@ export class ControladorService {
 
   public revisarCoordinador(profesorId: string): Observable<Boolean>{
     return this.adminEquipoGuia.revisarCoordinador(profesorId)
-}
+  }
+
+  public revisarCoordinadorEquipo(profesorId: string, equipoId: string): Observable<Boolean>{
+    return this.adminEquipoGuia.revisarCoordinadorEquipo(profesorId,equipoId)
+  }
+
+
 
 }
