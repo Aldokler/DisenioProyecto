@@ -145,10 +145,7 @@ export class ApiService {
   }
 
   public enviarCorreo( destinatario: string, asunto: string, contenido: string) {
-    console.log(destinatario)
-    console.log(asunto)
-    console.log(contenido)
-    return this.http.post( '${this.url}/enviar-correo', { destinatario, asunto, contenido });
+    return this.http.post(this.url + 'enviar-correo', { destinatario, asunto, contenido });
   }
 
 

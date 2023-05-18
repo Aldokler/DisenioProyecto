@@ -3,12 +3,22 @@ require('./config/conexion');
 const port = (process.env.port || 3000)
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 // express
 const app = express()
 
 //Payload
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+const corsOptions = {
+  origin: 'http://localhost:4200/recuperacion', // Reemplaza con la URL de tu aplicación Angular
+  optionsSuccessStatus: 200 // Algunos navegadores requieren que se especifique el código de estado de éxito explícitamente
+};
+
+// Aplica el middleware de CORS
+app.use(cors(corsOptions));
+
 
 //admitir
 app.use(express.json())

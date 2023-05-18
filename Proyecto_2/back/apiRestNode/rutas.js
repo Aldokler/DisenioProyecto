@@ -11,6 +11,16 @@ const router = require('express').Router();
 const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'http://localhost:4200', // Reemplaza con la URL de tu aplicación Angular
+    optionsSuccessStatus: 200 // Algunos navegadores requieren que se especifique el código de estado de éxito explícitamente
+  };
+  
+  // Aplica el middleware de CORS
+  router.use(cors(corsOptions));
+
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes utilizar otro proveedor de correo
@@ -22,8 +32,8 @@ const transporter = nodemailer.createTransport({
 
 
 // Ruta para enviar el correo electrónico
-router.post('/enviar-correo', (req, res) => {
-    const { destinatario, asunto, contenido } = req.query;
+router.post('/enviar-correo/:destinatario/:asunto/:contenido', (req, res) => {
+    const { destinatario, asunto, contenido } = req.params;
   
     // Configura los detalles del correo electrónico
     const mailOptions = {
@@ -120,6 +130,21 @@ router.delete('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
 // Ingresar
 
 // login ---------------------------------------------
+// devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
+router.get('/login', (request, response)=>{
+    const {user, pass} = request.query;
+    let sql = "call login(?,?)";
+    conexion.query(sql, [user, pass],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+// ver correo de usuario ---------------------------------------------
 // devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
 router.get('/login', (request, response)=>{
     const {user, pass} = request.query;
