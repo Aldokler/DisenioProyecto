@@ -33,6 +33,10 @@ export class HomePlanDeTrabajoComponent {
 
   ngOnInit(): void {
     if(this.pasarDatos.loginUser instanceof Profesor){
+      if(this.controller.){
+        this.controller.
+
+      }
       this.tipoDeUsuario = "Profesor"
     }else{
       this.tipoDeUsuario ="Administrativo"
