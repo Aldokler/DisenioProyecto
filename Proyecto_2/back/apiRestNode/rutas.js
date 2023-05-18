@@ -161,7 +161,7 @@ router.put('/usuario', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Contraseña modificada' })
+            response.json({status: '0' })
         }
     })
 });
