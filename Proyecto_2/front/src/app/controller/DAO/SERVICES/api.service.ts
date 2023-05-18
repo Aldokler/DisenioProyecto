@@ -27,6 +27,11 @@ export class ApiService {
     return this.http.get(this.url + '/coordinador/' + profesorId)
   }
 
+  public revisarCoordinadorEquipo(profesorId: string, equipoId : string){
+    return this.http.get(this.url + 'coordinadorE/' + profesorId + '/' + equipoId)
+  }
+
+  
 //-------------------------------------------------------------------------------------------------------------------------------
 
   public addPlanDeTrabajo(año: number, semestre: number, creador: number){
