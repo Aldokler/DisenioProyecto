@@ -73,4 +73,8 @@ export class VerActividadesPlanDeTrabajoComponent {
     this.controller.responderComentario(this.comentarioSeleccionado)
   }
 
+  agregarObservacion(observacion:string){
+    this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(),observacion)
+  }
+
 }
