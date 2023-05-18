@@ -52,6 +52,7 @@ export class RecuperacionComponent {
        if (res) { console.log("lorem ipsum sit dolor amet") }
       })
     ).subscribe()
+    
     this.controller.notificar(correoElectronico, asunto, codigo)
     this.correoEnviado = true; // Deshabilitar el primer formulario
   }
