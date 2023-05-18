@@ -18,7 +18,7 @@ export class AdminActividad{
                 console.log(data.actividad[0])
                 const json = data.actividad[0];
                 if (json == undefined){
-                    return new Actividad(0, 0, TIndoleActividad.TECNICO, '', new Date, [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], new Date, '', new Date)
+                    return new Actividad(0, 0, TIndoleActividad.TECNICO, '', '', [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], '', '', '')
                 } else {
                     return new Actividad(
                         json.id,
@@ -43,7 +43,7 @@ export class AdminActividad{
             })
         );
     }
-    public crearActividad(nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number): Observable<boolean>{
+    public crearActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number): Observable<boolean>{
         return this.DAO.addActividad(nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID).pipe(
             map((data: any) => {
                 return data.status == '0'
@@ -59,7 +59,7 @@ export class AdminActividad{
         )
     }
 
-    public modificarDatosActividad(id: number, nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado): Observable<boolean>{
+    public modificarDatosActividad(id: number, nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado): Observable<boolean>{
         return this.DAO.modificarActividad(id, nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, estado).pipe(
             map((data: any) => {
                 return data.status == '0'

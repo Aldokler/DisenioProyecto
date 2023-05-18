@@ -41,11 +41,11 @@ export class ApiService {
     return this.http.get(this.url + 'plan_trabajo/actividad/' + id)
   }
 
-  public addActividad(nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number){
+  public addActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number){
     return this.http.post(this.url + 'plan_trabajo/actividad', {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID})
   }
 
-  public modificarActividad(id: number, nombre: string, semana: number, fechaHora: Date, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado){
+  public modificarActividad(id: number, nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado){
     return this.http.put(this.url + 'plan_trabajo/actividad/' + id, {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, estado})
   }
 
