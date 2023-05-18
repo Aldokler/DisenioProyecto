@@ -79,7 +79,7 @@ export class AdminPlanDeTrabajo{
     public marcarActividadRealizada(id: String): boolean{
         return true
     }
-    public cancelarActividad(id: String): boolean{
+    public cancelarActividad(id: number): boolean{
         return true
     }
     public publicarActividad(id: String): boolean{

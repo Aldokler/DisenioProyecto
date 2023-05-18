@@ -71,7 +71,7 @@
 
                     <div class="card" style="border-radius: 1rem;">
 
-                        <form (submit)="actualizarActividad(nombre.value,tipo.value,link.value,estado.value,semana.value,fecha.value,hora.value,fechaPublicacion.value,afiche.value)">
+                        <form>
                             <div class="row g-0">
 
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
@@ -79,14 +79,14 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
-                                            <input #nombre  type="text" id="name" name="name" required
+                                            <input #nombre type="text" id="name" name="name" 
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"
                                                 value="{{actividadUsar.getNombre()}}" />
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Tipo de actividad</label>
 
-                                            <input #tipo type="text" id="name" name="name" required
+                                            <input #tipo type="text" id="name" name="name" 
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"
                                                 value="{{actividadUsar.getTipo()}}" />
                                         </div>
@@ -148,14 +148,14 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Enlace</label>
-                                            <input #link type="text" id="" name="" required
+                                            <input #link type="text" id="" name=""  
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"
                                                 value="{{actividadUsar.getLink()}}" />
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Estado</label>
-                                            <input #estado type="text" id="name" name="name" required
+                                            <input #estado type="text" id="name" name="name" 
                                                 class="form-control form-control-lg" style="background-color: #E2EFF8;"
                                                 value="{{actividadUsar.getEstado()}}" />
                                         </div>
@@ -166,9 +166,9 @@
                                 <div class="col-md-6 col-lg-6 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
                                         <label class="form-label">Semana</label>
-                                        <input #semana type="text" id="name" name="name" required
-                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
-                                                value="{{actividadUsar.getSemana()}}" />
+                                        <input #semana type="text" id="name" name="name" 
+                                            class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                            value="{{actividadUsar.getSemana()}}" />
 
                                         <div class="form-outline mb-4">
                                             <div id=""></div>
@@ -176,37 +176,39 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha</label>
-                                            <input #fecha type="date" id="" name="" required
-                                                class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" [value]="fechaUsar"/>
+                                            <input #fecha type="date" id="" name="" 
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                [value]="anio+ '-' + mes + '-' + dia  "/>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Hora</label>
                                             <input #hora type="time" id="hora" name="hora"
-                                                class="form-control form-control-lg" required
-                                                style="background-color: #E2EFF8;">
+                                                class="form-control form-control-lg" 
+                                                style="background-color: #E2EFF8;" [value]="hora + ':' + minutos">
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Fecha de publicación</label>
-                                            <input #fechaPublicacion type="date" id="" name="" required
-                                                class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getFechaAPublicar()}}" />
+                                            <input #fechaPublicacion type="date" id="" name="" 
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                               [value]="anioPublicar+ '-' + mesPublicar + '-' + diaPublicar  " />
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Subir afiche</label>
                                             <input #afiche type="file" id="" name="" accept=".jpg,.png"
-                                                class="form-control form-control-lg" required
-                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getAfiche()}}"/>
+                                                class="form-control form-control-lg" 
+                                                style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getAfiche()}}" />
                                         </div>
 
 
                                         <div class="btn-group">
 
                                             <div class="pt-1 mb-4 me-4">
-                                                <button class="btn btn-dark btn-lg btn-block" type="submit"
+                                                <button class="btn btn-dark btn-lg btn-block" type="button"
+                                                    (click)="actualizarActividad(nombre.value,tipo.value,link.value,estado.value,semana.value,fecha.value,hora.value,fechaPublicacion.value,afiche.value)"
                                                     style="background-color: #13293D;">Registrar actividad</button>
                                             </div>
 

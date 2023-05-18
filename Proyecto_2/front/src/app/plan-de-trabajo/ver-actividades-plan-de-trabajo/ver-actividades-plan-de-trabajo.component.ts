@@ -80,5 +80,8 @@ export class VerActividadesPlanDeTrabajoComponent {
   guardarDeNuevoActividad(){
     this.pasarDatos.actividadPlanDeTrabajo = this.pasarDatos.actividadPlanDeTrabajo
   }
+  cancelarActividad(){
+    this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
+  }
 
 }

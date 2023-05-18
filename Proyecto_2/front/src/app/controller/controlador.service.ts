@@ -146,7 +146,7 @@ export class ControladorService {
   public marcarActividadRealizada(id: String): boolean{
       return this.adminPlanDeTrabajo.marcarActividadRealizada(id)
   }
-  public cancelarActividad(id: String): boolean{
+  public cancelarActividad(id: number): boolean{
       return this.adminPlanDeTrabajo.cancelarActividad(id)
   }
   public publicarActividad(id: String): boolean{

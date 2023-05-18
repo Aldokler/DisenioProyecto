@@ -29,38 +29,59 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public actividadUsar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidenciar, [], '', "", '');
   public profesoresSeleccionados: Profesor[] = [];
   public profes: Profesor[] = [];
+
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
-  fechaUsar: string = "";
-  fechaMientras: string = "";
-  HoraUsar: Date = new Date();
-  fechapublicacionUsar: Date = new Date();
+  tipoDeModalidad: TModalidad = TModalidad.PRESENCIAL
+
+
+
+
   public evidencia: Evidencia = new Evidencia(0, [], "");
   public actividadGuardar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidencia, [], '', "", '');
-  dia = "";
-  mes = "";
-  anio = "";
+  public actividadGuardarda: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidencia, [], '', "", '');
+  dia: string = '';
+  mes: string = '';
+  anio: string = '';
+  diaPublicar: string = '';
+  mesPublicar: string = '';
+  anioPublicar: string = '';
+  fechaNueva: string = '';
+  fechaPublicacionNueva: string = '';
+  hora: string = '';
+  minutos: string = '';
 
 
   ngOnInit(): void {
-
     this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo;
 
-    this.fechaMientras = this.actividadUsar.getFechaHora();
-    console.log("hola");
-    console.log(this.fechaMientras);
-    const fecha = new Date(this.fechaMientras);
+    this.fechaNueva = new Date(this.actividadUsar.getFechaHora()).toISOString().replace('T', ' ').substring(0, 19);
+    this.fechaPublicacionNueva = new Date(this.actividadUsar.getFechaAPublicar()).toISOString().replace('T', ' ').substring(0, 19);
 
+    const fecha = new Date(this.fechaNueva);
+    this.dia = fecha.getDate().toString().padStart(2, '0');
+    this.mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
     this.anio = fecha.getFullYear().toString();
-    this.mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Agrega ceros a la izquierda si el mes es de un solo dígito
 
-    this.dia = fecha.getDate().toString().padStart(2, '0'); // Agrega ceros a la izquierda si el día es de un solo dígito
-    console.log(this.dia);
-    console.log(this.anio);
-    console.log(this.mes);
-    this.fechaUsar = this.dia + "/" +this.mes + "/" + this.anio
-    console.log(this.fechaUsar)
+    const fechaPublicar = new Date(this.fechaPublicacionNueva);
+    this.diaPublicar = fechaPublicar.getDate().toString().padStart(2, '0');
+    this.mesPublicar = (fechaPublicar.getMonth() + 1).toString().padStart(2, '0');
+    this.anioPublicar = fechaPublicar.getFullYear().toString();
 
+    const hora = this.fechaNueva.substring(11, 13);
+    const minutos = this.fechaNueva.substring(14, 16);
+    this.hora = hora;
+    this.minutos = minutos;
+    console.log(this.fechaNueva)
+    console.log(this.hora)
+    console.log(this.minutos)
+
+
+    this.controller.getProfesores().pipe(
+      tap(res => {
+        this.profes = res;
+      })
+    ).subscribe()
   }
 
   seleccionarProfesores(profesor: Profesor) {
@@ -69,7 +90,23 @@ export class ModificarActividadPlanDeTrabajoComponent {
     } else {
       this.profesoresSeleccionados.push(profesor);
     }
-    console.log(this.profesoresSeleccionados);
+  }
+
+  actualizarActividad(nombre: string, tipo: string, link: string, estado: string, semana: string,
+    fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
+
+    const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipo as keyof typeof TIndoleActividad];
+    const semanaNumber = parseInt(semana);
+    const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
+    const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
+    if (this.remotoSelected === true) {
+      this.actividadGuardarda = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.REMOTA, link, afiche, TEstado.PLANEADA, this.evidencia, [], fechaPublicar, "", fechaPublicar);
+    } else {
+      this.actividadGuardarda = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.PRESENCIAL, link, afiche, TEstado.PLANEADA, this.evidencia, [], fechaPublicar, "", fechaPublicar);
+    }
+
+    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(), this.actividadGuardarda);
+
   }
 
   selectRemoto() {
@@ -82,21 +119,6 @@ export class ModificarActividadPlanDeTrabajoComponent {
     this.presencialSelected = true;
   }
 
-actualizarActividad(nombre:string,tipo:string,link:string,estado:string,semana:string,
-  fecha:string,hora:string,fechaPublicacion:string,afiche:string){
 
-    const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipo as keyof typeof TIndoleActividad];
-    const semanaNumber = parseInt(semana);
-    const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
-    const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
-    if (this.remotoSelected === true) {
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,link,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
-    }else{
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,link,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
-    }
-
-    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(),this.actividadGuardar);
-
-}
 
 }
