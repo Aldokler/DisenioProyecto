@@ -73,5 +73,32 @@ export class HomeEstudiantesComponent {
       this.tipoDeUsuario ="Administrativo"
     }
   }
+
+  filtrarEstudiantes(carne:string,anio:string,campus:string){
+    const annioFiltrarNumber = parseInt(anio);
+
+    // Filtrar los planes por semestre y año
+    const estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
+      return estudiante.getAnnio() === annioFiltrarNumber && plan.getSemestre() === semestreFiltrarNumber;
+    });
+
+    if (planesFiltrados.length >= 1) {
+      // Si hay planes filtrados, asignarlos a 'listaPlanesDeTrabajo'
+      this.listaPlanesDeTrabajo = planesFiltrados;
+      console.log(this.listaPlanesDeTrabajo);
+      this.errorMessage = '';
+    } else {
+      // Si no hay planes o hay más de uno, mostrar mensaje de error
+      this.errorMessage = 'No existen planes de trabajo para el periodo indicado';
+      this.showError = true;
+
+      setTimeout(() => {
+        this.showError = false;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 750);
+      }, 4000);
+    }
+  }
   
 }

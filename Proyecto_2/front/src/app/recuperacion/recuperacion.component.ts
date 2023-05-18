@@ -22,6 +22,7 @@ export class RecuperacionComponent {
   correoEnviado = false;
   codigoAleatorio = ""
   codigoValidado = false;
+  correoIngresado = "";
 
   constructor(private controller: ControladorService) { }
 
@@ -43,6 +44,7 @@ export class RecuperacionComponent {
 
   enviarCorreo(correoElectronico: string) {
     console.log(correoElectronico)
+    this.correoIngresado = correoElectronico;
     const asunto = "Recuperación de constraseña"
     this.codigoAleatorio = this.generarCodigoAleatorio(8)
     const codigo = "El código de recuperación es: " + this.codigoAleatorio
@@ -58,12 +60,18 @@ export class RecuperacionComponent {
   }
 
   validarCodigo(codigoRecuperacion:string){
+    console.log(codigoRecuperacion)
+    console.log(this.codigoAleatorio)
     if(codigoRecuperacion == this.codigoAleatorio){
       this.codigoValidado =true
     }else{
       this.codigoValidado =false
     }
 
+  }
+
+  guardarNuevaContrasena(nuevaContrasena:string){
+    
   }
 
 }

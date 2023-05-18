@@ -37,7 +37,7 @@ export class AdminProfesores{
             map((data: any) => {
                 const profesorJson = data.profesor[0];
                 if (profesorJson == undefined){
-                    return new Profesor('', '', '', '', '', '', TSede.CA, '', '', new Buffer(''), TRol.GUIA)
+                    return new Profesor('', '', '', '', '', '', TSede.CA, '', '', "", TRol.GUIA)
                 } else {
                     return new Profesor(
                         profesorJson.id,

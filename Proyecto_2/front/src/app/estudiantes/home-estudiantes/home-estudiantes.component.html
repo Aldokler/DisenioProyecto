@@ -67,12 +67,12 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" id="" name="" class="form-control" placeholder="Carné" />
+                            <input #carne type="text" id="" name="" class="form-control" placeholder="Carné" />
                         </div>
                     </div>
 
                     <div class="col">
-                        <select class="form-select me-2" name="opcion2" id="opcion2">
+                        <select #anio class="form-select me-2" name="opcion2" id="opcion2">
                             <option value="">Año</option>
                             <option value="1">2018</option>
                             <option value="2">2019</option>
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="col">
-                        <select class="form-select me-2" name="opcion2" id="opcion2">
+                        <select #campus class="form-select me-2" name="opcion2" id="opcion2">
                             <option value="">Campus</option>
                             <option value="1">SJ </option>
                             <option value="2">CA</option>
@@ -93,8 +93,8 @@
                         </select>
                     </div>
 
-                    <div class="col">
-                        <button type="submit" class="btn text-white me-2" style="background-color: #13293D;">
+                    <div class="col"> 
+                        <button type="button" class="btn text-white me-2" style="background-color: #13293D;" (click)="filtrarEstudiantes(carne.value,anio.value,campus.value)">
                             Filtrar
                         </button>
                         <button type="" class="btn text-white " style="background-color: #13293D;" (click)="descargarExcel()">
