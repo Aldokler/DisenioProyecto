@@ -18,6 +18,8 @@ export class HomeEstudiantesComponent {
   public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
   fileName = '';
   public tipoDeUsuario: string = "";
+  public showError = false
+  public errorMessage = ''
 
   constructor(
     private controller: ControladorService
@@ -60,6 +62,7 @@ export class HomeEstudiantesComponent {
 
   ngOnInit(): void {
     this.estudiantes = this.pasarDatos.estudiantes
+    console.log(this.pasarDatos.estudiantes)
 
     if(this.pasarDatos.loginUser instanceof Profesor){
       if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
@@ -74,31 +77,23 @@ export class HomeEstudiantesComponent {
     }
   }
 
-  filtrarEstudiantes(carne:string,anio:string,campus:string){
-    const annioFiltrarNumber = parseInt(anio);
-
-    // Filtrar los planes por semestre y año
-    const estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
-      return estudiante.getAnnio() === annioFiltrarNumber && plan.getSemestre() === semestreFiltrarNumber;
-    });
-
-    if (planesFiltrados.length >= 1) {
-      // Si hay planes filtrados, asignarlos a 'listaPlanesDeTrabajo'
-      this.listaPlanesDeTrabajo = planesFiltrados;
-      console.log(this.listaPlanesDeTrabajo);
-      this.errorMessage = '';
+  filtrarEstudiantes(carne:string,campus:string){
+    this.estudiantes = this.pasarDatos.estudiantes
+    var estudiantesFiltrados: Estudiante[] = []
+    if (carne != ''){
+      estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
+        console.log(carne)
+        console.log(estudiante.getId())
+        return estudiante.getId() == carne
+      });
+    } else if (campus == '') {
+      estudiantesFiltrados = this.estudiantes
     } else {
-      // Si no hay planes o hay más de uno, mostrar mensaje de error
-      this.errorMessage = 'No existen planes de trabajo para el periodo indicado';
-      this.showError = true;
-
-      setTimeout(() => {
-        this.showError = false;
-        setTimeout(() => {
-          this.errorMessage = '';
-        }, 750);
-      }, 4000);
+      estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
+        return estudiante.getSede() == campus
+      });
     }
+    this.estudiantes = estudiantesFiltrados;
   }
   
 }
