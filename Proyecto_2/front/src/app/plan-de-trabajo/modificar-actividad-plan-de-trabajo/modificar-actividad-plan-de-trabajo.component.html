@@ -153,6 +153,13 @@
                                                 value="{{actividadUsar.getLink()}}" />
                                         </div>
 
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Estado</label>
+                                            <input type="text" id="name" name="name" required
+                                                class="form-control form-control-lg" style="background-color: #E2EFF8;"
+                                                value="{{actividadUsar.getEstado()}}" />
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -171,7 +178,7 @@
                                             <label class="form-label">Fecha</label>
                                             <input type="date" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{actividadUsar.getFechaHora()}}"/>
+                                                style="background-color: #E2EFF8;" [value]="fechaUsar"/>
                                         </div>
 
                                         <div class="form-outline mb-4">
