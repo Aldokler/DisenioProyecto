@@ -182,8 +182,8 @@ export class ControladorService {
         return this.adminLogin.verificarCodigo(codigo)
     }
 
-    public notificar(destinatario: string, asunto: string, contenido: string): void{
-      this.notificador.notificar(destinatario, asunto, contenido)
+    public notificar(destinatario: string, asunto: string, contenido: string): Observable<boolean>{
+      return this.notificador.notificar(destinatario, asunto, contenido)
     }
   
   public sleep(ms: number) {

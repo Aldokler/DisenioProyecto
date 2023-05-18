@@ -47,6 +47,12 @@ export class RecuperacionComponent {
     this.codigoAleatorio = this.generarCodigoAleatorio(8)
     const codigo = "El código de recuperación es: " + this.codigoAleatorio
 
+    this.controller.notificar(correoElectronico, asunto, codigo).pipe(
+      tap(res => {
+       if (res) { console.log("lorem ipsum sit dolor amet") }
+      })
+    ).subscribe()
+    
     this.controller.notificar(correoElectronico, asunto, codigo)
     this.correoEnviado = true; // Deshabilitar el primer formulario
   }
