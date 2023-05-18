@@ -79,25 +79,25 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
-                                            <input type="text" id="" name="" required
+                                            <input #nombreProfesor type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" />
+                                                style="background-color: #E2EFF8;" value="{{profesor.getNombre()}}"/>
 
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Correo Electrónico</label>
-                                            <input type="email" id="" name="" required
+                                            <input #correoElectronico type="email" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" />
+                                                style="background-color: #E2EFF8;" value="{{profesor.getCorreoElectronico()}}"/>
 
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
                                             <label class="form-label ">Cambiar foto</label>
-                                            <input type="file" id="" name="" accept=".jpg,.png"
-                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;"/>
+                                            <input #fotoProfesor type="file" id="" name="" accept=".jpg,.png"
+                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;" />
                                         </div>
 
                                     </div>
@@ -108,32 +108,32 @@
                                         
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Teléfono Celular</label>
-                                            <input type="text" id="" name="" required
+                                            <input #telefonoCelular type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" />
+                                                style="background-color: #E2EFF8;" value="{{profesor.getCelular()}}"/>
 
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Primer Apellido</label>
-                                            <input type="text" id="" name="" required
+                                            <input #primerApellido type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" />
+                                                style="background-color: #E2EFF8;" value="{{profesor.getApellido1()}}"/>
 
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Segundo Apellido</label>
-                                            <input type="text" id="" name="" required
+                                            <input #segundoApellido type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" />
+                                                style="background-color: #E2EFF8;" value="{{profesor.getApellido2()}}"/>
 
                                         </div>
 
                                         <div class="btn-group d-flex align-items-center">
 
                                             <div class="pt-1 mb-4 me-4">
-                                                <button class="btn btn-dark btn-lg btn-block" type="submit"
+                                                <button (submit)="guardarEdicionProfesor(nombreProfesor.value, correoElectronico.value, fotoProfesor.value,telefonoCelular.value,primerApellido.value,segundoApellido.value)" class="btn btn-dark btn-lg btn-block" type="submit"
                                                     style="background-color: #13293D;">Guardar</button>
                                             </div>
                                         </div>

@@ -78,7 +78,8 @@
 
                                 <p class="card-text">{{ profe.getId() }} </p>
 
-                                <a href="" class="btn text-white" style="background-color: #13293D;"
+
+                                <a  (click)="guardarDatosProfesor(profe)" href="" class="btn text-white" style="background-color: #13293D;"
                                     [routerLink]="['/editar-profesores']">Editar</a>
                             </div>
                         </div>

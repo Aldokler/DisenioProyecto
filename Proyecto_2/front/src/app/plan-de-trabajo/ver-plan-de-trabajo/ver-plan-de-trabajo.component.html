@@ -69,7 +69,7 @@
             <div class="col mt-5">
                     <div class="row">
 
-                        <div class="col">
+                        <div *ngIf="tipoDeUsuario == 'Profesor'" class="col">
                             <button type="" class="btn text-white me-2 "
                                 style="background-color: #13293D;"><a href="" class="text-decoration-none text-reset" [routerLink]="['/crear-actividad-plan-de-trabajo']">Crear Actividad </a></button>
                         </div>

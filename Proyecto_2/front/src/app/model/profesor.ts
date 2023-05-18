@@ -4,7 +4,7 @@ import { Usuario } from "./usuario";
 
 export class Profesor extends Usuario {
     private telefonoOficina: string;
-    private fotografia: string;
+    private fotografia: any;
     private rol: TRol;
 
     public constructor ( 
@@ -17,7 +17,7 @@ export class Profesor extends Usuario {
         sede: TSede,
         contraseña: string,
         telefonoOficina: string,
-        fotografia: string,
+        fotografia: any,
         rol: TRol
     ){
         super(
@@ -106,11 +106,11 @@ export class Profesor extends Usuario {
         this.telefonoOficina = telefonoOficina;
     }
 
-    public getFotografia(): string {
+    public getFotografia(): any {
         return this.fotografia;
     }
 
-    public setFotografia(fotografia: string): void {
+    public setFotografia(fotografia: any): void {
         this.fotografia = fotografia;
     }
 

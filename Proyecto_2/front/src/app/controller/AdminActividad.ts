@@ -51,8 +51,8 @@ export class AdminActividad{
         )
     }
 
-    public comentarActividad(mensaje: string, emisor: string, fechaHora: Date,actividadId: number){
-        return this.DAO.addComentario(mensaje, emisor, fechaHora, actividadId).pipe(
+    public comentarActividad(comentario: Comentario){
+        return this.DAO.addComentario(comentario.getMensaje(), comentario.getEmisor().getId(), comentario.getFechaHora(), comentario.getActividadId()).pipe(
             map((data: any) => {
                 return data.status == '0'
             })

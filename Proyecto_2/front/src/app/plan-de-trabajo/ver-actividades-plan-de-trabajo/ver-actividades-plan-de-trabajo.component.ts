@@ -20,28 +20,60 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
   styleUrls: ['./ver-actividades-plan-de-trabajo.component.css']
 })
 export class VerActividadesPlanDeTrabajoComponent {
-  tipoUsuario: string;
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public comentarios: Comentario[] = [];
-
+  public respuestaComentarios: Comentario[] = [];
+  public emisor:Profesor = new Profesor("","","","","","",TSede.CA,"","","",TRol.GUIA);
+  public fecha = new Date(2023, 4, 16, 12, 30, 45);
+  public comentarioSeleccionado:Comentario = new Comentario(0,"",this.emisor,this.fecha,0,0);
+  public tipoDeUsuario: string = "";
   constructor(private controller: ControladorService) {
     // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
-    this.tipoUsuario = 'GUIA';
   }
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+
+    if(this.pasarDatos.loginUser instanceof Profesor){
+      this.tipoDeUsuario = "Profesor"
+    }else{
+      this.tipoDeUsuario ="Administrativo"
+    }
+>>>>>>> 1975978cb267c114cbc03d5e00a139f13dfb2b59
     console.log(this.pasarDatos.actividadPlanDeTrabajo)
     console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
     this.controller.getComentarios(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
       tap(res => {
         this.comentarios = res;
+        this.respuestaComentarios = this.comentarios
         console.log(this.comentarios);
-        //this.actividades = res;
       })
 
     ).subscribe()
 
   }
 
+  generarComentarios(comentarioElegido:Comentario){
+    this.comentarioSeleccionado = comentarioElegido
+    console.log("Este es el comentario elegido")
+    console.log(comentarioElegido)
+    this.controller.getReplies(comentarioElegido.getId()).pipe(
+      tap(res1 => {
+        this.respuestaComentarios = res1
+        console.log("aqui es la respuesta del comentario")
+        console.log(this.respuestaComentarios)
+      })
+    ).subscribe()
+  }
+
+  guardarComentario(comentarioGuardar :string){
+   // this.controller.comentarActividad(comentarioGuardar,this.pasarDatos.loginUser.getId(),)
+  }
+
+
+  responderComentario(respuestaAComentario:string){
+    this.controller.responderComentario(this.comentarioSeleccionado)
+  }
 
 }

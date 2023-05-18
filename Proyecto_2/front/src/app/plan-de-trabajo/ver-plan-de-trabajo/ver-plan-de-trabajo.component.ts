@@ -28,12 +28,18 @@ export class VerPlanDeTrabajoComponent {
   public actividades: Actividad[] = [];
   public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
   public actividadSeleccionada: Actividad[] = []
+  public tipoDeUsuario: string = "";
 
   
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    if(this.pasarDatos.loginUser instanceof Profesor){
+      this.tipoDeUsuario = "Profesor"
+    }else{
+      this.tipoDeUsuario ="Administrativo"
+    }
     this.controller.getActividadesofPlan(this.pasarDatos.planesDeTrabajo.getId()).pipe(
       tap(res => {
        this.actividades = res;
@@ -47,8 +53,9 @@ export class VerPlanDeTrabajoComponent {
 
   guardarActividad(actividad: Actividad) {
     this.pasarDatos.actividadPlanDeTrabajo = actividad;
-
   }
+
+
   
 
 }
