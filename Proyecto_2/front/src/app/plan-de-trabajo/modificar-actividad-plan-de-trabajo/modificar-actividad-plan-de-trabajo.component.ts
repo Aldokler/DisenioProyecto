@@ -32,14 +32,14 @@ export class ModificarActividadPlanDeTrabajoComponent {
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
   fechaUsar:string = "";
-  fechaMientras:Date = new Date();
+  fechaMientras:string = "";
   HoraUsar:Date = new Date();
   fechapublicacionUsar:Date = new Date();
 
 
   ngOnInit(): void {
     this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo
-    this.fechaMientras = this.actividadUsar.getFechaHora()
+    this.fechaMientras = ''
     const fecha = new Date(this.fechaMientras);
     const dia = fecha.getDate();
     const mes = fecha.getMonth() + 1; // Los meses se indexan desde 0, por eso se suma 1

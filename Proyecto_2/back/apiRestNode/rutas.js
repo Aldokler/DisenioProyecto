@@ -25,7 +25,7 @@ router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Link agregado' })
+            response.json({status: '0' })
             
         
         }
@@ -36,7 +36,8 @@ router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
 router.post('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
     const{id} = request.params;
     const {Foto} = request.body;
-    const fotobin = Buffer.from(Foto.data);      
+    const fotobin = Buffer.from(Foto.data);
+    console.log(fotobin)      
     let sql = 'call subirAsistencia(?,?)';
     conexion.query(sql, [id,fotobin], (error, rows, fields)=>{
         if(error){
@@ -44,7 +45,7 @@ router.post('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Asistencia agregada' })
+            response.json({status: '0' })
         
         }
     })
