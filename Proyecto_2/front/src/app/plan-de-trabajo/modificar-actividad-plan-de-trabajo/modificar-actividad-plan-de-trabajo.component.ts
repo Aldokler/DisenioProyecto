@@ -107,7 +107,7 @@ export class ModificarActividadPlanDeTrabajoComponent {
       this.actividadGuardarda = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.PRESENCIAL, link, afiche, TEstado.PLANEADA, this.evidencia, [], "", "", fechaPublicar);
     }
     console.log(this.actividadGuardarda);
-    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(), this.actividadGuardarda);
+    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(), this.actividadGuardarda).subscribe();
 
   }
 
