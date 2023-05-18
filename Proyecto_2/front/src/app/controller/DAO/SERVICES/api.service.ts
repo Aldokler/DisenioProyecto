@@ -149,5 +149,9 @@ export class ApiService {
     return this.http.post(this.url + 'enviar-correo', { destinatario, asunto, contenido });
   }
 
+  public verificarCorreo(correo: String){
+    return this.http.get(this.url + 'recuperacion/' + correo)
+  }
+
 
 }

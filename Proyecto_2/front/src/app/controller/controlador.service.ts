@@ -169,7 +169,6 @@ export class ControladorService {
 
   //?
     public ingresar(Usuario: string, Contraseña: string): Observable<Boolean>{
-       
         return this.adminLogin.ingresar(Usuario, Contraseña)
     }
     public cambiarContraseña(correo:String): boolean{
@@ -185,6 +184,9 @@ export class ControladorService {
     public notificar(destinatario: string, asunto: string, contenido: string): Observable<boolean>{
       return this.notificador.notificar(destinatario, asunto, contenido)
     }
+    public verificarUsuario(correo: string): Observable<Boolean>{
+      return this.adminLogin.verificarUsuario(correo)
+  }
   
   public sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));

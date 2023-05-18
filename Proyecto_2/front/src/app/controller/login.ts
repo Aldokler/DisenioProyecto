@@ -16,6 +16,13 @@ export class login {
             })
         )
     }
+    public verificarUsuario(correo: string): Observable<Boolean>{
+        return this.DAO.verificarCorreo(correo).pipe(
+            map((data:any) => {
+                return data.check_user
+            })
+        )
+    }
     public cambiarContraseña(correo:String): boolean{ return true }
     public solicitarCambioContraseña(correo: String): boolean{ return true }
     public verificarCodigo(codigo: String): boolean{ return true }
