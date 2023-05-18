@@ -115,6 +115,13 @@ export class ControladorService {
   public modificarEvidencia(id: number): boolean{
       return this.adminActividad.modificarEvidencia(id)
   }
+  public subirLink(id: Number, link:string){
+    return this.adminActividad.subirLink(id, link)
+    }
+  public subirAsistencia(id: Number, Foto:any){
+    return this.adminActividad.subirAsistencia(id, Foto)
+  }
+
   public comentarActividad(comentario: Comentario){
       this.adminActividad.comentarActividad(comentario)
   }

@@ -112,6 +112,22 @@ export class AdminActividad{
       )
     }
 
+    public subirLink(id: Number, link:string){
+        return this.DAO.subirLink(id, link).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
+      }
+    
+      public subirAsistencia(id: Number, Foto:any){
+        return this.DAO.subirAsistencia(id, Foto).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
+      }
+
 //-----------------------------------------------------------------------------------------------------------------------
 
     public subirEvidencia(evidencia: Evidencia): boolean{

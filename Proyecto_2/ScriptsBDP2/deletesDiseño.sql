@@ -128,4 +128,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+drop procedure if exists eliminarAsistencia;
+DELIMITER $$
+CREATE PROCEDURE eliminarAsistencia(IN ImagenID int)
+BEGIN
+
+    DELETE FROM asistencia WHERE ID = ImagenID;
+    COMMIT;
+    
+END$$
+
 COMMIT;

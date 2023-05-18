@@ -69,6 +69,14 @@ export class ApiService {
     return this.http.post(this.url + '/equipo_guia/actividad/comentariosR/' , {comentario})
   }
 
+  public subirLink(id: Number, link:string){
+    return this.http.post(this.url + 'equipo_guia/actividad/link/' +id, {link})
+  }
+
+  public subirAsistencia(id: Number, Foto:any){
+    return this.http.post(this.url + 'equipo_guia/actividad/asistencia/' +id, {Foto})
+  }
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
