@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 
 
 
+
 // subir link -----------------------------------------------------------
 router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
     const {id} = request.params;
@@ -28,6 +29,23 @@ router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
             response.json({status: '0' })
             
         
+        }
+    })
+});
+
+// get asistencia -----------------------------------------------------------
+router.get('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = 'call getAsistencia(?)';
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const asistencias = rows[0].map(row => 
+                new Comentario(row.ID, row.Mensaje, row.Emisor, row.FechaHora, row.ComentarioOriginal, row.ActividadID)); // cambiar a tipo evidencia
+                response.json({asistencias})
         }
     })
 });
@@ -47,6 +65,21 @@ router.post('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
         else{
             response.json({status: '0' })
         
+        }
+    })
+});
+
+//eliminar asistencia -----------------------------------------------
+router.delete('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call eliminarAsistencia(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Asistencia eliminada' })
         }
     })
 });

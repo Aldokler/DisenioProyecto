@@ -93,7 +93,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-call getAdmByID('ADM-01');
 
 drop procedure if exists consultarEquipoGuia;
 DELIMITER $$
@@ -154,7 +153,25 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists check_coordinador;
+DELIMITER $$
+CREATE PROCEDURE check_coordinador(IN pID varchar(45))
+BEGIN
+	DECLARE check_user bool;
+	select if(count(profeID) = 1, true, false) into check_user from coordinador where profeID = pID;
+    select check_user;
+END$$
+DELIMITER ;
 
+drop procedure if exists check_coordinador_Equipo;
+DELIMITER $$
+CREATE PROCEDURE check_coordinador_Equipo(IN pID varchar(45), IN pIDE int)
+BEGIN
+	DECLARE check_user bool;
+	select if(count(profeID) = 1, true, false) into check_user from coordinador where profeID = pID AND equipoID = pIDE;
+    select check_user;
+END$$
+DELIMITER ;
 
 drop procedure if exists getNextActividad;
 DELIMITER $$
@@ -165,3 +182,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getAsistencia;
+DELIMITER $$
+CREATE PROCEDURE getAsistencia(vActividadID int)
+BEGIN
+	declare evidencia_ID int;
+    
+    SELECT Evidencia into evidencia_ID from actividad WHERE ID = vActividadID;
+    if(evidencia_ID) is not null then
+		SELECT * FROM asistencia WHERE EvidenciaID = evidencia_ID;
+	end if;
+    COMMIT;
+END$$

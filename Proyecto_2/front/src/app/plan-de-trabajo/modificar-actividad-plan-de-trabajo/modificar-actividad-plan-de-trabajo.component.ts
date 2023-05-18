@@ -31,6 +31,7 @@ export class ModificarActividadPlanDeTrabajoComponent {
   public profes: Profesor[] = [];
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
+<<<<<<< HEAD
   fechaUsar:string = "";
   fechaMientras:string = "";
   HoraUsar:Date = new Date();
@@ -44,9 +45,37 @@ export class ModificarActividadPlanDeTrabajoComponent {
     const dia = fecha.getDate();
     const mes = fecha.getMonth() + 1; // Los meses se indexan desde 0, por eso se suma 1
     const anio = fecha.getFullYear();
+=======
+  fechaUsar: string = "";
+  fechaMientras: string = "";
+  HoraUsar: Date = new Date();
+  fechapublicacionUsar: Date = new Date();
+  public evidencia: Evidencia = new Evidencia(0, [], "");
+  public actividadGuardar: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL, "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, this.evidencia, [], '', "", '');
+  dia = "";
+  mes = "";
+  anio = "";
 
-    this.fechaUsar = `${dia < 10 ? '0' + dia : dia}/${mes < 10 ? '0' + mes : mes}/${anio}`;
-    console.log(this.fechaMientras)
+
+  ngOnInit(): void {
+>>>>>>> 27cba4c57bd80bc6b39e153f7d67b675c9b96dc0
+
+    this.actividadUsar = this.pasarDatos.actividadPlanDeTrabajo;
+
+    this.fechaMientras = this.actividadUsar.getFechaHora();
+    console.log("hola");
+    console.log(this.fechaMientras);
+    const fecha = new Date(this.fechaMientras);
+
+    this.anio = fecha.getFullYear().toString();
+    this.mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Agrega ceros a la izquierda si el mes es de un solo dígito
+
+    this.dia = fecha.getDate().toString().padStart(2, '0'); // Agrega ceros a la izquierda si el día es de un solo dígito
+    console.log(this.dia);
+    console.log(this.anio);
+    console.log(this.mes);
+    this.fechaUsar = this.dia + "/" +this.mes + "/" + this.anio
+    console.log(this.fechaUsar)
 
   }
 
@@ -68,4 +97,22 @@ export class ModificarActividadPlanDeTrabajoComponent {
     this.remotoSelected = false;
     this.presencialSelected = true;
   }
+
+actualizarActividad(nombre:string,tipo:string,link:string,estado:string,semana:string,
+  fecha:string,hora:string,fechaPublicacion:string,afiche:string){
+
+    const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipo as keyof typeof TIndoleActividad];
+    const semanaNumber = parseInt(semana);
+    const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
+    const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
+    if (this.remotoSelected === true) {
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,link,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
+    }else{
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,link,afiche,TEstado.PLANEADA,this.evidencia,[],fechaPublicar,"",fechaPublicar);
+    }
+
+    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(),this.actividadGuardar);
+
+}
+
 }
