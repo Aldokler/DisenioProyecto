@@ -18,6 +18,8 @@ export class HomeEstudiantesComponent {
   public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
   fileName = '';
   public tipoDeUsuario: string = "";
+  public showError = false
+  public errorMessage = ''
 
   constructor(
     private controller: ControladorService
@@ -60,6 +62,7 @@ export class HomeEstudiantesComponent {
 
   ngOnInit(): void {
     this.estudiantes = this.pasarDatos.estudiantes
+    console.log(this.pasarDatos.estudiantes)
 
     if(this.pasarDatos.loginUser instanceof Profesor){
       if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
@@ -74,8 +77,23 @@ export class HomeEstudiantesComponent {
     }
   }
 
-  filtrarEstudiantes(carne:string,anio:string,campus:string){
-
+  filtrarEstudiantes(carne:string,campus:string){
+    this.estudiantes = this.pasarDatos.estudiantes
+    var estudiantesFiltrados: Estudiante[] = []
+    if (carne != ''){
+      estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
+        console.log(carne)
+        console.log(estudiante.getId())
+        return estudiante.getId() == carne
+      });
+    } else if (campus == '') {
+      estudiantesFiltrados = this.estudiantes
+    } else {
+      estudiantesFiltrados = this.estudiantes.filter((estudiante) => {
+        return estudiante.getSede() == campus
+      });
+    }
+    this.estudiantes = estudiantesFiltrados;
   }
   
 }
