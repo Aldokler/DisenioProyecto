@@ -192,4 +192,9 @@ CREATE TABLE `equipo_guía_x_profesor` (
   CONSTRAINT `IDProfesor_EGXP` FOREIGN KEY (`IDProfesor`) REFERENCES `profesor` (`ID`)
 );
 
+CREATE TABLE numeroProfesSede (
+  numero int default 0,
+  sede varchar(10) NOT NULL,
+  PRIMARY KEY (numero,sede)
+);
 COMMIT;

@@ -42,11 +42,18 @@ VALUES ('SC', 'Campus tecnológico local cartago');
 
 #-------------------------- Usuario ------------------------
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
-VALUES ('2020023569', 'David', 'Pastor', 'Barrientos', 'davidpastor@gmail.com', '+506 1234 5678', 'incorrecta', 'SJ');
+VALUES ('2020023569', 'David', 'Pastor', 'Barrientos', 'davidpastoro@gmail.com', '+506 1234 5678', 'incorrecta', 'SJ');
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
-VALUES ('2021008082', 'Bryan', 'Castro', 'Solís', 'bryancastro@gmail.com', '+506 5678 8569', 'si', 'SC');
+VALUES ('2021008082', 'Bryan', 'Castro', 'Solís', 'bryancastroo@gmail.com', '+506 5678 8569', 'si', 'SC');
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
-VALUES ('2021536038', 'Sharon', 'Chacón', 'Rodríguez', 'sharonchacon@gmail.com', '+506 1234 0658', '1234', 'CA');
+VALUES ('2021536038', 'Sharon', 'Chacón', 'Rodríguez', 'sharonchacono@gmail.com', '+506 1234 0658', '1234', 'CA');
+
+INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
+VALUES ('SJ-03', 'David', 'Pastor', 'Barrientos', 'davidpastor@gmail.com', '+506 1234 5678', 'incorrecta', 'SJ');
+INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
+VALUES ('SJ-04', 'Bryan', 'Castro', 'Solís', 'bryancastrosolis732@gmail.com', '+506 5678 8569', 'si', 'SC');
+INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
+VALUES ('SJ-05', 'Sharon', 'Chacón', 'Rodríguez', 'sharonxdcr21@gmail.com', '+506 1234 0658', 'sha', 'CA');
 
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
 VALUES ('SJ-01', 'Ericka', 'Solano', 'Fernández', 'ericka@gmail.com', '+506 6548 2135', 'asies', 'SJ');
@@ -59,7 +66,7 @@ VALUES ('LI-30', 'Francisco', 'Torres', 'Rojas', 'torres@gmail.com', '+506 8649 
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
 VALUES ('CA-15', 'Mauricio', 'Avilés', 'Zoster', 'aviles@gmail.com', '+506 2156 8432', 'Zosterxd', 'CA');
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
-VALUES ('SJ-40', 'Nelson', 'Cordero', 'Ajedrez', 'cordero@gmail.com', '+506 1234 5746', '100 rated chess, but im a teacher', 'SJ');
+VALUES ('SJ-02', 'Nelson', 'Cordero', 'Ajedrez', 'cordero@gmail.com', '+506 1234 5746', '100 rated chess, but im a teacher', 'SJ');
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
 VALUES ('SC-01', 'Eduardo', 'Canessa', 'Montero', 'canefox@gmail.com', '+506 1345 6842', 'el zorro', 'SC');
 INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
@@ -88,11 +95,18 @@ VALUES ('LI-30', '7513 8436', 'Coordinador');
 INSERT INTO profesor (ID, TelefonoOficina, Rol)
 VALUES ('CA-15', '9436 1346', 'Guia');
 INSERT INTO profesor (ID, TelefonoOficina, Rol)
-VALUES ('SJ-40', '384 6513 6513', 'Guia');
+VALUES ('SJ-02', '384 6513 6513', 'Guia');
 INSERT INTO profesor (ID, TelefonoOficina, Rol)
 VALUES ('SC-01', '94651 3521', 'Guia');
 INSERT INTO profesor (ID, TelefonoOficina, Rol)
 VALUES ('SC-02', '89543 516', 'Guia');
+
+INSERT INTO profesor (ID, TelefonoOficina, Rol)
+VALUES ('SC-05', '89543 516', 'Guia');
+INSERT INTO profesor (ID, TelefonoOficina, Rol)
+VALUES ('SC-06', '89543 516', 'Guia');
+INSERT INTO profesor (ID, TelefonoOficina, Rol)
+VALUES ('SC-07', '89543 516', 'Guia');
 
 INSERT INTO administrativo (ID, TelefonoOficina)
 VALUES ('ADM-01', '1105 2516');
