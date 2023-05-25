@@ -34,7 +34,7 @@ export class ControladorService {
   private adminAdministrativos = new AdminAdministrativos(this.DAO)
   private adminPlanDeTrabajo = new AdminPlanDeTrabajo(this.DAO)
   private adminEquipoGuia = new AdminEquipoGuia(this.DAO)
-  private adminEstudiante = new AdminEstudiante()
+  private adminEstudiante = new AdminEstudiante(this.DAO)
   private adminProfesores = new AdminProfesores(this.DAO)
   private adminLogin = new login(this.DAO)
   private excelService = new ComunicadorExcelService()
@@ -42,11 +42,14 @@ export class ControladorService {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  public addEstudiante(estudiante: Estudiante): Observable<boolean>{
+    return this.adminEstudiante.addEstudiante(estudiante)
+  }
   public getEstudiante(carne:number): Observable<Estudiante>{
       return this.adminEstudiante.getEstudiante(carne)
   }
-  public getEstudiantes(sede: String = ''): Observable<Estudiante[]>{
-      return this.adminEstudiante.getEstudiantes(sede)
+  public getEstudiantes(Sort: number): Observable<Estudiante[]>{
+      return this.adminEstudiante.getEstudiantes(Sort)
   }
   public editarEstudiante(datosEstudiante: Estudiante): boolean{
       return this.adminEstudiante.editarEstudiante(datosEstudiante)

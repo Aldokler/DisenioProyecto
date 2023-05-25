@@ -19,7 +19,7 @@ import { Evidencia } from './model/evidencia';
 export class PasarDatosService {
   private static instance: PasarDatosService;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): PasarDatosService {
     if (!PasarDatosService.instance) {

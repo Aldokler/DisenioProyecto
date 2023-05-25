@@ -27,23 +27,7 @@ export class HomeEstudiantesComponent {
 
   public estudiantes: Estudiante[] = [];
 
-  descargarExcel(): void {/*
-    var estudiantes: Estudiante[] = [];
-    estudiantes.push(new 
-      Estudiante("2020023569", "David", "Pastor", "Barrientos",
-       "davidpastorb@estudiantec.cr", "88888888", TSede.SJ, "1234"));
-    estudiantes.push(new 
-      Estudiante("0000000001", "Francisco", "Torres", "Rojas",
-       "ftorres@arpa.net", "12345678", TSede.CA, "LinuxRules"));
-    estudiantes.push(new 
-      Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
-       "elmiguelin@gmail.com", "88888888", TSede.SJ, "1234"));
-    estudiantes.push(new 
-      Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
-       "elmiguelin@gmail.com", "88888888", TSede.AL, "1234"));
-    estudiantes.push(new 
-      Estudiante("2015684651", "Miguel", "Cervantes", "Quijote",
-       "elmiguelin@gmail.com", "88888888", TSede.SC, "1234"));*/
+  descargarExcel(): void {
     this.controller.downloadStudents(this.estudiantes);
   }
 
@@ -55,14 +39,21 @@ export class HomeEstudiantesComponent {
     let fileReader = new FileReader()
     fileReader.readAsBinaryString(file)
     this.controller.uploadStudents(fileReader).then(students => {
-      this.estudiantes = students
-      this.pasarDatos.estudiantes = students
+      this.estudiantes.concat(students)
+      this.pasarDatos.estudiantes.concat(students)
+      this.estudiantes.forEach((estudiante) => {
+        this.controller.addEstudiante(estudiante)
+      })
     }).catch()
   }
 
   ngOnInit(): void {
-    this.estudiantes = this.pasarDatos.estudiantes
-    console.log(this.pasarDatos.estudiantes)
+    this.controller.getEstudiantes(1).pipe(
+      tap(res => {
+       this.pasarDatos.estudiantes = res;
+       this.estudiantes = res;
+      })
+    ).subscribe()
 
     if(this.pasarDatos.loginUser instanceof Profesor){
       if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){

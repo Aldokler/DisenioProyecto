@@ -176,6 +176,10 @@ export class ComunicadorExcelService {
     var nombreCompleto: string[] = [];
     var step = 0;
 
+    if (nombre == ''){
+      return ['','',''];
+    }
+
     for (var i = 0; i < nombre.length; i++){
       if (nombre.charAt(i) == ' '){
         var name = '';

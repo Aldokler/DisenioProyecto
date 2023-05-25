@@ -4,6 +4,7 @@ const {PlanDeTrabajo} = require('../model/plandetrabajo');
 const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
+const {Estudiante} = require('../model/estudiante');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -46,7 +47,9 @@ router.post('/enviar-correo', (req, res) => {
     });
   });
 
-
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
 
 // subir link -----------------------------------------------------------
 router.post('/equipo_guia/actividad/link/:id', (request, response)=>{
@@ -117,9 +120,11 @@ router.delete('/equipo_guia/actividad/asistencia/:id', (request, response)=>{
     })
 });
 
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
 
 // Ingresar
-
 // login ---------------------------------------------
 // devuelve un bool, 0 si los datos son incorrectos, 1 login correcto
 router.get('/login', (request, response)=>{
@@ -197,13 +202,11 @@ router.get('/coordinadorE/:id/:equipo', (request, response)=>{
     })
 });
 
-
-
-
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
 
 // Plan de Trabajo
-
-
 // ver comentarios principales +++++++++++++++++++
 router.get('/equipo_guia/actividad/comentarios/:id', (request, response)=>{
     const {id} = request.params;
@@ -405,8 +408,9 @@ router.put('/plan_trabajo/actividad/cancelar/:id', (request, response)=>{
     })
 });
 
-
-
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
 
 // Equipo Guía
 //get equipos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -521,6 +525,10 @@ router.get('/equipo_guia_id/:annio/:semestre', (request, response)=>{
     })
 });
 
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
+
 // gestion profesores
 //get profesores ---------------------------------------------------------
 router.get('/profesores', (request, response)=>{
@@ -602,10 +610,6 @@ router.post('/profesores', (request, response)=>{
         }
         else{
             response.json({status: 'Profesor agregado' })
-            /*
-            const buf = Buffer(fotobin, 'binary');
-            fs.writeFileSync('../upload/' + ID + '.png', buf);*/
-        
         }
     })
 });
@@ -646,3 +650,52 @@ router.put('/profesores/:id', (request, response)=>{
     })
 });
 module.exports= router;
+
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
+
+// crear estudiante-----------------------------------------------------------
+router.post('/estudiantes', (request, response)=>{
+    const {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
+           Celular , Contraseña , Sede} = request.body;
+    let sql = 'call addEstudiante(?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
+        Celular , Contraseña , Sede], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+//get estudiantes ---------------------------------------------------------
+router.get('/estudiantes/:Sort', (request, response)=>{
+    const {Sort} = request.params;
+    let sql = "";
+    switch (Sort) {
+        case '1':
+            sql = "call getEstudiantesAlfa()";
+            break;
+        case '2':
+            sql = "call getEstudiantesCarne()";
+            break;
+        case '3':
+            sql = "call getEstudiantesSede()";
+            break;
+    }
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiantes = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, ""));
+                response.json({estudiantes})
+        }
+    })
+});

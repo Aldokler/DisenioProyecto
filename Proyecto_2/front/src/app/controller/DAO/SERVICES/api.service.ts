@@ -144,6 +144,8 @@ export class ApiService {
     return this.http.put(this.url + 'profesores/'+ profesor.getId(), profesor);
   }
 
+//-------------------------------------------------------------------------------------------------------------------------------
+
   public enviarCorreo( destinatario: string, asunto: string, contenido: string) {
     console.log("api" + destinatario)
     return this.http.post(this.url + 'enviar-correo', { destinatario, asunto, contenido });
@@ -155,6 +157,18 @@ export class ApiService {
 
   public cambiarContraseña(correo: String, password: string){
     return this.http.put(this.url + 'usuario?correo=' + correo + '&password=' + password, {})
+  }
+
+//-------------------------------------------------------------------------------------------------------------------------------
+
+  public addEstudiante(ID: string, Nombre: string, Apellido1: string, Apellido2: string, CorreoElectronico: string , 
+    Celular: string , Contraseña: string , Sede: string){
+    return this.http.post(this.url + 'estudiantes', {ID, Nombre, Apellido1, Apellido2, CorreoElectronico , 
+      Celular , Contraseña , Sede} );
+  }
+
+  public getEstudiantes(Sort: number){
+    return this.http.get(this.url + 'estudiantes/' + Sort)
   }
 
 }
