@@ -23,10 +23,10 @@ export class VerActividadesPlanDeTrabajoComponent {
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public comentarios: Comentario[] = [];
   public respuestaComentarios: Comentario[] = [];
-  public emisor:Profesor = new Profesor("","","","","","",TSede.CA,"","","",TRol.GUIA);
   public fecha = new Date(2023, 4, 16, 12, 30, 45);
-  public comentarioSeleccionado:Comentario = new Comentario(0,"",this.emisor,this.fecha,0,0);
+  public comentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha,0,0);
   public tipoDeUsuario: string = "";
+  
   constructor(private controller: ControladorService) {
     // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
   }
@@ -70,7 +70,9 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   guardarComentario(comentarioGuardar :string){
-   // this.controller.comentarActividad(comentarioGuardar,this.pasarDatos.loginUser.getId(),)
+    let comentariocomentado:Comentario = new Comentario(0,comentarioGuardar,this.pasarDatos.loginUser.getId(),this.fecha,0,this.pasarDatos.actividadPlanDeTrabajo.getId())
+    console.log(comentariocomentado)
+    this.controller.comentarActividad(comentariocomentado)
   }
 
 

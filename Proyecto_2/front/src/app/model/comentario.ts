@@ -3,7 +3,7 @@ import { Profesor } from "./profesor";
 export class Comentario {
     private id: number
     private mensaje: string;
-    private emisor: Profesor;
+    private emisor: string;
     private fechaHora: Date;
     private comentarioOriginal: number;
     private actividadId: number;
@@ -11,7 +11,7 @@ export class Comentario {
     constructor(
         id: number,
         mensaje: string,
-        emisor: Profesor,
+        emisor: string,
         fechaHora: Date,
         comentarioOriginal: number,
         actividadId: number
@@ -40,11 +40,11 @@ export class Comentario {
         this.mensaje = mensaje;
     }
 
-    public getEmisor(): Profesor {
+    public getEmisor(): string {
         return this.emisor;
     }
 
-    public setEmisor(emisor: Profesor): void {
+    public setEmisor(emisor: string): void {
         this.emisor = emisor;
     }
 

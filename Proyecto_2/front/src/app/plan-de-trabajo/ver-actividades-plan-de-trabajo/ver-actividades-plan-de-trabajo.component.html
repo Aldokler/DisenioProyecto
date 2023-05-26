@@ -234,20 +234,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form onsubmit="">
+                <form (submit)="guardarComentario(comentario.value)">
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
                             <input #comentario type="text" id="register_commentary" name="register_commentary" class="form-control"
                                 required />
-
                         </div>
 
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button (submit)="guardarComentario(comentario.value)" type="submit" class="btn text-white"
+                        <button  type="submit" class="btn text-white"
                             style="background-color: #13293D;">Comentar</button>
                     </div>
 

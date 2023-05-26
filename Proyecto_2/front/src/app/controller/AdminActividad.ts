@@ -52,11 +52,11 @@ export class AdminActividad{
     }
 
     public comentarActividad(comentario: Comentario){
-        return this.DAO.addComentario(comentario.getMensaje(), comentario.getEmisor().getId(), comentario.getFechaHora(), comentario.getActividadId()).pipe(
+        return this.DAO.addComentario(comentario.getMensaje(), comentario.getEmisor(), comentario.getFechaHora(), comentario.getActividadId()).pipe(
             map((data: any) => {
                 return data.status == '0'
             })
-        )
+        ).subscribe()
     }
 
     public modificarDatosActividad(id: number, nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado): Observable<boolean>{
