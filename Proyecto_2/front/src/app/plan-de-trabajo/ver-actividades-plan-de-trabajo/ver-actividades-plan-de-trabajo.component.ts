@@ -77,7 +77,9 @@ export class VerActividadesPlanDeTrabajoComponent {
 
 
   responderComentario(respuestaAComentario:string){
-    this.controller.responderComentario(this.comentarioSeleccionado)
+    let respuestaComentario:Comentario = new Comentario(0,respuestaAComentario,this.pasarDatos.loginUser.getId(),this.fecha,this.comentarioSeleccionado.getId(),this.pasarDatos.actividadPlanDeTrabajo.getId())
+    console.log(respuestaComentario)
+    this.controller.responderComentario(respuestaComentario)
   }
 
   agregarObservacion(observacion:string){

@@ -55,6 +55,21 @@
     </div>
 
     <div class="container">
+
+        <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <h6>Ejemplo de notificación</h6>
+                  <p>Esta es una notificación de ejemplo.</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
         <div class="d-flex align-items-center pb-1 mb-4 mt-4">
             <a href="" class="text-decoration-none text-reset" [routerLink]="['/home']">
                 <img src="assets/imagenes/regresar.png" alt="">

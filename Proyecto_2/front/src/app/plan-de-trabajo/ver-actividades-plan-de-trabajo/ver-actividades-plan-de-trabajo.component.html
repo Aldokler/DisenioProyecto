@@ -56,6 +56,21 @@
 
 
     <section class="mb-4 mt-4">
+
+        <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <h6>Ejemplo de notificación</h6>
+                  <p>Esta es una notificación de ejemplo.</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
         <div class="container">
 
 
@@ -266,7 +281,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form onsubmit="">
+                <form (submit)="responderComentario(respuestaComentario.value)" >
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
@@ -279,7 +294,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button (submit)="responderComentario(respuestaComentario.value)" type="text" class="btn text-white"
+                        <button type="submit" class="btn text-white"
                             style="background-color: #13293D;">Responder</button>
                     </div>
 
