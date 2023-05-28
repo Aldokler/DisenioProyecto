@@ -71,7 +71,7 @@ export class AdminActividad{
             map((data: any) => {
                 return data.status == '0'
             })
-        )
+        ).subscribe()
     }
 
     public getComentarios(id: number): Observable<Comentario[]>{
