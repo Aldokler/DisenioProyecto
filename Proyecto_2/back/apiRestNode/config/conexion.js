@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
     user: 'David',
     password: 'Adm!n123',
     database: 'proyectodisenio',
-    timezone : "utc" 
+    dateStrings: true
     })
   
   connection.connect((err) =>{

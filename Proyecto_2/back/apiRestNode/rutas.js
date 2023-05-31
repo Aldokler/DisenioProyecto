@@ -13,6 +13,7 @@ const { json } = require('stream/consumers');
 const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
 const { response } = require('express');
+const moment = require('moment-timezone');
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes utilizar otro proveedor de correo
@@ -362,6 +363,7 @@ router.get('/plan_trabajo/actividad/:id', (request, response)=>{
 router.post('/plan_trabajo/actividad', (request, response)=>{
     const {nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID, fechaPublicar} = request.body;
     let sql = 'call addActividad (?,?,?,?,?,?,?,?,?)';
+    console.log(fechaHora)
     conexion.query(sql, [nombre, semana, fechaHora, diasAnunciar, link, tipo, modalidad, planID,fechaPublicar], (error, rows, fields)=>{
         if(error){
             console.log(error);
@@ -372,8 +374,6 @@ router.post('/plan_trabajo/actividad', (request, response)=>{
         }
     })
 });
-
-
 
 // modificar actividad ---------------------------------------------------
 router.put('/plan_trabajo/actividad/:id', (request, response)=>{
