@@ -140,8 +140,11 @@ export class ApiService {
     return this.http.delete(this.url + 'profesores/' +id)
   }
 
-  public modificarProfesor(profesor: Profesor){
-    return this.http.put(this.url + 'profesores/'+ profesor.getId(), profesor);
+  public modificarProfesor(ID: string, Nombre: string, Apellido1: string, Apellido2: string, CorreoElectronico: string , 
+    Celular: string , Contraseña: string , Sede: string , TelefonoOficina: string, Rol: string, Foto:Buffer){
+    
+    return this.http.put(this.url + 'profesores/'+ ID, {Nombre, Apellido1, Apellido2, CorreoElectronico , 
+      Celular , Contraseña , Sede , TelefonoOficina, Foto, Rol});
   }
 
 //-------------------------------------------------------------------------------------------------------------------------------

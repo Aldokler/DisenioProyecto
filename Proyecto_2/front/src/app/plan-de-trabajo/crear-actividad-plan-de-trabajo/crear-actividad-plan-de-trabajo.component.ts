@@ -53,9 +53,12 @@ export class CrearActividadPlanDeTrabajoComponent {
   }
 
   guardarActividad(nombreActividad: string, tipoActividad: string, enlace: string, semana: string, fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
+    console.log(fecha)
+    console.log(hora)
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
-    const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
+    const fechaDate = new Date(fecha + " " + hora+" UTC").toISOString().replace('T', ' ').substring(0, 19);
+    console.log(fechaDate)
     const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
     console.log("entra ")
     if (this.remotoSelected === true) {

@@ -58,7 +58,8 @@ export class AdminProfesores{
     }
 
     public editarDatosProfesor(profesor: Profesor): Observable<boolean>{
-        return this.DAO.modificarProfesor(profesor).pipe(
+        return this.DAO.modificarProfesor(profesor.getId(),profesor.getNombre(), profesor.getApellido1(), profesor.getApellido2(), profesor.getCorreoElectronico() , 
+        profesor.getCelular() , profesor.getContraseñA() , profesor.getSede() , profesor.getTelefonoOficina(), profesor.getRol(), profesor.getFotografia()).pipe(
             map((data:any) => {
                 return data.status == 'Profesor modificado'
             })

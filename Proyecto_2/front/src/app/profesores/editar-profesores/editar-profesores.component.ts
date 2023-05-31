@@ -33,8 +33,7 @@ export class EditarProfesoresComponent {
   guardarEdicionProfesor(nombreProfesor:string, correoElectronico:string, fotoProfesor:string,telefonoCelular:string,primerApellido:string,segundoApellido:string){
     const profesorEditar:Profesor = new Profesor(this.pasarDatos.guardarProfesor.getId(),nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,this.pasarDatos.guardarProfesor.getSede(),
     this.pasarDatos.guardarProfesor.getContraseñA(),this.pasarDatos.guardarProfesor.getTelefonoOficina(), fotoProfesor,this.pasarDatos.guardarProfesor.getRol());
-    this.controller.editarDatosProfesor(profesorEditar);
-   
+    this.controller.editarDatosProfesor(profesorEditar).subscribe()
   }
 
 }

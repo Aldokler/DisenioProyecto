@@ -106,7 +106,7 @@
                             </h4>
                             <div class="card-text">
                                 Semana: {{actividad.getSemana()}} &nbsp;&nbsp;&nbsp;
-                                {{actividad.getFechaHora()}}
+                                {{actividad.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
                             </div>
                             <a href="" class="btn btn-outline-secondary mt-2"
                             [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
