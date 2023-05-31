@@ -51,12 +51,12 @@ export class AdminActividad{
         )
     }
 
-    public comentarActividad(comentario: Comentario){
-        return this.DAO.addComentario(comentario.getMensaje(), comentario.getEmisor(), comentario.getFechaHora(), comentario.getActividadId()).pipe(
+    public comentarActividad(Mensaje:string,emisor:string,FechaHora:string,ActividadID:number): Observable<boolean>{
+        return this.DAO.addComentario(Mensaje, emisor, FechaHora, ActividadID).pipe(
             map((data: any) => {
                 return data.status == '0'
             })
-        ).subscribe()
+        )
     }
 
     public modificarDatosActividad(id: number, nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, estado: TEstado): Observable<boolean>{
@@ -137,5 +137,11 @@ export class AdminActividad{
         return true
     }
     
-    public responderComentario(comentario: Comentario){}
+    public responderComentario(comentario: Comentario): Observable<boolean>{
+        return this.DAO.addReplie(comentario.getMensaje(), comentario.getEmisor(), comentario.getFechaHora(), comentario.getActividadId(),comentario.getComentarioOriginal()).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
+    }
 }

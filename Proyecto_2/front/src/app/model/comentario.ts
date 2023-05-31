@@ -4,7 +4,7 @@ export class Comentario {
     private id: number
     private mensaje: string;
     private emisor: string;
-    private fechaHora: Date;
+    private fechaHora: string;
     private comentarioOriginal: number;
     private actividadId: number;
 
@@ -12,7 +12,7 @@ export class Comentario {
         id: number,
         mensaje: string,
         emisor: string,
-        fechaHora: Date,
+        fechaHora: string,
         comentarioOriginal: number,
         actividadId: number
     ) {
@@ -48,11 +48,11 @@ export class Comentario {
         this.emisor = emisor;
     }
 
-    public getFechaHora(): Date {
+    public getFechaHora(): string {
         return this.fechaHora;
     }
 
-    public setFechaHora(fechaHora: Date): void {
+    public setFechaHora(fechaHora: string): void {
         this.fechaHora = fechaHora;
     }
 

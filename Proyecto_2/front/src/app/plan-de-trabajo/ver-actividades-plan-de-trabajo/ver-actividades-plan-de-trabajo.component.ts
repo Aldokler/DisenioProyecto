@@ -23,8 +23,9 @@ export class VerActividadesPlanDeTrabajoComponent {
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public comentarios: Comentario[] = [];
   public respuestaComentarios: Comentario[] = [];
-  public fecha = new Date(2023, 4, 16, 12, 30, 45);
-  public comentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha,0,0);
+  public fecha = new Date();
+  public comentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,0);
+  public respuestaComentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,0);
   public tipoDeUsuario: string = "";
   
   constructor(private controller: ControladorService) {
@@ -70,16 +71,16 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   guardarComentario(comentarioGuardar :string){
-    let comentariocomentado:Comentario = new Comentario(0,comentarioGuardar,this.pasarDatos.loginUser.getId(),this.fecha,0,this.pasarDatos.actividadPlanDeTrabajo.getId())
+    let comentariocomentado:Comentario = new Comentario(0,comentarioGuardar,this.pasarDatos.loginUser.getId(),this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,this.pasarDatos.actividadPlanDeTrabajo.getId())
     console.log(comentariocomentado)
-    this.controller.comentarActividad(comentariocomentado)
+    this.controller.comentarActividad(comentariocomentado).subscribe()
   }
 
 
   responderComentario(respuestaAComentario:string){
-    let respuestaComentario:Comentario = new Comentario(0,respuestaAComentario,this.pasarDatos.loginUser.getId(),this.fecha,this.comentarioSeleccionado.getId(),this.pasarDatos.actividadPlanDeTrabajo.getId())
+    let respuestaComentario:Comentario = new Comentario(0,respuestaAComentario,this.pasarDatos.loginUser.getId(),this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],this.comentarioSeleccionado.getId(),this.pasarDatos.actividadPlanDeTrabajo.getId())
     console.log(respuestaComentario)
-    this.controller.responderComentario(respuestaComentario)
+    this.controller.responderComentario(respuestaComentario).subscribe()
   }
 
   agregarObservacion(observacion:string){
