@@ -23,6 +23,7 @@ import { RegistrarProfesorGuiaComponent } from './equipoGuia/componentes/registr
 import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-baja.component';
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
 import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
+import { MensajesComponent } from './mensajes/mensajes.component';
 
 //Rutas de navegación
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
     {path: 'registrar-profesor-guia',component: RegistrarProfesorGuiaComponent},
     {path: 'dar-de-baja',component: DarDeBajaComponent},
     {path: 'consultar-equipo',component: ConsultarEquipoComponent},
+    {path: 'mensajes',component: MensajesComponent},
 
 ];
 
