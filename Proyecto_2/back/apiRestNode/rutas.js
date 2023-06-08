@@ -699,3 +699,21 @@ router.get('/estudiantes/:Sort', (request, response)=>{
         }
     })
 });
+
+
+//la wea que pidió Bryan (get estudiantes por sede de un profesor) -----------------------------------------------------
+router.get('/estudiantesPorSede/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getEstudiantesByProfesorSede(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiantes = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, ""));
+                response.json({estudiantes})
+        }
+    })
+});

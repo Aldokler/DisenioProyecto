@@ -66,6 +66,16 @@ export class HomeEstudiantesComponent {
     }else{
       this.tipoDeUsuario ="Administrativo"
     }
+
+
+    //Prueabilla ahí
+    console.log("estudiantillos ahí")
+    this.controller.getEstudiantesPorSede("SJ-01").pipe(
+      tap(res => {
+        console.log(res.length)
+        res.forEach(x => {console.log(x)})
+      })
+    ).subscribe()
   }
 
   filtrarEstudiantes(carne:string,campus:string){

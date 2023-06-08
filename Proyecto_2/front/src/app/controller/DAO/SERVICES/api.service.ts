@@ -174,4 +174,8 @@ export class ApiService {
     return this.http.get(this.url + 'estudiantes/' + Sort)
   }
 
+  public getEstudiantesPorSede(id: string){
+    return this.http.get(this.url + 'estudiantesPorSede/' + id)
+  }
+
 }

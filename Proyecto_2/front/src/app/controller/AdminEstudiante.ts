@@ -42,6 +42,26 @@ export class AdminEstudiante{
             })
         );
     }
+    public getEstudiantesPorSede(ProfesorID: string): Observable<Estudiante[]>{
+        return this.DAO.getEstudiantesPorSede(ProfesorID).pipe(
+            map((data: any) => { 
+                const json = data.estudiantes;
+                console.log(data)
+                return json.map((json: any) => {
+                    return new Estudiante(
+                        json.id,
+                        json.nombre,
+                        json.apellido1,
+                        json.apellido2,
+                        json.correoElectronico,
+                        json.celular,
+                        json.sede,
+                        json.contraseña
+                    )
+                });
+            })
+        );
+    }
 
     public getEstudiante(carne: number): Observable<Estudiante> {
         return new Subject
