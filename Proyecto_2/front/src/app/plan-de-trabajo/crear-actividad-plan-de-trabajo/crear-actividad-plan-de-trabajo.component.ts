@@ -93,7 +93,6 @@ export class CrearActividadPlanDeTrabajoComponent {
   iniciarDesvanecimiento() {
     setTimeout(() => {
       this.showMessage = false;
-      this.router.navigate(['/ver-plan-de-trabajo']);
     }, 3000); // 3000 ms = 3 segundos
   }
 
