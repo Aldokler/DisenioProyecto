@@ -156,7 +156,7 @@
                                     <p>{{comentario.getMensaje()}}</p>
                                 </div>
                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                    Fecha de publicación: {{comentario.getFechaHora()}}  &nbsp;&nbsp;&nbsp;
+                                    Fecha de publicación: {{comentario.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}  &nbsp;&nbsp;&nbsp;
 
                                     <!-- ver respuestas y realizar comentarios -->
                                     <button (click)="generarComentarios(comentario)" class="btn btn-outline-secondary me-2" type="button"
@@ -186,7 +186,7 @@
                                                     <p> {{respuesta.getMensaje()}}</p>
                                                 </div>
                                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                                    {{respuesta.getFechaHora()}}
+                                                    {{respuesta.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
                                                 </div>
 
                                             </div>
@@ -249,7 +249,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form (submit)="guardarComentario(comentario.value)">
+                <form >
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
@@ -261,8 +261,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button  type="submit" class="btn text-white"
-                            style="background-color: #13293D;">Comentar</button>
+                        <button  type="button" class="btn text-white"
+                            style="background-color: #13293D;" (click)="guardarComentario(comentario.value)">Comentar</button>
                     </div>
 
                 </form>
@@ -281,7 +281,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form (submit)="responderComentario(respuestaComentario.value)" >
+                <form  >
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
@@ -294,8 +294,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn text-white"
-                            style="background-color: #13293D;">Responder</button>
+                        <button type="button" class="btn text-white"
+                            style="background-color: #13293D;" (click)="responderComentario(respuestaComentario.value)">Responder</button>
                     </div>
 
                 </form>

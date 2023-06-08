@@ -70,12 +70,12 @@ export class ApiService {
     return this.http.get(this.url + '/equipo_guia/actividad/comentariosR/' + id)
   }
 
-  public addComentario(Mensaje: string, Emisor: string, FechaHora: Date,ActividadID: number){
-    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {Mensaje, FechaHora, Emisor, ActividadID})
+  public addComentario(Mensaje: string, Emisor: string, FechaHora: string,ActividadID: number){
+    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {Mensaje,Emisor, FechaHora, ActividadID})
   }
 
-  public addReplie(comentario: Comentario){
-    return this.http.post(this.url + '/equipo_guia/actividad/comentariosR/' , {comentario})
+  public addReplie(Mensaje: string, Emisor: string, FechaHora: string,ActividadID: number, ComentarioOrigninal:number){
+    return this.http.post(this.url + '/equipo_guia/actividad/comentariosR/' , {Mensaje, FechaHora, Emisor, ActividadID, ComentarioOrigninal})
   }
 
   public subirLink(id: Number, link:string){

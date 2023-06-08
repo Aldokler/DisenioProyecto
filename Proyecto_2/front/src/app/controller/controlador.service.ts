@@ -130,11 +130,11 @@ export class ControladorService {
     return this.adminActividad.subirAsistencia(id, Foto)
   }
 
-  public comentarActividad(comentario: Comentario){
-      this.adminActividad.comentarActividad(comentario)
+  public comentarActividad(comentario: Comentario): Observable<boolean>{
+      return this.adminActividad.comentarActividad(comentario.getMensaje(), comentario.getEmisor(),comentario.getFechaHora(),comentario.getActividadId())
   }
-  public responderComentario(comentario: Comentario){
-      this.adminActividad.responderComentario(comentario)
+  public responderComentario(comentario: Comentario): Observable<boolean>{
+      return this.adminActividad.responderComentario(comentario)
   }
   public agregarObservacion(id: number, observacion: string){
       this.adminActividad.agregarObservacion(id, observacion)
