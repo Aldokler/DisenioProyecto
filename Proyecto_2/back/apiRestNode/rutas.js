@@ -321,6 +321,27 @@ router.get('/plan_trabajo/:id', (request, response)=>{
         }
     })
 });
+
+
+// get actividades de un plan por estado ---------------------------------------------***
+router.get('/plan_trabajo/:id/:estado', (request, response)=>{
+    const {id,estado} = request.params;
+    let sql = "call getActividadesByPlanyEstado(?,?);";
+    conexion.query(sql, [id,estado], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const actividades = rows[0].map(row => 
+                new Actividad(row.ID, row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividades})
+        }
+    })
+});
+
+
+
 /*
 // get proxima actividad de un plan ---------------------------------------------
 router.get('/plan_trabajo/:pplan', (request, response)=>{
@@ -733,3 +754,5 @@ router.get('/estudiante/:id', (request, response)=>{
         }
     })
 });
+
+
