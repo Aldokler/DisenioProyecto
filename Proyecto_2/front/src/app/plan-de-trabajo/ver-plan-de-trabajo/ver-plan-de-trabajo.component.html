@@ -130,7 +130,7 @@
 
 
                     <div *ngIf="tipoDeUsuario == 'Estudiante'">
-                        <div *ngIf="saber == false">
+                        <div *ngIf="!saber">
                             <div *ngFor="let actividadPlaneada of actividadesPlaneadas" class="card mb-4">
                                 <h5 class="card-header" style="background-color: #E2EFF8;">
                                     Actividad: {{actividadPlaneada.getNombre()}}
@@ -153,7 +153,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="saber == true">
+                        <div *ngIf="saber">
                             <div class="card mb-4">
                                 <h5 class="card-header" style="background-color: #E2EFF8;">
                                     Actividad: {{actividadProxima.getNombre()}}

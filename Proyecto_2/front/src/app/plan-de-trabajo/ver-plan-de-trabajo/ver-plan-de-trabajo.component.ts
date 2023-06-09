@@ -66,14 +66,21 @@ export class VerPlanDeTrabajoComponent {
   }
 
   proximaActividad() {
-    this.controller.consultarProximaActividad(this.pasarDatos.planesDeTrabajo.getId(), this.fecha.toDateString()).pipe(
+
+    const fechaProxima = new Date(this.fecha).toISOString().replace('T', ' ').substring(0, 19);
+    console.log(fechaProxima)
+    this.controller.consultarProximaActividad(this.pasarDatos.planesDeTrabajo.getId(), fechaProxima).pipe(
       tap(res => {
         this.actividadProxima = res;
         console.log(this.actividadProxima)
       })
     ).subscribe()
-    this.saber = true
-
+    if(this.saber){
+      this.saber = false
+    }else(
+      this.saber = true
+    )
+    
   }
 
   guardarActividad(actividad: Actividad) {
