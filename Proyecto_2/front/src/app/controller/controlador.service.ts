@@ -45,7 +45,7 @@ export class ControladorService {
   public addEstudiante(estudiante: Estudiante): Observable<boolean>{
     return this.adminEstudiante.addEstudiante(estudiante)
   }
-  public getEstudiante(carne:number): Observable<Estudiante>{
+  public getEstudiante(carne:string): Observable<Estudiante>{
       return this.adminEstudiante.getEstudiante(carne)
   }
   public getEstudiantes(Sort: number): Observable<Estudiante[]>{

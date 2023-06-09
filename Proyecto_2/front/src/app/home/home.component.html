@@ -57,7 +57,7 @@
 
     <div class="row justify-content-center">
 
-      <div class=" col-md-3 rounded-lg" >
+      <div  class=" col-md-3 rounded-lg" >
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-plan-de-trabajo']">
           <div class="card">
             <div class="card-body rounded" style="background-color: #E2EFF8; height: 400px;" >
@@ -68,7 +68,7 @@
         </a>
       </div>
 
-      <div class=" col-md-3 rounded-lg" >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg" >
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-profesores']">
           <div class="card">
             <div class="card-body " style="background-color: #E2EFF8; height: 400px;">
@@ -79,7 +79,7 @@
         </a>  
       </div>
 
-      <div class=" col-md-3 rounded-lg" >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg" >
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-estudiantes']">
           <div class="card">
             <div class="card-body" style="background-color: #E2EFF8; height: 400px;">
@@ -90,7 +90,7 @@
         </a>
       </div>
 
-      <div  class="col-md-3 " >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class="col-md-3 " >
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-equipo-guia']">
           <div class="card">
             <div class="card-body " style="background-color: #E2EFF8; height: 400px;" >

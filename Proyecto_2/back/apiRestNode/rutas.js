@@ -717,3 +717,19 @@ router.get('/estudiantesPorSede/:id', (request, response)=>{
         }
     })
 });
+
+//get estudiante por ID -----------------------------------------------------
+router.get('/estudiante/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getEstudianteByID(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiante = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña,row.Fotografia ));
+                response.json({estudiante})
+        }
+    })
+});
