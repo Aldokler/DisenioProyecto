@@ -45,9 +45,14 @@ export class ControladorService {
   public addEstudiante(estudiante: Estudiante): Observable<boolean>{
     return this.adminEstudiante.addEstudiante(estudiante)
   }
-  public getEstudiante(carne:number): Observable<Estudiante>{
+  public getEstudiante(carne:string): Observable<Estudiante>{
       return this.adminEstudiante.getEstudiante(carne)
   }
+
+  public getEstudianteByCorreo(correo:string): Observable<Estudiante>{
+    return this.adminEstudiante.getEstudianteByCorreo(correo)
+ }
+
   public getEstudiantes(Sort: number): Observable<Estudiante[]>{
       return this.adminEstudiante.getEstudiantes(Sort)
   }
@@ -105,6 +110,12 @@ export class ControladorService {
   public getActividad(id: number): Observable<Actividad>{
     return this.adminActividad.getActividad(id)
   }
+  public getActividadxEstado(id: number, estado: string): Observable<Actividad[]>{
+    return this.adminPlanDeTrabajo.getActividadesofPlanByEstado(id, estado)
+  }
+  public getNextActividad(id: number, fecha:string): Observable<Actividad>{
+    return this.adminPlanDeTrabajo.consultarProximaActividad(id, fecha)
+  }
   public crearActividad(actividad: Actividad, plan: number): Observable<boolean>{
       return this.adminActividad.crearActividad(actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), plan, actividad.getFechaAPublicar())
   }
@@ -145,8 +156,8 @@ export class ControladorService {
   public crearPlanTrabajo(año: number, semestre: number, creador: number): Observable<boolean>{
       return this.adminPlanDeTrabajo.crearPlanTrabajo(año, semestre, creador)
   }
-  public consultarProximaActividad(id: String): Observable<Actividad>{
-      return this.adminPlanDeTrabajo.consultarProximaActividad(id)
+  public consultarProximaActividad(id: number, fecha: string): Observable<Actividad>{
+      return this.adminPlanDeTrabajo.consultarProximaActividad(id , fecha)
   }
   public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
       return this.adminPlanDeTrabajo.verPlanDeTrabajo(id)

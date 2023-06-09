@@ -9,6 +9,8 @@ import { Profesor } from 'src/app/model/profesor';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { Usuario } from 'src/app/model/usuario';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-plan-de-trabajo',
@@ -17,7 +19,7 @@ import { Usuario } from 'src/app/model/usuario';
 })
 export class CrearPlanDeTrabajoComponent {
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService,private router: Router
   ) { }
 
   public actividades: Actividad[] = [];
@@ -26,21 +28,36 @@ export class CrearPlanDeTrabajoComponent {
   public creador: EquipoGuia = new EquipoGuia(0, this.miembros, 0, 0, this.coordinador);
 
   crearPlanDeTrabajo(fecha: string, semestre: string, annio: string, codigodeEquipo: string) {
-    /*
-    const annioNumber = parseInt(annio);
-    const semestreNumber = parseInt(semestre);
-    const planDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, annioNumber, semestreNumber, this.actividades, this.creador);
-    console.log(planDeTrabajo)*/
-    console.log("hola")
-
+    if (!fecha || !semestre|| !annio || !fecha || !codigodeEquipo ) {
+      this.showErrorAlert();
+      return;
+    }
     this.controller.crearPlanTrabajo(parseInt(annio), parseInt(semestre), parseInt(codigodeEquipo)).pipe(
       tap(res => {
         if (res) {
-          console.log("hola")
         }
       })
-    ).subscribe()
+    ).subscribe(() => {
+      this.showSuccessAlert() ;
+    })
   }
 
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/home-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear el plan de trabajo. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
 
 }

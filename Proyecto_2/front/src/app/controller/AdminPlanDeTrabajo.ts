@@ -68,10 +68,67 @@ export class AdminPlanDeTrabajo{
         )
     }
 
+    public getActividadesofPlanByEstado(id: number, estado: String): Observable<Actividad[]>{
+        return this.DAO.getActividadesofPlanEstado(id, estado).pipe(
+            map((data: any) => {
+                console.log(data.actividades)
+                const json = data.actividades;
+                return json.map((json: any) => {
+                    return new Actividad(
+                        json.id,
+                        json.semana,
+                        json.tipo,
+                        json.nombre,
+                        json.fechaHora,
+                        [],
+                        json.diasAnunciar,
+                        [],
+                        json.modalidad,
+                        json.link,
+                        json.afiche,
+                        json.estado,
+                        json.evidencia,
+                        [],
+                        json.fechaCancelacion,
+                        json.observacion,
+                        json.fechaAPublicar
+                    )
+                });
+            })
+        )
+    }
+
 //---------------------------------------------------------------------------------------------------------------------------
 
-    public consultarProximaActividad(id: String): Observable<Actividad>{
-        return new Subject
+    public consultarProximaActividad(id: number, fecha: string): Observable<Actividad>{
+        return this.DAO.getNextActividad(id, fecha).pipe(
+            map((data: any) => {
+                const json = data.actividad[0];
+                if (json == undefined){
+                    return new Actividad(0, 0, TIndoleActividad.TECNICO, '', '', [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], '', '', '')
+                } else {
+                    return new Actividad(
+                        json.id,
+                        json.semana,
+                        json.tipo,
+                        json.nombre,
+                        json.fechaHora,
+                        [],
+                        json.diasAnunciar,
+                        [],
+                        json.modalidad,
+                        json.link,
+                        json.afiche,
+                        json.estado,
+                        json.evidencia,
+                        [],
+                        json.fechaCancelacion,
+                        json.observacion,
+                        json.fechaAPublicar
+                    )
+                }
+            })
+        );
     }
     public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
         return new Subject

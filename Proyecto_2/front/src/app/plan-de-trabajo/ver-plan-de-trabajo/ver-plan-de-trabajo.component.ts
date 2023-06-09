@@ -26,41 +26,64 @@ import { Evidencia } from 'src/app/model/evidencia';
 export class VerPlanDeTrabajoComponent {
 
   public actividades: Actividad[] = [];
-  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  public actividadesPlaneadas: Actividad[] = [];
+  public actividadProxima = new Actividad(0, 0, TIndoleActividad.TECNICO, '', '', [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], '', '', '')
+  public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public actividadSeleccionada: Actividad[] = []
   public tipoDeUsuario: string = "";
+  public fecha = new Date();
+  public saber: boolean = false
 
-  
+
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    if(this.pasarDatos.loginUser instanceof Profesor){
-      if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
+    if (this.pasarDatos.loginUser instanceof Profesor) {
+      if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
         this.tipoDeUsuario = "Coordinador"
-      }else{
+      } else {
         this.tipoDeUsuario = "Profesor"
       }
-    }else{
-      this.tipoDeUsuario ="Administrativo"
+
+    } else if (this.pasarDatos.loginUser instanceof Administrativo) {
+      this.tipoDeUsuario = "Administrativo"
+    } else {
+      this.tipoDeUsuario = "Estudiante"
     }
     this.controller.getActividadesofPlan(this.pasarDatos.planesDeTrabajo.getId()).pipe(
       tap(res => {
-       this.actividades = res;
+        this.actividades = res;
       })
     ).subscribe()
-    console.log("este es el plan que se escogió");
-    console.log(this.pasarDatos.planesDeTrabajo);
-    
+
+    this.controller.getActividadxEstado(this.pasarDatos.planesDeTrabajo.getId(), "Notificada").pipe(
+      tap(res => {
+        this.actividadesPlaneadas = res;
+      })
+    ).subscribe()
   }
 
+  proximaActividad() {
+
+    const fechaProxima = new Date(this.fecha).toISOString().replace('T', ' ').substring(0, 19);
+    console.log(fechaProxima)
+    this.controller.consultarProximaActividad(this.pasarDatos.planesDeTrabajo.getId(), fechaProxima).pipe(
+      tap(res => {
+        this.actividadProxima = res;
+        console.log(this.actividadProxima)
+      })
+    ).subscribe()
+    if(this.saber){
+      this.saber = false
+    }else(
+      this.saber = true
+    )
+    
+  }
 
   guardarActividad(actividad: Actividad) {
     this.pasarDatos.actividadPlanDeTrabajo = actividad;
   }
-
-
-  
-
 }

@@ -10,6 +10,7 @@ import { TSede } from 'src/app/model/tsede';
 import { tap } from 'rxjs';
 import { Profesor } from '../model/profesor';
 import { PasarDatosService } from '../pasar-datos.service';
+import { Estudiante } from '../model/estudiante';
 
 
 @Component({
@@ -17,12 +18,12 @@ import { PasarDatosService } from '../pasar-datos.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   mostrarHomeComponent = false;
   errorMessage: string = "";
-  private pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  private pasarDatos: PasarDatosService = PasarDatosService.getInstance()
 
-  constructor(private router: Router, private my: ApiService, private  adm: AdminProfesores,private controller: ControladorService){}
+  constructor(private router: Router, private my: ApiService, private adm: AdminProfesores, private controller: ControladorService) { }
 
 
   ngOnInit(): void {
@@ -37,32 +38,55 @@ export class LoginComponent implements OnInit{
 
     this.controller.ingresar(correoUsuario, contrasenaInput).pipe(
       tap(async res => {
-        if (res){
+        if (res) {
           let Admin: Usuario | null = null;
           let Profe: Usuario | null = null;
+          let Estudiante: Usuario | null = null;
           await this.controller.getAdministrativo(correoUsuario).toPromise().then(
             admin => {
               Admin = admin as Administrativo
-              if (Admin.getId() == ''){
+              if (Admin.getId() == '') {
                 Admin = null
               }
-          }).catch()
+            }).catch()
+
           await this.controller.getProfesor(correoUsuario).toPromise().then(
             profe => {
+              console.log(profe)
               Profe = profe as Profesor
-              if (Profe.getId() == ''){
+              if (Profe.getId() == '') {
                 Profe = null
               }
-          }).catch()
+            }).catch()
+
+          await this.controller.getEstudianteByCorreo(correoUsuario).toPromise().then(
+            estudiante => {
+              console.log(estudiante)
+              Estudiante = estudiante as Estudiante
+              if (Estudiante.getId() == '') {
+                Estudiante = null
+              }
+            }).catch()
+
+          console.log(Profe)
+          console.log(Admin)
+          console.log(Estudiante)
+
           if (Profe) {
             console.log(Profe)
             this.pasarDatos.loginUser = Profe
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
             this.router.navigate(['/home']);
-          } else if (Admin){
+          } else if (Admin) {
             console.log(Admin)
             this.pasarDatos.loginUser = Admin
+            //--------------------------------------------------------------------------------------------------------------
+            this.mostrarHomeComponent = true;
+            this.router.navigate(['/home']);
+          } else if (Estudiante) {
+            console.log(Estudiante)
+            this.pasarDatos.loginUser = Estudiante
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
             this.router.navigate(['/home']);
@@ -93,6 +117,6 @@ export class LoginComponent implements OnInit{
       this.verContrasenaIcono = 'bi-eye';
     }
   }
-  
-  
+
+
 }

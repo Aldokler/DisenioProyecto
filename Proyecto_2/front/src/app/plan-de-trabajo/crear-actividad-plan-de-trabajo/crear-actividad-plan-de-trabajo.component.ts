@@ -33,7 +33,6 @@ export class CrearActividadPlanDeTrabajoComponent {
   presencialSelected: boolean = false;
   tipoDeModalidad: TModalidad = TModalidad.PRESENCIAL
   errorCreacion: boolean = false;
-  creacionCorrecta: boolean = false;
   showMessage: boolean = true;
   errorMessage: string = "";
   @ViewChild('registrationCommentaryModal') registrationCommentaryModal!: ElementRef;
@@ -70,9 +69,7 @@ export class CrearActividadPlanDeTrabajoComponent {
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
     const fechaDate = new Date(fecha + " " + hora + " UTC").toISOString().replace('T', ' ').substring(0, 19);
-    console.log(fechaDate)
     const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
-    console.log("entra ")
     if (this.remotoSelected === true) {
       this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.REMOTA, enlace, afiche, TEstado.PLANEADA, this.evidencia, [], "", "", fechaPublicar);
     } else {
@@ -82,7 +79,6 @@ export class CrearActividadPlanDeTrabajoComponent {
 
     this.controller.crearActividad(this.actividadGuardar, this.pasarDatos.planesDeTrabajo.getId()).subscribe(
       () => {
-        this.creacionCorrecta = true;
         this.showSuccessAlert() ;
       }
     );
