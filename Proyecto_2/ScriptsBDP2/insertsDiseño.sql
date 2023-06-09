@@ -34,6 +34,17 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS addEstudiante; //
+CREATE PROCEDURE addEstudiante(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFotografia longblob)
+BEGIN
+	INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
+	VALUES (vID, vNombre, vApellido1, vApellido2, vCorreoElectronico, vCelular, vContraseña, vSede);
+	INSERT INTO estudiante (ID, Fotografia)
+	VALUES (vID, vFoto);
+    COMMIT;
+END; //
+
 DELIMITER $$
 CREATE PROCEDURE addAdministrativo (vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45))
 BEGIN
@@ -153,6 +164,17 @@ BEGIN
     COMMIT;
 END$$
 DELIMITER ;
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS addEstudiante; //
+CREATE PROCEDURE addEstudiante(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFoto longblob)
+BEGIN
+	INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
+	VALUES (vID, vNombre, vApellido1, vApellido2, vCorreoElectronico, vCelular, vContraseña, vSede);
+	INSERT INTO estudiante (ID, Fotografia)
+	VALUES (vID, vFoto);
+    COMMIT;
+END; //
 
 drop procedure if exists defEquipoGuiaCoordinador;
 DELIMITER $$
