@@ -345,8 +345,7 @@ router.get('/plan_trabajo/:id/:estado', (request, response)=>{
 
 // get proxima actividad de un plan ---------------------------------------------
 router.get('/plan_trabajo_next/:pplan', (request, response)=>{
-    const {pplan} = request.params;
-    const {pfecha} = request.query;
+    const {pplan, pfecha} = request.params;
     let sql = "call getNextActividad(?,?);";
     conexion.query(sql, [pplan, pfecha], (error, rows, fields)=>{
         if(error){

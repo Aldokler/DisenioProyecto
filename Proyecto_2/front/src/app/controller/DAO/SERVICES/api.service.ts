@@ -55,7 +55,7 @@ export class ApiService {
   }
 
   public getNextActividadd(id: number, fecha: string){
-    return this.http.get(this.url + 'plan_trabajo_next/' + id, {fecha})
+    return this.http.get(this.url + 'plan_trabajo_next/' + id + "/" + fecha)
   }
 
   public addActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number, fechaPublicar: string){
