@@ -108,6 +108,9 @@ export class ControladorService {
   public getActividadxEstado(id: number, estado: string): Observable<Actividad[]>{
     return this.adminPlanDeTrabajo.getActividadesofPlanByEstado(id, estado)
   }
+  public getNextActividad(id: number, fecha:string): Observable<Actividad>{
+    return this.adminPlanDeTrabajo.consultarProximaActividad(id, fecha)
+  }
   public crearActividad(actividad: Actividad, plan: number): Observable<boolean>{
       return this.adminActividad.crearActividad(actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), plan, actividad.getFechaAPublicar())
   }
@@ -148,8 +151,8 @@ export class ControladorService {
   public crearPlanTrabajo(año: number, semestre: number, creador: number): Observable<boolean>{
       return this.adminPlanDeTrabajo.crearPlanTrabajo(año, semestre, creador)
   }
-  public consultarProximaActividad(id: String): Observable<Actividad>{
-      return this.adminPlanDeTrabajo.consultarProximaActividad(id)
+  public consultarProximaActividad(id: number, fecha: string): Observable<Actividad>{
+      return this.adminPlanDeTrabajo.consultarProximaActividad(id , fecha)
   }
   public verPlanDeTrabajo(id: String): Observable<PlanDeTrabajo>{
       return this.adminPlanDeTrabajo.verPlanDeTrabajo(id)
