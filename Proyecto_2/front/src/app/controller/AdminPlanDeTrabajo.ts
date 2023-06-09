@@ -68,6 +68,36 @@ export class AdminPlanDeTrabajo{
         )
     }
 
+    public getActividadesofPlanByEstado(id: number, estado: String): Observable<Actividad[]>{
+        return this.DAO.getActividadesofPlanEstado(id, estado).pipe(
+            map((data: any) => {
+                console.log(data.actividades)
+                const json = data.actividades;
+                return json.map((json: any) => {
+                    return new Actividad(
+                        json.id,
+                        json.semana,
+                        json.tipo,
+                        json.nombre,
+                        json.fechaHora,
+                        [],
+                        json.diasAnunciar,
+                        [],
+                        json.modalidad,
+                        json.link,
+                        json.afiche,
+                        json.estado,
+                        json.evidencia,
+                        [],
+                        json.fechaCancelacion,
+                        json.observacion,
+                        json.fechaAPublicar
+                    )
+                });
+            })
+        )
+    }
+
 //---------------------------------------------------------------------------------------------------------------------------
 
     public consultarProximaActividad(id: String): Observable<Actividad>{

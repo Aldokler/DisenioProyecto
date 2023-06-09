@@ -46,6 +46,10 @@ export class ApiService {
     return this.http.get(this.url + 'plan_trabajo/' + id)
   }
 
+  public getActividadesofPlanEstado(id: number, estado: String){
+    return this.http.get(this.url + 'plan_trabajo/' + id + "/" + estado)
+  }
+
   public getActividad(id: number){
     return this.http.get(this.url + 'plan_trabajo/actividad/' + id)
   }
