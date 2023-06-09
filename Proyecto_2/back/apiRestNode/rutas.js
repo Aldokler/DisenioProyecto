@@ -754,4 +754,19 @@ router.get('/estudiante/:id', (request, response)=>{
     })
 });
 
-
+//get estudiante por correo -----------------------------------------------------
+router.get('/estudiantec/:correo', (request, response)=>{
+    const {correo} = request.params;
+    let sql = "call getEstudianteByCorreo(?);";
+    conexion.query(sql, [correo], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiante = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña,row.Fotografia ));
+                response.json({estudiante})
+        }
+    })
+});

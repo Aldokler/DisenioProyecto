@@ -57,6 +57,13 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE getEstudianteByCorreo(IN pcorreo varchar(50))
+BEGIN
+	select * from usuario where CorreoElectronico = pcorreo ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE getEstudiantesSede ()
 BEGIN
 	select a.Nombre, a.Apellido1, a.Apellido2, a.CorreoElectronico, a.Celular, b.ID, a.Sede

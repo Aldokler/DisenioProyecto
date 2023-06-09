@@ -48,6 +48,11 @@ export class ControladorService {
   public getEstudiante(carne:string): Observable<Estudiante>{
       return this.adminEstudiante.getEstudiante(carne)
   }
+
+  public getEstudianteByCorreo(correo:string): Observable<Estudiante>{
+    return this.adminEstudiante.getEstudianteByCorreo(correo)
+ }
+
   public getEstudiantes(Sort: number): Observable<Estudiante[]>{
       return this.adminEstudiante.getEstudiantes(Sort)
   }

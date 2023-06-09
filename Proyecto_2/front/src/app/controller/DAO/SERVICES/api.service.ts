@@ -189,4 +189,8 @@ export class ApiService {
     return this.http.get(this.url + 'estudiante/' +carne)
   }
 
+  public getEstudianteByCorreo(correo: String){
+    return this.http.get(this.url + 'estudiantec/' + correo)
+  }
+
 }

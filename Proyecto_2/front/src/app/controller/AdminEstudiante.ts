@@ -84,6 +84,28 @@ export class AdminEstudiante{
             })
         );
     }
+
+    public getEstudianteByCorreo(correo: string): Observable<Estudiante> {
+        return this.DAO.getEstudianteByCorreo(correo).pipe(
+            map((data: any) => {
+                const Json = data.estudiante[0];
+                if (Json == undefined){
+                    return new Estudiante('', '', '', '', '', '', TSede.CA, "")
+                } else {
+                    return new Estudiante(
+                        Json.id,
+                        Json.nombre,
+                        Json.apellido1,
+                        Json.apellido2,
+                        Json.correoElectronico,
+                        Json.celular,
+                        Json.sede,
+                        Json.contraseña
+                    );
+                }
+            })
+        );
+    }
     public editarEstudiante(datosEstudiante: Estudiante): boolean{
         return true
     }

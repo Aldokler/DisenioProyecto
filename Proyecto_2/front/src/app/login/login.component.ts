@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
               }
             }).catch()
 
-          await this.controller.getEstudiante(correoUsuario).toPromise().then(
+          await this.controller.getEstudianteByCorreo(correoUsuario).toPromise().then(
             estudiante => {
               console.log(estudiante)
               Estudiante = estudiante as Estudiante
