@@ -148,8 +148,15 @@ DELIMITER $$
 CREATE PROCEDURE login(IN vusername varchar(45), IN vpassword varchar(45))
 BEGIN
 	DECLARE check_user bool;
-	select if(count(ID) = 1, true, false) into check_user from usuario where Contraseña = vpassword AND ID = vusername;
-    select check_user;
+    DECLARE check_student bool;
+    select if(count(ID) = 1, true, false) into check_student from usuario where CorreoElectronico = vusername;
+    if (check_student)  = true then
+		select if(count(ID) = 1, true, false) into check_user from usuario where Contraseña = vpassword AND CorreoElectronico = vusername;
+		select check_user;
+    else
+		select if(count(ID) = 1, true, false) into check_user from usuario where Contraseña = vpassword AND ID = vusername;
+		select check_user;
+	end if;
 END$$
 DELIMITER ;
 
@@ -181,6 +188,8 @@ BEGIN
 	ORDER BY FechaHora LIMIT 1;
 END$$
 DELIMITER ;
+
+
 
 drop procedure if exists getAsistencia;
 DELIMITER $$
