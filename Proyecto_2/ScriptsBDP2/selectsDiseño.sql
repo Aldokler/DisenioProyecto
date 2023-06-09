@@ -36,6 +36,31 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS getActividadesByPlanyEstado; //
+CREATE PROCEDURE getActividadesByPlanyEstado(IN pPlan varchar(50), IN pEstado varchar(45))
+BEGIN
+	SELECT * FROM actividad WHERE PlanID = pPlan AND Estado = pEstado;
+    COMMIT;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getNextActividadNotificada; // 
+CREATE PROCEDURE getNextActividadNotificada(IN pplan int, IN pfecha datetime)
+BEGIN
+select * from actividad where PlanID = pplan AND FechaHora >= pfecha AND Estado = "Notificada"
+ORDER BY FechaHora LIMIT 1;
+commit;
+END; // 
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getEstudianteByID; //
+CREATE PROCEDURE getEstudianteByID(IN pID varchar(50))
+BEGIN
+	select * from usuario join estudiante on estudiante.ID = usuario.ID where usuario.ID = pID ;
+    COMMIT;
+END; //
+
 DELIMITER $$
 CREATE PROCEDURE getEstudiantesAlfa ()
 BEGIN
@@ -99,6 +124,19 @@ BEGIN
 	select * from usuario join administrativo on administrativo.ID = pID where usuario.ID = pID ;
 END$$
 DELIMITER ;
+
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getProfesoresEnEquipoByProfesor; //
+CREATE PROCEDURE getProfesoresEnEquipoByProfesor(IN pprofesor_ID VARCHAR(45))
+BEGIN
+SELECT g.IDEquipoGuia, p.*, u.*
+FROM (SELECT gxp.IDEquipoGuia FROM equipo_guía_x_profesor gxp  WHERE gxp.IDProfesor= pprofesor_ID) as g
+INNER JOIN equipo_guía_x_profesor gxp ON gxp.IDEquipoGuia = g.IDEquipoGuia
+INNER JOIN profesor p ON gxp.IDProfesor = p.ID
+INNER JOIN usuario u ON p.ID =u.ID
+WHERE NOT IDProfesor = pprofesor_ID;
+END; //
 
 
 drop procedure if exists consultarEquipoGuia;

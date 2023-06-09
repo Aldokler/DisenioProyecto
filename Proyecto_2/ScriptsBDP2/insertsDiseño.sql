@@ -8,17 +8,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE addEstudiante (vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45))
-BEGIN
-	INSERT INTO usuario (ID, Nombre, Apellido1, Apellido2, CorreoElectronico, Celular, Contraseña, Sede)
-	VALUES (vID, vNombre, vApellido1, vApellido2, vCorreoElectronico, vCelular, vContraseña, vSede);
-	INSERT INTO estudiante (ID)
-	VALUES (vID);
-    COMMIT;
-END$$
-DELIMITER ;
-
 drop procedure if exists addProfesor;
 DELIMITER $$
 CREATE PROCEDURE addProfesor(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(45), vFoto longblob)
