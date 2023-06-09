@@ -27,11 +27,14 @@ export class VerPlanDeTrabajoComponent {
 
   public actividades: Actividad[] = [];
   public actividadesPlaneadas: Actividad[] = [];
-  public pasarDatos:PasarDatosService = PasarDatosService.getInstance()
+  public actividadProxima = new Actividad(0, 0, TIndoleActividad.TECNICO, '', '', [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], '', '', '')
+  public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public actividadSeleccionada: Actividad[] = []
   public tipoDeUsuario: string = "";
+  public fecha = new Date();
+  public saber: boolean = false
 
-  
+
   constructor(private controller: ControladorService, private route: ActivatedRoute) {
   }
 
@@ -44,36 +47,36 @@ export class VerPlanDeTrabajoComponent {
         this.tipoDeUsuario = "Profesor"
       }
 
-    } else if (this.pasarDatos.loginUser instanceof Administrativo){
+    } else if (this.pasarDatos.loginUser instanceof Administrativo) {
       this.tipoDeUsuario = "Administrativo"
-    }else {
+    } else {
       this.tipoDeUsuario = "Estudiante"
     }
     this.controller.getActividadesofPlan(this.pasarDatos.planesDeTrabajo.getId()).pipe(
       tap(res => {
-       this.actividades = res;
+        this.actividades = res;
       })
     ).subscribe()
 
     this.controller.getActividadxEstado(this.pasarDatos.planesDeTrabajo.getId(), "Notificada").pipe(
       tap(res => {
-       this.actividadesPlaneadas = res;
+        this.actividadesPlaneadas = res;
       })
     ).subscribe()
-
-    
-
-    console.log("este es el plan que se escogió");
-    console.log(this.pasarDatos.planesDeTrabajo);
-    
   }
 
+  proximaActividad() {
+    this.controller.consultarProximaActividad(this.pasarDatos.planesDeTrabajo.getId(), this.fecha.toDateString()).pipe(
+      tap(res => {
+        this.actividadProxima = res;
+        console.log(this.actividadProxima)
+      })
+    ).subscribe()
+    this.saber = true
+
+  }
 
   guardarActividad(actividad: Actividad) {
     this.pasarDatos.actividadPlanDeTrabajo = actividad;
   }
-
-
-  
-
 }

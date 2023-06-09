@@ -91,7 +91,16 @@
                                 [routerLink]="['/crear-actividad-plan-de-trabajo']">Crear Actividad </a></button>
                     </div>
 
+
+                    <div class="col">
+                        <button type="button" class="btn text-white me-2 " style="background-color: #13293D;"
+                            (click)="proximaActividad()">
+                            Próxima Actividad
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
 
             <section class="mb-4">
@@ -121,25 +130,52 @@
 
 
                     <div *ngIf="tipoDeUsuario == 'Estudiante'">
-                        <div *ngFor="let actividadPlaneada of actividadesPlaneadas" class="card mb-4">
-                            <h5 class="card-header" style="background-color: #E2EFF8;">
-                                Actividad: {{actividadPlaneada.getNombre()}}
-                            </h5>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    Tipo: {{actividadPlaneada.getTipo()}}
-                                </h4>
-                                <div class="card-text">
-                                    Semana: {{actividadPlaneada.getSemana()}} &nbsp;&nbsp;&nbsp;
-                                    {{actividadPlaneada.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                        <div *ngIf="saber == false">
+                            <div *ngFor="let actividadPlaneada of actividadesPlaneadas" class="card mb-4">
+                                <h5 class="card-header" style="background-color: #E2EFF8;">
+                                    Actividad: {{actividadPlaneada.getNombre()}}
+                                </h5>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        Tipo: {{actividadPlaneada.getTipo()}}
+                                    </h4>
+                                    <div class="card-text">
+                                        Semana: {{actividadPlaneada.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                        {{actividadPlaneada.getFechaHora().toString().replace('T', ' ').substring(0,
+                                        19)}}
+                                    </div>
+                                    <a href="" class="btn btn-outline-secondary mt-2"
+                                        [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
+                                        (click)="guardarActividad(actividadPlaneada)"
+                                        [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                        más detalles</a>
                                 </div>
-                                <a href="" class="btn btn-outline-secondary mt-2"
-                                    [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
-                                    (click)="guardarActividad(actividadPlaneada)"
-                                    [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                    más detalles</a>
                             </div>
                         </div>
+
+                        <div *ngIf="saber == true">
+                            <div class="card mb-4">
+                                <h5 class="card-header" style="background-color: #E2EFF8;">
+                                    Actividad: {{actividadProxima.getNombre()}}
+                                </h5>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        Tipo: {{actividadProxima.getTipo()}}
+                                    </h4>
+                                    <div class="card-text">
+                                        Semana: {{actividadProxima.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                        {{actividadProxima.getFechaHora().toString().replace('T', ' ').substring(0,
+                                        19)}}
+                                    </div>
+                                    <a href="" class="btn btn-outline-secondary mt-2"
+                                        [style.background-color]="actividadSeleccionada.includes(actividadProxima) ? '#ADD8E6' : '#13293D'"
+                                        (click)="guardarActividad(actividadProxima)"
+                                        [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                        más detalles</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
 
