@@ -58,23 +58,24 @@
     <section class="mb-4 mt-4">
 
         <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
             </button>
             <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <h6>Ejemplo de notificación</h6>
-                  <p>Esta es una notificación de ejemplo.</p>
-                </a>
-              </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <h6>Ejemplo de notificación</h6>
+                        <p>Esta es una notificación de ejemplo.</p>
+                    </a>
+                </li>
             </ul>
-          </div>
-          
+        </div>
+
         <div class="container">
 
 
-            <div class="d-flex align-items-center pb-1 " >
+            <div class="d-flex align-items-center pb-1 ">
                 <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-plan-de-trabajo']">
                     <img src="assets/imagenes/regresar.png" alt="">
                     <span class="h5 fw-bold ml-3">REGRESAR</span>
@@ -82,41 +83,65 @@
             </div>
 
             <div class="col mt-5">
-                    <div class="row">
+                <div class="row">
 
-                        <div *ngIf="tipoDeUsuario == 'Coordinador'" class="col">
-                            <button type="" class="btn text-white me-2 "
-                                style="background-color: #13293D;"><a href="" class="text-decoration-none text-reset" 
+                    <div *ngIf="tipoDeUsuario == 'Coordinador'" class="col">
+                        <button type="" class="btn text-white me-2 " style="background-color: #13293D;"><a href=""
+                                class="text-decoration-none text-reset"
                                 [routerLink]="['/crear-actividad-plan-de-trabajo']">Crear Actividad </a></button>
-                        </div>
-
                     </div>
+
+                </div>
             </div>
 
             <section class="mb-4">
                 <div class="container mt-4">
-
-                    <div *ngFor="let actividad of actividades" class="card mb-4">
-                        <h5 class="card-header" style="background-color: #E2EFF8;">
-                            Actividad: {{actividad.getNombre()}}
-                        </h5>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                Tipo: {{actividad.getTipo()}}
-                            </h4>
-                            <div class="card-text">
-                                Semana: {{actividad.getSemana()}} &nbsp;&nbsp;&nbsp;
-                                {{actividad.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                    <div *ngIf="tipoDeUsuario != 'Estudiante'">
+                        <div *ngFor="let actividad of actividades" class="card mb-4">
+                            <h5 class="card-header" style="background-color: #E2EFF8;">
+                                Actividad: {{actividad.getNombre()}}
+                            </h5>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Tipo: {{actividad.getTipo()}}
+                                </h4>
+                                <div class="card-text">
+                                    Semana: {{actividad.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                    {{actividad.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                                </div>
+                                <a href="" class="btn btn-outline-secondary mt-2"
+                                    [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
+                                    (click)="guardarActividad(actividad)"
+                                    [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                    más detalles</a>
                             </div>
-                            <a href="" class="btn btn-outline-secondary mt-2"
-                            [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
-                            (click)="guardarActividad(actividad)" 
-                                [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                más detalles</a>
                         </div>
                     </div>
 
-                    
+
+
+                    <div *ngIf="tipoDeUsuario == 'Estudiante'">
+                        <div *ngFor="let actividadPlaneada of actividadesPlaneadas" class="card mb-4">
+                            <h5 class="card-header" style="background-color: #E2EFF8;">
+                                Actividad: {{actividadPlaneada.getNombre()}}
+                            </h5>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Tipo: {{actividadPlaneada.getTipo()}}
+                                </h4>
+                                <div class="card-text">
+                                    Semana: {{actividadPlaneada.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                    {{actividadPlaneada.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                                </div>
+                                <a href="" class="btn btn-outline-secondary mt-2"
+                                    [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
+                                    (click)="guardarActividad(actividadPlaneada)"
+                                    [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                    más detalles</a>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </section>

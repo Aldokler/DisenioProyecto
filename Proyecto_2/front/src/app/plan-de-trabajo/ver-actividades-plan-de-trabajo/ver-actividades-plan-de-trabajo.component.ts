@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Actividad } from 'src/app/model/actividad';
+import { Administrativo } from 'src/app/model/administrativo';
 import { Comentario } from 'src/app/model/comentario';
 import { Evidencia } from 'src/app/model/evidencia';
 import { Profesor } from 'src/app/model/profesor';
@@ -13,6 +14,7 @@ import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { Usuario } from 'src/app/model/usuario';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-actividades-plan-de-trabajo',
@@ -28,59 +30,66 @@ export class VerActividadesPlanDeTrabajoComponent {
   public respuestaComentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,0);
   public tipoDeUsuario: string = "";
   
-  constructor(private controller: ControladorService) {
+  constructor(private controller: ControladorService,private router: Router) {
     // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
   }
 
   ngOnInit() {
 
-    if(this.pasarDatos.loginUser instanceof Profesor){
-      if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
+    if (this.pasarDatos.loginUser instanceof Profesor) {
+      if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
         this.tipoDeUsuario = "Coordinador"
-      }else{
+      } else {
         this.tipoDeUsuario = "Profesor"
       }
-    }else{
-      this.tipoDeUsuario ="Administrativo"
+
+    } else if (this.pasarDatos.loginUser instanceof Administrativo){
+      this.tipoDeUsuario = "Administrativo"
+    }else {
+      this.tipoDeUsuario = "Estudiante"
     }
-    console.log(this.pasarDatos.actividadPlanDeTrabajo)
-    console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
+
     this.controller.getComentarios(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
       tap(res => {
         this.comentarios = res;
         this.respuestaComentarios = this.comentarios
-        console.log(this.comentarios);
       })
-
     ).subscribe()
 
   }
 
   generarComentarios(comentarioElegido:Comentario){
     this.comentarioSeleccionado = comentarioElegido
-    console.log("Este es el comentario elegido")
-    console.log(comentarioElegido)
     this.controller.getReplies(comentarioElegido.getId()).pipe(
       tap(res1 => {
         this.respuestaComentarios = res1
-        console.log("aqui es la respuesta del comentario")
-        console.log(this.respuestaComentarios)
       })
     ).subscribe()
   }
 
   guardarComentario(comentarioGuardar :string){
+    if (!comentarioGuardar) {
+      this.showErrorAlert();
+      return;
+    }
     let comentariocomentado:Comentario = new Comentario(0,comentarioGuardar,this.pasarDatos.loginUser.getId(),this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,this.pasarDatos.actividadPlanDeTrabajo.getId())
-    console.log(comentariocomentado)
-    this.controller.comentarActividad(comentariocomentado).subscribe()
+    this.controller.comentarActividad(comentariocomentado).subscribe(
+      () => {
+        this.showSuccessAlert() ;
+      }
+    )
   }
 
 
   responderComentario(respuestaAComentario:string){
     let respuestaComentario:Comentario = new Comentario(0, respuestaAComentario, this.pasarDatos.loginUser.getId(), this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0], this.pasarDatos.actividadPlanDeTrabajo.getId(), this.comentarioSeleccionado.getId())
     console.log(respuestaComentario)
-    this.controller.responderComentario(respuestaComentario).subscribe()
+    this.controller.responderComentario(respuestaComentario).subscribe(
+      () => {
+        this.showSuccessAlert() ;
+      }
+    )
   }
 
   agregarObservacion(observacion:string){
@@ -92,6 +101,24 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
   cancelarActividad(){
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
+  }
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-actividades-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
   }
 
 }

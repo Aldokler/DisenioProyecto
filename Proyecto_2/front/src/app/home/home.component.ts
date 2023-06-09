@@ -31,8 +31,10 @@ export class HomeComponent {
         this.tipoDeUsuario = "Profesor"
       }
 
-    } else {
+    } else if (this.pasarDatos.loginUser instanceof Administrativo){
       this.tipoDeUsuario = "Administrativo"
+    }else {
+      this.tipoDeUsuario = "Estudiante"
     }
   }
 

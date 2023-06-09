@@ -12,6 +12,9 @@ import { TIndoleActividad } from 'src/app/model/tindoleactividad';
 import { TModalidad } from 'src/app/model/tmodalidad';
 import { TEstado } from 'src/app/model/testado';
 import { Evidencia } from 'src/app/model/evidencia';
+import { Router } from '@angular/router';
+import { ViewChild, ElementRef } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-actividad-plan-de-trabajo',
@@ -29,9 +32,13 @@ export class CrearActividadPlanDeTrabajoComponent {
   remotoSelected: boolean = false;
   presencialSelected: boolean = false;
   tipoDeModalidad: TModalidad = TModalidad.PRESENCIAL
+  errorCreacion: boolean = false;
+  showMessage: boolean = true;
+  errorMessage: string = "";
+  @ViewChild('registrationCommentaryModal') registrationCommentaryModal!: ElementRef;
 
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService, private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -55,20 +62,28 @@ export class CrearActividadPlanDeTrabajoComponent {
   guardarActividad(nombreActividad: string, tipoActividad: string, enlace: string, semana: string, fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
     console.log(fecha)
     console.log(hora)
+    if (!nombreActividad || !tipoActividad|| !semana || !fecha || !hora || !fechaPublicacion) {
+      this.showErrorAlert();
+      return;
+    }
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
-    const fechaDate = new Date(fecha + " " + hora+" UTC").toISOString().replace('T', ' ').substring(0, 19);
+    const fechaDate = new Date(fecha + " " + hora + " UTC").toISOString().replace('T', ' ').substring(0, 19);
     console.log(fechaDate)
     const fechaPublicar = new Date(fechaPublicacion).toISOString().replace('T', ' ').substring(0, 19);
     console.log("entra ")
     if (this.remotoSelected === true) {
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.REMOTA,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],"","",fechaPublicar);
-    }else{
-      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [],TModalidad.PRESENCIAL,enlace,afiche,TEstado.PLANEADA,this.evidencia,[],"","",fechaPublicar);
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.REMOTA, enlace, afiche, TEstado.PLANEADA, this.evidencia, [], "", "", fechaPublicar);
+    } else {
+      this.actividadGuardar = new Actividad(0, semanaNumber, tipoActividadEnum, nombreActividad, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.PRESENCIAL, enlace, afiche, TEstado.PLANEADA, this.evidencia, [], "", "", fechaPublicar);
     }
-
     console.log(this.actividadGuardar);
-    this.controller.crearActividad(this.actividadGuardar,this.pasarDatos.planesDeTrabajo.getId()).subscribe();
+
+    this.controller.crearActividad(this.actividadGuardar, this.pasarDatos.planesDeTrabajo.getId()).subscribe(
+      () => {
+        this.showSuccessAlert() ;
+      }
+    );
   }
 
   selectRemoto() {
@@ -79,6 +94,24 @@ export class CrearActividadPlanDeTrabajoComponent {
   selectPresencial() {
     this.remotoSelected = false;
     this.presencialSelected = true;
+  }
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear la actividad. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
   }
 
 }

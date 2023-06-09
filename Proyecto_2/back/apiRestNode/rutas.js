@@ -321,11 +321,31 @@ router.get('/plan_trabajo/:id', (request, response)=>{
         }
     })
 });
-/*
+
+
+// get actividades de un plan por estado ---------------------------------------------***
+router.get('/plan_trabajo/:id/:estado', (request, response)=>{
+    const {id,estado} = request.params;
+    let sql = "call getActividadesByPlanyEstado(?,?);";
+    conexion.query(sql, [id,estado], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const actividades = rows[0].map(row => 
+                new Actividad(row.ID, row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividades})
+        }
+    })
+});
+
+
+
+
 // get proxima actividad de un plan ---------------------------------------------
-router.get('/plan_trabajo/:pplan', (request, response)=>{
-    const {pplan} = request.params;
-    const {pfecha} = request.body;
+router.get('/plan_trabajo_next/:pplan', (request, response)=>{
+    const {pplan, pfecha} = request.params;
     let sql = "call getNextActividad(?,?);";
     conexion.query(sql, [pplan, pfecha], (error, rows, fields)=>{
         if(error){
@@ -338,7 +358,7 @@ router.get('/plan_trabajo/:pplan', (request, response)=>{
         }
     })
 });
-*/
+
 
 // get actividad by ID ---------------------------------------------***
 router.get('/plan_trabajo/actividad/:id', (request, response)=>{
@@ -717,3 +737,21 @@ router.get('/estudiantesPorSede/:id', (request, response)=>{
         }
     })
 });
+
+//get estudiante por ID -----------------------------------------------------
+router.get('/estudiante/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getEstudianteByID(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiante = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña,row.Fotografia ));
+                response.json({estudiante})
+        }
+    })
+});
+
+

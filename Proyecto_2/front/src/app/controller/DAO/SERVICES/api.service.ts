@@ -46,8 +46,16 @@ export class ApiService {
     return this.http.get(this.url + 'plan_trabajo/' + id)
   }
 
+  public getActividadesofPlanEstado(id: number, estado: String){
+    return this.http.get(this.url + 'plan_trabajo/' + id + "/" + estado)
+  }
+
   public getActividad(id: number){
     return this.http.get(this.url + 'plan_trabajo/actividad/' + id)
+  }
+
+  public getNextActividad(id: number, fecha: string){
+    return this.http.get(this.url + 'plan_trabajo_next/' + id + "/" + fecha)
   }
 
   public addActividad(nombre: string, semana: number, fechaHora: string, diasAnunciar: number, link: string, tipo: TIndoleActividad, modalidad: TModalidad, planID: number, fechaPublicar: string){
@@ -176,6 +184,9 @@ export class ApiService {
 
   public getEstudiantesPorSede(id: string){
     return this.http.get(this.url + 'estudiantesPorSede/' + id)
+  }
+  public getEstudiante(carne: String){
+    return this.http.get(this.url + 'estudiante/' +carne)
   }
 
 }
