@@ -63,8 +63,8 @@ export class CrearActividadPlanDeTrabajoComponent {
   guardarActividad(nombreActividad: string, tipoActividad: string, enlace: string, semana: string, fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
     console.log(fecha)
     console.log(hora)
-    if (!nombreActividad || !tipoActividad|| !enlace || !semana || !fecha || !hora || !fechaPublicacion) {
-      this.errorMessage = 'Por favor, complete todos los campos';
+    if (!nombreActividad || !tipoActividad|| !semana || !fecha || !hora || !fechaPublicacion) {
+      this.showErrorAlert();
       return;
     }
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipoActividad as keyof typeof TIndoleActividad];
@@ -84,10 +84,6 @@ export class CrearActividadPlanDeTrabajoComponent {
       () => {
         this.creacionCorrecta = true;
         this.showSuccessAlert() ;
-      },
-      (error) => {
-        this.errorCreacion = true;
-        console.log(error);
       }
     );
   }
@@ -106,10 +102,18 @@ export class CrearActividadPlanDeTrabajoComponent {
     swal.fire({
       icon: 'success',
       title: 'Registrado con éxito',
-      showConfirmButton: false,
-      timer: 1600
+      timer: 2000
     });
     this.router.navigate(['/ver-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear la actividad. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
   }
 
 }

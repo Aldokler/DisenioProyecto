@@ -86,10 +86,6 @@
                 <div class="col col-xl-10">
 
                     <div class="card" style="border-radius: 1rem;">
-                        <!-- Alerta de error -->
-                        <div class="alert alert-danger mt-3" role="alert" *ngIf="errorMessage">
-                            {{ errorMessage }}
-                          </div>
                         <form enctype="multipart/form-data" method="POST" action="/register">
                             <div class="row g-0">
 
@@ -173,7 +169,7 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Enlace</label>
-                                            <input #enlace type="text" id="enlace" name="enlace" required
+                                            <input #enlace type="text" id="enlace" name="enlace"
                                                 class="form-control form-control-lg"
                                                 style="background-color: #E2EFF8;" />
                                         </div>
