@@ -14,6 +14,7 @@ import { TEstado } from 'src/app/model/testado';
 import { Evidencia } from 'src/app/model/evidencia';
 import { Router } from '@angular/router';
 import { ViewChild, ElementRef } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-actividad-plan-de-trabajo',
@@ -82,18 +83,13 @@ export class CrearActividadPlanDeTrabajoComponent {
     this.controller.crearActividad(this.actividadGuardar, this.pasarDatos.planesDeTrabajo.getId()).subscribe(
       () => {
         this.creacionCorrecta = true;
+        this.showSuccessAlert() ;
       },
       (error) => {
         this.errorCreacion = true;
         console.log(error);
       }
     );
-  }
-
-  iniciarDesvanecimiento() {
-    setTimeout(() => {
-      this.showMessage = false;
-    }, 3000); // 3000 ms = 3 segundos
   }
 
   selectRemoto() {
@@ -104,6 +100,16 @@ export class CrearActividadPlanDeTrabajoComponent {
   selectPresencial() {
     this.remotoSelected = false;
     this.presencialSelected = true;
+  }
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      showConfirmButton: false,
+      timer: 1600
+    });
+    this.router.navigate(['/ver-plan-de-trabajo']);
   }
 
 }
