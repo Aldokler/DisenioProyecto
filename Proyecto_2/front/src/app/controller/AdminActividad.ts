@@ -138,7 +138,7 @@ export class AdminActividad{
     }
     
     public responderComentario(comentario: Comentario): Observable<boolean>{
-        return this.DAO.addReplie(comentario.getMensaje(), comentario.getEmisor(), comentario.getFechaHora(), comentario.getActividadId(),comentario.getComentarioOriginal()).pipe(
+        return this.DAO.addReplie(comentario.getMensaje(), comentario.getEmisor(), comentario.getFechaHora(), comentario.getActividadId(), comentario.getComentarioOriginal()).pipe(
             map((data: any) => {
                 return data.status == '0'
             })

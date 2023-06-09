@@ -105,6 +105,9 @@ export class ControladorService {
   public getActividad(id: number): Observable<Actividad>{
     return this.adminActividad.getActividad(id)
   }
+  public getActividadxEstado(id: number, estado: string): Observable<Actividad[]>{
+    return this.adminPlanDeTrabajo.getActividadesofPlanByEstado(id, estado)
+  }
   public getNextActividad(id: number, fecha:string): Observable<Actividad>{
     return this.adminPlanDeTrabajo.consultarProximaActividad(id, fecha)
   }

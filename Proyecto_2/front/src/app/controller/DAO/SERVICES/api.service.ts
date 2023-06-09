@@ -79,7 +79,7 @@ export class ApiService {
   }
 
   public addComentario(Mensaje: string, Emisor: string, FechaHora: string,ActividadID: number){
-    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {Mensaje,Emisor, FechaHora, ActividadID})
+    return this.http.post(this.url + '/equipo_guia/actividad/comentarios/' , {Mensaje, Emisor, FechaHora, ActividadID})
   }
 
   public addReplie(Mensaje: string, Emisor: string, FechaHora: string,ActividadID: number, ComentarioOrigninal:number){
