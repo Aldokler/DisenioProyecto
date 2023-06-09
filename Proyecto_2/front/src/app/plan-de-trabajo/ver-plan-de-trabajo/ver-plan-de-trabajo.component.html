@@ -121,7 +121,25 @@
 
 
                     <div *ngIf="tipoDeUsuario == 'Estudiante'">
-                        hola mundo
+                        <div *ngFor="let actividadPlaneada of actividadesPlaneadas" class="card mb-4">
+                            <h5 class="card-header" style="background-color: #E2EFF8;">
+                                Actividad: {{actividadPlaneada.getNombre()}}
+                            </h5>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Tipo: {{actividadPlaneada.getTipo()}}
+                                </h4>
+                                <div class="card-text">
+                                    Semana: {{actividadPlaneada.getSemana()}} &nbsp;&nbsp;&nbsp;
+                                    {{actividadPlaneada.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                                </div>
+                                <a href="" class="btn btn-outline-secondary mt-2"
+                                    [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
+                                    (click)="guardarActividad(actividadPlaneada)"
+                                    [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                    más detalles</a>
+                            </div>
+                        </div>
                     </div>
 
 

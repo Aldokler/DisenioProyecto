@@ -33,7 +33,6 @@ export class CrearActividadPlanDeTrabajoComponent {
   presencialSelected: boolean = false;
   tipoDeModalidad: TModalidad = TModalidad.PRESENCIAL
   errorCreacion: boolean = false;
-  creacionCorrecta: boolean = false;
   showMessage: boolean = true;
   errorMessage: string = "";
   @ViewChild('registrationCommentaryModal') registrationCommentaryModal!: ElementRef;
@@ -82,7 +81,6 @@ export class CrearActividadPlanDeTrabajoComponent {
 
     this.controller.crearActividad(this.actividadGuardar, this.pasarDatos.planesDeTrabajo.getId()).subscribe(
       () => {
-        this.creacionCorrecta = true;
         this.showSuccessAlert() ;
       }
     );

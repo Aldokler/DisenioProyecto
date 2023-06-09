@@ -105,6 +105,9 @@ export class ControladorService {
   public getActividad(id: number): Observable<Actividad>{
     return this.adminActividad.getActividad(id)
   }
+  public getActividadxEstado(id: number, estado: string): Observable<Actividad[]>{
+    return this.adminPlanDeTrabajo.getActividadesofPlanByEstado(id, estado)
+  }
   public crearActividad(actividad: Actividad, plan: number): Observable<boolean>{
       return this.adminActividad.crearActividad(actividad.getNombre(), actividad.getSemana(), actividad.getFechaHora(), actividad.getDiasAnunciar(), actividad.getLink(), actividad.getTipo(), actividad.getModalidad(), plan, actividad.getFechaAPublicar())
   }
