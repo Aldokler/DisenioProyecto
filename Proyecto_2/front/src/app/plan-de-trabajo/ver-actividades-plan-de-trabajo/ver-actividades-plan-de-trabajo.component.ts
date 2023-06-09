@@ -78,7 +78,7 @@ export class VerActividadesPlanDeTrabajoComponent {
 
 
   responderComentario(respuestaAComentario:string){
-    let respuestaComentario:Comentario = new Comentario(0,respuestaAComentario,this.pasarDatos.loginUser.getId(),this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],this.comentarioSeleccionado.getId(),this.pasarDatos.actividadPlanDeTrabajo.getId())
+    let respuestaComentario:Comentario = new Comentario(0, respuestaAComentario, this.pasarDatos.loginUser.getId(), this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0], this.pasarDatos.actividadPlanDeTrabajo.getId(), this.comentarioSeleccionado.getId())
     console.log(respuestaComentario)
     this.controller.responderComentario(respuestaComentario).subscribe()
   }
