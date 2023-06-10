@@ -44,7 +44,7 @@ export class PasarDatosService {
   public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
   public guardarProfesor: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
   public comentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
-
+  public guardarEstudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"");
 
 }
 

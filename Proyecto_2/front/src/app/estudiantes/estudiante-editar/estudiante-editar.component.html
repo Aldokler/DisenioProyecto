@@ -1,0 +1,172 @@
+<body>
+    <nav class="navbar navbar-light ">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+                aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+        style="background-color: #2B546A;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Aquí coloca el contenido del menú -->
+            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
+
+            <ul>
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-plan-de-trabajo']">
+                            <p style="color: white;">Plan de Trabajo</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-profesores']">
+                            <p style="color: white;">Profesores</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li>
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset " [routerLink]="['/home-equipo-guia']">
+                            <p style="color: white;">Equipo Guía</p>
+                        </a>
+                    </h5>
+                </li>
+
+                <li class="mt-5">
+                    <h5 class=" mb-5">
+                        <a href="" class="text-decoration-none text-reset ">
+                            <p style="color: white;">Cerrar Sesión</p>
+                        </a>
+                    </h5>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="mb-4 mt-4">
+
+        <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <h6>Ejemplo de notificación</h6>
+                  <p>Esta es una notificación de ejemplo.</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+        <div class="container">
+            <div class="d-flex align-items-center pb-1 ">
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-profesores']">
+                    <img src="assets/imagenes/regresar.png" alt="">
+                    <span class="h5 fw-bold ml-3">EDITAR PROFESOR</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col col-xl-10">
+
+                    <div class="card" style="border-radius: 1rem;">
+
+                        <form enctype="multipart/form-data" method="POST" action="/register">
+                            <div class="row g-0">
+
+                                <div class="col-md-6 col-lg-6 d-none d-md-block">
+                                    <div class="card-body p-4 p-lg-5 text-black">
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Nombre</label>
+                                            <input #nombreProfesor type="text" id="" name="" required
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getNombre()}}"/>
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Correo Electrónico</label>
+                                            <input #correoElectronico type="email" id="" name="" required
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getCorreoElectronico()}}"/>
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
+                                            <label class="form-label ">Cambiar foto</label>
+                                            <input #fotoProfesor type="file" id="" name="" accept=".jpg,.png"
+                                                class="form-control form-control-lg" required style="background-color: #E2EFF8;" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                                    <div class="card-body p-4 p-lg-5 text-black">
+                                        
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Teléfono Celular</label>
+                                            <input #telefonoCelular type="text" id="" name="" required
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getCelular()}}"/>
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Primer Apellido</label>
+                                            <input #primerApellido type="text" id="" name="" required
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido1()}}"/>
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label">Segundo Apellido</label>
+                                            <input #segundoApellido type="text" id="" name="" required
+                                                class="form-control form-control-lg"
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido2()}}"/>
+
+                                        </div>
+
+                                        <div class="btn-group d-flex align-items-center">
+
+                                            <div class="pt-1 mb-4 me-4">
+                                                <button (click)="guardarEdicionEstudiante(nombreProfesor.value, correoElectronico.value, fotoProfesor.value,telefonoCelular.value,primerApellido.value,segundoApellido.value)" class="btn btn-dark btn-lg btn-block" type="button"
+                                                    style="background-color: #13293D;">Guardar</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                        
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>

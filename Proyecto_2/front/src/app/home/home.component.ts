@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
-import { TRol } from 'src/app/model/trol';
-import { TSede } from 'src/app/model/tsede';
-import { ApiService } from '../controller/DAO/SERVICES/api.service';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { PasarDatosService } from '../pasar-datos.service';
 import { Profesor } from '../model/profesor';
-import { provideCloudflareLoader } from '@angular/common';
 
 @Component({
   selector: 'app-home',

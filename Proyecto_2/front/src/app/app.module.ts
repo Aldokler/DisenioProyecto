@@ -28,6 +28,7 @@ import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
 import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
 import { MensajesComponent } from './mensajes/mensajes.component';
+import { EstudianteEditarComponent } from './estudiantes/estudiante-editar/estudiante-editar.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { MensajesComponent } from './mensajes/mensajes.component';
     ConsultarEquipoComponent,
     VerActividadesPlanDeTrabajoComponent,
     MensajesComponent,
+    EstudianteEditarComponent,
 
 
   ],

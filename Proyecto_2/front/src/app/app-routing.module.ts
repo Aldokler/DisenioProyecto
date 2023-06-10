@@ -24,6 +24,7 @@ import { DarDeBajaComponent } from './equipoGuia/componentes/dar-de-baja/dar-de-
 import { ConsultarEquipoComponent } from './equipoGuia/componentes/consultar-equipo/consultar-equipo.component';
 import { VerActividadesPlanDeTrabajoComponent } from './plan-de-trabajo/ver-actividades-plan-de-trabajo/ver-actividades-plan-de-trabajo.component';
 import { MensajesComponent } from './mensajes/mensajes.component';
+import { EstudianteEditarComponent } from './estudiantes/estudiante-editar/estudiante-editar.component';
 
 //Rutas de navegación
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
     {path: 'dar-de-baja',component: DarDeBajaComponent},
     {path: 'consultar-equipo',component: ConsultarEquipoComponent},
     {path: 'mensajes',component: MensajesComponent},
+    {path: 'estudiante-editar',component: EstudianteEditarComponent},
 
 ];
 
