@@ -58,19 +58,23 @@
     <section class="mb-4 mt-4">
 
         <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
             </button>
             <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <h6>Ejemplo de notificación</h6>
-                  <p>Esta es una notificación de ejemplo.</p>
-                </a>
-              </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <h6>Ejemplo de notificación</h6>
+                        <p>Esta es una notificación de ejemplo.</p>
+                    </a>
+
+                    <button>Borrar</button>
+
+                </li>
             </ul>
-          </div>
-          
+        </div>
+
         <div class="container">
 
 
@@ -100,21 +104,23 @@
                     </div>
 
                     <!-- ver y hacer comentarios -->
-                    <button *ngIf="tipoDeUsuario === 'Coordinador' || tipoDeUsuario === 'Profesor' " class="btn btn-outline-secondary me-2" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapse_comments" aria-expanded="false"
+                    <button *ngIf="tipoDeUsuario === 'Coordinador' || tipoDeUsuario === 'Profesor' "
+                        class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse_comments" aria-expanded="false"
                         style="background-color: #13293D; color: white;">
                         Comentarios
                     </button>
 
-                    <button *ngIf="tipoDeUsuario === 'Coordinador' || tipoDeUsuario === 'Profesor' "  class="btn btn-outline-secondary me-2" type="button"
+                    <button *ngIf="tipoDeUsuario === 'Coordinador' || tipoDeUsuario === 'Profesor' "
+                        class="btn btn-outline-secondary me-2" type="button"
                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
                         data-bs-target="#registration_commentary">
                         Comentar
                     </button>
 
 
-                    <button *ngIf="tipoDeUsuario === 'Coordinador'" class="btn btn-outline-secondary me-2 " type="button"
-                        style="background-color: #13293D; color: white;">
+                    <button *ngIf="tipoDeUsuario === 'Coordinador'" class="btn btn-outline-secondary me-2 "
+                        type="button" style="background-color: #13293D; color: white;">
                         <a href="" class="text-decoration-none text-reset"
                             [routerLink]="['/modificar-actividad-plan-de-trabajo']">Modificar Actividad</a>
 
@@ -141,7 +147,7 @@
 
                     <div class="collapse" id="collapse_comments">
                         <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
-                <!-- empieza comentario ---------------------->
+                            <!-- empieza comentario ---------------------->
 
                             <div *ngFor="let comentario of comentarios; let i = index" class="card mb-4">
 
@@ -149,22 +155,24 @@
                                     <img src="assets/imagenes/usuario.png" alt="Generic placeholder image"
                                         class="img-fluid rounded-circle border border-white border-3 me-2"
                                         style="width: 40px;">
-                                        {{comentario.getEmisor()}}
+                                    {{comentario.getEmisor()}}
                                 </div>
 
                                 <div class="card-body">
                                     <p>{{comentario.getMensaje()}}</p>
                                 </div>
                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                    Fecha de publicación: {{comentario.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}  &nbsp;&nbsp;&nbsp;
+                                    Fecha de publicación: {{comentario.getFechaHora().toString().replace('T', '
+                                    ').substring(0, 19)}} &nbsp;&nbsp;&nbsp;
 
                                     <!-- ver respuestas y realizar comentarios -->
-                                    <button (click)="generarComentarios(comentario)" class="btn btn-outline-secondary me-2" type="button"
-                                        data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse_answers_' + i"
-                                        aria-expanded="false" style="background-color: #13293D; color: white;">Ver
+                                    <button (click)="generarComentarios(comentario)"
+                                        class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#collapse_answers_' + i" aria-expanded="false"
+                                        style="background-color: #13293D; color: white;">Ver
                                         respuestas</button>
 
-                                    <button  class="btn btn-outline-secondary me-2" type="button"
+                                    <button class="btn btn-outline-secondary me-2" type="button"
                                         style="background-color: #13293D; color: white;" data-bs-toggle="modal"
                                         data-bs-target="#registration_commentary_answer">Responder comentario</button>
 
@@ -173,68 +181,70 @@
                                         <div class="mt-4"
                                             style="height: 400px; display: block; overflow: auto; position: relative;">
                                             <div *ngFor="let respuesta of respuestaComentarios" class="card mb-4">
-<!-- aqui se responde -->
-                                                <div  class="card-header" style="background-color: #E2EFF8; ">
+                                                <!-- aqui se responde -->
+                                                <div class="card-header" style="background-color: #E2EFF8; ">
                                                     <img src="assets/imagenes/usuario.png"
                                                         alt="Generic placeholder image"
                                                         class="img-fluid rounded-circle border border-white border-3 me-2"
                                                         style="width: 40px;">
-                                                        {{respuesta.getEmisor()}}
+                                                    {{respuesta.getEmisor()}}
                                                 </div>
 
                                                 <div class="card-body">
                                                     <p> {{respuesta.getMensaje()}}</p>
                                                 </div>
                                                 <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                                    {{respuesta.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
+                                                    {{respuesta.getFechaHora().toString().replace('T', ' ').substring(0,
+                                                    19)}}
                                                 </div>
 
                                             </div>
-<!-- aqui se responde -->
+                                            <!-- aqui se responde -->
 
                                         </div>
                                     </div>
-                                    
+
                                     <!-- aqui termina una respuesta -->
                                 </div>
 
                             </div>
-                    <!-- aqui termina un comentario------------------------ -->
+                            <!-- aqui termina un comentario------------------------ -->
 
                         </div>
 
                     </div>
 
 
-                            
 
 
-                    </div>
+
+                </div>
 
 
-                    <div class="collapse" id="observacion">
-                        <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
-                            <div class="card mb-4">
+                <div class="collapse" id="observacion">
+                    <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
+                        <div class="card mb-4">
 
-                                <div class="card-body">
-                                    <div class="form-outline mb-4">
-                                        <input #observacion type="text" id="oberservacion" name="observacion" required
-                                            class="form-control form-control-lg" style="background-color: #E2EFF8;" />
-                                    </div>
-
-                                    <button (click)="agregarObservacion(observacion.value)" type="button" class="btn text-white"
-                                        style="background-color: #13293D;">Agregar Observación</button>
+                            <div class="card-body">
+                                <div class="form-outline mb-4">
+                                    <input #observacion type="text" id="oberservacion" name="observacion" required
+                                        class="form-control form-control-lg" style="background-color: #E2EFF8;" />
                                 </div>
 
-
-
+                                <button (click)="agregarObservacion(observacion.value)" type="button"
+                                    class="btn text-white" style="background-color: #13293D;">Agregar
+                                    Observación</button>
                             </div>
+
+
+
                         </div>
+                    </div>
 
                 </div>
             </section>
         </div>
-   
+
     </section>
 
 
@@ -249,20 +259,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form >
+                <form>
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
-                            <input #comentario type="text" id="register_commentary" name="register_commentary" class="form-control"
-                                required />
+                            <input #comentario type="text" id="register_commentary" name="register_commentary"
+                                class="form-control" required />
                         </div>
 
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button  type="button" class="btn text-white"
-                            style="background-color: #13293D;" (click)="guardarComentario(comentario.value)">Comentar</button>
+                        <button type="button" class="btn text-white" style="background-color: #13293D;"
+                            (click)="guardarComentario(comentario.value)">Comentar</button>
                     </div>
 
                 </form>
@@ -281,21 +291,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form  >
+                <form>
                     <div class="modal-body">
                         <div class="form-outline mb-4">
                             <label class="form-label">Comentario</label>
-                            <input #respuestaComentario type="text" id="registration_commentary_answer" name="registration_commentary_answer"
-                                class="form-control" required />
-
+                            <input #respuestaComentario type="text" id="registration_commentary_answer"
+                                name="registration_commentary_answer" class="form-control" required />
                         </div>
-
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn text-white"
-                            style="background-color: #13293D;" (click)="responderComentario(respuestaComentario.value)">Responder</button>
+                        <button type="button" class="btn text-white" style="background-color: #13293D;"
+                            (click)="responderComentario(respuestaComentario.value)">Responder</button>
                     </div>
 
                 </form>

@@ -12,6 +12,7 @@ import { TIndoleActividad } from './model/tindoleactividad';
 import { TModalidad } from './model/tmodalidad';
 import { TEstado } from './model/testado';
 import { Evidencia } from './model/evidencia';
+import { Comentario } from './model/comentario';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ import { Evidencia } from './model/evidencia';
 export class PasarDatosService {
   private static instance: PasarDatosService;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): PasarDatosService {
     if (!PasarDatosService.instance) {
@@ -37,10 +38,13 @@ export class PasarDatosService {
   public fechapublicar = new Date(2023, 4, 16, 12, 30, 45);
   public evidencia: Evidencia = new Evidencia(0, [], "");
   public actividadPlanDeTrabajo: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
-     "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA, 
-     this.evidencia,[], '', "", '');
+    "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
+    this.evidencia, [], '', "", '');
   public estudiantes: Estudiante[] = []
   public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "")
-public guardarProfesor: Profesor =new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
+  public guardarProfesor: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
+  public comentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
+
+
 }
 
