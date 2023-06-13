@@ -10,6 +10,8 @@ import { TModalidad } from 'src/app/model/tmodalidad';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modificar-actividad-plan-de-trabajo',
@@ -20,7 +22,7 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
 export class ModificarActividadPlanDeTrabajoComponent {
 
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService, private router: Router
   ) { }
 
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
@@ -96,7 +98,12 @@ export class ModificarActividadPlanDeTrabajoComponent {
 
   actualizarActividad(nombre: string, tipo: string, link: string, estado: string, semana: string,
     fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
-    console.log(hora)
+
+      if (!nombre || !tipo|| !link || !estado || !semana || !fecha || !hora || !fechaPublicacion || !afiche) {
+        this.showErrorAlert();
+        return;
+      }
+
     const tipoActividadEnum: TIndoleActividad = TIndoleActividad[tipo as keyof typeof TIndoleActividad];
     const semanaNumber = parseInt(semana);
     const fechaDate = new Date(fecha).toISOString().replace('T', ' ').substring(0, 19);
@@ -107,8 +114,11 @@ export class ModificarActividadPlanDeTrabajoComponent {
       this.actividadGuardarda = new Actividad(0, semanaNumber, tipoActividadEnum, nombre, fechaDate, this.profesoresSeleccionados, 3, [], TModalidad.PRESENCIAL, link, afiche, TEstado.PLANEADA, this.evidencia, [], "", "", fechaPublicar);
     }
     console.log(this.actividadGuardarda);
-    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(), this.actividadGuardarda).subscribe();
-
+    this.controller.modificarDatosActividad(this.pasarDatos.planesDeTrabajo.getId(), this.actividadGuardarda).subscribe(
+      () => {
+        this.showSuccessAlert() ;
+      }
+    );
   }
 
   selectRemoto() {
@@ -121,6 +131,24 @@ export class ModificarActividadPlanDeTrabajoComponent {
     this.presencialSelected = true;
   }
 
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-actividades-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
 
 
 }

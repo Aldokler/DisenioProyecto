@@ -2,6 +2,7 @@ import { TSede } from "./tsede";
 import { Usuario } from "./usuario";
 
 export class Estudiante extends Usuario {
+    private fotografia: any;
 
     public constructor ( 
         id: string,
@@ -11,7 +12,7 @@ export class Estudiante extends Usuario {
         correoElectronico: string,
         celular: string,
         sede: TSede,
-        contraseña: string
+        contraseña: string,
     ){
         super(
             id,

@@ -83,7 +83,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   responderComentario(respuestaAComentario: string) {
     let respuestaComentario: Comentario = new Comentario(0, respuestaAComentario,
       this.pasarDatos.loginUser.getId(),
-      this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 
+      this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0],
       this.pasarDatos.comentarioSeleccionado.getId(),
       this.pasarDatos.actividadPlanDeTrabajo.getId())
     console.log(respuestaComentario)
@@ -96,7 +96,15 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   agregarObservacion(observacion: string) {
-    this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), observacion)
+    if (!observacion) {
+      this.showErrorAlert();
+      return;
+    }
+    this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), observacion).subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
   }
 
   guardarDeNuevoActividad() {
@@ -104,6 +112,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
   cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
+    this.showSuccessAlert();
   }
 
   showSuccessAlert() {

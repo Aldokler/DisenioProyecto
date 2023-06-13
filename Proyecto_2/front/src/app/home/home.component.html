@@ -1,34 +1,36 @@
-
-
 <body>
   <nav class="navbar navbar-light ">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+        aria-controls="sidebar">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </nav>
-  
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel" style="background-color: #2B546A;">
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel"
+    style="background-color: #2B546A;">
     <div class="offcanvas-header">
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
     </div>
-    <div class="offcanvas-body" >
+    <div class="offcanvas-body">
       <!-- Aquí coloca el contenido del menú -->
-      <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5"  >
+      <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
 
       <ul>
         <li>
-          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset " ><p style="color: white;">Cerrar Sesión</p> </a></h3> 
+          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset ">
+              <p style="color: white;">Cerrar Sesión</p>
+            </a></h3>
         </li>
 
         <li *ngIf="tipoDeUsuario == 'Estudiante'">
           <h3 class=" mb-5">
-              <a href="" class="text-decoration-none text-reset " [routerLink]="['/estudiante-editar']">
-                  <p style="color: white;">Editar Perfil</p>
-              </a>
+            <a href="" class="text-decoration-none text-reset " [routerLink]="['/estudiante-editar']">
+              <p style="color: white;">Editar Perfil</p>
+            </a>
           </h3>
-      </li>
+        </li>
 
       </ul>
     </div>
@@ -41,35 +43,82 @@
         <div class="col-auto ml-auto">
           <button class="btn btn-link position-relative" [routerLink]="['/mensajes']">
             <i class="bi bi-envelope display-4" style="color: black; font-size: 40px;"></i>
-            
+
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-            
+
           </button>
         </div>
         <div class="col-auto">
           <div class="dropdown">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
             </button>
+
+
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
-              <a class="dropdown-item" href="#">
-                <h6>Ejemplo de notificación</h6>
-                <p>Esta es una notificación de ejemplo.</p>
-              </a>
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pestaña1-tab" data-bs-toggle="tab" href="#pestaña1" role="tab" aria-controls="pestaña1" aria-selected="true">Notificaciones</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pestaña2-tab" data-bs-toggle="tab" href="#pestaña2" role="tab" aria-controls="pestaña2" aria-selected="false">Leídas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pestaña3-tab" data-bs-toggle="tab" href="#pestaña3" role="tab" aria-controls="pestaña3" aria-selected="false">No leídas</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
+                  <a class="dropdown-item d-flex" >
+                    <div>
+                      <h6>Ejemplo de notificación 1</h6>
+                      <p>Esta es la notificación de la pestaña 1.</p>
+                    </div>
+                    <button class="btn btn-link text-danger ms-auto">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </a>
+                </div>
+                <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
+                  <a class="dropdown-item d-flex">
+                    <div>
+                      <h6>Ejemplo de notificación 2</h6>
+                      <p>Esta es la notificación de la pestaña 2.</p>
+                    </div>
+                    <button class="btn btn-link text-danger ms-auto">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </a>
+                </div>
+                <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
+                  <a class="dropdown-item d-flex">
+                    <div>
+                      <h6>Ejemplo de notificación 3</h6>
+                      <p>Esta es la notificación de la pestaña 3.</p>
+                    </div>
+                    <button class="btn btn-link text-danger ms-auto">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </a>
+                </div>
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>
     </div>
 
-    <h1 class="d-flex justify-content-center mb-5" >Te damos la Bienvenida</h1>
+    <h1 class="d-flex justify-content-center mb-5">Te damos la Bienvenida</h1>
 
     <div class="row justify-content-center">
 
-      <div  class=" col-md-3 rounded-lg" >
+      <div class=" col-md-3 rounded-lg">
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-plan-de-trabajo']">
           <div class="card">
-            <div class="card-body rounded" style="background-color: #E2EFF8; height: 400px;" >
+            <div class="card-body rounded" style="background-color: #E2EFF8; height: 400px;">
               <h3 class="d-flex justify-content-center mt-5 mb-5">Plan de trabajo</h3>
               <img src="assets/imagenes/Calendario.png" alt="" class="img-fluid w-50 mx-auto d-block mb-5">
             </div>
@@ -77,7 +126,7 @@
         </a>
       </div>
 
-      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg" >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg">
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-profesores']">
           <div class="card">
             <div class="card-body " style="background-color: #E2EFF8; height: 400px;">
@@ -85,10 +134,10 @@
               <img src="assets/imagenes/profesores.png" alt="" class="img-fluid w-50 mx-auto d-block mb-5">
             </div>
           </div>
-        </a>  
+        </a>
       </div>
 
-      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg" >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class=" col-md-3 rounded-lg">
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-estudiantes']">
           <div class="card">
             <div class="card-body" style="background-color: #E2EFF8; height: 400px;">
@@ -99,17 +148,17 @@
         </a>
       </div>
 
-      <div *ngIf="tipoDeUsuario != 'Estudiante'" class="col-md-3 " >
+      <div *ngIf="tipoDeUsuario != 'Estudiante'" class="col-md-3 ">
         <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-equipo-guia']">
           <div class="card">
-            <div class="card-body " style="background-color: #E2EFF8; height: 400px;" >
+            <div class="card-body " style="background-color: #E2EFF8; height: 400px;">
               <h3 class="d-flex justify-content-center mt-5 mb-5">Equipo Guía</h3>
               <img src="assets/imagenes/equipo guia.png" alt="" class="img-fluid w-50 mx-auto d-block mb-5">
             </div>
           </div>
         </a>
       </div>
-      
+
 
     </div>
   </div>
