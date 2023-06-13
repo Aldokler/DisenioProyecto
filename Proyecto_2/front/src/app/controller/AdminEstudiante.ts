@@ -106,8 +106,13 @@ export class AdminEstudiante{
             })
         );
     }
-    public editarEstudiante(datosEstudiante: Estudiante): boolean{
-        return true
+    public editarEstudiante(estudiante: Estudiante): Observable<boolean>{
+        return this.DAO.modificarEstudiante(estudiante.getId(),estudiante.getCelular(), estudiante.getFoto()).pipe(
+            map((data:any) => {
+                return data.status == 'Estudiante modificado'
+            })
+        )
     }
+
     public cargarListaEstudiantes(link: String){}
 }
