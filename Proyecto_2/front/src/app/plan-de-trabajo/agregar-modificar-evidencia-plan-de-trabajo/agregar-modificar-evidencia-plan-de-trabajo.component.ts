@@ -5,6 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
 import { Buffer } from 'buffer';
 import { tap } from 'rxjs';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-modificar-evidencia-plan-de-trabajo',
@@ -19,7 +21,7 @@ export class AgregarModificarEvidenciaPlanDeTrabajoComponent {
 
   constructor(
     private controller: ControladorService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer, private router: Router
   ) {}
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public evidencias : Evidencia[] = [];
@@ -30,19 +32,30 @@ export class AgregarModificarEvidenciaPlanDeTrabajoComponent {
   }
 
   agregarEvidencia(link: string){
-    console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
-    console.log(link)
-    console.log(this.imageBuffer)
+
+    if (!link) {
+      this.showErrorAlert();
+      return;
+    }
+
     this.controller.subirLink(this.pasarDatos.actividadPlanDeTrabajo.getId(), link).pipe(
       tap(res => {
         if (res){ console.log("si")}
       })
-    ).subscribe()
+    ).subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
     this.controller.subirAsistencia(this.pasarDatos.actividadPlanDeTrabajo.getId(), this.imageBuffer).pipe(
       tap(res => {
         if (res){ console.log("si")}
       })
-    ).subscribe()
+    ).subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
   }
 
   eliminarFotoEvidencia(){
@@ -119,4 +132,24 @@ export class AgregarModificarEvidenciaPlanDeTrabajoComponent {
       return null;
     }
   })
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-actividades-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
+
+
 }

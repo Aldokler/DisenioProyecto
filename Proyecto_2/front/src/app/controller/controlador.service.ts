@@ -147,8 +147,8 @@ export class ControladorService {
   public responderComentario(comentario: Comentario): Observable<boolean>{
       return this.adminActividad.responderComentario(comentario)
   }
-  public agregarObservacion(id: number, observacion: string){
-      this.adminActividad.agregarObservacion(id, observacion)
+  public agregarObservacion(id: number, observacion: string): Observable<boolean>{
+      return this.adminActividad.agregarObservacion(id, observacion)
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

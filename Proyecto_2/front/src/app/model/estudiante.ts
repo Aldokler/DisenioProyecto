@@ -3,6 +3,7 @@ import { TSede } from "./tsede";
 import { Usuario } from "./usuario";
 
 export class Estudiante extends Usuario {
+    private fotografia: any;
     private foto: any;
 
     public constructor ( 
