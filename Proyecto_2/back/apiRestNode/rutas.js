@@ -925,23 +925,4 @@ router.put('/Notificar', (request, response)=>{
     })
 });
 
-
-
-// modificar estudiante ---------------------------------------------------
-router.put('/estudiante/:id', (request, response)=>{
-    const {id} = request.params;
-    const {Celular , Foto,} = request.body;
-    const fotobin = Buffer.from(Foto.data);   
-    let sql = 'call updateEstudiante(?,?,?)';
-    conexion.query(sql, [id, Celular , fotobin], (error, rows, fields)=>{
-        if(error){
-            console.log(error);
-            response.json({status: '-1' });
-        }
-        else{
-            response.json({status: 'Estudiante modificado' })
-        }
-    })
-});
-
 module.exports= router;
