@@ -893,7 +893,7 @@ router.get('/actividadesANotificar', (request, response)=>{
 });
 
 
-// get usuarios a notificar por actividad------**---------------------------------------------
+// get usuarios a notificar por actividad---------------------------------------------------
 router.get('/usuariosANotificar/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getUsuariosANotificar(?);";
@@ -912,8 +912,8 @@ router.get('/usuariosANotificar/:id', (request, response)=>{
     
 
 
-// notificar actividad-----------------**----------------------------------
-router.put('/Notificar', (request, response)=>{
+// notificar actividad---------------------------------------------------
+router.post('/Notificar/:notificacion/:usuario', (request, response)=>{
     const {notificacion, usuario} = request.params;
     let sql = "call sendNotificacion(?,?);";
     conexion.query(sql, [notificacion, usuario], (error, rows, fields)=>{
@@ -922,8 +922,7 @@ router.put('/Notificar', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            const id = rows[0]
-            response.json(id)
+            response.json({status: 'Notificacion' })
         }
     })
 });
