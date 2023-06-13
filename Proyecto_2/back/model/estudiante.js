@@ -19,9 +19,17 @@ exports.Estudiante = void 0;
 var usuario_1 = require("./usuario");
 var Estudiante = /** @class */ (function (_super) {
     __extends(Estudiante, _super);
-    function Estudiante(id, nombre, apellido1, apellido2, correoElectronico, celular, sede, contraseña) {
-        return _super.call(this, id, nombre, apellido1, apellido2, correoElectronico, celular, sede, contraseña) || this;
+    function Estudiante(id, nombre, apellido1, apellido2, correoElectronico, celular, sede, contraseña, foto) {
+        var _this = _super.call(this, id, nombre, apellido1, apellido2, correoElectronico, celular, sede, contraseña) || this;
+        _this.foto = foto;
+        return _this;
     }
+    Estudiante.prototype.getFoto = function () {
+        return this.foto;
+    };
+    Estudiante.prototype.setFoto = function (foto) {
+        this.foto = foto;
+    };
     Estudiante.prototype.getId = function () {
         return this.id;
     };
@@ -31,7 +39,6 @@ var Estudiante = /** @class */ (function (_super) {
     Estudiante.prototype.getNombre = function () {
         return this.nombre;
     };
-    
     Estudiante.prototype.setNombre = function (nombre) {
         this.nombre = nombre;
     };

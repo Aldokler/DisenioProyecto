@@ -21,6 +21,15 @@
         <li>
           <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset " ><p style="color: white;">Cerrar Sesión</p> </a></h3> 
         </li>
+
+        <li *ngIf="tipoDeUsuario == 'Estudiante'">
+          <h3 class=" mb-5">
+              <a href="" class="text-decoration-none text-reset " [routerLink]="['/estudiante-editar']">
+                  <p style="color: white;">Editar Perfil</p>
+              </a>
+          </h3>
+      </li>
+
       </ul>
     </div>
   </div>
@@ -100,6 +109,7 @@
           </div>
         </a>
       </div>
+      
 
     </div>
   </div>

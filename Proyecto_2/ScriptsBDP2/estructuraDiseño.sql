@@ -198,3 +198,61 @@ CREATE TABLE numeroProfesSede (
   PRIMARY KEY (numero,sede)
 );
 COMMIT;
+
+CREATE TABLE `chat` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Host` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`)
+);
+
+CREATE TABLE `mensaje` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Emisor` VARCHAR(45) NOT NULL,
+  `FechaHora` DATETIME NOT NULL,
+  `Contenido` VARCHAR(300) NOT NULL,
+  `ChatID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `mEmisor` FOREIGN KEY (`Emisor`) REFERENCES `usuario`(`ID`),
+  CONSTRAINT `ChatID` FOREIGN KEY (`ChatID`) REFERENCES `chat` (`ID`)
+);
+
+CREATE TABLE `notificacion` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Emisor` VARCHAR(45) NOT NULL,
+  `FechaHora` DATETIME NOT NULL,
+  `Contenido` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `nEmisor` FOREIGN KEY (`Emisor`) REFERENCES `usuario` (`ID`)
+);
+
+CREATE TABLE `notificador` (
+  `ID` int NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `IDa` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`),
+  CONSTRAINT `IDc` FOREIGN KEY (`ID`) REFERENCES `chat` (`ID`)
+);
+
+CREATE TABLE `usuario_x_chat` (
+  `IDUsuario` VARCHAR(45) NOT NULL,
+  `IDChat` int NOT NULL,
+  PRIMARY KEY (`IDUsuario`,`IDChat`),
+  CONSTRAINT `cIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
+  CONSTRAINT `IDChat` FOREIGN KEY (`IDChat`) REFERENCES `chat` (`ID`)
+);
+
+CREATE TABLE `usuario_x_notificacion` (
+  `IDUsuario`  VARCHAR(45) NOT NULL,
+  `IDNotificacion` int NOT NULL,
+  PRIMARY KEY (`IDUsuario`,`IDNotificacion`),
+  CONSTRAINT `nIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
+  CONSTRAINT `IDNotificacion` FOREIGN KEY (`IDNotificacion`) REFERENCES `notificacion` (`ID`)
+);
+
+CREATE TABLE `usuario_x_notificador` (
+  `IDUsuario`  VARCHAR(45) NOT NULL,
+  `IDNotificador` int NOT NULL,
+  PRIMARY KEY (`IDUsuario`,`IDNotificador`),
+  CONSTRAINT `nrIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
+  CONSTRAINT `IDNotificador` FOREIGN KEY (`IDNotificador`) REFERENCES `notificador` (`ID`)
+);

@@ -26,11 +26,10 @@ export class VerActividadesPlanDeTrabajoComponent {
   public comentarios: Comentario[] = [];
   public respuestaComentarios: Comentario[] = [];
   public fecha = new Date();
-  public comentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,0);
-  public respuestaComentarioSeleccionado:Comentario = new Comentario(0,"","",this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,0);
+  public respuestaComentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
   public tipoDeUsuario: string = "";
-  
-  constructor(private controller: ControladorService,private router: Router) {
+
+  constructor(private controller: ControladorService, private router: Router) {
     // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
   }
 
@@ -44,23 +43,22 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.tipoDeUsuario = "Profesor"
       }
 
-    } else if (this.pasarDatos.loginUser instanceof Administrativo){
+    } else if (this.pasarDatos.loginUser instanceof Administrativo) {
       this.tipoDeUsuario = "Administrativo"
-    }else {
+    } else {
       this.tipoDeUsuario = "Estudiante"
     }
 
     this.controller.getComentarios(this.pasarDatos.actividadPlanDeTrabajo.getId()).pipe(
       tap(res => {
         this.comentarios = res;
-        this.respuestaComentarios = this.comentarios
       })
     ).subscribe()
 
   }
 
-  generarComentarios(comentarioElegido:Comentario){
-    this.comentarioSeleccionado = comentarioElegido
+  generarComentarios(comentarioElegido: Comentario) {
+    this.pasarDatos.comentarioSeleccionado = comentarioElegido
     this.controller.getReplies(comentarioElegido.getId()).pipe(
       tap(res1 => {
         this.respuestaComentarios = res1
@@ -68,38 +66,43 @@ export class VerActividadesPlanDeTrabajoComponent {
     ).subscribe()
   }
 
-  guardarComentario(comentarioGuardar :string){
+  guardarComentario(comentarioGuardar: string) {
     if (!comentarioGuardar) {
       this.showErrorAlert();
       return;
     }
-    let comentariocomentado:Comentario = new Comentario(0,comentarioGuardar,this.pasarDatos.loginUser.getId(),this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0],0,this.pasarDatos.actividadPlanDeTrabajo.getId())
+    let comentariocomentado: Comentario = new Comentario(0, comentarioGuardar, this.pasarDatos.loginUser.getId(), this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, this.pasarDatos.actividadPlanDeTrabajo.getId())
     this.controller.comentarActividad(comentariocomentado).subscribe(
       () => {
-        this.showSuccessAlert() ;
+        this.showSuccessAlert();
       }
     )
   }
 
 
-  responderComentario(respuestaAComentario:string){
-    let respuestaComentario:Comentario = new Comentario(0, respuestaAComentario, this.pasarDatos.loginUser.getId(), this.fecha.toISOString().split('T')[0]+' '+this.fecha.toTimeString().split(' ')[0], this.pasarDatos.actividadPlanDeTrabajo.getId(), this.comentarioSeleccionado.getId())
+  responderComentario(respuestaAComentario: string) {
+    let respuestaComentario: Comentario = new Comentario(0, respuestaAComentario,
+      this.pasarDatos.loginUser.getId(),
+      this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 
+      this.pasarDatos.comentarioSeleccionado.getId(),
+      this.pasarDatos.actividadPlanDeTrabajo.getId())
     console.log(respuestaComentario)
+
     this.controller.responderComentario(respuestaComentario).subscribe(
       () => {
-        this.showSuccessAlert() ;
+        this.showSuccessAlert();
       }
     )
   }
 
-  agregarObservacion(observacion:string){
-    this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(),observacion)
+  agregarObservacion(observacion: string) {
+    this.controller.agregarObservacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), observacion)
   }
 
-  guardarDeNuevoActividad(){
+  guardarDeNuevoActividad() {
     this.pasarDatos.actividadPlanDeTrabajo = this.pasarDatos.actividadPlanDeTrabajo
   }
-  cancelarActividad(){
+  cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
   }
 
