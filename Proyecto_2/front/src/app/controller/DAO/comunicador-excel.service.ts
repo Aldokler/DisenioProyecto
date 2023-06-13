@@ -138,7 +138,7 @@ export class ComunicadorExcelService {
             jason[i1]['Correo Electrónico'],
             jason[i1]['Celular'],
             sheetNames[i] as TSede,
-            '');
+            '',"");
             estudiantes.push(estudiante)
         }
       }

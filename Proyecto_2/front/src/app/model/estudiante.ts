@@ -1,8 +1,10 @@
+import { retry } from "rxjs";
 import { TSede } from "./tsede";
 import { Usuario } from "./usuario";
 
 export class Estudiante extends Usuario {
     private fotografia: any;
+    private foto: any;
 
     public constructor ( 
         id: string,
@@ -13,6 +15,7 @@ export class Estudiante extends Usuario {
         celular: string,
         sede: TSede,
         contraseña: string,
+        foto: any
     ){
         super(
             id,
@@ -22,7 +25,16 @@ export class Estudiante extends Usuario {
             correoElectronico,
             celular,
             sede,
-            contraseña);
+            contraseña,);
+            this.foto = foto;
+    }
+
+    public getFoto(): any {
+        return this.foto;
+    }
+
+    public setFoto(foto: any): void{
+        this.foto = foto;
     }
 
     public getId(): string {

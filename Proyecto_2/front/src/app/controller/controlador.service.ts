@@ -59,9 +59,9 @@ export class ControladorService {
   public getEstudiantesPorSede(ProfesorID: string): Observable<Estudiante[]>{
       return this.adminEstudiante.getEstudiantesPorSede(ProfesorID)
   }
-  public editarEstudiante(datosEstudiante: Estudiante): boolean{
-      return this.adminEstudiante.editarEstudiante(datosEstudiante)
-  }
+  public editarDatosEstudiante(estudiante: Estudiante): Observable<boolean>{
+    return this.adminEstudiante.editarEstudiante(estudiante)
+}
   public cargarListaEstudiantes(link: String){
       this.adminEstudiante.cargarListaEstudiantes(link)
   }

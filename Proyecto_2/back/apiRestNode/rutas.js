@@ -788,3 +788,141 @@ router.put('/estudiante/:id', (request, response)=>{
         }
     })
 });
+
+module.exports= router;
+
+
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
+
+// gestion notificaciones
+// crear notificacion-----------------------------------------------------------
+router.post('/notificacion', (request, response)=>{
+    const {Emisor, FechaHora, Contenido} = request.params;    
+    let sql = 'call addNotificacion(?,?,?)';
+    conexion.query(sql, [Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion agregada' })
+        }
+    })
+});
+
+
+// modificar notificacion---------------------------------------------------
+router.put('notificacion/update', (request, response)=>{
+    const {id, Emisor, FechaHora, Contenido} = request.params;
+    let sql = 'call updateNotificacion(?,?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [id, Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+
+// delete notificacion---------------------------------------------------
+router.delete('/notificacion/delete', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteNotificacion(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+// crear notificador-----------------------------------------------------------
+router.post('/notificador', (request, response)=>{
+    const {ID} = request.params;    
+    let sql = 'call addNotificador(?)';
+    conexion.query(sql, [ID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificador agregado' })
+        }
+    })
+});
+
+// delete notificador---------------------------------------------------
+router.delete('/notificador/delete', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteNotificador(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+
+// get actividades a notificar---------------------------------------------------
+router.get('/actividadesANotificar', (request, response)=>{
+    let sql = "call getActividadesANotificar();";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const id = rows[0]
+            response.json(id)
+        }
+    })
+});
+
+
+// get usuarios a notificar por actividad---------------------------------------------------
+router.get('/usuariosANotificar', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getUsuariosANotificar(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const id = rows[0]
+            response.json(id)
+        }
+    })
+});
+
+// notificar actividad---------------------------------------------------
+router.put('/Notificar', (request, response)=>{
+    const {notificacion, usuario} = request.params;
+    let sql = "call sendNotificacion(?,?);";
+    conexion.query(sql, [notificacion, usuario], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const id = rows[0]
+            response.json(id)
+        }
+    })
+});
+
+module.exports= router;
