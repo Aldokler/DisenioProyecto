@@ -32,7 +32,7 @@ export class EstudianteEditarComponent {
 
   }
 
-  guardarEdicionEstudiante(nombreProfesor:string, correoElectronico:string, fotoProfesor:string,telefonoCelular:string,primerApellido:string,segundoApellido:string){
+  guardarEdicionEstudiante(fotoEstudiante:string,telefonoCelular:string){
     
   }
 

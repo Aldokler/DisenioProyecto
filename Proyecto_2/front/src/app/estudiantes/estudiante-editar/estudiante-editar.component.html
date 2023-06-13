@@ -73,9 +73,9 @@
           
         <div class="container">
             <div class="d-flex align-items-center pb-1 ">
-                <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-profesores']">
+                <a href="" class="text-decoration-none text-reset" [routerLink]="['/home']">
                     <img src="assets/imagenes/regresar.png" alt="">
-                    <span class="h5 fw-bold ml-3">EDITAR PROFESOR</span>
+                    <span class="h5 fw-bold ml-3">EDITAR PERFIL</span>
                 </a>
             </div>
         </div>
@@ -94,9 +94,9 @@
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label">Nombre</label>
-                                            <input #nombreProfesor type="text" id="" name="" required
+                                            <input #nombreEstudiante type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{estudiante.getNombre()}}"/>
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getNombre()}}" readonly />
 
                                         </div>
 
@@ -104,14 +104,14 @@
                                             <label class="form-label">Correo Electrónico</label>
                                             <input #correoElectronico type="email" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{estudiante.getCorreoElectronico()}}"/>
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getCorreoElectronico()}}" readonly />
 
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
                                             <label class="form-label ">Cambiar foto</label>
-                                            <input #fotoProfesor type="file" id="" name="" accept=".jpg,.png"
+                                            <input #fotoEstudiante type="file" id="" name="" accept=".jpg,.png"
                                                 class="form-control form-control-lg" required style="background-color: #E2EFF8;" />
                                         </div>
 
@@ -133,7 +133,7 @@
                                             <label class="form-label">Primer Apellido</label>
                                             <input #primerApellido type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido1()}}"/>
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido1()}}" readonly />
 
                                         </div>
 
@@ -141,14 +141,14 @@
                                             <label class="form-label">Segundo Apellido</label>
                                             <input #segundoApellido type="text" id="" name="" required
                                                 class="form-control form-control-lg"
-                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido2()}}"/>
+                                                style="background-color: #E2EFF8;" value="{{estudiante.getApellido2()}}"  readonly />
 
                                         </div>
 
                                         <div class="btn-group d-flex align-items-center">
 
                                             <div class="pt-1 mb-4 me-4">
-                                                <button (click)="guardarEdicionEstudiante(nombreProfesor.value, correoElectronico.value, fotoProfesor.value,telefonoCelular.value,primerApellido.value,segundoApellido.value)" class="btn btn-dark btn-lg btn-block" type="button"
+                                                <button (click)="guardarEdicionEstudiante( fotoEstudiante.value,telefonoCelular.value)" class="btn btn-dark btn-lg btn-block" type="button"
                                                     style="background-color: #13293D;">Guardar</button>
                                             </div>
                                         </div>
