@@ -36,7 +36,8 @@ export class AdminEstudiante{
                         json.correoElectronico,
                         json.celular,
                         json.sede,
-                        json.contraseña
+                        json.contraseña,
+                        json.foto
                     )
                 });
             })
@@ -56,7 +57,8 @@ export class AdminEstudiante{
                         json.correoElectronico,
                         json.celular,
                         json.sede,
-                        json.contraseña
+                        json.contraseña,
+                        json.foto
                     )
                 });
             })
@@ -68,7 +70,7 @@ export class AdminEstudiante{
             map((data: any) => {
                 const Json = data.estudiante[0];
                 if (Json == undefined){
-                    return new Estudiante('', '', '', '', '', '', TSede.CA, "")
+                    return new Estudiante('', '', '', '', '', '', TSede.CA, "", "")
                 } else {
                     return new Estudiante(
                         Json.id,
@@ -78,7 +80,8 @@ export class AdminEstudiante{
                         Json.correoElectronico,
                         Json.celular,
                         Json.sede,
-                        Json.contraseña
+                        Json.contraseña,
+                        Json.foto
                     );
                 }
             })
@@ -90,7 +93,7 @@ export class AdminEstudiante{
             map((data: any) => {
                 const Json = data.estudiante[0];
                 if (Json == undefined){
-                    return new Estudiante('', '', '', '', '', '', TSede.CA, "")
+                    return new Estudiante('', '', '', '', '', '', TSede.CA, "", "")
                 } else {
                     return new Estudiante(
                         Json.id,
@@ -100,7 +103,8 @@ export class AdminEstudiante{
                         Json.correoElectronico,
                         Json.celular,
                         Json.sede,
-                        Json.contraseña
+                        Json.contraseña,
+                        Json.foto
                     );
                 }
             })

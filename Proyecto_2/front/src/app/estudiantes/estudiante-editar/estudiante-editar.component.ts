@@ -19,7 +19,7 @@ export class EstudianteEditarComponent {
   ) { }
 
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
-  public estudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"");
+  public estudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"","");
 
   ngOnInit(): void {
 
