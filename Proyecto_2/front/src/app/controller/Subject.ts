@@ -9,16 +9,16 @@ export class Subject{
 
     private observers: Observer[] = [];
 
-    public suscribirse(subject: number, observer: string, tipo: string): void{
-        this.DAO.suscribirseANotificador(observer, subject, tipo);
+    public suscribirse(notificador: number, observer: string, tipo: string): void{
+        this.DAO.suscribirseANotificador(observer, notificador, tipo);
     }
 
-    public desuscribirse(subject: number, observer: string, tipo: string): void{
-        this.DAO.desuscribirseANotificador(observer, subject, tipo);
+    public desuscribirse(notificador: number, observer: string, tipo: string): void{
+        this.DAO.desuscribirseANotificador(observer, notificador, tipo);
     }
 
-    public notificar(notificadorID: number, notificacion: number){
-        const suscriptores: string[] = this.DAO.getSuscriptores(notificadorID);
+    public notificar(notificadorID: number,tipoNotificador: string, notificacion: number){
+        const suscriptores: string[] = this.DAO.getSuscriptores(notificadorID, tipoNotificador);
 
         for (const observer of this.observers) {
             observer.notificar(notificacion, suscriptores);

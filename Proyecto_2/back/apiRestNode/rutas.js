@@ -895,7 +895,7 @@ router.get('/actividadesANotificar', (request, response)=>{
 
 
 // get usuarios a notificar por actividad---------------------------------------------------
-router.get('/usuariosANotificar/:id', (request, response)=>{
+router.get('/usuariosANotificar/:NotifId/:Tipo', (request, response)=>{
     const {NotifId, Tipo} = request.params;
     let sql = "call getUsuariosANotificar(?,?);";
     conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
