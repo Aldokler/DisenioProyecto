@@ -1,4 +1,4 @@
-import { map, tap } from "rxjs";
+import { Observable, map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { SistemaNotificador } from "./SistemaNotificador";
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -43,6 +43,14 @@ export class Subject{
                 return data.lista;
             })
         );
+    }
+
+    public crearNotificador(ID: number, Tipo: string): Observable<boolean>{
+        return this.DAO.addNotificador(ID, Tipo).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
     }
 
 

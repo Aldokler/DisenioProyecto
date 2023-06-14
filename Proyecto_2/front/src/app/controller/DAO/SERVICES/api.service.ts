@@ -221,5 +221,8 @@ export class ApiService {
     return this.http.get(this.url + 'usuariosANotificar/' + notificadorID + '/'+ notificadorTipo)
   }
 
+  public addNotificador(ID: number, Tipo: string){
+    return this.http.post(this.url + 'notificador', {ID, Tipo});
+  }
 
 }
