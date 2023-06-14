@@ -40,7 +40,7 @@ export class EditarEstudiantesComponent {
     }
     const estudianteEditar:Estudiante = new Estudiante(carne,nombre,primerApellido,segundoApellido,correoElectronico,telefono,this.pasarDatos.guardarEstudiante.getSede(),this.pasarDatos.guardarEstudiante.getContraseñA(),this.pasarDatos.guardarEstudiante.getFoto());
     console.log(estudianteEditar)
-    this.controller.editarDatosEstudiante(estudianteEditar).subscribe(
+    this.controller.editarDatosEstudiantePlus(estudianteEditar).subscribe(
       () => {
         this.showSuccessAlert() ;
       }

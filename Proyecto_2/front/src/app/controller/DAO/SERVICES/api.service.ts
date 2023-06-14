@@ -196,4 +196,10 @@ export class ApiService {
   public modificarEstudiante(ID: string, celular: string, Foto:Buffer){
     return this.http.put(this.url + 'estudiante/'+ ID, {celular, Foto});
   }
+
+  public modificarEstudiantePlus(ID: string, Nombre: string, Apellido1: string, Apellido2: string, CorreoElectronico: string , 
+    Celular: string , Contraseña: string , Sede: string, Foto:Buffer){
+    return this.http.put(this.url + 'estudianteplus/'+ ID, {Nombre, Apellido1, Apellido2, CorreoElectronico , 
+      Celular , Contraseña , Sede, Foto});
+  }
 }

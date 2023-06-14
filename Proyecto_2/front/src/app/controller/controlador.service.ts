@@ -61,7 +61,10 @@ export class ControladorService {
   }
   public editarDatosEstudiante(estudiante: Estudiante): Observable<boolean>{
     return this.adminEstudiante.editarEstudiante(estudiante)
-}
+  }
+  public editarDatosEstudiantePlus(estudiante: Estudiante): Observable<boolean>{
+    return this.adminEstudiante.editarEstudiantePlus(estudiante)
+  }
   public cargarListaEstudiantes(link: String){
       this.adminEstudiante.cargarListaEstudiantes(link)
   }

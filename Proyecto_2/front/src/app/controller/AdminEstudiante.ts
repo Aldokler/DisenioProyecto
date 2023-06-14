@@ -113,7 +113,16 @@ export class AdminEstudiante{
     public editarEstudiante(estudiante: Estudiante): Observable<boolean>{
         return this.DAO.modificarEstudiante(estudiante.getId(),estudiante.getCelular(), estudiante.getFoto()).pipe(
             map((data:any) => {
-                return data.status == 'Estudiante modificado'
+                return data.status == '1'
+            })
+        )
+    }
+    public editarEstudiantePlus(estudiante: Estudiante): Observable<boolean>{
+        return this.DAO.modificarEstudiantePlus(estudiante.getId(), estudiante.getNombre(), estudiante.getApellido1(),
+        estudiante.getApellido2(), estudiante.getCorreoElectronico(), estudiante.getCelular(), estudiante.getContraseñA(),
+        estudiante.getSede(), estudiante.getFoto()).pipe(
+            map((data:any) => {
+                return data.status == '1'
             })
         )
     }

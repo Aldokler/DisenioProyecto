@@ -784,7 +784,7 @@ router.put('/estudiante/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Estudiante modificado' })
+            response.json({status: '1' })
         }
     })
 });
