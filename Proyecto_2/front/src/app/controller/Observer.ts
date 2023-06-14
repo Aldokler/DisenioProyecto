@@ -1,4 +1,4 @@
 interface Observer {
 
-    notificar(notificacionID: number, usuarioID: string): void;
+    notificar(notificacionID: number, usuarioID: string[]): void;
 }
