@@ -8,14 +8,15 @@ BEGIN
     COMMIT;
     
     SELECT ID into vID FROM actividad order by ID desc limit 1;
-    insert into notificador values (vID, 'Actividad');
+    -- insert into notificador values (vID, 'Actividad');
+    call addNotificador(vID, "Actividad", vNombre);
     
     INSERT INTO dias_recordatorio (Dia, Actividad) VALUES (DATE(DATE_ADD(vFechaHora, INTERVAL vDiasAnunciar DAY)), vID);
 
 END$$
 DELIMITER ;
 
-call addActividad('vNombre varchar(45)', 1, '1971-04-15 3:45:00', 5 , 'vLink varchar(45)', "Técnico", "Presencial", 1, '1971-04-15 3:45:00');
+call addActividad('varchar(45)', 1, '1971-04-15 3:45:00', 5 , 'vLink varchar(45)', "Técnico", "Presencial", 1, '1971-04-15 3:45:00');
 
 drop procedure if exists addProfesor;
 DELIMITER $$
