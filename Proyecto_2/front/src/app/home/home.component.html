@@ -18,11 +18,6 @@
       <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
 
       <ul>
-        <li>
-          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset ">
-              <p style="color: white;">Cerrar Sesión</p>
-            </a></h3>
-        </li>
 
         <li *ngIf="tipoDeUsuario == 'Estudiante'">
           <h3 class=" mb-5">
@@ -30,6 +25,12 @@
               <p style="color: white;">Editar Perfil</p>
             </a>
           </h3>
+        </li>
+
+        <li>
+          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset ">
+              <p style="color: white;">Cerrar Sesión</p>
+            </a></h3>
         </li>
 
       </ul>
@@ -57,40 +58,59 @@
 
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
+
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" id="pestaña1-tab" data-bs-toggle="tab" href="#pestaña1" role="tab" aria-controls="pestaña1" aria-selected="true">Notificaciones</a>
+                  <a class="nav-link active" id="pestaña1-tab" data-bs-toggle="tab" href="#pestaña1" role="tab"
+                    aria-controls="pestaña1" aria-selected="true">Notificaciones
+
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="pestaña2-tab" data-bs-toggle="tab" href="#pestaña2" role="tab" aria-controls="pestaña2" aria-selected="false">Leídas</a>
+                  <a class="nav-link" id="pestaña2-tab" data-bs-toggle="tab" href="#pestaña2" role="tab"
+                    aria-controls="pestaña2" aria-selected="false">Leídas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="pestaña3-tab" data-bs-toggle="tab" href="#pestaña3" role="tab" aria-controls="pestaña3" aria-selected="false">No leídas</a>
+                  <a class="nav-link" id="pestaña3-tab" data-bs-toggle="tab" href="#pestaña3" role="tab"
+                    aria-controls="pestaña3" aria-selected="false">No leídas</a>
                 </li>
               </ul>
-              <div class="tab-content">
+              Eliminar todas las notificaciones
+              <button class="btn btn-link text-danger ms-auto">
+                <i class="bi bi-trash"></i>
+              </button>
+
+              <div class="tab-content overflow-auto" style="max-height: 400px; background-color: #E2EFF8;;">
+
                 <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
-                  <a class="dropdown-item d-flex" >
+                  <div class="dropdown-item d-flex align-items-center">
                     <div>
                       <h6>Ejemplo de notificación 1</h6>
                       <p>Esta es la notificación de la pestaña 1.</p>
+                      <button class="btn text-white text-center" style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                        Ver más detalles
+                      </button>
+                      <button class="btn btn-link text-danger ms-auto">
+                        <i class="bi bi-trash"></i>
+                      </button>
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
+                  </div>
                 </div>
+
+
                 <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
-                  <a class="dropdown-item d-flex">
+                  <div class="dropdown-item d-flex">
                     <div>
                       <h6>Ejemplo de notificación 2</h6>
                       <p>Esta es la notificación de la pestaña 2.</p>
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
+
+                  </div>
+                  <button class="btn btn-link text-danger ms-auto">
+                    <i class="bi bi-trash"></i>
+                  </button>
                 </div>
+
                 <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
                   <a class="dropdown-item d-flex">
                     <div>

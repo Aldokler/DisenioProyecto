@@ -14,6 +14,7 @@ export class HomeComponent {
   miUsuario: Usuario | null = null;
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public tipoDeUsuario: string = ""
+  public estadoNotificacion: boolean = false
 
   constructor(private controller: ControladorService) { }
   ngOnInit(): void {
@@ -24,9 +25,9 @@ export class HomeComponent {
         this.tipoDeUsuario = "Profesor"
       }
 
-    } else if (this.pasarDatos.loginUser instanceof Administrativo){
+    } else if (this.pasarDatos.loginUser instanceof Administrativo) {
       this.tipoDeUsuario = "Administrativo"
-    }else {
+    } else {
       this.tipoDeUsuario = "Estudiante"
     }
   }

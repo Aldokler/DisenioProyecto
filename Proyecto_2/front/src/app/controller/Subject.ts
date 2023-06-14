@@ -14,12 +14,20 @@ export class Subject{
 
     
 
-    public suscribirse(notificador: number, observer: string, tipo: string): void{
-        this.DAO.suscribirseANotificador(observer, notificador, tipo);
+    public suscribirse(notificador: number, observer: string, tipo: string): Observable<boolean>{
+        return this.DAO.suscribirseANotificador(observer, notificador, tipo).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
     }
 
-    public desuscribirse(notificador: number, observer: string, tipo: string): void{
-        this.DAO.desuscribirseANotificador(observer, notificador, tipo);
+    public desuscribirse(notificador: number, observer: string, tipo: string):Observable<boolean>{
+        return this.DAO.desuscribirseANotificador(observer, notificador, tipo).pipe(
+            map((data: any) => {
+                return data.status == '0'
+            })
+        )
     }
 
     public notificar(notificadorID: number,tipoNotificador: string, notificacion: number){

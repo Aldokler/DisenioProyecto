@@ -2,17 +2,9 @@ import { Component, ComponentFactory } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
-import { Actividad } from 'src/app/model/actividad';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Comentario } from 'src/app/model/comentario';
-import { Evidencia } from 'src/app/model/evidencia';
 import { Profesor } from 'src/app/model/profesor';
-import { TEstado } from 'src/app/model/testado';
-import { TIndoleActividad } from 'src/app/model/tindoleactividad';
-import { TModalidad } from 'src/app/model/tmodalidad';
-import { TRol } from 'src/app/model/trol';
-import { TSede } from 'src/app/model/tsede';
-import { Usuario } from 'src/app/model/usuario';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
 import swal from 'sweetalert2';
 
