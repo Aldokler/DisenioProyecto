@@ -281,15 +281,14 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getUsuariosANotificar; //
-CREATE PROCEDURE getUsuariosANotificar(IN pID INT)
+CREATE PROCEDURE getUsuariosANotificar(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
 BEGIN
 	SELECT uxnr.IDUsuario
     FROM notificador nr
     INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
-    WHERE nr.ID = pID;
+    WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
     COMMIT;
 END; //
-
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getBuzonByUsuario; //
