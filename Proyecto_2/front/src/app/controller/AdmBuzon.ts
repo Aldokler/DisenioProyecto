@@ -2,7 +2,7 @@ import { Observable, map } from "rxjs";
 import { Notificacion } from "../model/notificacion";
 import { ApiService } from "./DAO/SERVICES/api.service";
 
-export class AdminPlanDeTrabajo{
+export class AdmBuzon{
 
     constructor(private DAO: ApiService){}
 
@@ -23,5 +23,5 @@ export class AdminPlanDeTrabajo{
                 });
             })
         )
-    }ui
+    }
 }

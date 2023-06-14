@@ -38,7 +38,7 @@ export class HomeComponent {
       this.tipoDeUsuario = "Estudiante"
     }
 
-    this.controller.notificaciones.getNotificaciones(this.pasarDatos.loginUser.getId()).pipe(
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId()).pipe(
       tap(res => {
         this.notificaciones = res;
       })

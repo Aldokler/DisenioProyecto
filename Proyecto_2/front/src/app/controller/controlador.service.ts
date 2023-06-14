@@ -20,6 +20,8 @@ import { Usuario } from '../model/usuario';
 import { ComunicadorExcelService } from './DAO/comunicador-excel.service';
 import { NotificadorCorreo } from './NotificadorCorreo';
 import { Subject } from './Subject';
+import { AdmBuzon } from './AdmBuzon';
+import { Notificacion } from '../model/notificacion';
 
 
 @Injectable({
@@ -41,6 +43,7 @@ export class ControladorService {
   private excelService = new ComunicadorExcelService()
   private notificador = new NotificadorCorreo(this.DAO)
   public subject = new Subject(this.DAO)
+  private AdmBuzon = new AdmBuzon(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -238,5 +241,8 @@ export class ControladorService {
     return this.adminActividad.getLastActividad()
 }
 
+public getNotificaciones(id: string): Observable<Notificacion[]>{
+  return this.AdmBuzon.getNotificaciones(id);
+}
 
 }
