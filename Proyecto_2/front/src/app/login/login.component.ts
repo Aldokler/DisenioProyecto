@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
 
           await this.controller.getProfesor(correoUsuario).toPromise().then(
             profe => {
-              console.log(profe)
               Profe = profe as Profesor
               if (Profe.getId() == '') {
                 Profe = null
@@ -61,31 +60,23 @@ export class LoginComponent implements OnInit {
 
           await this.controller.getEstudianteByCorreo(correoUsuario).toPromise().then(
             estudiante => {
-              console.log(estudiante)
               Estudiante = estudiante as Estudiante
               if (Estudiante.getId() == '') {
                 Estudiante = null
               }
             }).catch()
 
-          console.log(Profe)
-          console.log(Admin)
-          console.log(Estudiante)
-
           if (Profe) {
-            console.log(Profe)
             this.pasarDatos.loginUser = Profe
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
             this.router.navigate(['/home']);
           } else if (Admin) {
-            console.log(Admin)
             this.pasarDatos.loginUser = Admin
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;
             this.router.navigate(['/home']);
           } else if (Estudiante) {
-            console.log(Estudiante)
             this.pasarDatos.loginUser = Estudiante
             //--------------------------------------------------------------------------------------------------------------
             this.mostrarHomeComponent = true;

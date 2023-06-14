@@ -286,9 +286,10 @@ BEGIN
 	SELECT uxnr.IDUsuario
     FROM notificador nr
     INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
-    WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
+    WHERE nr.SujetoID = pID AND nr.Tipo = pTipo;
     COMMIT;
 END; //
+
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getBuzonByUsuario; //
@@ -311,4 +312,21 @@ BEGIN
     INNER JOIN profesor p ON uxnr.IDUsuario = p.ID
     WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
     COMMIT;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getMensajesByChat; //
+CREATE PROCEDURE getMensajesByChat(IN pIDChat INT)
+BEGIN
+	SELECT * FROM mensaje WHERE ChatID = pIDChat;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getChatByUser; //
+CREATE PROCEDURE getChatByUser(IN pIDUser INT)
+BEGIN
+	SELECT c.* 
+    FROM usuario_x_chat uxc
+    INNER JOIN chat c ON c.ID = uxc.IDChat
+    WHERE uxc.IDUsuario = pIDUser;
 END; //

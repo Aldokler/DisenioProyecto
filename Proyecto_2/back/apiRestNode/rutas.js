@@ -847,10 +847,10 @@ router.delete('/notificacion/delete', (request, response)=>{
 });
 
 // crear notificador-----------------------------------------------------------
-router.post('/notificador/:ID', (request, response)=>{
-    const {UserID, Tipo} = request.body;    
-    let sql = 'call addNotificador(?)';
-    conexion.query(sql, [UserID, Tipo], (error, rows, fields)=>{
+router.post('/notificador', (request, response)=>{
+    const {notificadorID, tipo} = request.body;    
+    let sql = 'call addNotificador(?,?)';
+    conexion.query(sql, [notificadorID, tipo], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -860,6 +860,7 @@ router.post('/notificador/:ID', (request, response)=>{
         }
     })
 });
+
 
 // delete notificador-----**----------------------------------------------
 router.delete('/notificador/delete', (request, response)=>{
