@@ -19,6 +19,7 @@ import { login } from './login';
 import { Usuario } from '../model/usuario';
 import { ComunicadorExcelService } from './DAO/comunicador-excel.service';
 import { NotificadorCorreo } from './NotificadorCorreo';
+import { Subject } from './Subject';
 
 
 @Injectable({
@@ -39,6 +40,7 @@ export class ControladorService {
   private adminLogin = new login(this.DAO)
   private excelService = new ComunicadorExcelService()
   private notificador = new NotificadorCorreo(this.DAO)
+  private subject = new Subject(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
