@@ -788,3 +788,21 @@ router.put('/estudiante/:id', (request, response)=>{
         }
     })
 });
+
+// modificar estudiante+ ---------------------------------------------------
+router.put('/estudianteplus/:id', (request, response)=>{
+    const {id} = request.params;
+    const {Nombre, Apellido1, Apellido2, CorreoElectronico , 
+           Celular , Contraseña, Sede, Foto} = request.body;
+    let sql = 'call updateEstudiantePlus(?,?,?,?,?,?,?,?,?)';
+    conexion.query(sql, [id,Nombre, Apellido1, Apellido2, CorreoElectronico , 
+        Celular , Contraseña , Sede , Foto], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '1' })
+        }
+    })
+});
