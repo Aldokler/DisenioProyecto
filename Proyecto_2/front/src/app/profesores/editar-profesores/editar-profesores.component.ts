@@ -35,7 +35,7 @@ export class EditarProfesoresComponent {
   }
 
   guardarEdicionProfesor(nombreProfesor:string, correoElectronico:string, fotoProfesor:string,telefonoCelular:string,primerApellido:string,segundoApellido:string){
-    if (!nombreProfesor || !correoElectronico|| !fotoProfesor || !telefonoCelular || !primerApellido  || !segundoApellido) {
+    if (!nombreProfesor || !correoElectronico || !telefonoCelular || !primerApellido  || !segundoApellido) {
       this.showErrorAlert();
       return;
     }
@@ -54,7 +54,7 @@ export class EditarProfesoresComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-plan-de-trabajo']);
+    this.router.navigate(['/home-profesores']);
   }
 
   showErrorAlert() {
