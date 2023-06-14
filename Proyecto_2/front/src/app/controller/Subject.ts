@@ -1,6 +1,7 @@
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { SistemaNotificador } from "./SistemaNotificador";
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observer } from "./Observer";
 
 export class Subject{
     private observers: Observer[] = [];
