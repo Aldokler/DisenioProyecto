@@ -218,12 +218,14 @@ CREATE TABLE `mensaje` (
 
 CREATE TABLE `notificacion` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `Emisor` VARCHAR(45) NOT NULL,
+  `IDEmisor` INT NOT NULL,
+  `EmisorTipo` ENUM("Actividad","Chat") NOT NULL,
   `FechaHora` DATETIME NOT NULL,
   `Contenido` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `nEmisor` FOREIGN KEY (`Emisor`) REFERENCES `usuario` (`ID`)
+  CONSTRAINT `cEmisor` FOREIGN KEY (`IDEmisor`,`EmisorTipo`) REFERENCES `notificador` (`SujetoID`, `Tipo`)
 );
+
 
 CREATE TABLE `notificador` (
   `SujetoID` int NOT NULL,
