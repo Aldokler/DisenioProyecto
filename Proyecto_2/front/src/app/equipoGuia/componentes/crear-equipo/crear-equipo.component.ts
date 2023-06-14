@@ -5,6 +5,8 @@ import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
 import { Usuario } from 'src/app/model/usuario';
 import { EquipoGuia } from 'src/app/model/equipoguia';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-equipo',
@@ -13,7 +15,7 @@ import { EquipoGuia } from 'src/app/model/equipoguia';
 })
 export class CrearEquipoComponent {
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService,private router: Router
   ) { }
 
   public profes: Profesor[] = [];
@@ -40,14 +42,35 @@ export class CrearEquipoComponent {
   }
 
   guardarEquipo(semestre: string, annio: string) {
-
+    if (!semestre || !annio) {
+      this.showErrorAlert();
+      return;
+    }
     this.semestreEntero = parseInt(semestre);
     this.annioEntero = parseInt(annio);
     if (this.semestreEntero && this.annioEntero && this.profesoresSeleccionados.length > 0) {
-
       const equipo: EquipoGuia = new EquipoGuia( 0, this.profesoresSeleccionados, this.annioEntero, this.semestreEntero, this.profesoresSeleccionados[0]);
       this.controller.crearEquipo(equipo)
+      this.showSuccessAlert()
     };
+  }
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/home-profesores']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear el plan de trabajo. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
   }
 
 }
