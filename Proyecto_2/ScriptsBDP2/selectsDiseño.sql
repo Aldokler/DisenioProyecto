@@ -286,7 +286,7 @@ BEGIN
 	SELECT uxnr.IDUsuario
     FROM notificador nr
     INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
-    WHERE nr.SujetoID = pID AND nr.IDTipo = pTipo;
+    WHERE nr.SujetoID = pID AND nr.Tipo = pTipo;
     COMMIT;
 END; //
 
