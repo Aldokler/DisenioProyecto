@@ -930,7 +930,7 @@ router.get('/profesoresANotificar/:id', (request, response)=>{
     
 
 
-// notificar actividad---------------------------------------------------
+// notificar ---------------------------------------------------
 router.post('/Notificar/:notificacion/:usuario', (request, response)=>{
     const {notificacion, usuario} = request.params;
     let sql = "call sendNotificacion(?,?);";
@@ -966,7 +966,7 @@ router.get('/buzon/:id', (request, response)=>{
     })
 });
 
-router.put('/suscribir', (request, response)=>{
+router.post('/suscribir', (request, response)=>{
     const {UserId, NotificadorID, Tipo} = request.body;
     let sql = 'call suscribirUsuario(?,?,?)';
     conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
@@ -982,7 +982,7 @@ router.put('/suscribir', (request, response)=>{
 
 router.delete('/cancelarSubscripcion', (request, response)=>{
     console.log()
-    const {UserId, NotificadorID, Tipo} = request.body;
+    const {UserId, NotificadorID, Tipo} = request.query;
     let sql = "call cancelarSubscripcionUsuario(?,?,?);";
     conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
         if(error){

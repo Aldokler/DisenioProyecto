@@ -202,4 +202,20 @@ export class ApiService {
     return this.http.put(this.url + 'estudianteplus/'+ ID, {Nombre, Apellido1, Apellido2, CorreoElectronico , 
       Celular , Contraseña , Sede, Foto});
   }
+
+  /////////////////////
+
+  public suscribirseANotificador(UserId: string, NotificadorID: number, Tipo: string){
+    return this.http.post(this.url + 'suscribir', {UserId, NotificadorID, Tipo} );
+  }
+
+  public desuscribirseANotificador(UserId: string, NotificadorID: number, Tipo: string){
+    return this.http.delete(this.url + 'cancelarSubscripcion?UserId=' + UserId + '&NotificadorID=' + NotificadorID + '&Tipo=' + Tipo);
+  }
+
+  public notificarABuzon(NotificadorID: number, UserId: string){
+    return this.http.post(this.url + 'Notificar', {NotificadorID, UserId} );
+  }
+
+
 }
