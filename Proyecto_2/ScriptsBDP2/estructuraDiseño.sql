@@ -226,6 +226,8 @@ CREATE TABLE `notificacion` (
   CONSTRAINT `cEmisor` FOREIGN KEY (`IDEmisor`,`EmisorTipo`) REFERENCES `notificador` (`SujetoID`, `Tipo`)
 );
 
+ALTER TABLE notificacion
+ADD Emisor varchar(50);
 
 CREATE TABLE `notificador` (
   `SujetoID` int NOT NULL,
