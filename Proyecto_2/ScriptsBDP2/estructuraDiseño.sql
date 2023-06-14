@@ -226,11 +226,9 @@ CREATE TABLE `notificacion` (
 );
 
 CREATE TABLE `notificador` (
-  `ID` int NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `IDa` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`),
-  CONSTRAINT `IDc` FOREIGN KEY (`ID`) REFERENCES `chat` (`ID`)
+  `SujetoID` int NOT NULL,
+  `Tipo` Enum("Actividad","Chat") NOT NULL,
+  PRIMARY KEY (`SujetoID`, `Tipo`)
 );
 
 CREATE TABLE `usuario_x_chat` (
@@ -252,7 +250,9 @@ CREATE TABLE `usuario_x_notificacion` (
 CREATE TABLE `usuario_x_notificador` (
   `IDUsuario`  VARCHAR(45) NOT NULL,
   `IDNotificador` int NOT NULL,
-  PRIMARY KEY (`IDUsuario`,`IDNotificador`),
+  `IDTipo` Enum("Actividad","Chat") NOT NULL,
+  PRIMARY KEY (`IDUsuario`,`IDNotificador`,`IDTipo`),
   CONSTRAINT `nrIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
-  CONSTRAINT `IDNotificador` FOREIGN KEY (`IDNotificador`) REFERENCES `notificador` (`ID`)
+  CONSTRAINT `IDNotificador` FOREIGN KEY (`IDNotificador`,`IDTipo`) REFERENCES `notificador` (`SujetoID`,`Tipo`)
 );
+

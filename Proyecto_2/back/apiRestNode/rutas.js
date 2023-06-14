@@ -815,8 +815,8 @@ router.post('/notificacion', (request, response)=>{
 
 // modificar notificacion-----**----------------------------------------------
 router.put('notificacion/update', (request, response)=>{
-    const {id, Emisor, FechaHora, Contenido} = request.params;
-    let sql = 'call updateNotificacion(?,?,?,?,?,?,?,?,?)';
+    const {id, Emisor, FechaHora, Contenido} = request.body;
+    let sql = 'call updateNotificacion(?,?,?,?)';
     conexion.query(sql, [id, Emisor, FechaHora, Contenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
@@ -832,7 +832,7 @@ router.put('notificacion/update', (request, response)=>{
 // delete notificacion----**-----------------------------------------------
 router.delete('/notificacion/delete', (request, response)=>{
     console.log()
-    const {id} = request.params;
+    const {id} = request.body;
     let sql = "call deleteNotificacion(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
@@ -847,9 +847,9 @@ router.delete('/notificacion/delete', (request, response)=>{
 
 // crear notificador-----------------------------------------------------------
 router.post('/notificador/:ID', (request, response)=>{
-    const {ID} = request.params;    
+    const {UserID, Tipo} = request.body;    
     let sql = 'call addNotificador(?)';
-    conexion.query(sql, [ID], (error, rows, fields)=>{
+    conexion.query(sql, [UserID, Tipo], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -863,7 +863,7 @@ router.post('/notificador/:ID', (request, response)=>{
 // delete notificador-----**----------------------------------------------
 router.delete('/notificador/delete', (request, response)=>{
     console.log()
-    const {id} = request.params;
+    const {id} = request.body;
     let sql = "call deleteNotificador(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
@@ -895,9 +895,26 @@ router.get('/actividadesANotificar', (request, response)=>{
 
 // get usuarios a notificar por actividad---------------------------------------------------
 router.get('/usuariosANotificar/:id', (request, response)=>{
-    const {id} = request.params;
-    let sql = "call getUsuariosANotificar(?);";
-    conexion.query(sql, [id], (error, rows, fields)=>{
+    const {NotifId, Tipo} = request.params;
+    let sql = "call getUsuariosANotificar(?,?);";
+    conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const lista = rows[0].map(row => row.IDUsuario)
+            response.json({lista})
+        }
+    })
+});
+
+
+// get usuarios a notificar por actividad---------------------------------------------------
+router.get('/profesoresANotificar/:id', (request, response)=>{
+    const {NotifId, Tipo} = request.params;
+    let sql = "call getProfesoresANotificar(?,?);";
+    conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -928,3 +945,67 @@ router.post('/Notificar/:notificacion/:usuario', (request, response)=>{
 });
 
 module.exports= router;
+
+
+//get buzón por usuario ID -----------------------------------------------------
+/*router.get('/profesores/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call getProfesoresByID(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const profesor = rows[0].map(row => 
+                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
+                response.json({profesor})
+        }
+    })
+});*/
+
+router.put('/suscribir', (request, response)=>{
+    const {UserId, NotificadorID, Tipo} = request.body;
+    let sql = 'call suscribirUsuario(?,?,?)';
+    conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+router.delete('/cancelarSubscripcion', (request, response)=>{
+    console.log()
+    const {UserId, NotificadorID, Tipo} = request.body;
+    let sql = "call cancelarSubscripcionUsuario(?,?,?);";
+    conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+
+// update dia recordatorio by actividad-----**----------------------------------------------
+router.put('notificacion/update', (request, response)=>{
+    const {id} = request.body;
+    let sql = 'call updateRecordatorioActividad(?)';
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
