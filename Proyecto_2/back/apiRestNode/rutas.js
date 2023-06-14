@@ -1012,4 +1012,86 @@ router.put('recordatorio/update', (request, response)=>{
     })
 });
 
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
+
+// gestion chats
+// crear mensaje-----------------------------------------------------------
+router.post('/mensaje', (request, response)=>{
+    const {Emisor, FechaHora, Contenido, ChatID} = request.body;    
+    let sql = 'call sendMessage(?,?,?,?)';
+    conexion.query(sql, [Emisor, FechaHora, Contenido, ChatID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Mensaje enviado' })
+        }
+    })
+});
+
+// eliminar mensaje-----------------------------------------------------------
+router.delete('/mensajeDelete/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteMessage(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+// crear chat-----------------------------------------------------------
+router.post('/chat/:ID', (request, response)=>{
+    const {ID} = request.body;    
+    let sql = 'call addChat(?)';
+    conexion.query(sql, [ID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Chat creado' })
+        }
+    })
+});
+
+// eliminar chat-----------------------------------------------------------
+router.delete('/chatDelete/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteChat(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+// devuelve un bool, 0 si el usuario ne esta suscrito al notificador, 1 si si lo está
+router.get('/checkIfSuscribed', (request, response)=>{
+    const {IDUser, IDNotif, Tipo} = request.params;
+    let sql = "call checkIsSuscribed(?,?,?)";
+    conexion.query(sql, [IDUser, IDNotif, Tipo],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+
 module.exports= router;
