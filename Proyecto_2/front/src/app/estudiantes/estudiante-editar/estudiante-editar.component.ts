@@ -6,6 +6,8 @@ import { Profesor } from 'src/app/model/profesor';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estudiante-editar',
@@ -15,11 +17,11 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
 export class EstudianteEditarComponent {
 
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService,private router: Router
   ) { }
 
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
-  public estudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"");
+  public estudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"","");
 
   ngOnInit(): void {
 
@@ -32,8 +34,31 @@ export class EstudianteEditarComponent {
 
   }
 
-  guardarEdicionEstudiante(nombreProfesor:string, correoElectronico:string, fotoProfesor:string,telefonoCelular:string,primerApellido:string,segundoApellido:string){
+  guardarEdicionEstudiante(fotoEstudiante:string,telefonoCelular:string){
+    if (!fotoEstudiante || !telefonoCelular) {
+      this.showErrorAlert();
+      return;
+    }
     
+  }
+
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
   }
 
 }

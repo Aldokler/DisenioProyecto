@@ -96,5 +96,9 @@ export class HomeEstudiantesComponent {
     }
     this.estudiantes = estudiantesFiltrados;
   }
+
+  guardarDatosEstudiante(estudiante:Estudiante){
+    this.pasarDatos.guardarEstudiante = estudiante
+  }
   
 }

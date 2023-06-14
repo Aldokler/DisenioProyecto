@@ -60,8 +60,6 @@ export class CrearActividadPlanDeTrabajoComponent {
   }
 
   guardarActividad(nombreActividad: string, tipoActividad: string, enlace: string, semana: string, fecha: string, hora: string, fechaPublicacion: string, afiche: string) {
-    console.log(fecha)
-    console.log(hora)
     if (!nombreActividad || !tipoActividad|| !semana || !fecha || !hora || !fechaPublicacion) {
       this.showErrorAlert();
       return;

@@ -258,3 +258,57 @@ BEGIN
     select check_user;
 END$$
 DELIMITER ;
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getNextActividadNotificada; // 
+CREATE PROCEDURE getNextActividadNotificada(IN pplan int, IN pfecha datetime)
+BEGIN
+select * from actividad where PlanID = pplan AND FechaHora >= pfecha AND Estado = "Notificada"
+ORDER BY FechaHora LIMIT 1;
+commit;
+END; // 
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getActividadesANotificar; //
+CREATE PROCEDURE getActividadesANotificar()
+BEGIN
+	SELECT a.ID
+    FROM (SELECT * FROM actividad WHERE FechaAPublicar <= DATE(CONVERT_TZ(NOW(),'+00:00','-06:00'))  AND FechaHora > DATE(CONVERT_TZ(NOW(),'+00:00','-06:00')) ) as a
+    INNER JOIN dias_recordatorio dr ON a.ID = dr.Actividad
+    WHERE DATE(dr.Dia) = DATE(CONVERT_TZ(NOW(),'+00:00','-06:00'));
+    COMMIT;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getUsuariosANotificar; //
+CREATE PROCEDURE getUsuariosANotificar(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+BEGIN
+	SELECT uxnr.IDUsuario
+    FROM notificador nr
+    INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
+    WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
+    COMMIT;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getBuzonByUsuario; //
+CREATE PROCEDURE getBuzonByUsuario(IN pID VARCHAR(45))
+BEGIN
+	SELECT notif.* FROM usuario_x_notificacion uxn
+    INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
+    WHERE uxn.IDUsuario = pID
+    ORDER BY notif.FechaHora DESC;
+commit;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS getProfesoresANotificar; //
+CREATE PROCEDURE getProfesoresANotificar(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+BEGIN
+	SELECT uxnr.IDUsuario
+    FROM notificador nr
+    INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
+    INNER JOIN profesor p ON uxnr.IDUsuario = p.ID
+    WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
+    COMMIT;
+END; //

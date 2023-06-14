@@ -66,12 +66,12 @@ export class AdminActividad{
             })
         )
     }
-    public agregarObservacion(id: number, observacion: string){
+    public agregarObservacion(id: number, observacion: string): Observable<boolean>{
         return this.DAO.addObservacion(id, observacion).pipe(
             map((data: any) => {
                 return data.status == '0'
             })
-        ).subscribe()
+        )
     }
 
     public getComentarios(id: number): Observable<Comentario[]>{

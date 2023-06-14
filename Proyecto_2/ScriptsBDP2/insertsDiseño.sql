@@ -10,7 +10,7 @@ DELIMITER ;
 
 drop procedure if exists addProfesor;
 DELIMITER $$
-CREATE PROCEDURE addProfesor(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(45), vFoto longblob)
+CREATE PROCEDURE addProfesor(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vTelefonoOficina varchar(45), vRol varchar(4notificador5), vFoto longblob)
 BEGIN
 
 
@@ -230,7 +230,55 @@ END$$
 
 
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS addNotificacion; //
+CREATE PROCEDURE addNotificacion(IN pEmisor varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
+BEGIN
+	INSERT INTO notificacion (ID, Emisor, FechaHora, Contenido) VALUES (default, pEmisor, pFechaHora, pContenido);
+commit;
+END; //
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS addNotificador; //
+CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+BEGIN
+	INSERT INTO notificador(SujetoID,Tipo) VALUES (pID, pTipo);
+commit;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS suscribirUsuario; //
+CREATE PROCEDURE suscribirUsuario(IN pIDUsuario VARCHAR(45), IN pIDNotificador INT, IN pIDTipo ENUM("Actividad","Chat"))
+BEGIN
+	INSERT INTO usuario_x_notificador (IDUsuario, IDNotificador, IDTipo) VALUES (pIDUsuario, pIDNotificador, pIDTipo);
+commit;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS sendNotificacion; //
+CREATE PROCEDURE sendNotificacion(IN pIDNotif INT, IN IDUsuario VARCHAR(45))
+BEGIN
+	INSERT INTO usuario_x_notificacion (IDUsuario, IDNotificacion) VALUES(pIDUsuario, pIDNotif);
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS updateNotificacion; //
+CREATE PROCEDURE updateNotificacion(IN pID INT, IN pEmisor varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
+BEGIN
+	UPDATE notificacion SET Emisor = pEmisor, FechaHora = pFechaHora, Contenido = pContenido WHERE ID = pID;
+commit;
+END; //
+
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS updateRecordatorioActividad; //
+CREATE PROCEDURE updateRecordatorioActividad(IN pID INT)
+BEGIN
+    UPDATE dias_recordatorio as dr
+    INNER JOIN actividad a ON a.ID = dr.Actividad
+    SET dr.Dia = DATE_ADD(dr.Dia, INTERVAL a.DiasAnunciar DAY)
+    WHERE a.ID = pID;
+END; //
 
 
 

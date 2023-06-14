@@ -59,9 +59,9 @@ export class ControladorService {
   public getEstudiantesPorSede(ProfesorID: string): Observable<Estudiante[]>{
       return this.adminEstudiante.getEstudiantesPorSede(ProfesorID)
   }
-  public editarEstudiante(datosEstudiante: Estudiante): boolean{
-      return this.adminEstudiante.editarEstudiante(datosEstudiante)
-  }
+  public editarDatosEstudiante(estudiante: Estudiante): Observable<boolean>{
+    return this.adminEstudiante.editarEstudiante(estudiante)
+}
   public cargarListaEstudiantes(link: String){
       this.adminEstudiante.cargarListaEstudiantes(link)
   }
@@ -147,8 +147,8 @@ export class ControladorService {
   public responderComentario(comentario: Comentario): Observable<boolean>{
       return this.adminActividad.responderComentario(comentario)
   }
-  public agregarObservacion(id: number, observacion: string){
-      this.adminActividad.agregarObservacion(id, observacion)
+  public agregarObservacion(id: number, observacion: string): Observable<boolean>{
+      return this.adminActividad.agregarObservacion(id, observacion)
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
