@@ -82,50 +82,74 @@
 
               <div class="tab-content overflow-auto" style="max-height: 400px; background-color: #E2EFF8;;">
 
-                <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
-                  <div class="dropdown-item d-flex align-items-center">
-                    <div>
-                      <h6>Ejemplo de notificación 1</h6>
-                      <p>Esta es la notificación de la pestaña 1.</p>
-                      <button class="btn text-white text-center" style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
-                        Ver más detalles
-                      </button>
-                      <button class="btn btn-link text-danger ms-auto">
-                        <i class="bi bi-trash"></i>
-                      </button>
+
+                <div *ngFor="let notificacion of notificaciones">
+                  <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
+                    <div class="dropdown-item d-flex align-items-center">
+                      <div>
+                        <h6>{{notificacion.getIdEmisor()}}</h6>
+                        <p>{{notificacion.getContenido()}}</p>
+                        {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                        <button class="btn text-white text-center"
+                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                          Ver más detalles
+                        </button>
+                        <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacion(notificacion)" >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+
                     </div>
                   </div>
                 </div>
 
 
-                <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
-                  <div class="dropdown-item d-flex">
-                    <div>
-                      <h6>Ejemplo de notificación 2</h6>
-                      <p>Esta es la notificación de la pestaña 2.</p>
-                    </div>
+                <div *ngFor="let notificacionleida of notificacionesleidas">
+                  <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
+                    <div class="dropdown-item d-flex align-items-center">
+                      <div>
+                        <h6>{{notificacionleida.getIdEmisor()}}</h6>
+                        <p>{{notificacionleida.getContenido()}}</p>
+                        {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                        <button class="btn text-white text-center"
+                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                          Ver más detalles
+                        </button>
+                        <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacionLeida(notificacionleida)" >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
 
+                    </div>
                   </div>
-                  <button class="btn btn-link text-danger ms-auto">
-                    <i class="bi bi-trash"></i>
-                  </button>
                 </div>
 
-                <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
-                  <a class="dropdown-item d-flex">
-                    <div>
-                      <h6>Ejemplo de notificación 3</h6>
-                      <p>Esta es la notificación de la pestaña 3.</p>
+
+
+                <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
+                  <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
+                    <div class="dropdown-item d-flex align-items-center">
+                      <div>
+                        <h6>{{notificacionNoLeida.getIdEmisor()}}</h6>
+                        <p>{{notificacionNoLeida.getContenido()}}</p>
+                        {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                        <button class="btn text-white text-center"
+                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                          Ver más detalles
+                        </button>
+                        <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacionNoLeida(notificacionNoLeida)" >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
+                  </div>
                 </div>
+
+
+
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
