@@ -232,9 +232,9 @@ END$$
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificacion; //
-CREATE PROCEDURE addNotificacion(IN pEmisor varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
+CREATE PROCEDURE addNotificacion(IN pIDEmisor INT, IN pEmisorTipo varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
 BEGIN
-	INSERT INTO notificacion (ID, Emisor, FechaHora, Contenido) VALUES (default, pEmisor, pFechaHora, pContenido);
+	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido);
 commit;
 END; //
 
@@ -263,11 +263,12 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS updateNotificacion; //
-CREATE PROCEDURE updateNotificacion(IN pID INT, IN pEmisor varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
+CREATE PROCEDURE updateNotificacion(IN pID INT, IN pIDEmisor INT, IN pEmisorTipo varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
 BEGIN
-	UPDATE notificacion SET Emisor = pEmisor, FechaHora = pFechaHora, Contenido = pContenido WHERE ID = pID;
+	UPDATE notificacion SET IDEmisor = pEmisor, EmisorTipo = pEmisorTipo, FechaHora = pFechaHora, Contenido = pContenido WHERE ID = pID;
 commit;
 END; //
+
 
 
 DELIMITER //
@@ -280,6 +281,18 @@ BEGIN
     WHERE a.ID = pID;
 END; //
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS joinChat; //
+CREATE PROCEDURE joinChat(IN pIDUsuario VARCHAR(45), IN pIDChat INT)
+BEGIN
+	INSERT INTO usuario_x_chat (IDUsuario, IDChat) VALUES(pIDUsuario, pIDChat);
+END; //
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS addChat; //
+CREATE PROCEDURE addChat(IN pIDUsuario VARCHAR(45))
+BEGIN
+	INSERT INTO chat (ID, Host) VALUES(default, pIDUsuario);
+END; //
 
 COMMIT;
