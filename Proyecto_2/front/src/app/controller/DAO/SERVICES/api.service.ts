@@ -217,5 +217,9 @@ export class ApiService {
     return this.http.post(this.url + 'Notificar', {NotificadorID, UserId} );
   }
 
+  public getSuscriptores(notificadorID: number){
+    return this.http.get(this.url + 'usuariosANotificar/' + notificadorID)
+  }
+
 
 }

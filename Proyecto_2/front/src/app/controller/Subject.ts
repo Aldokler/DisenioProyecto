@@ -17,11 +17,11 @@ export class Subject{
         this.DAO.desuscribirseANotificador(observer, subject, tipo);
     }
 
-    public notificar(notificacion: number, usuario: string[]){
-        
+    public notificar(notificadorID: number, notificacion: number){
+        const suscriptores: string[] = this.DAO.getSuscriptores(notificadorID);
 
         for (const observer of this.observers) {
-            observer.notificar(notificacion, usuario);
+            observer.notificar(notificacion, suscriptores);
         }
     }
 
