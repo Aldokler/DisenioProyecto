@@ -234,6 +234,9 @@ export class ControladorService {
     return this.adminEquipoGuia.revisarCoordinadorEquipo(profesorId,equipoId)
   }
 
+  public getLastActividad(año: Number, semestre: Number): Observable<Number> {
+    return this.adminActividad.getLastActividad()
+}
 
 
 }

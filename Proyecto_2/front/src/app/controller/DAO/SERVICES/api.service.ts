@@ -23,6 +23,10 @@ export class ApiService {
     return this.http.get(this.url + 'login?user=' + user + '&pass=' + pass)
   }
 
+  public getLastActividadID(){
+    return this.http.get(this.url + 'last_actividad')
+  }
+
   public revisarCoordinador(profesorId: string){
     return this.http.get(this.url + '/coordinador/' + profesorId)
   }

@@ -330,3 +330,11 @@ BEGIN
     INNER JOIN chat c ON c.ID = uxc.IDChat
     WHERE uxc.IDUsuario = pIDUser;
 END; //
+
+drop procedure if exists getLastActividadID;
+DELIMITER $$
+CREATE PROCEDURE getLastActividadID()
+BEGIN
+	SELECT ID FROM actividad order by ID desc limit 1;
+END$$
+DELIMITER ;

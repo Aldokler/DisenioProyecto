@@ -144,4 +144,12 @@ export class AdminActividad{
             })
         )
     }
+
+    public getLastActividad(): Observable<Number>{
+        return this.DAO.getLastActividadID().pipe(
+            map((data:any) => {
+                return data.ID
+            })
+        )
+    }
 }

@@ -1012,4 +1012,20 @@ router.put('recordatorio/update', (request, response)=>{
     })
 });
 
+
+// get actividad by ID ---------------------------------------------***
+router.get('/last_actividad', (request, response)=>{
+    let sql = "call getLastActividadID();";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+
 module.exports= router;
