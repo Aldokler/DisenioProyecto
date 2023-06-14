@@ -1,7 +1,9 @@
+import { ApiService } from "./DAO/SERVICES/api.service";
+
 export class SistemaNotificador implements Observer{
-    public constructor(){}
+    public constructor(private DAO: ApiService){}
     
-    update(notificacionID: number, usuarioID: string): void {
-        throw new Error("Method not implemented.");
+    public notificar(notificacion: number, usuario: string){
+        this.DAO.notificarABuzon(notificacion, usuario);
     }
 }

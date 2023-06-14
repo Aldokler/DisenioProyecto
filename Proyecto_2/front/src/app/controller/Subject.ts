@@ -3,6 +3,8 @@ import { ApiService } from "./DAO/SERVICES/api.service";
 export class Subject{
     public constructor(private DAO: ApiService){}
 
+    private observers: Observer[] = [];
+
     public suscribirse(subject: number, observer: string, tipo: string): void{
         this.DAO.suscribirseANotificador(observer, subject, tipo);
     }
@@ -12,7 +14,9 @@ export class Subject{
     }
 
     public notificar(notificacion: number, usuario: string){
-        this.DAO.notificarABuzon(notificacion, usuario);
+        for (const observer of this.observers) {
+            observer.notificar(notificacion, usuario);
+        }
     }
 
 
