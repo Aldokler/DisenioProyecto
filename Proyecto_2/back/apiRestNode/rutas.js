@@ -5,6 +5,7 @@ const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
 const {Estudiante} = require('../model/estudiante');
+const {notificacion, Notificacion} = require('../model/notificacion');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -948,9 +949,9 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-router.get('/buzon', (request, response)=>{
+router.get('/buzon/:id', (request, response)=>{
     console.log()
-    const {id} = request.body;
+    const {id} = request.params;
     let sql = "call getBuzonByUsuario(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
@@ -959,7 +960,7 @@ router.get('/buzon', (request, response)=>{
         }
         else{
             const notificacion = rows[0].map(row => 
-                new Notification(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
+                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
                 response.json({notificacion})
         }
     })
