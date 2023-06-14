@@ -895,9 +895,26 @@ router.get('/actividadesANotificar', (request, response)=>{
 
 // get usuarios a notificar por actividad---------------------------------------------------
 router.get('/usuariosANotificar/:id', (request, response)=>{
-    const {UserId, Tipo} = request.params;
+    const {NotifId, Tipo} = request.params;
     let sql = "call getUsuariosANotificar(?,?);";
-    conexion.query(sql, [UserId, Tipo], (error, rows, fields)=>{
+    conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const lista = rows[0].map(row => row.IDUsuario)
+            response.json({lista})
+        }
+    })
+});
+
+
+// get usuarios a notificar por actividad---------------------------------------------------
+router.get('/profesoresANotificar/:id', (request, response)=>{
+    const {NotifId, Tipo} = request.params;
+    let sql = "call getProfesoresANotificar(?,?);";
+    conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

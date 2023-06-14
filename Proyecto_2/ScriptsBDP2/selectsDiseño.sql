@@ -301,3 +301,14 @@ BEGIN
 commit;
 END; //
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS getProfesoresANotificar; //
+CREATE PROCEDURE getProfesoresANotificar(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+BEGIN
+	SELECT uxnr.IDUsuario
+    FROM notificador nr
+    INNER JOIN usuario_x_notificador uxnr ON nr.ID = uxnr.IDNotificador
+    INNER JOIN profesor p ON uxnr.IDUsuario = p.ID
+    WHERE nr.IDNotificador = pID AND nr.IDTipo = pTipo;
+    COMMIT;
+END; //
