@@ -799,9 +799,9 @@ module.exports= router;
 // gestion notificaciones
 // crear notificacion-----------------------------------------------------------
 router.post('/notificacion', (request, response)=>{
-    const {Emisor, FechaHora, Contenido} = request.body;    
-    let sql = 'call addNotificacion(?,?,?)';
-    conexion.query(sql, [Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+    const {IDEmisor, TipoEmisor, FechaHora, Contenido} = request.body;    
+    let sql = 'call addNotificacion(?,?,?,?)';
+    conexion.query(sql, [IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -815,9 +815,9 @@ router.post('/notificacion', (request, response)=>{
 
 // modificar notificacion-----**----------------------------------------------
 router.put('notificacion/update', (request, response)=>{
-    const {id, Emisor, FechaHora, Contenido} = request.body;
-    let sql = 'call updateNotificacion(?,?,?,?)';
-    conexion.query(sql, [id, Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+    const {id, IDEmisor, TipoEmisor, FechaHora, Contenido} = request.body;
+    let sql = 'call updateNotificacion(?,?,?,?,?)';
+    conexion.query(sql, [id, IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -996,7 +996,7 @@ router.delete('/cancelarSubscripcion', (request, response)=>{
 
 
 // update dia recordatorio by actividad-----**----------------------------------------------
-router.put('notificacion/update', (request, response)=>{
+router.put('recordatorio/update', (request, response)=>{
     const {id} = request.body;
     let sql = 'call updateRecordatorioActividad(?)';
     conexion.query(sql, [id], (error, rows, fields)=>{
@@ -1009,3 +1009,5 @@ router.put('notificacion/update', (request, response)=>{
         }
     })
 });
+
+module.exports= router;

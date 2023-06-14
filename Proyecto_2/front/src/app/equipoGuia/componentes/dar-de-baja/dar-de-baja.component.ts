@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { EquipoGuia } from 'src/app/model/equipoguia';
 import { tap } from 'rxjs';
-import { Usuario } from 'src/app/model/usuario';
-import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
 import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dar-de-baja',
@@ -16,14 +16,14 @@ import { TSede } from 'src/app/model/tsede';
 export class DarDeBajaComponent {
 
   constructor(
-    private controller: ControladorService
+    private controller: ControladorService,private router: Router
   ) { }
 
   public equiposguia: EquipoGuia[] = [];
   public annios: Number[] = [];
   listaEquipo: Profesor[] = [];
   public profesoresSeleccionados: Profesor[] = [];
-  public profe:Profesor = new Profesor("","","","","","",TSede.CA,"","","",TRol.GUIA);
+  public profe: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
   public errorMessage: String = '';
   public showError: boolean = false;
   public equipoGuiaId: number = 0; // Variable para almacenar el ID del equipo guía
@@ -33,7 +33,7 @@ export class DarDeBajaComponent {
     this.controller.getEquiposGuia().pipe(
       tap(res => {
         this.equiposguia = res;
-        
+
         this.annios = this.equiposguia.map(value => {
           return value.getAnnio()
         }).filter((value, index, self) => {
@@ -57,7 +57,7 @@ export class DarDeBajaComponent {
     this.equiposguia = this.equiposguia.filter((equipo) => {
       return equipo.getAnnio() == annioFiltrarNumber && equipo.getSemestre() == semestreFiltrarNumber;
     });
-    if (this.equiposguia.length == 1){
+    if (this.equiposguia.length == 1) {
       let actual = this.equiposguia[0].getId();
       this.equipoGuiaId = actual
       this.controller.getProfesoresDeEquipoGuia(actual).pipe(
@@ -67,10 +67,10 @@ export class DarDeBajaComponent {
         )
       ).subscribe()
       this.errorMessage = ''
-    } else { 
+    } else {
       this.errorMessage = 'No existen equipos guía para el periodo indicado'
       this.showError = true;
-  
+
       setTimeout(() => {
         this.showError = false;
         setTimeout(() => {
@@ -92,20 +92,42 @@ export class DarDeBajaComponent {
   }
 
   seleccionarProfesores(profesor: Profesor) {
-      //añadir el ID del equipo guia 
-      console.log(this.equiposguia);
-      console.log(this.profesoresSeleccionados);
-      console.log(this.equipoGuiaId);
-      console.log(profesor.getId());
+    //añadir el ID del equipo guia 
 
-      this.controller.sacarProfesor(this.equipoGuiaId,profesor.getId()).pipe(
-        tap(res => {
-          if(res){
-            console.log("hola");
-          }
-        })
-      ).subscribe()
+    if (!profesor) {
+      this.showErrorAlert();
+      return;
+    }
+
+    this.controller.sacarProfesor(this.equipoGuiaId, profesor.getId()).pipe(
+      tap(res => {
+        if (res) {
+          console.log("hola");
+        }
+      })
+    ).subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
   }
 
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/dar-de-baja']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear el plan de trabajo. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
 
 }
