@@ -9,6 +9,8 @@ BEGIN
     
     SELECT ID into vID FROM actividad order by ID desc limit 1;
     insert into notificador values (vID, 'Actividad');
+    
+    INSERT INTO dias_recordatorio (Dia, Actividad) VALUES (DATE(DATE_ADD(vFechaHora, INTERVAL vDiasAnunciar DAY)), vID);
 
 END$$
 DELIMITER ;
