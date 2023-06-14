@@ -40,7 +40,7 @@ export class ControladorService {
   private adminLogin = new login(this.DAO)
   private excelService = new ComunicadorExcelService()
   private notificador = new NotificadorCorreo(this.DAO)
-  private subject = new Subject(this.DAO)
+  public subject = new Subject(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -233,7 +233,5 @@ export class ControladorService {
   public revisarCoordinadorEquipo(profesorId: string, equipoId: string): Observable<Boolean>{
     return this.adminEquipoGuia.revisarCoordinadorEquipo(profesorId,equipoId)
   }
-
-
 
 }
