@@ -10,13 +10,12 @@ BEGIN
     SELECT ID into vID FROM actividad order by ID desc limit 1;
     -- insert into notificador values (vID, 'Actividad');
     call addNotificador(vID, "Actividad", vNombre);
+    SELECT vID;
     
-    INSERT INTO dias_recordatorio (Dia, Actividad) VALUES (DATE(DATE_ADD(vFechaHora, INTERVAL vDiasAnunciar DAY)), vID);
+    INSERT INTO dias_recordatorio (ID, Dia, Actividad) VALUES (default, DATE(DATE_ADD(vFechaHora, INTERVAL vDiasAnunciar DAY)), vID);
 
 END$$
 DELIMITER ;
-
-call addActividad('varchar(45)', 1, '1971-04-15 3:45:00', 5 , 'vLink varchar(45)', "Técnico", "Presencial", 1, '1971-04-15 3:45:00');
 
 drop procedure if exists addProfesor;
 DELIMITER $$
@@ -254,7 +253,7 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificador; //
-CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"), nombre varchar(50))
+CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"), IN nombre varchar(50))
 BEGIN
     INSERT INTO notificador(SujetoID,Tipo, Nombre) VALUES (pID, pTipo, nombre);
 commit;

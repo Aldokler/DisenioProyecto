@@ -163,7 +163,7 @@ CREATE TABLE `dias_recordatorio` (
   `Actividad` int NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `idDias_REcordatORIO_UNIQUE` (`ID`),
-  CONSTRAINT `Actividad` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`)
+  CONSTRAINT `dActividad` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`)
 );
 
 
