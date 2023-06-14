@@ -948,22 +948,22 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-/*router.get('/profesores/:id', (request, response)=>{
+router.get('/buzon', (request, response)=>{
     console.log()
-    const {id} = request.params;
-    let sql = "call getProfesoresByID(?);";
+    const {id} = request.body;
+    let sql = "call getBuzonByUsuario(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
-            const profesor = rows[0].map(row => 
-                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
-                response.json({profesor})
+            const notificacion = rows[0].map(row => 
+                new Notification(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
+                response.json({notificacion})
         }
     })
-});*/
+});
 
 router.put('/suscribir', (request, response)=>{
     const {UserId, NotificadorID, Tipo} = request.body;
