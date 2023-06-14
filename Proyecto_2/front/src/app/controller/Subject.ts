@@ -1,13 +1,16 @@
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { SistemaNotificador } from "./SistemaNotificador";
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 export class Subject{
+    private observers: Observer[] = [];
+
     public constructor(private DAO: ApiService){
         const sistemaNotificador = new SistemaNotificador(this.DAO);
         this.observers.push(sistemaNotificador);
     }
 
-    private observers: Observer[] = [];
+    
 
     public suscribirse(notificador: number, observer: string, tipo: string): void{
         this.DAO.suscribirseANotificador(observer, notificador, tipo);
@@ -19,6 +22,8 @@ export class Subject{
 
     public notificar(notificadorID: number,tipoNotificador: string, notificacion: number){
         const suscriptores: string[] = this.DAO.getSuscriptores(notificadorID, tipoNotificador);
+
+      
 
         for (const observer of this.observers) {
             observer.notificar(notificacion, suscriptores);
