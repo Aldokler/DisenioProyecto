@@ -118,7 +118,7 @@ export class DarDeBajaComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-profesores']);
+    this.router.navigate(['/dar-de-baja']);
   }
 
   showErrorAlert() {

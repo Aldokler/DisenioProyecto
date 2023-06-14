@@ -61,7 +61,7 @@ export class CrearEquipoComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-profesores']);
+    this.router.navigate(['/crear-equipo']);
   }
 
   showErrorAlert() {

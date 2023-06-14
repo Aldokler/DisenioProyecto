@@ -134,7 +134,7 @@ export class RegistrarProfesorGuiaComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-profesores']);
+    this.router.navigate(['/home-equipo-guia']);
   }
 
   showErrorAlert() {

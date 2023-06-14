@@ -132,7 +132,7 @@ export class ConsultarEquipoComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-profesores']);
+    this.router.navigate(['/consultar-equipo']);
   }
 
   showErrorAlert() {
