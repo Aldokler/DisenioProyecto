@@ -1,14 +1,18 @@
 import { map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { SistemaNotificador } from "./SistemaNotificador";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observer } from "./Observer";
 
 export class Subject{
+    private observers: Observer[] = [];
+
     public constructor(private DAO: ApiService){
         const sistemaNotificador = new SistemaNotificador(this.DAO);
         this.observers.push(sistemaNotificador);
     }
 
-    private observers: Observer[] = [];
+    
 
     public suscribirse(notificador: number, observer: string, tipo: string): void{
         this.DAO.suscribirseANotificador(observer, notificador, tipo);

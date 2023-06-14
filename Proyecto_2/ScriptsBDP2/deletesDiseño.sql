@@ -159,12 +159,27 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS cancelarSubscripcionUsuario; //
-CREATE PROCEDURE suscribirUsuario(IN pIDUsuario VARCHAR(45), IN pIDNotificador INT, IN pIDTipo ENUM("Actividad","Chat"))
+CREATE PROCEDURE cancelarSubscripcionUsuario(IN pIDUsuario VARCHAR(45), IN pIDNotificador INT, IN pIDTipo ENUM("Actividad","Chat"))
 BEGIN
 	DELETE FROM usuario_x_notificador WHERE IDUsuario = pIDUsuario AND IDNotificador =pIDNotificador AND IDTipo = pIDTipo;
 commit;
 END; //
 
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS deleteChat; //
+CREATE PROCEDURE deleteChat(IN pID INT)
+BEGIN
+	DELETE FROM mensaje WHERE ChatID = pID;
+    DELETE FROM usuario_x_chat WHERE IDChat;
+	DELETE FROM chat WHERE ID = pID;
+END; //
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS deleteMessage; //
+CREATE PROCEDURE deleteMessage(IN pID INT)
+BEGIN
+	DELETE FROM mensaje WHERE ID = pID;
+END; //
 
 COMMIT;

@@ -1,4 +1,6 @@
 import { ApiService } from "./DAO/SERVICES/api.service";
+import { Observer } from "./Observer";
+
 
 export class SistemaNotificador implements Observer{
     public constructor(private DAO: ApiService){}

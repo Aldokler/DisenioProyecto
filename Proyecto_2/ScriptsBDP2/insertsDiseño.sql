@@ -295,4 +295,20 @@ BEGIN
 	INSERT INTO chat (ID, Host) VALUES(default, pIDUsuario);
 END; //
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS sendMessage; //
+CREATE PROCEDURE sendMessage(IN pEmisor VARCHAR(45), IN pFechaHora DATETIME, IN pContenido VARCHAR(300), IN ChatID INT)
+BEGIN
+	INSERT INTO chat (ID, Emisor, FechaHora, Contenido, ChatID) VALUES(default, pEmisor, pFechaHora, pContenido, pChatID);
+END; //
+
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS addUserChat; //
+CREATE PROCEDURE addUserChat(IN pIDChat INT, IN pIDUsuario VARCHAR(45))
+BEGIN
+	INSERT INTO usuario_x_chat (IDUsuario, IDChat) VALUES(pIDUsuario, pIDChat);
+END; //
+
 COMMIT;
+
