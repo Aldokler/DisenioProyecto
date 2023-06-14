@@ -1,0 +1,17 @@
+export class Subject{
+    public constructor(){}
+
+    public suscribirse(subject: number, observer: string): void{
+
+    }
+
+    public desuscribirse(subject: number, observer: string): void{
+
+    }
+
+    public notificar(){
+
+    }
+
+
+}
