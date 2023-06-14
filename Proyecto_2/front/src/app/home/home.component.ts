@@ -17,10 +17,8 @@ export class HomeComponent {
 
   constructor(private controller: ControladorService) { }
   ngOnInit(): void {
-    console.log(this.pasarDatos.loginUser instanceof Profesor);
     if (this.pasarDatos.loginUser instanceof Profesor) {
       if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
-        console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
         this.tipoDeUsuario = "Coordinador"
       } else {
         this.tipoDeUsuario = "Profesor"

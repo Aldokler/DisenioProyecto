@@ -57,7 +57,6 @@ export class HomeEstudiantesComponent {
 
     if(this.pasarDatos.loginUser instanceof Profesor){
       if(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()) ){
-        console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
         this.tipoDeUsuario = "Coordinador"
       }else{
         this.tipoDeUsuario = "Profesor"
@@ -69,8 +68,14 @@ export class HomeEstudiantesComponent {
 
 
     //Prueabilla ahí
+    /*
     console.log("suscriptorcillos ahí")
-    this.controller.no
+    this.controller.subject.getSuscriptores(1, "Actividad").pipe(
+      tap(res => {
+        console.log(res);
+      })
+    ).subscribe();
+    */
   }
 
   filtrarEstudiantes(carne:string,campus:string){

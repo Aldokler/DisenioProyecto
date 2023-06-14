@@ -23,31 +23,24 @@ export class Subject{
     }
 
     public notificar(notificadorID: number,tipoNotificador: string, notificacion: number){
-        const suscriptores: string[] = []
         this.getSuscriptores(notificadorID, tipoNotificador).pipe(
-            map((data: any) => { 
-                const json = data;
-                return json.map((json: any) => {
-                });
+            tap(res => {
+                for (const observer of this.observers) {
+                    observer.notificar(notificacion, res);
+                }
             })
-        );
+          ).subscribe();
 
-        for (const observer of this.observers) {
-            observer.notificar(notificacion, suscriptores);
-        }
     }
 
     public addObserver(sistemaNotificador: SistemaNotificador){
         this.observers.push(sistemaNotificador);
     }
 
-    private getSuscriptores(notificadorID: number,tipoNotificador: string){
+    public getSuscriptores(notificadorID: number,tipoNotificador: string){
         return this.DAO.getSuscriptores(notificadorID, tipoNotificador).pipe(
             map((data: any) => { 
-                const json = data.lista;
-                return json.map((json: any) => {
-                    json
-                });
+                return data.lista;
             })
         );
     }
