@@ -1107,4 +1107,21 @@ router.get('/last_actividad', (request, response)=>{
     })
 });
 
+// crear chat-----------------------------------------------------------
+router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
+    const {IDChat,IDUsuario} = request.params;    
+    let sql = 'call addUserChat(?,?)';
+    conexion.query(sql, [IDChat,IDUsuario], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Usuario agregado' })
+        }
+    })
+});
+
+
+
 module.exports= router;
