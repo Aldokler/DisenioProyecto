@@ -1,3 +1,4 @@
+import { map, tap } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { SistemaNotificador } from "./SistemaNotificador";
 
@@ -18,7 +19,14 @@ export class Subject{
     }
 
     public notificar(notificadorID: number,tipoNotificador: string, notificacion: number){
-        const suscriptores: string[] = this.DAO.getSuscriptores(notificadorID, tipoNotificador);
+        const suscriptores: string[] = []
+        this.getSuscriptores(notificadorID, tipoNotificador).pipe(
+            map((data: any) => { 
+                const json = data;
+                return json.map((json: any) => {
+                });
+            })
+        );
 
         for (const observer of this.observers) {
             observer.notificar(notificacion, suscriptores);
@@ -27,6 +35,17 @@ export class Subject{
 
     public addObserver(sistemaNotificador: SistemaNotificador){
         this.observers.push(sistemaNotificador);
+    }
+
+    private getSuscriptores(notificadorID: number,tipoNotificador: string){
+        return this.DAO.getSuscriptores(notificadorID, tipoNotificador).pipe(
+            map((data: any) => { 
+                const json = data.lista;
+                return json.map((json: any) => {
+                    json
+                });
+            })
+        );
     }
 
 

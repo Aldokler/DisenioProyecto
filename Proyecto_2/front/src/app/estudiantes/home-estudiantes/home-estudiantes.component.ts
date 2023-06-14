@@ -69,13 +69,8 @@ export class HomeEstudiantesComponent {
 
 
     //Prueabilla ahí
-    console.log("estudiantillos ahí")
-    this.controller.getEstudiantesPorSede("SJ-01").pipe(
-      tap(res => {
-        console.log(res.length)
-        res.forEach(x => {console.log(x)})
-      })
-    ).subscribe()
+    console.log("suscriptorcillos ahí")
+    this.controller.no
   }
 
   filtrarEstudiantes(carne:string,campus:string){
