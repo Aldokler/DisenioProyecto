@@ -235,6 +235,9 @@ CREATE TABLE `notificador` (
   PRIMARY KEY (`SujetoID`, `Tipo`)
 );
 
+ALTER TABLE notificador
+ADD Nombre varchar(50);
+
 CREATE TABLE `usuario_x_chat` (
   `IDUsuario` VARCHAR(45) NOT NULL,
   `IDChat` int NOT NULL,

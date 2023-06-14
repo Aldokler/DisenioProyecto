@@ -243,15 +243,19 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificacion; //
 CREATE PROCEDURE addNotificacion(IN pIDEmisor INT, IN pEmisorTipo varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
 BEGIN
-	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido);
+	declare vnombre varchar(50);
+    Select Nombre into vnombre from notificador where SujetoID = pIDEmisor AND Tipo = pEmisorTipo;
+    Select vnombre;
+	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido, Emisor) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido, vnombre);
 commit;
 END; //
 
+
 DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificador; //
-CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"), nombre varchar(50))
 BEGIN
-	INSERT INTO notificador(SujetoID,Tipo) VALUES (pID, pTipo);
+    INSERT INTO notificador(SujetoID,Tipo, Nombre) VALUES (pID, pTipo, nombre);
 commit;
 END; //
 
