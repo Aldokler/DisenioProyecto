@@ -2,11 +2,18 @@ drop procedure if exists addActividad;
 DELIMITER $$
 CREATE PROCEDURE addActividad (vNombre varchar(45), vSemana int, vFechaHora date, vDiasAnunciar int, vLink varchar(45), vTipoactividad varchar(45), vModalidad varchar(45), vPlanID int, vFechaPublicar date)
 BEGIN
+	DECLARE vID int;
 	INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
 	VALUES (vNombre, vSemana, vFechaHora, vDiasAnunciar, vLink, vTipoactividad, vModalidad, 'Planeada', vPlanID, vFechaPublicar);
     COMMIT;
+    
+    SELECT ID into vID FROM actividad order by ID desc limit 1;
+    insert into notificador values (vID, 'Actividad');
+
 END$$
 DELIMITER ;
+
+call addActividad('vNombre varchar(45)', 1, '1971-04-15 3:45:00', 5 , 'vLink varchar(45)', "Técnico", "Presencial", 1, '1971-04-15 3:45:00');
 
 drop procedure if exists addProfesor;
 DELIMITER $$
