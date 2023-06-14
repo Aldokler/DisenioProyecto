@@ -4,6 +4,7 @@ export class Notificacion {
     private contenido: string;
     private idEmisor: number;
     private emisorTipo: string;
+    private emisor: string
 
     constructor(
         id: number,
@@ -11,12 +12,14 @@ export class Notificacion {
         contenido: string,
         idEmisor: number,
         emisorTipo: string,
+        emisor: string
     ) {
         this.id = id
         this.fechaHora = fechaHora
         this.contenido = contenido
         this.idEmisor = idEmisor
         this.emisorTipo = emisorTipo
+        this.emisor = emisor
     }
     
     public getId(): number {
@@ -49,6 +52,14 @@ export class Notificacion {
 
     public setIdEmisor(idEmisor: number): void {
         this.idEmisor = idEmisor;
+    }
+
+    public getEmisor(): string {
+        return this.emisor;
+    }
+
+    public setEmisor(Emisor: string): void {
+        this.emisor = Emisor;
     }
 
     public getmisorTipo(): string {
