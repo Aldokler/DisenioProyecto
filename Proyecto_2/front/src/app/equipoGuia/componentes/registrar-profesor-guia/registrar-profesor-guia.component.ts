@@ -6,6 +6,8 @@ import { TRol } from 'src/app/model/trol';
 import { TSede } from 'src/app/model/tsede';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Buffer } from 'buffer';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-profesor-guia',
@@ -21,15 +23,23 @@ export class RegistrarProfesorGuiaComponent {
 
   constructor(
     private controller: ControladorService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) { }
 
 
   public rolProfesor: TRol = TRol.GUIA;
   nombreArchivo:String = "";
 
-  registrarProfesor(
-    codigoCampus: String, correoElectronico: string, telefonoCelular: string, nombreProfesor: string, telefonoOficina: string, fotoProfesor: string, primerApellido: string, segundoApellido: string) {
+  registrarProfesor(codigoCampus: String, correoElectronico: string, 
+    telefonoCelular: string, nombreProfesor: string, telefonoOficina: string, 
+    fotoProfesor: string, primerApellido: string, segundoApellido: string) {
+
+      if (!codigoCampus || !correoElectronico || !telefonoCelular || !nombreProfesor || !telefonoOficina || !primerApellido || !segundoApellido || !fotoProfesor) {
+        this.showErrorAlert();
+        return;
+      }
+
     const codigoCampusEnum: TSede = TSede[codigoCampus as keyof typeof TSede];
     const profesor: Profesor = new Profesor("LI-666",nombreProfesor,primerApellido,segundoApellido,correoElectronico,telefonoCelular,codigoCampusEnum,"1234",telefonoOficina,this.imageBuffer,this.rolProfesor);
     console.log(profesor);
@@ -40,7 +50,11 @@ export class RegistrarProfesorGuiaComponent {
           console.log(this.imageBuffer);
         }
       })
-    ).subscribe()
+    ).subscribe(
+      () => {
+        this.showSuccessAlert() ;
+      }
+    )
   }
 
   handleFileInput(event: any): any {
@@ -113,4 +127,24 @@ export class RegistrarProfesorGuiaComponent {
       return null;
     }
   })
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/home-equipo-guia']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error al crear el plan de trabajo. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
+
+
 }

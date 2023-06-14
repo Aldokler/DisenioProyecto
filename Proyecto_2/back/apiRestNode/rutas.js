@@ -789,23 +789,7 @@ router.put('/estudiante/:id', (request, response)=>{
     })
 });
 
-// modificar estudiante+ ---------------------------------------------------
-router.put('/estudianteplus/:id', (request, response)=>{
-    const {id} = request.params;
-    const {Nombre, Apellido1, Apellido2, CorreoElectronico , 
-           Celular , Contraseña, Sede, Foto} = request.body;
-    let sql = 'call updateEstudiantePlus(?,?,?,?,?,?,?,?,?)';
-    conexion.query(sql, [id,Nombre, Apellido1, Apellido2, CorreoElectronico , 
-        Celular , Contraseña , Sede , Foto], (error, rows, fields)=>{
-            if(error){
-                console.log(error);
-                response.json({status: '-1' });
-            }
-            else{
-                response.json({status: '1' })
-            }
-        })
-    });
+module.exports= router;
 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -815,9 +799,9 @@ router.put('/estudianteplus/:id', (request, response)=>{
 // gestion notificaciones
 // crear notificacion-----------------------------------------------------------
 router.post('/notificacion', (request, response)=>{
-    const {Emisor, FechaHora, Contenido} = request.body;    
-    let sql = 'call addNotificacion(?,?,?)';
-    conexion.query(sql, [Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+    const {IDEmisor, TipoEmisor, FechaHora, Contenido} = request.body;    
+    let sql = 'call addNotificacion(?,?,?,?)';
+    conexion.query(sql, [IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -831,9 +815,9 @@ router.post('/notificacion', (request, response)=>{
 
 // modificar notificacion-----**----------------------------------------------
 router.put('notificacion/update', (request, response)=>{
-    const {id, Emisor, FechaHora, Contenido} = request.body;
-    let sql = 'call updateNotificacion(?,?,?,?)';
-    conexion.query(sql, [id, Emisor, FechaHora, Contenido], (error, rows, fields)=>{
+    const {id, IDEmisor, TipoEmisor, FechaHora, Contenido} = request.body;
+    let sql = 'call updateNotificacion(?,?,?,?,?)';
+    conexion.query(sql, [id, IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -964,22 +948,22 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-/*router.get('/profesores/:id', (request, response)=>{
+router.get('/buzon', (request, response)=>{
     console.log()
-    const {id} = request.params;
-    let sql = "call getProfesoresByID(?);";
+    const {id} = request.body;
+    let sql = "call getBuzonByUsuario(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
-            const profesor = rows[0].map(row => 
-                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
-                response.json({profesor})
+            const notificacion = rows[0].map(row => 
+                new Notification(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
+                response.json({notificacion})
         }
     })
-});*/
+});
 
 router.put('/suscribir', (request, response)=>{
     const {UserId, NotificadorID, Tipo} = request.body;
@@ -1012,7 +996,7 @@ router.delete('/cancelarSubscripcion', (request, response)=>{
 
 
 // update dia recordatorio by actividad-----**----------------------------------------------
-router.put('notificacion/update', (request, response)=>{
+router.put('recordatorio/update', (request, response)=>{
     const {id} = request.body;
     let sql = 'call updateRecordatorioActividad(?)';
     conexion.query(sql, [id], (error, rows, fields)=>{
@@ -1025,3 +1009,5 @@ router.put('notificacion/update', (request, response)=>{
         }
     })
 });
+
+module.exports= router;
