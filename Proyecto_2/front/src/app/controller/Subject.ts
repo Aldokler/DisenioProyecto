@@ -38,7 +38,6 @@ export class Subject{
                 }
             })
           ).subscribe();
-
     }
 
     public addObserver(sistemaNotificador: SistemaNotificador){
