@@ -5,6 +5,7 @@ const {Actividad} = require('../model/actividad');
 const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
 const {Estudiante} = require('../model/estudiante');
+const {notificacion, Notificacion} = require('../model/notificacion');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -784,7 +785,7 @@ router.put('/estudiante/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Estudiante modificado' })
+            response.json({status: '1' })
         }
     })
 });
@@ -894,7 +895,7 @@ router.get('/actividadesANotificar', (request, response)=>{
 
 
 // get usuarios a notificar por actividad---------------------------------------------------
-router.get('/usuariosANotificar/:id', (request, response)=>{
+router.get('/usuariosANotificar/:NotifId/:Tipo', (request, response)=>{
     const {NotifId, Tipo} = request.params;
     let sql = "call getUsuariosANotificar(?,?);";
     conexion.query(sql, [NotifId, Tipo], (error, rows, fields)=>{
@@ -929,7 +930,7 @@ router.get('/profesoresANotificar/:id', (request, response)=>{
     
 
 
-// notificar actividad---------------------------------------------------
+// notificar ---------------------------------------------------
 router.post('/Notificar/:notificacion/:usuario', (request, response)=>{
     const {notificacion, usuario} = request.params;
     let sql = "call sendNotificacion(?,?);";
@@ -948,9 +949,9 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-router.get('/buzon', (request, response)=>{
+router.get('/buzon/:id', (request, response)=>{
     console.log()
-    const {id} = request.body;
+    const {id} = request.params;
     let sql = "call getBuzonByUsuario(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
         if(error){
@@ -959,13 +960,13 @@ router.get('/buzon', (request, response)=>{
         }
         else{
             const notificacion = rows[0].map(row => 
-                new Notification(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
+                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
                 response.json({notificacion})
         }
     })
 });
 
-router.put('/suscribir', (request, response)=>{
+router.post('/suscribir', (request, response)=>{
     const {UserId, NotificadorID, Tipo} = request.body;
     let sql = 'call suscribirUsuario(?,?,?)';
     conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
@@ -981,7 +982,7 @@ router.put('/suscribir', (request, response)=>{
 
 router.delete('/cancelarSubscripcion', (request, response)=>{
     console.log()
-    const {UserId, NotificadorID, Tipo} = request.body;
+    const {UserId, NotificadorID, Tipo} = request.query;
     let sql = "call cancelarSubscripcionUsuario(?,?,?);";
     conexion.query(sql, [UserId, NotificadorID, Tipo], (error, rows, fields)=>{
         if(error){

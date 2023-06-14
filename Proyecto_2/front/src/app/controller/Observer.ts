@@ -1,4 +1,4 @@
-interface Observer {
+export interface Observer {
 
-    update(notificacionID: number, usuarioID: string): void;
+    notificar(notificacionID: number, usuarioID: string[]): void;
 }

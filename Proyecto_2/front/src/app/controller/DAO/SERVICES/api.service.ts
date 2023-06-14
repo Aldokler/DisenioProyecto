@@ -196,4 +196,30 @@ export class ApiService {
   public modificarEstudiante(ID: string, celular: string, Foto:Buffer){
     return this.http.put(this.url + 'estudiante/'+ ID, {celular, Foto});
   }
+
+  public modificarEstudiantePlus(ID: string, Nombre: string, Apellido1: string, Apellido2: string, CorreoElectronico: string , 
+    Celular: string , Contraseña: string , Sede: string, Foto:Buffer){
+    return this.http.put(this.url + 'estudianteplus/'+ ID, {Nombre, Apellido1, Apellido2, CorreoElectronico , 
+      Celular , Contraseña , Sede, Foto});
+  }
+
+  /////////////////////
+
+  public suscribirseANotificador(UserId: string, NotificadorID: number, Tipo: string){
+    return this.http.post(this.url + 'suscribir', {UserId, NotificadorID, Tipo} );
+  }
+
+  public desuscribirseANotificador(UserId: string, NotificadorID: number, Tipo: string){
+    return this.http.delete(this.url + 'cancelarSubscripcion?UserId=' + UserId + '&NotificadorID=' + NotificadorID + '&Tipo=' + Tipo);
+  }
+
+  public notificarABuzon(NotificadorID: number, UserId: string){
+    return this.http.post(this.url + 'Notificar', {NotificadorID, UserId} );
+  }
+
+  public getSuscriptores(notificadorID: number, notificadorTipo: string){
+    return this.http.get(this.url + 'usuariosANotificar/' + notificadorID + '/'+ notificadorTipo)
+  }
+
+
 }
