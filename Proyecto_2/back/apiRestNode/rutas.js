@@ -995,3 +995,17 @@ router.delete('/cancelarSubscripcion', (request, response)=>{
 });
 
 
+// update dia recordatorio by actividad-----**----------------------------------------------
+router.put('notificacion/update', (request, response)=>{
+    const {id} = request.body;
+    let sql = 'call updateRecordatorioActividad(?)';
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
