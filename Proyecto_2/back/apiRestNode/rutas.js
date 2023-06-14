@@ -951,7 +951,6 @@ module.exports= router;
 
 //get buzón por usuario ID -----------------------------------------------------
 router.get('/buzon/:id', (request, response)=>{
-    console.log()
     const {id} = request.params;
     let sql = "call getBuzonByUsuario(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
@@ -961,7 +960,7 @@ router.get('/buzon/:id', (request, response)=>{
         }
         else{
             const notificacion = rows[0].map(row => 
-                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
+                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo, row.Emisor));
                 response.json({notificacion})
         }
     })
