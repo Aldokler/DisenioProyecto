@@ -43,8 +43,8 @@ export class HomeComponent {
         this.notificaciones = res;
       })
     ).subscribe()
-
-    this.controller.notificacionesgetNotificacionesLeidas(this.pasarDatos.loginUser.getId()).pipe(
+/*
+    this.controller.getNotificacionesLeidas(this.pasarDatos.loginUser.getId()).pipe(
       tap(res => {
         this.notificacionesleidas = res;
       })
@@ -54,10 +54,10 @@ export class HomeComponent {
       tap(res => {
         this.notificacionesNoLeidas = res;
       })
-    ).subscribe()
+    ).subscribe()*/
 
   }
-
+/*
   borrarNotificacion(notificacion: Notificacion) {
     if (!notificacion) {
       this.showErrorAlert();
@@ -87,6 +87,6 @@ export class HomeComponent {
       text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
       timer: 3000
     });
-  }
+  }*/
 
 }
