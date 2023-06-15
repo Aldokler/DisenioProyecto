@@ -247,11 +247,7 @@ drop table if exists usuario_x_notificacion;
 CREATE TABLE `usuario_x_notificacion` (
   `IDUsuario` varchar(45) NOT NULL,
   `IDNotificacion` int NOT NULL,
-<<<<<<< HEAD
-  `Estado` boolean default 0,
-=======
   `Estado` tinyint(1) DEFAULT '0',
->>>>>>> e39e8a4b49760bceebd5071c8cf5030da0512100
   PRIMARY KEY (`IDUsuario`,`IDNotificacion`),
   KEY `IDNotificacion` (`IDNotificacion`),
   CONSTRAINT `IDNotificacion` FOREIGN KEY (`IDNotificacion`) REFERENCES `notificacion` (`ID`),
