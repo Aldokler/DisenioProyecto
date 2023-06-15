@@ -1123,7 +1123,7 @@ router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
     })
 });
 
-//get buzón por usuario ID -----------------------------------------------------
+//getChatByUser -----------------------------------------------------
 router.get('/chatUser/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getChatByUser(?);";
@@ -1140,7 +1140,7 @@ router.get('/chatUser/:id', (request, response)=>{
     })
 });
 
-//get buzón por usuario ID -----------------------------------------------------
+//getMensajesByChat -----------------------------------------------------
 router.get('/mensajeChat/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getMensajesByChat(?);";

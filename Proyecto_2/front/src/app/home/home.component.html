@@ -80,46 +80,54 @@
                 <i class="bi bi-trash"></i>
               </button>
 
-              <div class="tab-content overflow-auto" style="max-height: 400px; background-color: #E2EFF8;;">
-
-
+              <div class="tab-content overflow-auto" style="height: 400px;width: 400px; background-color: #E2EFF8;;">
+                
                 <div *ngFor="let notificacion of notificaciones">
-                  <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
-                    <div class="dropdown-item d-flex align-items-center">
-                      <div>
-                        <h6>{{notificacion.getIdEmisor()}}</h6>
-                        <p>{{notificacion.getContenido()}}</p>
-                        {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
-                        <button class="btn text-white text-center"
-                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                  <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab"
+                    style="max-width: 400px;">
+                    <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                      <div style="width: 300px;">
+                        <div>
+                          <h6>{{notificacion.getIdEmisor()}}</h6>
+                          <p class="text-break word-wrap">
+                            {{notificacion.getContenido()}} &nbsp;&nbsp;&nbsp;
+                            {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                          </p>
+                        </div>
+                        <button class="btn text-white text-center "
+                          style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
                           Ver más detalles
                         </button>
-                        <button class="btn btn-link text-danger ms-auto" type="button"  >
+                        <button class="btn btn-link text-danger ms-auto" type="button">
                           <i class="bi bi-trash"></i>
                         </button>
+                        <i class="bi bi-eye"></i>
                       </div>
-
                     </div>
                   </div>
                 </div>
 
 
                 <div *ngFor="let notificacionleida of notificacionesleidas">
-                  <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
-                    <div class="dropdown-item d-flex align-items-center">
-                      <div>
-                        <h6>{{notificacionleida.getIdEmisor()}}</h6>
-                        <p>{{notificacionleida.getContenido()}}</p>
-                        {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
-                        <button class="btn text-white text-center"
-                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                  <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab" style="max-width: 400px;">
+                    <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                      <div style="width: 300px;">
+                        <div>
+                          <h6>{{notificacionleida.getIdEmisor()}}</h6>
+                          <p class="text-break word-wrap">
+                            {{notificacionleida.getContenido()}} &nbsp;&nbsp;&nbsp;
+                            {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                          </p>
+                        </div>
+                        <button class="btn text-white text-center "
+                          style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
                           Ver más detalles
                         </button>
-                        <button class="btn btn-link text-danger ms-auto" type="button"  >
+                        <button class="btn btn-link text-danger ms-auto" type="button">
                           <i class="bi bi-trash"></i>
                         </button>
+                        <i class="bi bi-eye"></i>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -127,21 +135,25 @@
 
 
                 <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
-                  <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
-                    <div class="dropdown-item d-flex align-items-center">
-                      <div>
-                        <h6>{{notificacionNoLeida.getIdEmisor()}}</h6>
-                        <p>{{notificacionNoLeida.getContenido()}}</p>
-                        {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
-                        <button class="btn text-white text-center"
-                          style="background-color: #13293D; width: 120px; height: 30px;font-size: 0.75rem;">
+                  <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab" style="max-width: 400px;">
+                    <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                      <div style="width: 300px;">
+                        <div>
+                          <h6>{{notificacionNoLeida.getIdEmisor()}}</h6>
+                          <p class="text-break word-wrap">
+                            {{notificacionNoLeida.getContenido()}} &nbsp;&nbsp;&nbsp;
+                            {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                          </p>
+                        </div>
+                        <button class="btn text-white text-center "
+                          style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
                           Ver más detalles
                         </button>
-                        <button class="btn btn-link text-danger ms-auto" type="button"  >
+                        <button class="btn btn-link text-danger ms-auto" type="button">
                           <i class="bi bi-trash"></i>
                         </button>
+                        <i class="bi bi-eye"></i>
                       </div>
-
                     </div>
                   </div>
                 </div>
