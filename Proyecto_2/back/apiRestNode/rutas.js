@@ -6,6 +6,8 @@ const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
 const {Estudiante} = require('../model/estudiante');
 const {notificacion, Notificacion} = require('../model/notificacion');
+const {Chat} = require('../model/chat');
+const {Mensaje} = require('../model/mensaje');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -1121,6 +1123,38 @@ router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
     })
 });
 
+//get buzón por usuario ID -----------------------------------------------------
+router.get('/chatUser/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getChatByUser(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const chat = rows[0].map(row => 
+                new Chat(row.ID, row.Host));
+                response.json({chat})
+        }
+    })
+});
 
+//get buzón por usuario ID -----------------------------------------------------
+router.get('/mensajeChat/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getMensajesByChat(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const mensaje = rows[0].map(row => 
+                new Mensaje(row.ID,row.Emisor,row.FechaHora, row.Contenido, row.ChatID));
+                response.json({mensaje})
+        }
+    })
+});
 
 module.exports= router;
