@@ -954,7 +954,7 @@ module.exports= router;
 //get buzón por usuario ID -----------------------------------------------------
 router.get('/buzon/:id/:filtro', (request, response)=>{
     const {id, filtro} = request.params;
-    let sql = "call getBuzonByUsuario(?);";
+    let sql = "call getBuzonByUsuario(?,?);";
     conexion.query(sql, [id, filtro], (error, rows, fields)=>{
         if(error){
             console.log(error);
@@ -1123,7 +1123,7 @@ router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
     })
 });
 
-//get buzón por usuario ID -----------------------------------------------------
+//getChatByUser -----------------------------------------------------
 router.get('/chatUser/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getChatByUser(?);";
@@ -1140,7 +1140,7 @@ router.get('/chatUser/:id', (request, response)=>{
     })
 });
 
-//get buzón por usuario ID -----------------------------------------------------
+//getMensajesByChat -----------------------------------------------------
 router.get('/mensajeChat/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getMensajesByChat(?);";

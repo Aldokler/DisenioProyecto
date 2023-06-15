@@ -37,25 +37,28 @@ export class HomeComponent {
     } else {
       this.tipoDeUsuario = "Estudiante"
     }
-
+//0-no leidas, 1-leidas, 2-todas
     this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 2).pipe(
       tap(res => {
         this.notificaciones = res;
       })
     ).subscribe()
-/*
-    this.controller.getNotificacionesLeidas(this.pasarDatos.loginUser.getId()).pipe(
+
+    console.log(this.notificaciones)
+
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(),1).pipe(
       tap(res => {
         this.notificacionesleidas = res;
       })
     ).subscribe()
+    console.log(this.notificacionesleidas)
 
-    this.controller.notificacionesgetNotificacionesNoLeidas(this.pasarDatos.loginUser.getId()).pipe(
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(),0).pipe(
       tap(res => {
         this.notificacionesNoLeidas = res;
       })
     ).subscribe()
-*/
+    console.log(this.notificacionesNoLeidas)
 
   }
 /*
