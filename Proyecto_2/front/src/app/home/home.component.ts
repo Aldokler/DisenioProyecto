@@ -69,7 +69,7 @@ export class HomeComponent {
       }
     )
 
-  }
+  }*/
 
   showSuccessAlert() {
     swal.fire({
@@ -87,6 +87,6 @@ export class HomeComponent {
       text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
       timer: 3000
     });
-  }*/
+  }
 
 }
