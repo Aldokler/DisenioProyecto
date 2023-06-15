@@ -293,13 +293,19 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getBuzonByUsuario; //
-CREATE PROCEDURE getBuzonByUsuario(IN pID VARCHAR(45))
+CREATE PROCEDURE getBuzonByUsuario(IN pID VARCHAR(45), IN filtro int)
 BEGIN
-	SELECT notif.* FROM usuario_x_notificacion uxn
-    INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
-    WHERE uxn.IDUsuario = pID
-    ORDER BY notif.FechaHora DESC;
-commit;
+	if filtro = 2 then 
+		SELECT notif.* FROM usuario_x_notificacion uxn
+		INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
+		WHERE uxn.IDUsuario = pID 
+        ORDER BY notif.FechaHora DESC;
+	else
+		SELECT notif.* FROM usuario_x_notificacion uxn
+		INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
+		WHERE uxn.IDUsuario = pID AND Estado = filtro
+		ORDER BY notif.FechaHora DESC;
+	end if;
 END; //
 
 DELIMITER //
