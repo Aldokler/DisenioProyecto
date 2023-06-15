@@ -74,7 +74,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE addEvidencia (vLink varchar(45), vActividad int)
-BEGIN
+BEGINEquipo
 	declare idEvidencia int;
 	INSERT INTO evidencia (Link)
 	VALUES (vLink);
@@ -314,6 +314,52 @@ DROP PROCEDURE IF EXISTS addUserChat; //
 CREATE PROCEDURE addUserChat(IN pIDChat INT, IN pIDUsuario VARCHAR(45))
 BEGIN
 	INSERT INTO usuario_x_chat (IDUsuario, IDChat) VALUES(pIDUsuario, pIDChat);
+END; //
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiante`(vID varchar(45), vCelular varchar(45), vFoto longblob)
+BEGIN
+	UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Celular  = vCelular,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END; //
+
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiante+`(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFoto longblob)
+BEGIN
+		UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Nombre = vNombre,
+		usuario.Apellido1 = vApellido1,
+		usuario.Apellido2 = vApellido2 ,
+		usuario.CorreoElectronico = vCorreoElectronico ,
+		usuario.Celular  = vCelular,
+		usuario.Contraseña = vContraseña,
+		usuario.Sede = vSede,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END; //
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiantePlus`(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFoto longblob)
+BEGIN
+		UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Nombre = vNombre,
+		usuario.Apellido1 = vApellido1,
+		usuario.Apellido2 = vApellido2 ,
+		usuario.CorreoElectronico = vCorreoElectronico ,
+		usuario.Celular  = vCelular,
+		usuario.Contraseña = vContraseña,
+		usuario.Sede = vSede,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
 END; //
 
 COMMIT;
