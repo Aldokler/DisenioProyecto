@@ -182,4 +182,26 @@ BEGIN
 	DELETE FROM mensaje WHERE ID = pID;
 END; //
 
+
+DROP PROCEDURE IF EXISTS deleteBuzon; //
+DELIMITER $$
+CREATE PROCEDURE deleteBuzon(buzonID varchar(45))
+BEGIN
+	DELETE FROM usuario_x_notificacion where IDUsuario = buzonID;
+    COMMIT;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS deleteNotificacionBuzon; //
+DELIMITER $$
+CREATE PROCEDURE deleteNotificacionBuzon(buzonID varchar(45), notiID varchar(45))
+BEGIN
+	DELETE FROM usuario_x_notificacion where IDUsuario = buzonID AND IDNotificacion = notiID;
+    COMMIT;
+END$$
+DELIMITER ;
+
+
+
+
 COMMIT;
