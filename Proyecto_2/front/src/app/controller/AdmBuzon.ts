@@ -9,8 +9,8 @@ export class AdmBuzon{
     public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>{
         return this.DAO.getBuzon(id, filtro).pipe(
             map((data: any) => {
-                console.log(data.actividades)
-                const json = data.actividades;
+                console.log(data.notificaciones)
+                const json = data.notificaciones;
                 return json.map((json: any) => {
                     return new Notificacion(
                         json.id,

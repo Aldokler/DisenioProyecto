@@ -230,7 +230,7 @@ export class ApiService {
   }
 
   public getBuzon(ID: string, filtro: number){
-    return this.http.get(this.url + 'notificador/' + ID + '/' + filtro);
+    return this.http.get(this.url + 'buzon/' + ID + '/' + filtro);
   }
 
 }

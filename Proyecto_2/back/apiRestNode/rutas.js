@@ -961,9 +961,9 @@ router.get('/buzon/:id/:filtro', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            const notificacion = rows[0].map(row => 
+            const notificaciones = rows[0].map(row => 
                 new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo, row.Emisor));
-                response.json({notificacion})
+                response.json({notificaciones})
         }
     })
 });
