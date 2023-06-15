@@ -39,8 +39,8 @@ export class HomeComponent {
     }
 //0-no leidas, 1-leidas, 2-todas
     this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 2).pipe(
-      tap(res => {
-        this.notificaciones = res;
+      tap(res2 => {
+        this.notificaciones = res2;
       })
     ).subscribe()
 
@@ -54,8 +54,8 @@ export class HomeComponent {
     console.log(this.notificacionesleidas)
 
     this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(),0).pipe(
-      tap(res => {
-        this.notificacionesNoLeidas = res;
+      tap(res1 => {
+        this.notificacionesNoLeidas = res1;
       })
     ).subscribe()
     console.log(this.notificacionesNoLeidas)
