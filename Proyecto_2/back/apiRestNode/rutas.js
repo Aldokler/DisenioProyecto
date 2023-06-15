@@ -1157,4 +1157,38 @@ router.get('/mensajeChat/:id', (request, response)=>{
     })
 });
 
+
+//eliminar notificacion de buzon -----------------------------------------------
+router.delete('/buzon/:buzon/:noti', (request, response)=>{
+    const {buzon, noti} = request.params;
+    let sql = "call deleteNotificacionBuzon(?,?);";
+    conexion.query(sql, [buzon, noti], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+//vaciar buzon -----------------------------------------------
+router.delete('/buzon/:buzon', (request, response)=>{
+    const {buzon} = request.params;
+    let sql = "call deleteBuzon(?);";
+    conexion.query(sql, [buzon], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Buzon vaciado' })
+        }
+    })
+});
+
+module.exports= router;
+
+
 module.exports= router;

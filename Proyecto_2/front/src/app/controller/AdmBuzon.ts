@@ -24,4 +24,22 @@ export class AdmBuzon{
             })
         )
     }
+
+    public vaciarBuzon(id: string): Observable<Notificacion[]>{
+        return this.DAO.vaciarBuzon(id).pipe(
+            map((data:any) => {
+                return data.check_user
+            })
+        )
+    }
+
+    public deleteNotificacionBuzon(id: string, notificacion: number): Observable<boolean>{
+        return this.DAO.deleteNotificacionBuzon(id,notificacion).pipe(
+            map((data:any) => {
+                return data.check_user
+            })
+        )
+    }
+
+
 }

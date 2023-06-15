@@ -232,5 +232,11 @@ export class ApiService {
   public getBuzon(ID: string, filtro: number){
     return this.http.get(this.url + 'buzon/' + ID + '/' + filtro);
   }
+  public vaciarBuzon(id: String){
+    return this.http.delete(this.url + 'buzon/' + id)
+  }
+  public deleteNotificacionBuzon(id: String, notificacion: number){
+    return this.http.delete(this.url + 'buzon/' + id + '/' + notificacion)
+  }
 
 }

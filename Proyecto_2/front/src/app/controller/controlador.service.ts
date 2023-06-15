@@ -245,5 +245,13 @@ public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>
   return this.AdmBuzon.getNotificaciones(id, filtro);
 }
 
+public vaciarBuzon(id: string): Observable<Notificacion[]>{
+  return this.AdmBuzon.vaciarBuzon(id);
+}
+
+public deleteNotificacionBuzon(id: string, notificacion: number): Observable<boolean>{
+  return this.AdmBuzon.deleteNotificacionBuzon(id, notificacion)
+}
+
 
 }
