@@ -80,11 +80,12 @@
                 <i class="bi bi-trash"></i>
               </button>
 
-              <div class="tab-content overflow-auto" style="height: 400px;width: 400px; background-color: #E2EFF8;;">
-                
-                <div *ngFor="let notificacion of notificaciones">
-                  <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab"
-                    style="max-width: 400px;">
+              <div class="tab-content overflow-auto" style="height: 400px;width: 400px; background-color: #E2EFF8;">
+
+
+                <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacion of notificaciones">
                     <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
                       <div style="width: 300px;">
                         <div>
@@ -101,6 +102,7 @@
                         <button class="btn btn-link text-danger ms-auto" type="button">
                           <i class="bi bi-trash"></i>
                         </button>
+                        <i [ngClass]="notificacion.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
                         <i class="bi bi-eye"></i>
                       </div>
                     </div>
@@ -108,8 +110,10 @@
                 </div>
 
 
-                <div *ngFor="let notificacionleida of notificacionesleidas">
-                  <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab" style="max-width: 400px;">
+
+                <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacionleida of notificacionesleidas">
                     <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
                       <div style="width: 300px;">
                         <div>
@@ -132,10 +136,9 @@
                   </div>
                 </div>
 
-
-
-                <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
-                  <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab" style="max-width: 400px;">
+                <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
                     <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
                       <div style="width: 300px;">
                         <div>
@@ -161,6 +164,7 @@
 
 
               </div>
+
             </div>
           </div>
         </div>
