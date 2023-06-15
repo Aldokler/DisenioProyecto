@@ -37,44 +37,46 @@ export class HomeComponent {
     } else {
       this.tipoDeUsuario = "Estudiante"
     }
-//0-no leidas, 1-leidas, 2-todas
+    //0-no leidas, 1-leidas, 2-todas
     this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 2).pipe(
       tap(res2 => {
         this.notificaciones = res2;
       })
     ).subscribe()
-
+    console.log("todas")
     console.log(this.notificaciones)
 
-    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(),1).pipe(
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 1).pipe(
       tap(res => {
         this.notificacionesleidas = res;
       })
     ).subscribe()
+    console.log("leidas")
     console.log(this.notificacionesleidas)
 
-    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(),0).pipe(
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 0).pipe(
       tap(res1 => {
         this.notificacionesNoLeidas = res1;
       })
     ).subscribe()
+    console.log("no leidas")
     console.log(this.notificacionesNoLeidas)
 
   }
-/*
-  borrarNotificacion(notificacion: Notificacion) {
-    if (!notificacion) {
-      this.showErrorAlert();
-      return;
-    }
-    this.controller.eliminarNotificacion(notificacion.getId()).subscribe(
-      () => {
-        this.showSuccessAlert();
+  /*
+    borrarNotificacion(notificacion: Notificacion) {
+      if (!notificacion) {
+        this.showErrorAlert();
+        return;
       }
-    )
-
-  }
-*/
+      this.controller.eliminarNotificacion(notificacion.getId()).subscribe(
+        () => {
+          this.showSuccessAlert();
+        }
+      )
+  
+    }
+  */
   showSuccessAlert() {
     swal.fire({
       icon: 'success',

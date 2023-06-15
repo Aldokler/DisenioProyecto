@@ -245,4 +245,5 @@ public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>
   return this.AdmBuzon.getNotificaciones(id, filtro);
 }
 
+
 }
