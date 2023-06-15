@@ -72,20 +72,20 @@ export class HomeComponent {
     console.log(this.notificacionesNoLeidas)
 
   }
-  /*
-    borrarNotificacion(notificacion: Notificacion) {
-      if (!notificacion) {
-        this.showErrorAlert();
-        return;
-      }
-      this.controller.eliminarNotificacion(notificacion.getId()).subscribe(
-        () => {
-          this.showSuccessAlert();
-        }
-      )
-  
+
+  borrarNotificacion(notificacion: Notificacion) {
+    if (!notificacion) {
+      this.showErrorAlert();
+      return;
     }
-  */
+    /*this.controller.eliminarNotificacion(notificacion.getId()).subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )*/
+
+  }
+
   showSuccessAlert() {
     swal.fire({
       icon: 'success',
@@ -102,6 +102,14 @@ export class HomeComponent {
       text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
       timer: 3000
     });
+  }
+
+  cambiarEstadoNotificacion(notificacion: Notificacion) {
+
+  }
+
+  cambiarEstadoNotificacionOjito(notificacion: Notificacion) {
+
   }
 
 }

@@ -18,7 +18,8 @@ export class AdmBuzon{
                         json.idEmisor,
                         json.emisorTipo,
                         json.emisor,
-                        json.estado
+                        json.estado,
+                        json.nombre
                     )
                 });
             })
