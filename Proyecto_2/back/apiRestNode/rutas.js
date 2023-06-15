@@ -952,10 +952,10 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-router.get('/buzon/:id', (request, response)=>{
-    const {id} = request.params;
+router.get('/buzon/:id/:filtro', (request, response)=>{
+    const {id, filtro} = request.params;
     let sql = "call getBuzonByUsuario(?);";
-    conexion.query(sql, [id], (error, rows, fields)=>{
+    conexion.query(sql, [id, filtro], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

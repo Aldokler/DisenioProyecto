@@ -229,8 +229,8 @@ export class ApiService {
     return this.http.post(this.url + 'notificador', {ID, Tipo});
   }
 
-  public getBuzon(ID: string){
-    return this.http.get(this.url + 'notificador/' + ID);
+  public getBuzon(ID: string, filtro: number){
+    return this.http.get(this.url + 'notificador/' + ID + '/' + filtro);
   }
 
 }

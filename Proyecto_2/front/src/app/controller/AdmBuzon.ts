@@ -6,8 +6,8 @@ export class AdmBuzon{
 
     constructor(private DAO: ApiService){}
 
-    public getNotificaciones(id: string): Observable<Notificacion[]>{
-        return this.DAO.getBuzon(id).pipe(
+    public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>{
+        return this.DAO.getBuzon(id, filtro).pipe(
             map((data: any) => {
                 console.log(data.actividades)
                 const json = data.actividades;

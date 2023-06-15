@@ -38,7 +38,7 @@ export class HomeComponent {
       this.tipoDeUsuario = "Estudiante"
     }
 
-    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId()).pipe(
+    this.controller.getNotificaciones(this.pasarDatos.loginUser.getId(), 2).pipe(
       tap(res => {
         this.notificaciones = res;
       })
@@ -54,7 +54,8 @@ export class HomeComponent {
       tap(res => {
         this.notificacionesNoLeidas = res;
       })
-    ).subscribe()*/
+    ).subscribe()
+*/
 
   }
 /*
@@ -63,14 +64,14 @@ export class HomeComponent {
       this.showErrorAlert();
       return;
     }
-    this.controller.notificaciones.eliminarNotificacion(notificacion.getId()).subscribe(
+    this.controller.eliminarNotificacion(notificacion.getId()).subscribe(
       () => {
         this.showSuccessAlert();
       }
     )
 
-  }*/
-
+  }
+*/
   showSuccessAlert() {
     swal.fire({
       icon: 'success',

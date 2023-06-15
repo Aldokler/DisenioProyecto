@@ -241,8 +241,8 @@ export class ControladorService {
     return this.adminActividad.getLastActividad()
 }
 
-public getNotificaciones(id: string): Observable<Notificacion[]>{
-  return this.AdmBuzon.getNotificaciones(id);
+public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>{
+  return this.AdmBuzon.getNotificaciones(id, filtro);
 }
 
 }

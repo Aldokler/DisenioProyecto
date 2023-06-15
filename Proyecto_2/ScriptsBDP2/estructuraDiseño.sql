@@ -246,9 +246,11 @@ CREATE TABLE `usuario_x_chat` (
   CONSTRAINT `IDChat` FOREIGN KEY (`IDChat`) REFERENCES `chat` (`ID`)
 );
 
+drop table if exists usuario_x_notificacion;
 CREATE TABLE `usuario_x_notificacion` (
   `IDUsuario`  VARCHAR(45) NOT NULL,
   `IDNotificacion` int NOT NULL,
+  `Estado` boolean default 0,
   PRIMARY KEY (`IDUsuario`,`IDNotificacion`),
   CONSTRAINT `nIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
   CONSTRAINT `IDNotificacion` FOREIGN KEY (`IDNotificacion`) REFERENCES `notificacion` (`ID`)
