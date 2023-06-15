@@ -40,7 +40,7 @@ var Notificacion = /** @class */ (function () {
     Notificacion.prototype.setEmisor = function (Emisor) {
         this.emisor = Emisor;
     };
-    Notificacion.prototype.getmisorTipo = function () {
+    Notificacion.prototype.getEmisorTipo = function () {
         return this.emisorTipo;
     };
     Notificacion.prototype.setEmisorTipo = function (emisorTipo) {

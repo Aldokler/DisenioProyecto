@@ -62,7 +62,7 @@ export class Notificacion {
         this.emisor = Emisor;
     }
 
-    public getmisorTipo(): string {
+    public getEmisorTipo(): string {
         return this.emisorTipo;
     }
 
