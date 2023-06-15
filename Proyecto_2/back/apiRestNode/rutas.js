@@ -962,7 +962,7 @@ router.get('/buzon/:id/:filtro', (request, response)=>{
         }
         else{
             const notificaciones = rows[0].map(row => 
-                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo, row.Emisor));
+                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo, row.Emisor, row.Estado));
                 response.json({notificaciones})
         }
     })
