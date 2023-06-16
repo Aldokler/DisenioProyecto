@@ -7,6 +7,7 @@ export class SistemaNotificador implements Observer{
     public constructor(private DAO: ApiService){}
     
     public notificar(notificacion: number, usuario: string[]){
+        console.log("sistema")
         for (const userID of usuario) {
             this.DAO.notificarABuzon(notificacion, userID);
         }

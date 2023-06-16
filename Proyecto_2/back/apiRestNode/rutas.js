@@ -937,10 +937,11 @@ router.get('/profesoresANotificar/:id', (request, response)=>{
 
 
 // notificar ---------------------------------------------------
-router.post('/Notificar/:notificacion/:usuario', (request, response)=>{
-    const {notificacion, usuario} = request.params;
+router.post('/Notificar', (request, response)=>{
+    "send"
+    const {NotificadorID, UserId} = request.body;
     let sql = "call sendNotificacion(?,?);";
-    conexion.query(sql, [notificacion, usuario], (error, rows, fields)=>{
+    conexion.query(sql, [NotificadorID, UserId], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

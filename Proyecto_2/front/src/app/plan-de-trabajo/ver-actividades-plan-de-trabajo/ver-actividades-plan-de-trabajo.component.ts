@@ -20,6 +20,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   public fecha = new Date();
   public respuestaComentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
   public tipoDeUsuario: string = "";
+  public ID: number = -1;
 
   constructor(private controller: ControladorService, private router: Router) {
     // aquí puedes obtener el tipo de usuario actual y establecer la variable tipoUsuario en consecuencia
@@ -132,7 +133,7 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
     .pipe(
     tap(res => {
       if (res) {
-        console.log("hola")
+        this.ID = res
       }
     })
   ).subscribe(
@@ -140,6 +141,23 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
       this.showSuccessAlert() ;
     }
   )
+
+  console.log("ID" ,  this.ID)
+
+  this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad", this.ID)
+/*
+  this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "Se les invita a la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    .pipe(
+    tap(res => {
+      if (res) {
+        console.log("hola")
+      }
+    })
+  ).subscribe(
+    () => {
+      this.showSuccessAlert() ;
+    }
+  )*/
   }
 
   showSuccessAlert() {
