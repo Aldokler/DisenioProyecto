@@ -156,30 +156,36 @@
                   <div *ngFor="let notificacionleida of notificacionesleidas">
 
                     <div *ngIf="notificacionleida.getEmisorTipo() == 'Actividad' ">
-                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
-                        <div style="width: 300px;">
-                          <div>
-                            <h6>{{notificacionleida.getNombre()}}</h6>
-                            <p class="text-break word-wrap">
-                              {{notificacionleida.getContenido()}} <br>
-                              {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
-                            </p>
-                          </div>
-                          <button (click)="cambiarEstadoNotificacion(notificacionleida)"
-                            class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
-                            type="button">
-                            Ver más detalles
-                          </button>
-                          <button class="btn btn-link text-danger ms-auto" type="button">
-                            <i class="bi bi-trash"></i>
-                          </button>
-                          <button (click)="cambiarEstadoNotificacionOjito(notificacionleida)">
-                            <i [ngClass]="notificacionleida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
-                          </button>
+                      <div
+                        [ngStyle]="notificacionleida.getEstado() === 1 ? { 'background-color': '#FFFFFF' } : { 'background-color': '#E2EFF8' }">
+                        <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                          <div style="width: 300px;">
+                            <div>
+                              <h6>{{notificacionleida.getNombre()}}</h6>
+                              <p class="text-break word-wrap">
+                                {{notificacionleida.getContenido()}} <br>
+                                {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                              </p>
+                            </div>
+                            <button
+                              (click)="cambiarEstadoNotificacion(notificacionleida);guardarDatoActividadNotificacion(notificacionleida)"
+                              [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
+                              type="button">
+                              Ver más detalles
+                            </button>
+                            <button class="btn btn-link text-danger ms-auto" type="button"
+                              (click)="borrarNotificacion(notificacionleida)">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacionleida)">
+                              <i [ngClass]="notificacionleida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                            </button>
 
+                          </div>
                         </div>
                       </div>
+
                     </div>
 
                     <div *ngIf="notificacionleida.getEmisorTipo() == 'Chat' ">
@@ -192,14 +198,18 @@
                               {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                             </p>
                           </div>
-                          <button type="button" class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Aceptar Invitación
-                          </button>
-                          <button type="button" class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Declinar Invitación
-                          </button>
+                          <div *ngIf="!boolean">
+                            <button (click)="aceptarInvitacion(notificacionleida)" type="button"
+                              class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Aceptar Invitación
+                            </button>
+                            <button class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Declinar Invitación
+                            </button>
+                          </div>
+
                           <button class="btn btn-link text-danger ms-auto" type="button">
                             <i class="bi bi-trash"></i>
                           </button>
@@ -216,30 +226,37 @@
                   style="max-width: 400px;">
                   <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
                     <div *ngIf="notificacionNoLeida.getEmisorTipo() == 'Actividad' ">
-                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
-                        <div style="width: 300px;">
-                          <div>
-                            <h6>{{notificacionNoLeida.getNombre()}}</h6>
-                            <p class="text-break word-wrap">
-                              {{notificacionNoLeida.getContenido()}} <br>
-                              {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
-                            </p>
-                          </div>
-                          <button (click)="cambiarEstadoNotificacion(notificacionNoLeida)"
-                            class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
-                            type="button">
-                            Ver más detalles
-                          </button>
-                          <button class="btn btn-link text-danger ms-auto" type="button">
-                            <i class="bi bi-trash"></i>
-                          </button>
-                          <button (click)="cambiarEstadoNotificacionOjito(notificacionNoLeida)">
-                            <i [ngClass]="notificacionNoLeida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
-                          </button>
+                      <div
+                        [ngStyle]="notificacionNoLeida.getEstado() === 1 ? { 'background-color': '#FFFFFF' } : { 'background-color': '#E2EFF8' }">
+                        <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                          <div style="width: 300px;">
+                            <div>
+                              <h6>{{notificacionNoLeida.getNombre()}}</h6>
+                              <p class="text-break word-wrap">
+                                {{notificacionNoLeida.getContenido()}} <br>
+                                {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                              </p>
+                            </div>
+                            <button
+                              (click)="cambiarEstadoNotificacion(notificacionNoLeida);guardarDatoActividadNotificacion(notificacionNoLeida)"
+                              [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
+                              type="button">
+                              Ver más detalles
+                            </button>
+                            <button class="btn btn-link text-danger ms-auto" type="button"
+                              (click)="borrarNotificacion(notificacionNoLeida)">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacionNoLeida)">
+                              <i
+                                [ngClass]="notificacionNoLeida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                            </button>
 
+                          </div>
                         </div>
                       </div>
+
                     </div>
 
                     <div *ngIf="notificacionNoLeida.getEmisorTipo() == 'Chat' ">
@@ -252,14 +269,18 @@
                               {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                             </p>
                           </div>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Aceptar Invitación
-                          </button>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Declinar Invitación
-                          </button>
+                          <div *ngIf="!boolean">
+                            <button (click)="aceptarInvitacion(notificacionNoLeida)" type="button"
+                              class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Aceptar Invitación
+                            </button>
+                            <button class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Declinar Invitación
+                            </button>
+                          </div>
+
                           <button class="btn btn-link text-danger ms-auto" type="button">
                             <i class="bi bi-trash"></i>
                           </button>

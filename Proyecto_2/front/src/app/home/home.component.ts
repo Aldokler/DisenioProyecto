@@ -116,8 +116,11 @@ export class HomeComponent {
 
   }
 
-  aceptarInvitacion(notificacion:Notificacion) {
-    this.controller.unirseAChat(notificacion.getIdEmisor(),this.pasarDatos.loginUser.getId()).subscribe()
+  aceptarInvitacion(notificacion: Notificacion) {
+    this.controller.unirseAChat(notificacion.getIdEmisor(), this.pasarDatos.loginUser.getId()).subscribe(
+      () => {
+        this.showSuccessAlert();
+      })
     this.boolean = true
     this.ngOnInit()
   }
@@ -136,6 +139,9 @@ export class HomeComponent {
           this.showSuccessAlert();
         }
       )
+
+    this.boolean = true
+    this.ngOnInit()
   }
 
   cambiarEstadoNotificacionOjito(notificacion: Notificacion) {
