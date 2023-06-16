@@ -33,8 +33,10 @@ export class Subject {
     public notificar(notificadorID: number, tipoNotificador: string, notificacion: number) {
         this.getSuscriptores(notificadorID, tipoNotificador).pipe(
             tap(res => {
+                console.log(res)
                 for (const observer of this.observers) {
                     observer.notificar(notificacion, res);
+                    console.log(observer)
                 }
             })
         ).subscribe();

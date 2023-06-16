@@ -938,7 +938,6 @@ router.get('/profesoresANotificar/:id', (request, response)=>{
 
 // notificar ---------------------------------------------------
 router.post('/Notificar', (request, response)=>{
-    "send"
     const {NotificadorID, UserId} = request.body;
     let sql = "call sendNotificacion(?,?);";
     conexion.query(sql, [NotificadorID, UserId], (error, rows, fields)=>{

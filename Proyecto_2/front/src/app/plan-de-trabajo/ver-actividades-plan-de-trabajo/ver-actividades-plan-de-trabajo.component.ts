@@ -132,9 +132,9 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
     this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha publicado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
     .pipe(
     tap(res => {
-      if (res) {
-        this.ID = res
-      }
+        console.log("ssss", res)
+        this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad", res)
+      
     })
   ).subscribe(
     () => {
@@ -142,9 +142,8 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
     }
   )
 
-  console.log("ID" ,  this.ID)
 
-  this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad", this.ID)
+ 
 /*
   this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "Se les invita a la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
     .pipe(

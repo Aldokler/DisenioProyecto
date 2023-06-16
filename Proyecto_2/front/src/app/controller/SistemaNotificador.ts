@@ -9,7 +9,8 @@ export class SistemaNotificador implements Observer{
     public notificar(notificacion: number, usuario: string[]){
         console.log("sistema")
         for (const userID of usuario) {
-            this.DAO.notificarABuzon(notificacion, userID);
+            console.log(notificacion, userID )
+            this.DAO.notificarABuzon(notificacion, userID).subscribe();
         }
         
     }
