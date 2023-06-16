@@ -40,7 +40,8 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS getActividadesByPlanyEstado; //
 CREATE PROCEDURE getActividadesByPlanyEstado(IN pPlan varchar(50), IN pEstado varchar(45))
 BEGIN
-	SELECT * FROM actividad WHERE PlanID = pPlan AND Estado = pEstado;
+	SELECT * FROM actividad WHERE PlanID = pPlan AND Estado = pEstado
+    ORDER BY Semana;
     COMMIT;
 END; //
 

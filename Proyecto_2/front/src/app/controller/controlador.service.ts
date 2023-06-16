@@ -22,6 +22,7 @@ import { NotificadorCorreo } from './NotificadorCorreo';
 import { Subject } from './Subject';
 import { AdmBuzon } from './AdmBuzon';
 import { Notificacion } from '../model/notificacion';
+import { SistemaNotificador } from "./SistemaNotificador";
 
 
 @Injectable({
@@ -44,6 +45,7 @@ export class ControladorService {
   private notificador = new NotificadorCorreo(this.DAO)
   public subject = new Subject(this.DAO)
   private AdmBuzon = new AdmBuzon(this.DAO)
+  private SistemaNotificador = new SistemaNotificador(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -258,5 +260,9 @@ public setEstadoNotificacion(id: string, notificacion: number): Observable<boole
   return this.AdmBuzon.setEstadoNotificacion(id, notificacion)
 }
 
+
+public crearNotificacion(notificadorID :number, TipoEmisor: string, FechaHora :string, Contenido :string): Observable<number>{
+  return this.SistemaNotificador.crearNotificacion(notificadorID , TipoEmisor , FechaHora , Contenido)
+}
 
 }

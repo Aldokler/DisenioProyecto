@@ -244,9 +244,12 @@ DROP PROCEDURE IF EXISTS addNotificacion; //
 CREATE PROCEDURE addNotificacion(IN pIDEmisor INT, IN pEmisorTipo varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
 BEGIN
 	declare vnombre varchar(50);
+    
     Select Nombre into vnombre from notificador where SujetoID = pIDEmisor AND Tipo = pEmisorTipo;
-    Select vnombre;
 	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido, Emisor) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido, vnombre);
+    
+    SELECT ID FROM notificacion order by ID desc limit 1;
+    
 commit;
 END; //
 
