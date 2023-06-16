@@ -80,7 +80,20 @@
                         <div class="tab-pane fade show active" id="contactos">
 
                             <ul class="list-group">
-                                <li *ngFor="let contacto of contactos" class="list-group-item">Contacto 1</li>
+                                <li *ngFor="let contacto of contactos" class="list-group-item">
+                                    <div class="card-header" style="background-color: #E2EFF8;">
+                                        {{contacto.getNombre()}}
+                                    </div>
+                                    <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                        <button class="btn text-white me-2"
+                                            [style.background-color]="contactosSeleccionados.includes(contacto) ? '#ADD8E6' : '#13293D'"
+                                            (click)="crearGrupo(contacto)">
+                                            Seleccionar
+                                        </button>
+                                    </div>
+                                    
+                                    Contacto 1
+                                </li>
                             </ul>
 
                         </div>
@@ -103,9 +116,7 @@
 
                         </div>
                     </div>
-                    <button class="btn btn-primary mt-3" style="background-color: #13293D;"
-                        (click)="crearMensajeGrupal()">Crear mensaje
-                        grupal</button>
+                    <button class="btn btn-primary mt-3" style="background-color: #13293D;" type="button" (click)="crearGrupoLista()">Crear Chat</button>
                 </div>
                 <div class="col-9">
                     <div class="row">
@@ -178,13 +189,13 @@
                     <div class="chat-container" style="height: 350px;">
 
                         <div *ngFor="let mensaje of mensajes">
-
+                            
                             <div class="message message sender"
-                                *ngIf="this.pasarDatos.loginUser.getNombre() == mensaje.getEmisor()">
+                                *ngIf="this.pasarDatos.loginUser.getId() == mensaje.getEmisor()">
                                 <span class="sender"> {{mensaje.getEmisor()}}:</span> {{mensaje.getContenido()}}
                             </div>
 
-                            <div class="message" *ngIf="this.pasarDatos.loginUser.getNombre() != mensaje.getEmisor()">
+                            <div class="message" *ngIf="this.pasarDatos.loginUser.getId() != mensaje.getEmisor()">
                                 <span class="sender"> {{mensaje.getEmisor()}}:</span> {{mensaje.getContenido()}}
                             </div>
 

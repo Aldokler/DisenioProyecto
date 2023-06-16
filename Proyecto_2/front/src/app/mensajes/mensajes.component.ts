@@ -27,8 +27,8 @@ export class MensajesComponent {
   public chatsActivos: Chat[] = []
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public tipoDeUsuario: string = "";
-  public contactosSeleccionados:Usuario[] = []
-  public mensajes:Mensaje[] = []
+  public contactosSeleccionados: Usuario[] = []
+  public mensajes: Mensaje[] = []
   public contactosNoAnadidos: Usuario[] = []
 
 
@@ -55,20 +55,40 @@ export class MensajesComponent {
 
   }
 
-  agregarParticipantes(contacto:Usuario) {
+  agregarParticipantes(contacto: Usuario) {
 
   }
 
-  crearMensajeGrupal(){
+  crearGrupo(contacto: Usuario) {
+    this.contactosSeleccionados.push(contacto);
+  }
+
+  crearGrupoLista() {
+    if (this.contactosSeleccionados.length == 1) {
+      this.controller.crearChat(this.contactosSeleccionados[0].getId())
+    }
+    else {
+      this.controller.crearChat(this.pasarDatos.loginUser.getId())
+      this.controller.subject.crearNotificador(this.pasarDatos.loginUser.getId(),"Chat")
+      for (const contacto of this.contactosSeleccionados) {
+        
+      }
+    }
+  }
+
+  enviarMensaje(mensajeEnviado: string) {
 
   }
 
-  enviarMensaje(mensajeEnviado:string){
-
-  }
-
-  verChat(chat:number){
-    this.controller.
+  verChat(chat: number) {
+    this.controller.getMensajesChat(chat).pipe(
+      tap(res => {
+        console.log("res")
+        console.log(res)
+        this.mensajes = res;
+      })
+    ).subscribe()
+    this.ngOnInit()
 
   }
 
