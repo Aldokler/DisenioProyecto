@@ -1171,9 +1171,9 @@ router.get('/mensajeChat/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            const mensaje = rows[0].map(row => 
+            const mensajes = rows[0].map(row => 
                 new Mensaje(row.ID,row.Emisor,row.FechaHora, row.Contenido, row.ChatID));
-                response.json({mensaje})
+                response.json({mensajes})
         }
     })
 });

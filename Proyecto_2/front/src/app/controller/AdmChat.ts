@@ -46,10 +46,10 @@ export class AdmChat{
     public getMensajesChat(id: string): Observable<Mensaje[]> {
         return this.DAO.getMensajesChat(id).pipe(
             map((data: any) => {
-                const json = data.equipos;
+                const json = data.mensajes;
                 return json.map((json: any) => {
                     return new Mensaje(
-                        json.iD,
+                        json.id,
                         json.emisor,
                         json.fechaHora,
                         json.contenido,
