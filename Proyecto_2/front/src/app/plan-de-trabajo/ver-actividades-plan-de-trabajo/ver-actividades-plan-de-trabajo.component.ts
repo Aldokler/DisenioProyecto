@@ -127,6 +127,21 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
 
   }
 
+  publicarActividad(){
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha publicado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    .pipe(
+    tap(res => {
+      if (res) {
+        console.log("hola")
+      }
+    })
+  ).subscribe(
+    () => {
+      this.showSuccessAlert() ;
+    }
+  )
+  }
+
   showSuccessAlert() {
     swal.fire({
       icon: 'success',

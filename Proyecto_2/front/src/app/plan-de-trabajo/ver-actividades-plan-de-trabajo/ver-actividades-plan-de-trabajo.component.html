@@ -145,6 +145,11 @@
                         Cancelar Actividad
                     </button>
 
+                    <button *ngIf="tipoDeUsuario === 'Coordinador'" class="btn btn-outline-secondary me-2" type="button"
+                        style="background-color: #13293D; color: white;" (click)="publicarActividad()">
+                        Publicar Actividad
+                    </button>
+
                     <div class="collapse" id="collapse_comments">
                         <div class="mt-4" style="height: 400px; display: block; overflow: auto; position: relative;">
                             <!-- empieza comentario ---------------------->
