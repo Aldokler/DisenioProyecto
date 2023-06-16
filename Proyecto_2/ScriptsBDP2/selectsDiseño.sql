@@ -335,7 +335,7 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS getMensajesByChat; //
 CREATE PROCEDURE getMensajesByChat(IN pIDChat INT)
 BEGIN
-	SELECT * FROM mensaje WHERE ChatID = pIDChat;
+	SELECT * FROM mensaje WHERE ChatID = pIDChat order by ID desc;
 END; //
 
 DELIMITER //

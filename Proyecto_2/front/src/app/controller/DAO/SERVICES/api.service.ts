@@ -266,5 +266,9 @@ export class ApiService {
     return this.http.get(this.url+ 'chatUser/' + id)
   }
 
+  public getMensajesChat(id: string){
+    return this.http.get(this.url+ 'mensajeChat/' + id)
+  }
+
 
 }

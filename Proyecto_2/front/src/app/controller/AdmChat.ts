@@ -2,6 +2,7 @@ import { Observable, map } from "rxjs";
 import { Notificacion } from "../model/notificacion";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { Chat } from "../model/chat";
+import { Mensaje } from "../model/mensaje";
 
 export class AdmChat{
 
@@ -42,4 +43,21 @@ export class AdmChat{
         );
     }
 
+    public getMensajesChat(id: string): Observable<Mensaje[]> {
+        return this.DAO.getMensajesChat(id).pipe(
+            map((data: any) => {
+                const json = data.equipos;
+                return json.map((json: any) => {
+                    return new Mensaje(
+                        json.iD,
+                        json.emisor,
+                        json.fechaHora,
+                        json.contenido,
+                        json.chatID
+                    )
+                });
+            })
+        );
+    }
+ 
 }
