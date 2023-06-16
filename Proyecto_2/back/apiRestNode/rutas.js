@@ -1073,6 +1073,7 @@ router.delete('/mensajeDelete/:id', (request, response)=>{
 
 // crear chat-----------------------------------------------------------
 router.post('/chat', (request, response)=>{
+    console.log("crear chat  apiiii")
     const {ID} = request.body;    
     let sql = 'call addChat(?)';
     conexion.query(sql, [ID], (error, rows, fields)=>{
@@ -1081,6 +1082,7 @@ router.post('/chat', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
+            console.log("crear chat  apiiii2")
             response.json({status: 'Chat creado' })
         }
     })

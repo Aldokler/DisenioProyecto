@@ -21,6 +21,7 @@ export class AdmChat{
     public crearChat(user: string): Observable<number>{
         return this.DAO.crearChat(user).pipe(
             map((data: any) => {
+                console.log(data)
                 return data.ID
             }))
     }

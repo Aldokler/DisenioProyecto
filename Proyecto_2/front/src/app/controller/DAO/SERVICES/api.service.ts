@@ -225,8 +225,8 @@ export class ApiService {
     return this.http.get(this.url + 'usuariosANotificar/' + notificadorID + '/'+ notificadorTipo)
   }
 
-  public addNotificador(ID: number, Tipo: string){
-    return this.http.post(this.url + 'notificador', {ID, Tipo});
+  public addNotificador(notificadorID: number, tipo: string){
+    return this.http.post(this.url + 'notificador', {notificadorID, tipo});
   }
 
   public crearNotificacion(pIDEmisor :number, pEmisorTipo: string, pFechaHora :string, pContenido :string){
@@ -254,9 +254,9 @@ export class ApiService {
     return this.http.post(this.url+ 'unirsechat', {chat, user})
   }
 
-  public crearChat(user: string){
+  public crearChat(ID: string){
     console.log("crear chat  front")
-    return this.http.post(this.url+ 'chat', {user})
+    return this.http.post(this.url+ 'chat', {ID})
   }
 
   public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID: number){
