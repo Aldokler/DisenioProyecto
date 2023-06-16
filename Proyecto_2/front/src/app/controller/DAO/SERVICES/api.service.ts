@@ -240,6 +240,7 @@ export class ApiService {
   }
 
   public setEstadoNotificacion(id: String, notificacion: number){
-    return this.http.put(this.url + 'buzon/', {id, notificacion})
+    console.log("api")
+    return this.http.put(this.url + 'buzon', {id, notificacion})
   }
 }

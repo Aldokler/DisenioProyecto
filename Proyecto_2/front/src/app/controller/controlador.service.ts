@@ -254,6 +254,7 @@ public deleteNotificacionBuzon(id: string, notificacion: number): Observable<boo
 }
 
 public setEstadoNotificacion(id: string, notificacion: number): Observable<boolean>{
+  console.log("controlador")
   return this.AdmBuzon.setEstadoNotificacion(id, notificacion)
 }
 

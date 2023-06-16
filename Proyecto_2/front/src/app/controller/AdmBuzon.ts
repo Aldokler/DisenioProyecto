@@ -43,6 +43,7 @@ export class AdmBuzon{
     }
 
     public setEstadoNotificacion(id: string, notificacion: number): Observable<boolean>{
+        console.log("admisnitrador")
         return this.DAO.setEstadoNotificacion(id,notificacion).pipe(
             map((data:any) => {
                 return data.check_user

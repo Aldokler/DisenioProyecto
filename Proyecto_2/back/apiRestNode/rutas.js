@@ -1189,7 +1189,7 @@ router.delete('/buzon/:buzon', (request, response)=>{
 });
 
 // modificar estado notificacion ---------------------------------------------------
-router.put('/buzon', (request, response)=>{
+router.put('buzon', (request, response)=>{
     const {id, noti} = request.body;
     let sql = 'call setEstadoNotificacion(?,?)';
     conexion.query(sql, [id,noti], (error, rows, fields)=>{
@@ -1198,12 +1198,10 @@ router.put('/buzon', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
+            console.log("else")
             response.json({status: 'Estado modificado' })
         }
     })
 });
-
-module.exports= router;
-
 
 module.exports= router;

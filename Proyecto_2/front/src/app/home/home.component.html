@@ -97,8 +97,8 @@
                                 {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                               </p>
                             </div>
-                            <button (click)="cambiarEstadoNotificacion(notificacion)"
-                              class="btn text-white text-center "
+                            <button (click)="cambiarEstadoNotificacion(notificacion);guardarDatoActividadNotificacion(notificacion)" 
+                            [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
                               style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
                               type="button">
                               Ver más detalles
@@ -106,7 +106,7 @@
                             <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacion(notificacion)">
                               <i class="bi bi-trash"></i>
                             </button>
-                            <button (click)="cambiarEstadoNotificacionOjito(notificacion)">
+                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacion)" >
                               <i [ngClass]="notificacion.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
                             </button>
 

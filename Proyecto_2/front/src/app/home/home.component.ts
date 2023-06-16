@@ -8,6 +8,7 @@ import { Notificacion } from '../model/notificacion';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { Actividad } from '../model/actividad';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent {
   public notificaciones: Notificacion[] = []
   public notificacionesleidas: Notificacion[] = []
   public notificacionesNoLeidas: Notificacion[] = []
+  public comentActividad : any
 
   constructor(private controller: ControladorService, private router: Router) { }
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class HomeComponent {
     )
   }
 
-  borrarBuzon() { 
+  borrarBuzon() {
     this.controller.vaciarBuzon(this.pasarDatos.loginUser.getId()).subscribe(
       () => {
         this.showSuccessAlert();
@@ -106,7 +108,25 @@ export class HomeComponent {
   }
 
   cambiarEstadoNotificacionOjito(notificacion: Notificacion) {
+    console.log("entra aqui ")
+    this.controller.setEstadoNotificacion(this.pasarDatos.loginUser.getId(),notificacion.getId()).subscribe()
+    console.log(notificacion.getEstado())
+    this.ngOnInit()
+  }
 
+  guardarDatoActividadNotificacion(notificacion: Notificacion) {
+
+    this.pasarDatos.guardarActividadNotificacion = notificacion.getId()
+    this.comentActividad = this.controller.getActividad(this.pasarDatos.guardarActividadNotificacion);
+
+    this.pasarDatos.actividadPlanDeTrabajo = new Actividad(this.comentActividad.getId(),
+    this.comentActividad.getSemana(),this.comentActividad.getTipo(),this.comentActividad.getNombre(),
+    this.comentActividad.getFechaHora(),this.comentActividad.getResponsables(),
+    this.comentActividad.getDiasAnunciar(),this.comentActividad.getDiasRecordatorio(),
+    this.comentActividad.getModalidad(),this.comentActividad.getLink(),this.comentActividad.getAfiche(),
+    this.comentActividad.getEstado(),this.comentActividad.getEvidencia(),
+    this.comentActividad.getComentarios(),this.comentActividad.getFechaCancelacion(),
+    this.comentActividad.getObservacion(),this.comentActividad.getFechaAPublicar())
   }
 
 }
