@@ -68,7 +68,7 @@ export class MensajesComponent {
   }
 
   verChat(chat:number){
-    this.controller.
+    //this.controller.
 
   }
 

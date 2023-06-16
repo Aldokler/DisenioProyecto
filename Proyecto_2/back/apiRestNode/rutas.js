@@ -1139,7 +1139,7 @@ router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Usuario agregado' })
+            response.json(rows[0][0])
         }
     })
 });
