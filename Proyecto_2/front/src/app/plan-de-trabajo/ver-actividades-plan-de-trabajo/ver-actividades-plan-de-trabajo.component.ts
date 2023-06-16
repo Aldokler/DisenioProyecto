@@ -119,14 +119,12 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
   cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
-    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(),
-      "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0],
-      "Se ha cancelado la actividad " + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + " del día " +
-      this.pasarDatos.actividadPlanDeTrabajo.getFechaHora()).pipe(
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "Se ha cancelado la actividad " + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + " del día " + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora()+"\n")
+      .pipe(
         tap(res => {
-          if (res) {
-            console.log("hola")
-          }
+          console.log("ssss", res)
+          this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", res)
+
         })
       ).subscribe(
         () => {
@@ -139,7 +137,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   publicarActividad() {
-    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "Se ha publicado la actividad " + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + " del día " + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "Se ha publicado la actividad " + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + " del día " + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora() + "\n")
       .pipe(
         tap(res => {
           console.log("ssss", res)
