@@ -15,7 +15,7 @@ export class AdminActividad{
     public getActividad(id: number): Observable<Actividad>{
         return this.DAO.getActividad(id).pipe(
             map((data: any) => {
-                console.log(data.actividad[0])
+                console.log(data)
                 const json = data.actividad[0];
                 if (json == undefined){
                     return new Actividad(0, 0, TIndoleActividad.TECNICO, '', '', [], 0, [], TModalidad.PRESENCIAL, '', '', TEstado.PLANEADA, new Evidencia(0, [], ''), [], '', '', '')
