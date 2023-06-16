@@ -258,5 +258,9 @@ export class ApiService {
     return this.http.post(this.url+ 'chat', {user})
   }
 
+  public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID: number){
+    return this.http.post(this.url+ 'mensaje', {Emisor, FechaHora, Contenido, ChatID})
+  }
+
 
 }

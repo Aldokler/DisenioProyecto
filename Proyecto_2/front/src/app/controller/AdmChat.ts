@@ -20,4 +20,11 @@ export class AdmChat{
             }))
     }
 
+    public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID: number): Observable<boolean>{
+        return this.DAO.crearMensaje(Emisor, FechaHora, Contenido, ChatID).pipe(
+            map((data: any) => {
+                return data.status
+            }))
+    }
+
 }

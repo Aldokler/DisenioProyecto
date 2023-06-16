@@ -274,4 +274,8 @@ public unirseAChat(chat: number, user: string): Observable<boolean>{
 public crearChat(user: string): Observable<boolean>{
   return this.AdmChat.crearChat(user)
 }
+
+public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID: number): Observable<boolean>{
+  return this.AdmChat.crearMensaje(Emisor, FechaHora, Contenido, ChatID)
+}
 }
