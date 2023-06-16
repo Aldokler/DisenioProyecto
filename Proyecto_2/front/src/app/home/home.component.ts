@@ -30,7 +30,8 @@ export class HomeComponent {
   public evidencia: Evidencia = new Evidencia(0, [], "");
   public actividadNotificacion: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
     "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
-    this.evidencia, [], '', "", '');;
+    this.evidencia, [], '', "", '');
+  public fecha = new Date();
 
   constructor(private controller: ControladorService, private router: Router) { }
   ngOnInit(): void {
@@ -112,6 +113,26 @@ export class HomeComponent {
 
   cambiarEstadoNotificacion(notificacion: Notificacion) {
 
+  }
+
+  aceptarInvitacion() {
+    //this.controller.unirseAChat(,this.pasarDatos.loginUser.getId()).subscribe()
+  }
+
+  denegarInvitacion() {
+    //this.controller.unirseAChat(,this.pasarDatos.loginUser.getId()).subscribe()
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Chat", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "se ha denegado el chat" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día" + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+      .pipe(
+        tap(res => {
+
+          this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Chat", res)
+
+        })
+      ).subscribe(
+        () => {
+          this.showSuccessAlert();
+        }
+      )
   }
 
   cambiarEstadoNotificacionOjito(notificacion: Notificacion) {

@@ -41,7 +41,7 @@
         <div class="container">
 
             <div class="row justify-content-end">
-                
+
                 <div class="col-auto">
                     <div class="dropdown">
                         <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown"
@@ -78,38 +78,33 @@
                     </ul>
                     <div class="tab-content mt-3">
                         <div class="tab-pane fade show active" id="contactos">
+
                             <ul class="list-group">
-                                <li class="list-group-item">Contacto 1</li>
-                                <li class="list-group-item">Contacto 2</li>
-                                <li class="list-group-item">Contacto 3</li>
-                                <!-- Agrega más elementos aquí -->
-                                <li class="list-group-item">Contacto 4</li>
-                                <li class="list-group-item">Contacto 5</li>
-                                <li class="list-group-item">Contacto 6</li>
-                                <li class="list-group-item">Contacto 7</li>
-                                <li class="list-group-item">Contacto 8</li>
-                                <li class="list-group-item">Contacto 9</li>
-                                <li class="list-group-item">Contacto 10</li>
+                                <li *ngFor="let contacto of contactos" class="list-group-item">Contacto 1</li>
                             </ul>
 
                         </div>
                         <div class="tab-pane fade" id="chats">
+
                             <ul class="list-group">
-                                <li class="list-group-item">Chat 1</li>
-                                <li class="list-group-item">Chat 2</li>
-                                <li class="list-group-item">Chat 3</li>
-                                <!-- Agrega más elementos aquí -->
-                                <li class="list-group-item">Chat 4</li>
-                                <li class="list-group-item">Chat 5</li>
-                                <li class="list-group-item">Chat 6</li>
-                                <li class="list-group-item">Chat 7</li>
-                                <li class="list-group-item">Chat 8</li>
-                                <li class="list-group-item">Chat 9</li>
-                                <li class="list-group-item">Chat 10</li>
+                                <div>
+
+                                    <li *ngFor="let chatActivo of chatsActivos" class="list-group-item text-align-items-center">
+                                        <h3>Chat 1 </h3>
+                                        <button (click)=" verChat(chatActivo.getId())" class="btn btn-primary" type="button"
+                                            style="background-color: #13293D;">
+                                            Ver Chat
+                                        </button>
+                                    </li>
+
+                                </div>
+
                             </ul>
+
                         </div>
                     </div>
-                    <button class="btn btn-primary mt-3" style="background-color: #13293D;">Crear mensaje
+                    <button class="btn btn-primary mt-3" style="background-color: #13293D;"
+                        (click)="crearMensajeGrupal()">Crear mensaje
                         grupal</button>
                 </div>
                 <div class="col-9">
@@ -117,34 +112,92 @@
                         <div>
                             <h5 class="col">Chat actual</h5>
                         </div>
-                        <div>
-                            <button class="btn btn-primary mt-3 col" style="background-color: #13293D;">Añadir
-                                Participantes</button>
+                        <div row>
+                            <div *ngIf="tipoDeUsuario != 'Profesor'">
+
+                                <button class="btn btn-primary mt-3 col" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_nomembers" aria-expanded="false"
+                                    style="background-color: #13293D; color: white;">
+                                    Añadir Participantes
+                                </button>
+
+                                <div class="collapse" id="collapse_nomembers">
+                                    <div class="mt-4"
+                                        style="height: 400px; display: block; overflow: auto; position: relative;">
+
+                                        <div *ngFor="let contactoNoAnadidos of contactosNoAnadidos" class="card mb-4">
+
+                                            <div class="card-header" style="background-color: #E2EFF8;">
+                                                {{contactoNoAnadidos.getNombre()}}
+                                            </div>
+                                            <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                                <button class="btn text-white me-2"
+                                                    [style.background-color]="contactosSeleccionados.includes(contactoNoAnadidos) ? '#ADD8E6' : '#13293D'"
+                                                    (click)="agregarParticipantes(contactoNoAnadidos)">
+                                                    Seleccionar
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary mt-3 col" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse_members" aria-expanded="false"
+                                style="background-color: #13293D; color: white;">
+                                Ver Participantes
+                            </button>
+
+                            <div class="collapse" id="collapse_members">
+                                <div class="mt-4"
+                                    style="height: 400px; display: block; overflow: auto; position: relative;">
+
+                                    <div *ngFor="let contactoNoAnadidos of contactosNoAnadidos" class="card mb-4">
+
+                                        <div class="card-header" style="background-color: #E2EFF8;">
+                                            {{contactoNoAnadidos.getNombre()}}
+                                        </div>
+                                        <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                            <button class="btn text-white me-2"
+                                                [style.background-color]="contactosSeleccionados.includes(contactoNoAnadidos) ? '#ADD8E6' : '#13293D'"
+                                                (click)="agregarParticipantes(contactoNoAnadidos)">
+                                                Seleccionar
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
                     </div>
 
                     <div class="chat-container" style="height: 350px;">
-                        <div class="message">
-                            <span class="sender">Juan:</span> Hola, ¿cómo estás?
+
+                        <div *ngFor="let mensaje of mensajes">
+
+                            <div class="message message sender"
+                                *ngIf="this.pasarDatos.loginUser.getNombre() == mensaje.getEmisor()">
+                                <span class="sender"> {{mensaje.getEmisor()}}:</span> {{mensaje.getContenido()}}
+                            </div>
+
+                            <div class="message" *ngIf="this.pasarDatos.loginUser.getNombre() != mensaje.getEmisor()">
+                                <span class="sender"> {{mensaje.getEmisor()}}:</span> {{mensaje.getContenido()}}
+                            </div>
+
                         </div>
-                        <div class="message sender">
-                            <span class="sender">María:</span> ¡Hola! Estoy bien, gracias. ¿Y tú?
-                        </div>
-                        <!-- Ejemplo de más mensajes -->
-                        <div class="message">
-                            <span class="sender">Juan:</span> Bien, gracias. ¿Quieres salir esta tarde?
-                        </div>
-                        <div class="message sender">
-                            <span class="sender">María:</span> ¡Claro! ¿A qué hora nos vemos?
-                        </div>
+
                     </div>
                     <form id="messageForm" class="mt-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Escribe tu mensaje..." required>
+                            <input #mensaje type="text" class="form-control" placeholder="Escribe tu mensaje..."
+                                required>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit"
-                                    style="background-color: #13293D;">Enviar</button>
+                                <button class="btn btn-primary" type="button" style="background-color: #13293D;"
+                                    (click)="enviarMensaje(mensaje.value)">Enviar</button>
                             </div>
                         </div>
                     </form>

@@ -185,12 +185,12 @@
                               {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                             </p>
                           </div>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                          <button type="button" class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;" (click)="aceptarInvitacion()">
                             Aceptar Invitación
                           </button>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                          <button type="button" class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;" (click)="denegarInvitacion()">
                             Declinar Invitación
                           </button>
                           <button class="btn btn-link text-danger ms-auto" type="button">

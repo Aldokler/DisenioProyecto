@@ -27,7 +27,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   ngOnInit() {
-console.log(this.pasarDatos.actividadPlanDeTrabajo)
+    console.log(this.pasarDatos.actividadPlanDeTrabajo)
     if (this.pasarDatos.loginUser instanceof Profesor) {
       if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
@@ -109,54 +109,54 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
   }
   cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
- 
-
-    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
-    .pipe(
-    tap(res => {
-      if (res) {
-        console.log("hola")
-      }
-    })
-  ).subscribe(
-    () => {
-      this.showSuccessAlert() ;
-    }
-  )
-       //this.showSuccessAlert();
-       //this.ngOnInit()
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(),
+      "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0],
+      "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día" +
+      this.pasarDatos.actividadPlanDeTrabajo.getFechaHora()).pipe(
+        tap(res => {
+          if (res) {
+            console.log("hola")
+          }
+        })
+      ).subscribe(
+        () => {
+          this.showSuccessAlert();
+        }
+      )
+    //this.showSuccessAlert();
+    //this.ngOnInit()
 
   }
 
-  publicarActividad(){
-    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha publicado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
-    .pipe(
-    tap(res => {
-        console.log("ssss", res)
-        this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad", res)
-      
-    })
-  ).subscribe(
-    () => {
-      this.showSuccessAlert() ;
-    }
-  )
+  publicarActividad() {
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "se ha publicado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día" + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+      .pipe(
+        tap(res => {
+          console.log("ssss", res)
+          this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", res)
+
+        })
+      ).subscribe(
+        () => {
+          this.showSuccessAlert();
+        }
+      )
 
 
- 
-/*
-  this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "Se les invita a la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
-    .pipe(
-    tap(res => {
-      if (res) {
-        console.log("hola")
-      }
-    })
-  ).subscribe(
-    () => {
-      this.showSuccessAlert() ;
-    }
-  )*/
+
+    /*
+      this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "Se les invita a la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+        .pipe(
+        tap(res => {
+          if (res) {
+            console.log("hola")
+          }
+        })
+      ).subscribe(
+        () => {
+          this.showSuccessAlert() ;
+        }
+      )*/
   }
 
   showSuccessAlert() {
