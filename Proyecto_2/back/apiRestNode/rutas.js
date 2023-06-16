@@ -1234,8 +1234,8 @@ router.put('/buzone/:id', (request, response)=>{
 //get profesores ---------------------------------------------------------
 router.get('/getContactosprofesores/:sede', (request, response)=>{
     const {sede} = request.params;
-    let sql = "call getContactos(?,0)";
-    conexion.query(sql, (error, rows, fields)=>{
+    let sql = "call getContactos(?,?)";
+    conexion.query(sql, [sede,1], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -1252,8 +1252,8 @@ router.get('/getContactosprofesores/:sede', (request, response)=>{
 //get profesores ---------------------------------------------------------
 router.get('/getContactosestudiantes/:sede', (request, response)=>{
     const {sede} = request.params;
-    let sql = "call getContactos(?,1)";
-    conexion.query(sql, (error, rows, fields)=>{
+    let sql = "call getContactos(?,?)";
+    conexion.query(sql, [sede,0],(error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
