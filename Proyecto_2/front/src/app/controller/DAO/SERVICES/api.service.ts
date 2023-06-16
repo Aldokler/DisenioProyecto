@@ -254,5 +254,9 @@ export class ApiService {
     return this.http.post(this.url+ 'unirsechat', {chat, user})
   }
 
-  
+  public crearChat(user: string){
+    return this.http.post(this.url+ 'chat', {user})
+  }
+
+
 }

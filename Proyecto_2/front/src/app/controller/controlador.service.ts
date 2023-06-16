@@ -270,4 +270,8 @@ public crearNotificacion(notificadorID :number, TipoEmisor: string, FechaHora :s
 public unirseAChat(chat: number, user: string): Observable<boolean>{
   return this.AdmChat.unirseAChat(chat , user)
 }
+
+public crearChat(user: string): Observable<boolean>{
+  return this.AdmChat.crearChat(user)
+}
 }

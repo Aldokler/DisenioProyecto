@@ -13,6 +13,11 @@ export class AdmChat{
             }))
     }
 
-
+    public crearChat(user: string): Observable<boolean>{
+        return this.DAO.crearChat(user).pipe(
+            map((data: any) => {
+                return data.status
+            }))
+    }
 
 }

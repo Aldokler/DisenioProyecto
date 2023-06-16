@@ -985,19 +985,7 @@ router.post('/suscribir', (request, response)=>{
     })
 });
 
-router.post('/unirsechat', (request, response)=>{
-    const {chat, user} = request.body;
-    let sql = 'call addUserChat(?,?)';
-    conexion.query(sql, [chat, user], (error, rows, fields)=>{
-        if(error){
-            console.log(error);
-            response.json({status: '-1' });
-        }
-        else{
-            response.json({status: '0' })
-        }
-    })
-});
+
 
 router.delete('/cancelarSubscripcion', (request, response)=>{
     console.log()
@@ -1034,6 +1022,22 @@ router.put('recordatorio/update', (request, response)=>{
 //*************************************************************************************************************
 //-------------------------------------------------------------------------------------------------------------
 
+// unirsechat ---------------------------------------------------
+router.post('/unirsechat', (request, response)=>{
+    const {chat, user} = request.body;
+    let sql = 'call addUserChat(?,?)';
+    conexion.query(sql, [chat, user], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
+
 // gestion chats
 // crear mensaje-----------------------------------------------------------
 router.post('/mensaje', (request, response)=>{
@@ -1067,7 +1071,7 @@ router.delete('/mensajeDelete/:id', (request, response)=>{
 });
 
 // crear chat-----------------------------------------------------------
-router.post('/chat/:ID', (request, response)=>{
+router.post('/chat', (request, response)=>{
     const {ID} = request.body;    
     let sql = 'call addChat(?)';
     conexion.query(sql, [ID], (error, rows, fields)=>{
