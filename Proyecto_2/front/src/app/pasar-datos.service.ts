@@ -13,6 +13,7 @@ import { TModalidad } from './model/tmodalidad';
 import { TEstado } from './model/testado';
 import { Evidencia } from './model/evidencia';
 import { Comentario } from './model/comentario';
+import { Notificacion } from './model/notificacion';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class PasarDatosService {
   }
   public coordinador: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
   public creador: EquipoGuia = new EquipoGuia(0, [], 0, 0, this.coordinador);
-  public loginUser: Usuario = new Estudiante("", "", "", "", "", "", TSede.CA, "","");
+  public loginUser: Usuario = new Estudiante("", "", "", "", "", "", TSede.CA, "", "");
   public planesDeTrabajo: PlanDeTrabajo = new PlanDeTrabajo(0, 0, 0, [], this.creador);
   public fecha = new Date(2023, 4, 16, 12, 30, 45);
   public fechacancelacion = new Date(2023, 4, 16, 12, 30, 45);
@@ -41,10 +42,11 @@ export class PasarDatosService {
     "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
     this.evidencia, [], '', "", '');
   public estudiantes: Estudiante[] = []
-  public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "","")
+  public actualEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "", "")
   public guardarProfesor: Profesor = new Profesor("", "", "", "", "", "", TSede.CA, "", "", "", TRol.GUIA);
   public comentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
-  public guardarEstudiante:Estudiante = new Estudiante("","","","","","",TSede.CA,"","");
-
+  public guardarEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "", "");
+  public guardarActividadNotificacion: number = 0
+  
 }
 

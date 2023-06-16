@@ -57,18 +57,19 @@
     <div class="container">
 
         <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
+            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
             </button>
             <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <h6>Ejemplo de notificación</h6>
-                  <p>Esta es una notificación de ejemplo.</p>
-                </a>
-              </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <h6>Ejemplo de notificación</h6>
+                        <p>Esta es una notificación de ejemplo.</p>
+                    </a>
+                </li>
             </ul>
-          </div>
+        </div>
 
         <div class="d-flex align-items-center pb-1 mb-4 mt-4">
             <a href="" class="text-decoration-none text-reset" [routerLink]="['/home']">
@@ -97,11 +98,13 @@
                         </select>
                     </div>
 
-                    <div class="col"> 
-                        <button type="button" class="btn text-white me-2" style="background-color: #13293D;" (click)="filtrarEstudiantes(carne.value,campus.value)">
+                    <div class="col">
+                        <button type="button" class="btn text-white me-2" style="background-color: #13293D;"
+                            (click)="filtrarEstudiantes(carne.value,campus.value)">
                             Filtrar
                         </button>
-                        <button type="" class="btn text-white " style="background-color: #13293D;" (click)="descargarExcel()">
+                        <button type="" class="btn text-white " style="background-color: #13293D;"
+                            (click)="descargarExcel()">
                             Generar Excel
                         </button>
 
@@ -113,22 +116,25 @@
 
         <div *ngIf="tipoDeUsuario  == 'Profesor' || tipoDeUsuario  == 'Coordinador' " class="card mt-4 mb-4">
             <div class="card-body">
-            <!--  aqui se hacen los estudiantes -->
+                <!--  aqui se hacen los estudiantes -->
                 <div class="row mb-3 mt-3 text-center">
-                    <div *ngFor="let  estudiante of estudiantes" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                    <div *ngFor="let  estudiante of estudiantes"
+                        class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
-                                <h5 class="card-title">{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }} {{ estudiante.getNombre() }}</h5>
+                                <h5 class="card-title">{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }}
+                                    {{ estudiante.getNombre() }}</h5>
                                 <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block">
 
                                 <a href="" class="btn text-white" style="background-color: #13293D;"
-                                    [routerLink]="['/editar-estudiantes']" (click)="guardarDatosEstudiante(estudiante)">Editar</a>
+                                    [routerLink]="['/editar-estudiantes']"
+                                    (click)="guardarDatosEstudiante(estudiante)">Editar</a>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
-            <!--  -->
+                <!--  -->
 
             </div>
         </div>
@@ -139,17 +145,18 @@
                 <div class="mt-3">
                     <form onsubmit="">
                         <div class="row">
-                                <div class="col">
-                                    <div class="form-outline">
-                                        <input #file type="file" id="deal_name" name="deal_name" class="form-control" (change)="handleFileInput($event)"/>
-                                        <label class="form-label">Subir Archivo</label>
-                                    </div>
+                            <div class="col">
+                                <div class="form-outline">
+                                    <input #file type="file" id="deal_name" name="deal_name" class="form-control"
+                                        (change)="handleFileInput($event)" />
+                                    <label class="form-label">Subir Archivo</label>
                                 </div>
-    
-                                <div class="col">
-                                    <button type="submit" class="btn text-white" (click)="cargarExcel()"
-                                        style="background-color: #13293D;">Consultar Datos</button>
-                                </div>
+                            </div>
+
+                            <div class="col">
+                                <button type="submit" class="btn text-white" (click)="cargarExcel()"
+                                    style="background-color: #13293D;">Consultar Datos</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -174,7 +181,8 @@
                                 </td>
 
                                 <td>
-                                    <p>{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }} {{ estudiante.getNombre() }}</p>
+                                    <p>{{ estudiante.getApellido1() }} {{ estudiante.getApellido2() }} {{
+                                        estudiante.getNombre() }}</p>
                                 </td>
 
                                 <td>

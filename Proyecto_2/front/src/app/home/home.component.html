@@ -18,11 +18,6 @@
       <img src="assets/imagenes/usuario.png" alt="" class="img-fluid w-25 mx-auto d-block mb-5">
 
       <ul>
-        <li>
-          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset ">
-              <p style="color: white;">Cerrar Sesión</p>
-            </a></h3>
-        </li>
 
         <li *ngIf="tipoDeUsuario == 'Estudiante'">
           <h3 class=" mb-5">
@@ -30,6 +25,12 @@
               <p style="color: white;">Editar Perfil</p>
             </a>
           </h3>
+        </li>
+
+        <li>
+          <h3 class=" mb-5"><a href="" class="text-decoration-none text-reset ">
+              <p style="color: white;">Cerrar Sesión</p>
+            </a></h3>
         </li>
 
       </ul>
@@ -57,55 +58,216 @@
 
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
+
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" id="pestaña1-tab" data-bs-toggle="tab" href="#pestaña1" role="tab" aria-controls="pestaña1" aria-selected="true">Notificaciones</a>
+                  <a class="nav-link active" id="pestaña1-tab" data-bs-toggle="tab" href="#pestaña1" role="tab"
+                    aria-controls="pestaña1" aria-selected="true">Notificaciones
+
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="pestaña2-tab" data-bs-toggle="tab" href="#pestaña2" role="tab" aria-controls="pestaña2" aria-selected="false">Leídas</a>
+                  <a class="nav-link" id="pestaña2-tab" data-bs-toggle="tab" href="#pestaña2" role="tab"
+                    aria-controls="pestaña2" aria-selected="false">Leídas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="pestaña3-tab" data-bs-toggle="tab" href="#pestaña3" role="tab" aria-controls="pestaña3" aria-selected="false">No leídas</a>
+                  <a class="nav-link" id="pestaña3-tab" data-bs-toggle="tab" href="#pestaña3" role="tab"
+                    aria-controls="pestaña3" aria-selected="false">No leídas</a>
                 </li>
               </ul>
-              <div class="tab-content">
-                <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab">
-                  <a class="dropdown-item d-flex" >
-                    <div>
-                      <h6>Ejemplo de notificación 1</h6>
-                      <p>Esta es la notificación de la pestaña 1.</p>
+              Eliminar todas las notificaciones
+              <button class="btn btn-link text-danger ms-auto" (click)="borrarBuzon()" type="button">
+                <i class="bi bi-trash"></i>
+              </button>
+
+              <div class="tab-content overflow-auto" style="height: 400px;width: 400px;">
+
+
+                <div class="tab-pane fade show active" id="pestaña1" role="tabpanel" aria-labelledby="pestaña1-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacion of notificaciones">
+                    <div *ngIf="notificacion.getEmisorTipo() == 'Actividad' ">
+                      <div [ngStyle]="notificacion.getEstado() === 1 ? { 'background-color': '#FFFFFF' } : { 'background-color': '#E2EFF8' }"> 
+                        <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                          <div style="width: 300px;">
+                            <div>
+                              <h6>{{notificacion.getNombre()}}</h6>
+                              <p class="text-break word-wrap">
+                                {{notificacion.getContenido()}} <br>
+                                {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                              </p>
+                            </div>
+                            <button (click)="cambiarEstadoNotificacion(notificacion);guardarDatoActividadNotificacion(notificacion)" 
+                            [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
+                              type="button">
+                              Ver más detalles
+                            </button>
+                            <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacion(notificacion)">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacion)" >
+                              <i [ngClass]="notificacion.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
-                </div>
-                <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab">
-                  <a class="dropdown-item d-flex">
-                    <div>
-                      <h6>Ejemplo de notificación 2</h6>
-                      <p>Esta es la notificación de la pestaña 2.</p>
+
+                    <div *ngIf="notificacion.getEmisorTipo() == 'Chat' ">
+                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                        <div style="width: 300px;">
+                          <div>
+                            <h6>{{notificacion.getNombre()}}</h6>
+                            <p class="text-break word-wrap">
+                              {{notificacion.getContenido()}} <br>
+                              {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                            </p>
+                          </div>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Aceptar Invitación
+                          </button>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Declinar Invitación
+                          </button>
+                          <button class="btn btn-link text-danger ms-auto" type="button">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                          <i [ngClass]="notificacion.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                        </div>
+                      </div>
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
+                  </div>
                 </div>
-                <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab">
-                  <a class="dropdown-item d-flex">
-                    <div>
-                      <h6>Ejemplo de notificación 3</h6>
-                      <p>Esta es la notificación de la pestaña 3.</p>
+
+                <div class="tab-pane fade" id="pestaña2" role="tabpanel" aria-labelledby="pestaña2-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacionleida of notificacionesleidas">
+
+                    <div *ngIf="notificacionleida.getEmisorTipo() == 'Actividad' ">
+                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                        <div style="width: 300px;">
+                          <div>
+                            <h6>{{notificacionleida.getNombre()}}</h6>
+                            <p class="text-break word-wrap">
+                              {{notificacionleida.getContenido()}} <br>
+                              {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                            </p>
+                          </div>
+                          <button (click)="cambiarEstadoNotificacion(notificacionleida)"
+                            class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
+                            type="button">
+                            Ver más detalles
+                          </button>
+                          <button class="btn btn-link text-danger ms-auto" type="button">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                          <button (click)="cambiarEstadoNotificacionOjito(notificacionleida)">
+                            <i [ngClass]="notificacionleida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                          </button>
+
+                        </div>
+                      </div>
                     </div>
-                    <button class="btn btn-link text-danger ms-auto">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </a>
+
+                    <div *ngIf="notificacionleida.getEmisorTipo() == 'Chat' ">
+                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                        <div style="width: 300px;">
+                          <div>
+                            <h6>{{notificacionleida.getNombre()}}</h6>
+                            <p class="text-break word-wrap">
+                              {{notificacionleida.getContenido()}} <br>
+                              {{notificacionleida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                            </p>
+                          </div>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Aceptar Invitación
+                          </button>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Declinar Invitación
+                          </button>
+                          <button class="btn btn-link text-danger ms-auto" type="button">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                          <i [ngClass]="notificacionleida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
                 </div>
+
+                <div class="tab-pane fade" id="pestaña3" role="tabpanel" aria-labelledby="pestaña3-tab"
+                  style="max-width: 400px;">
+                  <div *ngFor="let notificacionNoLeida of notificacionesNoLeidas">
+                    <div *ngIf="notificacionNoLeida.getEmisorTipo() == 'Actividad' ">
+                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                        <div style="width: 300px;">
+                          <div>
+                            <h6>{{notificacionNoLeida.getNombre()}}</h6>
+                            <p class="text-break word-wrap">
+                              {{notificacionNoLeida.getContenido()}} <br>
+                              {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                            </p>
+                          </div>
+                          <button (click)="cambiarEstadoNotificacion(notificacionNoLeida)"
+                            class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
+                            type="button">
+                            Ver más detalles
+                          </button>
+                          <button class="btn btn-link text-danger ms-auto" type="button">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                          <button (click)="cambiarEstadoNotificacionOjito(notificacionNoLeida)">
+                            <i [ngClass]="notificacionNoLeida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                          </button>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="notificacionNoLeida.getEmisorTipo() == 'Chat' ">
+                      <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
+                        <div style="width: 300px;">
+                          <div>
+                            <h6>{{notificacionNoLeida.getNombre()}}</h6>
+                            <p class="text-break word-wrap">
+                              {{notificacionNoLeida.getContenido()}} <br>
+                              {{notificacionNoLeida.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
+                            </p>
+                          </div>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Aceptar Invitación
+                          </button>
+                          <button class="btn text-white text-center "
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                            Declinar Invitación
+                          </button>
+                          <button class="btn btn-link text-danger ms-auto" type="button">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                          <i [ngClass]="notificacionNoLeida.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
               </div>
+
             </div>
-
-
           </div>
         </div>
       </div>

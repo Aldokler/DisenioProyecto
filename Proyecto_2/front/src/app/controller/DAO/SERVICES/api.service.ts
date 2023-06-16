@@ -23,6 +23,10 @@ export class ApiService {
     return this.http.get(this.url + 'login?user=' + user + '&pass=' + pass)
   }
 
+  public getLastActividadID(){
+    return this.http.get(this.url + 'last_actividad')
+  }
+
   public revisarCoordinador(profesorId: string){
     return this.http.get(this.url + '/coordinador/' + profesorId)
   }
@@ -221,5 +225,28 @@ export class ApiService {
     return this.http.get(this.url + 'usuariosANotificar/' + notificadorID + '/'+ notificadorTipo)
   }
 
+  public addNotificador(ID: number, Tipo: string){
+    return this.http.post(this.url + 'notificador', {ID, Tipo});
+  }
 
+  public crearNotificacion(pIDEmisor :number, pEmisorTipo: string, pFechaHora :string, pContenido :string){
+    console.log("apidd")
+    console.log(pIDEmisor, pEmisorTipo)
+    return this.http.post(this.url + 'notificacion', {pIDEmisor, pEmisorTipo, pFechaHora, pContenido} );
+  }
+
+  public getBuzon(ID: string, filtro: number){
+    return this.http.get(this.url + 'buzon/' + ID + '/' + filtro);
+  }
+  public vaciarBuzon(id: String){
+    return this.http.delete(this.url + 'buzon/' + id)
+  }
+  public deleteNotificacionBuzon(id: String, notificacion: number){
+    return this.http.delete(this.url + 'buzon/' + id + '/' + notificacion)
+  }
+
+  public setEstadoNotificacion(id: String, noti: number){
+    console.log("api")
+    return this.http.put(this.url + 'buzone/' + id , {noti})
+  }
 }

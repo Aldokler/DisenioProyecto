@@ -2,17 +2,9 @@ import { Component, ComponentFactory } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
-import { Actividad } from 'src/app/model/actividad';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Comentario } from 'src/app/model/comentario';
-import { Evidencia } from 'src/app/model/evidencia';
 import { Profesor } from 'src/app/model/profesor';
-import { TEstado } from 'src/app/model/testado';
-import { TIndoleActividad } from 'src/app/model/tindoleactividad';
-import { TModalidad } from 'src/app/model/tmodalidad';
-import { TRol } from 'src/app/model/trol';
-import { TSede } from 'src/app/model/tsede';
-import { Usuario } from 'src/app/model/usuario';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
 import swal from 'sweetalert2';
 
@@ -34,7 +26,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   ngOnInit() {
-
+console.log(this.pasarDatos.actividadPlanDeTrabajo)
     if (this.pasarDatos.loginUser instanceof Profesor) {
       if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
@@ -64,6 +56,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.respuestaComentarios = res1
       })
     ).subscribe()
+    this.ngOnInit()
   }
 
   guardarComentario(comentarioGuardar: string) {
@@ -77,6 +70,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
 
@@ -93,6 +87,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
   agregarObservacion(observacion: string) {
@@ -105,6 +100,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
   guardarDeNuevoActividad() {
@@ -112,7 +108,38 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
   cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
-    this.showSuccessAlert();
+ 
+
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    .pipe(
+    tap(res => {
+      if (res) {
+        console.log("hola")
+      }
+    })
+  ).subscribe(
+    () => {
+      this.showSuccessAlert() ;
+    }
+  )
+       //this.showSuccessAlert();
+       //this.ngOnInit()
+
+  }
+
+  publicarActividad(){
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha publicado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    .pipe(
+    tap(res => {
+      if (res) {
+        console.log("hola")
+      }
+    })
+  ).subscribe(
+    () => {
+      this.showSuccessAlert() ;
+    }
+  )
   }
 
   showSuccessAlert() {

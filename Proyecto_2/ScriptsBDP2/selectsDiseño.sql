@@ -40,7 +40,8 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS getActividadesByPlanyEstado; //
 CREATE PROCEDURE getActividadesByPlanyEstado(IN pPlan varchar(50), IN pEstado varchar(45))
 BEGIN
-	SELECT * FROM actividad WHERE PlanID = pPlan AND Estado = pEstado;
+	SELECT * FROM actividad WHERE PlanID = pPlan AND Estado = pEstado
+    ORDER BY Semana;
     COMMIT;
 END; //
 
@@ -291,15 +292,22 @@ BEGIN
 END; //
 
 
+
 DELIMITER //
 DROP PROCEDURE IF EXISTS getBuzonByUsuario; //
-CREATE PROCEDURE getBuzonByUsuario(IN pID VARCHAR(45))
+CREATE PROCEDURE getBuzonByUsuario(IN pID VARCHAR(45), IN filtro int)
 BEGIN
-	SELECT notif.* FROM usuario_x_notificacion uxn
-    INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
-    WHERE uxn.IDUsuario = pID
-    ORDER BY notif.FechaHora DESC;
-commit;
+	if filtro = 2 then 
+		SELECT notif.*, Estado FROM usuario_x_notificacion uxn
+		INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
+		WHERE uxn.IDUsuario = pID 
+        ORDER BY notif.FechaHora DESC;
+	else
+		SELECT notif.*, Estado FROM usuario_x_notificacion uxn
+		INNER JOIN notificacion notif ON notif.ID = uxn.IDNotificacion 
+		WHERE uxn.IDUsuario = pID AND Estado = filtro
+		ORDER BY notif.FechaHora DESC;
+	end if;
 END; //
 
 DELIMITER //
@@ -330,3 +338,11 @@ BEGIN
     INNER JOIN chat c ON c.ID = uxc.IDChat
     WHERE uxc.IDUsuario = pIDUser;
 END; //
+
+drop procedure if exists getLastActividadID;
+DELIMITER $$
+CREATE PROCEDURE getLastActividadID()
+BEGIN
+	SELECT ID FROM actividad order by ID desc limit 1;
+END$$
+DELIMITER ;

@@ -2,9 +2,18 @@ drop procedure if exists addActividad;
 DELIMITER $$
 CREATE PROCEDURE addActividad (vNombre varchar(45), vSemana int, vFechaHora date, vDiasAnunciar int, vLink varchar(45), vTipoactividad varchar(45), vModalidad varchar(45), vPlanID int, vFechaPublicar date)
 BEGIN
+	DECLARE vID int;
 	INSERT INTO actividad (Nombre, Semana, FechaHora, DiasAnunciar, Link, Tipo, Modalidad, Estado, PlanID, FechaAPublicar)
 	VALUES (vNombre, vSemana, vFechaHora, vDiasAnunciar, vLink, vTipoactividad, vModalidad, 'Planeada', vPlanID, vFechaPublicar);
     COMMIT;
+    
+    SELECT ID into vID FROM actividad order by ID desc limit 1;
+    -- insert into notificador values (vID, 'Actividad');
+    call addNotificador(vID, "Actividad", vNombre);
+    SELECT vID;
+    
+    INSERT INTO dias_recordatorio (ID, Dia, Actividad) VALUES (default, DATE(DATE_ADD(vFechaHora, INTERVAL vDiasAnunciar DAY)), vID);
+
 END$$
 DELIMITER ;
 
@@ -65,7 +74,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE addEvidencia (vLink varchar(45), vActividad int)
-BEGIN
+BEGINEquipo
 	declare idEvidencia int;
 	INSERT INTO evidencia (Link)
 	VALUES (vLink);
@@ -234,15 +243,22 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificacion; //
 CREATE PROCEDURE addNotificacion(IN pIDEmisor INT, IN pEmisorTipo varchar(45), IN pFechaHora DATETIME, IN pContenido varchar(300))
 BEGIN
-	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido);
+	declare vnombre varchar(50);
+    
+    Select Nombre into vnombre from notificador where SujetoID = pIDEmisor AND Tipo = pEmisorTipo;
+	INSERT INTO notificacion (ID, IDEmisor, EmisorTipo, FechaHora, Contenido, Emisor) VALUES (default, pIDEmisor, pEmisorTipo, pFechaHora, pContenido, vnombre);
+    
+    SELECT ID FROM notificacion order by ID desc limit 1;
+    
 commit;
 END; //
 
+
 DELIMITER //
 DROP PROCEDURE IF EXISTS addNotificador; //
-CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"))
+CREATE PROCEDURE addNotificador(IN pID INT, IN pTipo ENUM("Actividad","Chat"), IN nombre varchar(50))
 BEGIN
-	INSERT INTO notificador(SujetoID,Tipo) VALUES (pID, pTipo);
+    INSERT INTO notificador(SujetoID,Tipo, Nombre) VALUES (pID, pTipo, nombre);
 commit;
 END; //
 
@@ -282,13 +298,6 @@ BEGIN
 END; //
 
 DELIMITER //
-DROP PROCEDURE IF EXISTS joinChat; //
-CREATE PROCEDURE joinChat(IN pIDUsuario VARCHAR(45), IN pIDChat INT)
-BEGIN
-	INSERT INTO usuario_x_chat (IDUsuario, IDChat) VALUES(pIDUsuario, pIDChat);
-END; //
-
-DELIMITER //
 DROP PROCEDURE IF EXISTS addChat; //
 CREATE PROCEDURE addChat(IN pIDUsuario VARCHAR(45))
 BEGIN
@@ -309,6 +318,63 @@ CREATE PROCEDURE addUserChat(IN pIDChat INT, IN pIDUsuario VARCHAR(45))
 BEGIN
 	INSERT INTO usuario_x_chat (IDUsuario, IDChat) VALUES(pIDUsuario, pIDChat);
 END; //
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiante`(vID varchar(45), vCelular varchar(45), vFoto longblob)
+BEGIN
+	UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Celular  = vCelular,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END; //
+
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiante+`(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFoto longblob)
+BEGIN
+		UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Nombre = vNombre,
+		usuario.Apellido1 = vApellido1,
+		usuario.Apellido2 = vApellido2 ,
+		usuario.CorreoElectronico = vCorreoElectronico ,
+		usuario.Celular  = vCelular,
+		usuario.Contraseña = vContraseña,
+		usuario.Sede = vSede,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END; //
+
+DELIMITER //
+CREATE DEFINER=`David`@`%` PROCEDURE `updateEstudiantePlus`(vID varchar(45), vNombre varchar(45), vApellido1 varchar(45), vApellido2 varchar(45), vCorreoElectronico varchar(45), vCelular varchar(45), vContraseña varchar(45), vSede varchar(45), vFoto longblob)
+BEGIN
+		UPDATE usuario INNER JOIN estudiante ON estudiante.ID = usuario.ID
+		SET
+		usuario.Nombre = vNombre,
+		usuario.Apellido1 = vApellido1,
+		usuario.Apellido2 = vApellido2 ,
+		usuario.CorreoElectronico = vCorreoElectronico ,
+		usuario.Celular  = vCelular,
+		usuario.Contraseña = vContraseña,
+		usuario.Sede = vSede,
+        estudiante.Fotografia =  vFoto
+		WHERE  usuario.ID = vID;
+    COMMIT;
+END; //
+
+
+drop procedure if exists setEstadoNotificacion;
+DELIMITER $$
+CREATE PROCEDURE setEstadoNotificacion(IN buzon varchar(45),IN notificacion int)
+BEGIN
+	UPDATE usuario_x_notificacion SET Estado = not Estado WHERE IDUsuario = buzon AND IDNotificacion = notificacion;
+    COMMIT;
+END$$
+
+
 
 COMMIT;
 

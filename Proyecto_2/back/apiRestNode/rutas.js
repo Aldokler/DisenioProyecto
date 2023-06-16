@@ -6,6 +6,8 @@ const {Administrativo} = require('../model/administrativo');
 const {Comentario} = require('../model/comentario');
 const {Estudiante} = require('../model/estudiante');
 const {notificacion, Notificacion} = require('../model/notificacion');
+const {Chat} = require('../model/chat');
+const {Mensaje} = require('../model/mensaje');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -800,15 +802,18 @@ module.exports= router;
 // gestion notificaciones
 // crear notificacion-----------------------------------------------------------
 router.post('/notificacion', (request, response)=>{
-    const {IDEmisor, TipoEmisor, FechaHora, Contenido} = request.body;    
+    console.log("dd") 
+    const {pIDEmisor, pEmisorTipo, pFechaHora, pContenido} = request.body;    
     let sql = 'call addNotificacion(?,?,?,?)';
-    conexion.query(sql, [IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
+    conexion.query(sql, [pIDEmisor, pEmisorTipo, pFechaHora, pContenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
-            response.json({status: 'Notificacion agregada' })
+            console.log("ru")
+            console.log(rows[0][0])
+            response.json(rows[0][0])
         }
     })
 });
@@ -847,10 +852,10 @@ router.delete('/notificacion/delete', (request, response)=>{
 });
 
 // crear notificador-----------------------------------------------------------
-router.post('/notificador/:ID', (request, response)=>{
-    const {UserID, Tipo} = request.body;    
-    let sql = 'call addNotificador(?)';
-    conexion.query(sql, [UserID, Tipo], (error, rows, fields)=>{
+router.post('/notificador', (request, response)=>{
+    const {notificadorID, tipo} = request.body;    
+    let sql = 'call addNotificador(?,?)';
+    conexion.query(sql, [notificadorID, tipo], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
@@ -860,6 +865,7 @@ router.post('/notificador/:ID', (request, response)=>{
         }
     })
 });
+
 
 // delete notificador-----**----------------------------------------------
 router.delete('/notificador/delete', (request, response)=>{
@@ -949,19 +955,18 @@ module.exports= router;
 
 
 //get buzón por usuario ID -----------------------------------------------------
-router.get('/buzon/:id', (request, response)=>{
-    console.log()
-    const {id} = request.params;
-    let sql = "call getBuzonByUsuario(?);";
-    conexion.query(sql, [id], (error, rows, fields)=>{
+router.get('/buzon/:id/:filtro', (request, response)=>{
+    const {id, filtro} = request.params;
+    let sql = "call getBuzonByUsuario(?,?);";
+    conexion.query(sql, [id, filtro], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });
         }
         else{
-            const notificacion = rows[0].map(row => 
-                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo));
-                response.json({notificacion})
+            const notificaciones = rows[0].map(row => 
+                new Notificacion(row.ID, row.FechaHora, row.Contenido, row.IDEmisor, row.EmisorTipo, row.Emisor, row.Estado));
+                response.json({notificaciones})
         }
     })
 });
@@ -1007,6 +1012,198 @@ router.put('recordatorio/update', (request, response)=>{
         }
         else{
             response.json({status: '0' })
+        }
+    })
+});
+
+//-------------------------------------------------------------------------------------------------------------
+//*************************************************************************************************************
+//-------------------------------------------------------------------------------------------------------------
+
+// gestion chats
+// crear mensaje-----------------------------------------------------------
+router.post('/mensaje', (request, response)=>{
+    const {Emisor, FechaHora, Contenido, ChatID} = request.body;    
+    let sql = 'call sendMessage(?,?,?,?)';
+    conexion.query(sql, [Emisor, FechaHora, Contenido, ChatID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Mensaje enviado' })
+        }
+    })
+});
+
+// eliminar mensaje-----------------------------------------------------------
+router.delete('/mensajeDelete/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteMessage(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+// crear chat-----------------------------------------------------------
+router.post('/chat/:ID', (request, response)=>{
+    const {ID} = request.body;    
+    let sql = 'call addChat(?)';
+    conexion.query(sql, [ID], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Chat creado' })
+        }
+    })
+});
+
+// eliminar chat-----------------------------------------------------------
+router.delete('/chatDelete/:id', (request, response)=>{
+    console.log()
+    const {id} = request.params;
+    let sql = "call deleteChat(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+// devuelve un bool, 0 si el usuario ne esta suscrito al notificador, 1 si si lo está
+router.get('/checkIfSuscribed', (request, response)=>{
+    const {IDUser, IDNotif, Tipo} = request.params;
+    let sql = "call checkIsSuscribed(?,?,?)";
+    conexion.query(sql, [IDUser, IDNotif, Tipo],(error, rows, fields)=>{
+        if(error){
+            console.log(error);response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+// get actividad by ID ---------------------------------------------***
+router.get('/last_actividad', (request, response)=>{
+    let sql = "call getLastActividadID();";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json(rows[0][0])
+        }
+    })
+});
+
+// crear chat-----------------------------------------------------------
+router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
+    const {IDChat,IDUsuario} = request.params;    
+    let sql = 'call addUserChat(?,?)';
+    conexion.query(sql, [IDChat,IDUsuario], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Usuario agregado' })
+        }
+    })
+});
+
+//getChatByUser -----------------------------------------------------
+router.get('/chatUser/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getChatByUser(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const chat = rows[0].map(row => 
+                new Chat(row.ID, row.Host));
+                response.json({chat})
+        }
+    })
+});
+
+//getMensajesByChat -----------------------------------------------------
+router.get('/mensajeChat/:id', (request, response)=>{
+    const {id} = request.params;
+    let sql = "call getMensajesByChat(?);";
+    conexion.query(sql, [id], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const mensaje = rows[0].map(row => 
+                new Mensaje(row.ID,row.Emisor,row.FechaHora, row.Contenido, row.ChatID));
+                response.json({mensaje})
+        }
+    })
+});
+
+
+//eliminar notificacion de buzon -----------------------------------------------
+router.delete('/buzon/:buzon/:noti', (request, response)=>{
+    const {buzon, noti} = request.params;
+    let sql = "call deleteNotificacionBuzon(?,?);";
+    conexion.query(sql, [buzon, noti], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Notificacion eliminada' })
+        }
+    })
+});
+
+//vaciar buzon -----------------------------------------------
+router.delete('/buzon/:buzon', (request, response)=>{
+    const {buzon} = request.params;
+    let sql = "call deleteBuzon(?);";
+    conexion.query(sql, [buzon], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Buzon vaciado' })
+        }
+    })
+});
+
+
+// modificar noti ---------------------------------------------------
+router.put('/buzone/:id', (request, response)=>{
+    const {id} = request.params;
+    const {noti} = request.body;
+    let sql = 'call setEstadoNotificacion(?,?)';
+    conexion.query(sql, [id,noti], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: 'Estado modificado' })
         }
     })
 });

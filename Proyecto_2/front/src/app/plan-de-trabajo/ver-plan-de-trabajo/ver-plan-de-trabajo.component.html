@@ -118,11 +118,25 @@
                                     Semana: {{actividad.getSemana()}} &nbsp;&nbsp;&nbsp;
                                     {{actividad.getFechaHora().toString().replace('T', ' ').substring(0, 19)}}
                                 </div>
-                                <a href="" class="btn btn-outline-secondary mt-2"
-                                    [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
-                                    (click)="guardarActividad(actividad)"
-                                    [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                    más detalles</a>
+                                <div class="row">
+                                    <a class="btn btn-secondary mt-2 col"
+                                        [style.background-color]="actividadSeleccionada.includes(actividad) ? '#ADD8E6' : '#13293D'"
+                                        (click)="guardarActividad(actividad)"
+                                        [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                        más detalles
+                                    </a>
+                                    <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                        (click)="suscribirPersonas(actividad)">
+                                        Suscribirme
+                                    </button>
+
+                                    <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                        (click)="desuscribirPersonas(actividad)">
+                                        Desuscribirme
+                                    </button>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -144,11 +158,24 @@
                                         {{actividadPlaneada.getFechaHora().toString().replace('T', ' ').substring(0,
                                         19)}}
                                     </div>
-                                    <a href="" class="btn btn-outline-secondary mt-2"
-                                        [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
-                                        (click)="guardarActividad(actividadPlaneada)"
-                                        [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                        más detalles</a>
+                                    <div class="row">
+                                        <a class="btn btn-secondary mt-2 col"
+                                            [style.background-color]="actividadSeleccionada.includes(actividadPlaneada) ? '#ADD8E6' : '#13293D'"
+                                            (click)="guardarActividad(actividadPlaneada)"
+                                            [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                            más detalles
+                                        </a>
+                                        <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                            (click)="suscribirPersonas(actividadPlaneada)">
+                                            Suscribirme
+                                        </button>
+
+                                        <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                            (click)="desuscribirPersonas(actividadPlaneada)">
+                                            Desuscribirme
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -167,11 +194,25 @@
                                         {{actividadProxima.getFechaHora().toString().replace('T', ' ').substring(0,
                                         19)}}
                                     </div>
-                                    <a href="" class="btn btn-outline-secondary mt-2"
-                                        [style.background-color]="actividadSeleccionada.includes(actividadProxima) ? '#ADD8E6' : '#13293D'"
-                                        (click)="guardarActividad(actividadProxima)"
-                                        [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
-                                        más detalles</a>
+                                    <div class="row">
+                                        <a class="btn btn-secondary mt-2 col"
+                                            [style.background-color]="actividadSeleccionada.includes(actividadProxima) ? '#ADD8E6' : '#13293D'"
+                                            (click)="guardarActividad(actividadProxima)"
+                                            [routerLink]="['/ver-actividades-plan-de-trabajo']">Ver
+                                            más detalles
+                                        </a>
+                                        <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                            (click)="suscribirPersonas(actividadProxima)">
+                                            Suscribirme
+                                        </button>
+
+                                        <button class="btn btn-secondary mt-2 col" style="background-color: #13293D;"
+                                            (click)="desuscribirPersonas(actividadProxima)">
+                                            Desuscribirme
+                                        </button>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

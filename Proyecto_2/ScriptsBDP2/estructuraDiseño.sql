@@ -163,7 +163,7 @@ CREATE TABLE `dias_recordatorio` (
   `Actividad` int NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `idDias_REcordatORIO_UNIQUE` (`ID`),
-  CONSTRAINT `Actividad` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`)
+  CONSTRAINT `dActividad` FOREIGN KEY (`ID`) REFERENCES `actividad` (`ID`)
 );
 
 
@@ -192,10 +192,10 @@ CREATE TABLE `equipo_guía_x_profesor` (
   CONSTRAINT `IDProfesor_EGXP` FOREIGN KEY (`IDProfesor`) REFERENCES `profesor` (`ID`)
 );
 
-CREATE TABLE numeroProfesSede (
-  numero int default 0,
-  sede varchar(10) NOT NULL,
-  PRIMARY KEY (numero,sede)
+CREATE TABLE `numeroprofessede` (
+  `numero` int NOT NULL DEFAULT '0',
+  `sede` varchar(10) NOT NULL,
+  PRIMARY KEY (`numero`,`sede`)
 );
 COMMIT;
 
@@ -218,19 +218,21 @@ CREATE TABLE `mensaje` (
 
 CREATE TABLE `notificacion` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `IDEmisor` INT NOT NULL,
-  `EmisorTipo` ENUM("Actividad","Chat") NOT NULL,
-  `FechaHora` DATETIME NOT NULL,
-  `Contenido` VARCHAR(300) NOT NULL,
+  `IDEmisor` int NOT NULL,
+  `EmisorTipo` enum('Actividad','Chat') NOT NULL,
+  `FechaHora` datetime NOT NULL,
+  `Contenido` varchar(300) NOT NULL,
+  `Emisor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `cEmisor` FOREIGN KEY (`IDEmisor`,`EmisorTipo`) REFERENCES `notificador` (`SujetoID`, `Tipo`)
+  KEY `cEmisor` (`IDEmisor`,`EmisorTipo`),
+  CONSTRAINT `cEmisor` FOREIGN KEY (`IDEmisor`, `EmisorTipo`) REFERENCES `notificador` (`SujetoID`, `Tipo`)
 );
-
 
 CREATE TABLE `notificador` (
   `SujetoID` int NOT NULL,
-  `Tipo` Enum("Actividad","Chat") NOT NULL,
-  PRIMARY KEY (`SujetoID`, `Tipo`)
+  `Tipo` enum('Actividad','Chat') NOT NULL,
+  `Nombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`SujetoID`,`Tipo`)
 );
 
 CREATE TABLE `usuario_x_chat` (
@@ -241,12 +243,15 @@ CREATE TABLE `usuario_x_chat` (
   CONSTRAINT `IDChat` FOREIGN KEY (`IDChat`) REFERENCES `chat` (`ID`)
 );
 
+drop table if exists usuario_x_notificacion;
 CREATE TABLE `usuario_x_notificacion` (
-  `IDUsuario`  VARCHAR(45) NOT NULL,
+  `IDUsuario` varchar(45) NOT NULL,
   `IDNotificacion` int NOT NULL,
+  `Estado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`IDUsuario`,`IDNotificacion`),
-  CONSTRAINT `nIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`),
-  CONSTRAINT `IDNotificacion` FOREIGN KEY (`IDNotificacion`) REFERENCES `notificacion` (`ID`)
+  KEY `IDNotificacion` (`IDNotificacion`),
+  CONSTRAINT `IDNotificacion` FOREIGN KEY (`IDNotificacion`) REFERENCES `notificacion` (`ID`),
+  CONSTRAINT `nIDUsuario` FOREIGN KEY (`IDUsuario`) REFERENCES `usuario` (`ID`)
 );
 
 CREATE TABLE `usuario_x_notificador` (

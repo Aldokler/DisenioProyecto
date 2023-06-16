@@ -20,6 +20,9 @@ import { Usuario } from '../model/usuario';
 import { ComunicadorExcelService } from './DAO/comunicador-excel.service';
 import { NotificadorCorreo } from './NotificadorCorreo';
 import { Subject } from './Subject';
+import { AdmBuzon } from './AdmBuzon';
+import { Notificacion } from '../model/notificacion';
+import { SistemaNotificador } from "./SistemaNotificador";
 
 
 @Injectable({
@@ -41,6 +44,8 @@ export class ControladorService {
   private excelService = new ComunicadorExcelService()
   private notificador = new NotificadorCorreo(this.DAO)
   public subject = new Subject(this.DAO)
+  private AdmBuzon = new AdmBuzon(this.DAO)
+  private SistemaNotificador = new SistemaNotificador(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -234,6 +239,30 @@ export class ControladorService {
     return this.adminEquipoGuia.revisarCoordinadorEquipo(profesorId,equipoId)
   }
 
+  public getLastActividad(año: Number, semestre: Number): Observable<Number> {
+    return this.adminActividad.getLastActividad()
+}
 
+public getNotificaciones(id: string, filtro: number): Observable<Notificacion[]>{
+  return this.AdmBuzon.getNotificaciones(id, filtro);
+}
+
+public vaciarBuzon(id: string): Observable<Notificacion[]>{
+  return this.AdmBuzon.vaciarBuzon(id);
+}
+
+public deleteNotificacionBuzon(id: string, notificacion: number): Observable<boolean>{
+  return this.AdmBuzon.deleteNotificacionBuzon(id, notificacion)
+}
+
+public setEstadoNotificacion(id: string, notificacion: number): Observable<boolean>{
+  console.log("controlador")
+  return this.AdmBuzon.setEstadoNotificacion(id, notificacion)
+}
+
+
+public crearNotificacion(notificadorID :number, TipoEmisor: string, FechaHora :string, Contenido :string): Observable<number>{
+  return this.SistemaNotificador.crearNotificacion(notificadorID , TipoEmisor , FechaHora , Contenido)
+}
 
 }

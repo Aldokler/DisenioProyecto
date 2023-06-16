@@ -1,22 +1,18 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { PlanDeTrabajo } from 'src/app/model/plandetrabajo';
-import { Usuario } from 'src/app/model/usuario';
 import { Administrativo } from 'src/app/model/administrativo';
 import { Profesor } from 'src/app/model/profesor';
 import { tap } from 'rxjs';
 import { ControladorService } from 'src/app/controller/controlador.service';
 import { Actividad } from 'src/app/model/actividad';
-import { EquipoGuia } from 'src/app/model/equipoguia';
-import { TRol } from 'src/app/model/trol';
-import { TSede } from 'src/app/model/tsede';
 import { PasarDatosService } from 'src/app/pasar-datos.service';
 import { TModalidad } from 'src/app/model/tmodalidad';
 import { TEstado } from 'src/app/model/testado';
 import { TIndoleActividad } from 'src/app/model/tindoleactividad';
 import { Evidencia } from 'src/app/model/evidencia';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-plan-de-trabajo',
@@ -35,7 +31,7 @@ export class VerPlanDeTrabajoComponent {
   public saber: boolean = false
 
 
-  constructor(private controller: ControladorService, private route: ActivatedRoute) {
+  constructor(private controller: ControladorService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -75,15 +71,59 @@ export class VerPlanDeTrabajoComponent {
         console.log(this.actividadProxima)
       })
     ).subscribe()
-    if(this.saber){
+    if (this.saber) {
       this.saber = false
-    }else(
+    } else (
       this.saber = true
     )
-    
   }
 
   guardarActividad(actividad: Actividad) {
     this.pasarDatos.actividadPlanDeTrabajo = actividad;
   }
+
+  suscribirPersonas(actividad: Actividad) {
+    if (!actividad) {
+      this.showErrorAlert();
+      return;
+    }
+    console.log(actividad)
+    this.controller.subject.suscribirse(actividad.getId(), this.pasarDatos.loginUser.getId(), "Actividad").subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
+  }
+
+  desuscribirPersonas(actividad: Actividad) {
+    if (!actividad) {
+      this.showErrorAlert();
+      return;
+    }
+    console.log(actividad)
+    this.controller.subject.desuscribirse(actividad.getId(), this.pasarDatos.loginUser.getId(), "Actividad").subscribe(
+      () => {
+        this.showSuccessAlert();
+      }
+    )
+  }
+
+  showSuccessAlert() {
+    swal.fire({
+      icon: 'success',
+      title: 'Registrado con éxito',
+      timer: 2000
+    });
+    this.router.navigate(['/ver-plan-de-trabajo']);
+  }
+
+  showErrorAlert() {
+    swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Ocurrió un error. Por favor, inténtalo nuevamente.',
+      timer: 3000
+    });
+  }
+
 }
