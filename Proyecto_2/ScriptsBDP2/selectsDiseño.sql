@@ -358,12 +358,11 @@ BEGIN
 END$$
 DELIMITER ;
 
-drop procedure if exists getContactos;
+drop procedure if exists getMiembros;
 DELIMITER $$
-CREATE PROCEDURE getContactos(vchat int, vsede varchar(45))
+CREATE PROCEDURE getMiembros(vchat int)
 BEGIN
-	SELECT * FROM usuario join usuario_x_chat on IDChat = vchat
-    where Sede =  vsede;
+	SELECT * FROM usuario join usuario_x_chat on IDChat = vchat;
 END$$
 DELIMITER ;
 
@@ -376,5 +375,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+drop procedure if exists getContactos;
+DELIMITER $$
+CREATE PROCEDURE getContactos(vsede varchar(45), tipo boolean)
+BEGIN
+	if tipo = 1 then
+		SELECT * FROM usuario join estudiante on ID where Sede =  vsede;
+	else
+		SELECT * FROM usuario join profesor on ID where Sede =  vsede;
+	end if;
+END$$
+DELIMITER ;
 
-call getContactos(1, );
+
+
+
+call getContactos("SJ");

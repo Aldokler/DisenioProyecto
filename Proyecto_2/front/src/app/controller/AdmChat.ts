@@ -3,6 +3,9 @@ import { Notificacion } from "../model/notificacion";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { Chat } from "../model/chat";
 import { Mensaje } from "../model/mensaje";
+import { Usuario } from "../model/usuario";
+import { Profesor } from "../model/profesor";
+import { Estudiante } from "../model/estudiante";
 
 export class AdmChat{
 
@@ -54,6 +57,50 @@ export class AdmChat{
                         json.fechaHora,
                         json.contenido,
                         json.chatID
+                    )
+                });
+            })
+        );
+    }
+
+    public getContactosEstudiantes(sede: string): Observable<Estudiante[]>{
+        return this.DAO.getContactosestudiantes(sede).pipe(
+            map((data: any) => { 
+                const profesoresJson = data.profesores;
+                return profesoresJson.map((profesorJson: any) => {
+                    return new Estudiante(
+                        profesorJson.id,
+                        profesorJson.nombre,
+                        profesorJson.apellido1,
+                        profesorJson.apellido2,
+                        profesorJson.correoElectronico,
+                        profesorJson.celular,
+                        profesorJson.sede,
+                        profesorJson.contraseña,
+                        ""
+                    )
+                });
+            })
+        );
+    }
+
+    public getContactosP(sede: string): Observable<Profesor[]>{
+        return this.DAO.getContactosprofesores(sede).pipe(
+            map((data: any) => { 
+                const profesoresJson = data.profesores;
+                return profesoresJson.map((profesorJson: any) => {
+                    return new Profesor(
+                        profesorJson.id,
+                        profesorJson.nombre,
+                        profesorJson.apellido1,
+                        profesorJson.apellido2,
+                        profesorJson.correoElectronico,
+                        profesorJson.celular,
+                        profesorJson.sede,
+                        profesorJson.contraseña,
+                        profesorJson.telefonoOficina,
+                        profesorJson.fotografia,
+                        profesorJson.rol
                     )
                 });
             })

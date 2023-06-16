@@ -289,4 +289,11 @@ public getMensajesChat(id: number): Observable<Mensaje[]>{
   return this.AdmChat.getMensajesChat(id)
 }
 
+public getContactosP(sede: string): Observable<Profesor[]>{
+  return this.AdmChat.getContactosP(sede)
+}
+
+public getContactosE(sede: string): Observable<Estudiante[]>{
+  return this.AdmChat.getContactosEstudiantes(sede)
+}
 }

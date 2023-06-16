@@ -17,6 +17,7 @@ const conexion = require('./config/conexion');
 const bodyParser = require('body-parser');
 const { response } = require('express');
 const moment = require('moment-timezone');
+const { Usuario } = require('../model/usuario');
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes utilizar otro proveedor de correo
@@ -1222,6 +1223,45 @@ router.put('/buzone/:id', (request, response)=>{
         }
         else{
             response.json({status: 'Estado modificado' })
+        }
+    })
+});
+
+
+
+
+//getContactos -----------------------------------------------------
+//get profesores ---------------------------------------------------------
+router.get('/getContactosprofesores/:sede', (request, response)=>{
+    const {sede} = request.params;
+    let sql = "call getContactos(?,0)";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const profesores = rows[0].map(row => 
+                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
+                response.json({profesores})
+        }
+    })
+});
+
+//getContactos -----------------------------------------------------
+//get profesores ---------------------------------------------------------
+router.get('/getContactosestudiantes/:sede', (request, response)=>{
+    const {sede} = request.params;
+    let sql = "call getContactos(?,1)";
+    conexion.query(sql, (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiantes = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, ""));
+                response.json({estudiantes})
         }
     })
 });

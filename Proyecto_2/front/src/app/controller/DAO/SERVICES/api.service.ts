@@ -270,5 +270,13 @@ export class ApiService {
     return this.http.get(this.url+ 'mensajeChat/' + id)
   }
 
+  public getContactosestudiantes(sede: string){
+    return this.http.get(this.url+ 'getContactosestudiantes/' + sede)
+  }
+
+  public getContactosprofesores(sede: string){
+    return this.http.get(this.url+ 'getgetContactosprofesoresContactos/' + sede)
+  }
+
 
 }

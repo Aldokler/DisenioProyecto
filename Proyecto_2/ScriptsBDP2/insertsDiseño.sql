@@ -306,6 +306,8 @@ BEGIN
 	INSERT INTO chat (ID, Host) VALUES(default, pIDUsuario);
     SELECT ID into vID FROM chat order by ID desc limit 1;
     call addUserChat(vID, pIDUsuario);
+    
+    SELECT ID FROM chat order by ID desc limit 1;
 END; //
 
 DELIMITER //
