@@ -985,6 +985,20 @@ router.post('/suscribir', (request, response)=>{
     })
 });
 
+router.post('/unirsechat', (request, response)=>{
+    const {chat, user} = request.body;
+    let sql = 'call addUserChat(?,?)';
+    conexion.query(sql, [chat, user], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            response.json({status: '0' })
+        }
+    })
+});
+
 router.delete('/cancelarSubscripcion', (request, response)=>{
     console.log()
     const {UserId, NotificadorID, Tipo} = request.query;

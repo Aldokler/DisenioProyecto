@@ -36,6 +36,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+drop procedure if exists getActividadByID;
+DELIMITER $$
+CREATE PROCEDURE getActividadByID(pID int)
+BEGIN
+	select * from actividad where ID = pID;
+END$$
+DELIMITER ;
+
 DELIMITER //
 DROP PROCEDURE IF EXISTS getActividadesByPlanyEstado; //
 CREATE PROCEDURE getActividadesByPlanyEstado(IN pPlan varchar(50), IN pEstado varchar(45))

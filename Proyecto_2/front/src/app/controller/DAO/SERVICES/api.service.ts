@@ -249,4 +249,10 @@ export class ApiService {
     console.log("api")
     return this.http.put(this.url + 'buzone/' + id , {noti})
   }
+
+  public unirseAChat(chat: number, user: string){
+    return this.http.post(this.url+ 'unirsechat', {chat, user})
+  }
+
+  
 }

@@ -23,6 +23,7 @@ import { Subject } from './Subject';
 import { AdmBuzon } from './AdmBuzon';
 import { Notificacion } from '../model/notificacion';
 import { SistemaNotificador } from "./SistemaNotificador";
+import { AdmChat } from './AdmChat';
 
 
 @Injectable({
@@ -45,6 +46,7 @@ export class ControladorService {
   private notificador = new NotificadorCorreo(this.DAO)
   public subject = new Subject(this.DAO)
   private AdmBuzon = new AdmBuzon(this.DAO)
+  private AdmChat = new AdmChat(this.DAO)
   private SistemaNotificador = new SistemaNotificador(this.DAO)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,4 +267,7 @@ public crearNotificacion(notificadorID :number, TipoEmisor: string, FechaHora :s
   return this.SistemaNotificador.crearNotificacion(notificadorID , TipoEmisor , FechaHora , Contenido)
 }
 
+public unirseAChat(chat: number, user: string): Observable<boolean>{
+  return this.AdmChat.unirseAChat(chat , user)
+}
 }
