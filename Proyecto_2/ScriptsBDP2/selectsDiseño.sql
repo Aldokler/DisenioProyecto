@@ -380,9 +380,23 @@ DELIMITER $$
 CREATE PROCEDURE getContactos(vsede varchar(45), tipo boolean)
 BEGIN
 	if tipo = 1 then
-		SELECT * FROM usuario join estudiante on ID where Sede =  vsede;
+		SELECT * FROM usuario join estudiante on estudiante.ID = usuario.ID where Sede =  vsede;
 	else
-		SELECT * FROM usuario join profesor on ID where Sede =  vsede;
+		SELECT * FROM usuario join profesor on profesor.ID = usuario.ID where Sede =  vsede;
+	end if;
+END$$
+DELIMITER ;
+
+drop procedure if exists getContactosNoEnChat;
+DELIMITER $$
+CREATE PROCEDURE getContactosNoEnChat(vsede varchar(45), tipo boolean, vchat int)
+BEGIN
+	if tipo = 1 then
+		SELECT * FROM usuario WHERE EXISTS ( SELECT 1 FROM estudiante WHERE estudiante.ID = usuario.ID) 
+        AND NOT EXISTS ( SELECT 1 FROM usuario_x_chat WHERE usuario_x_chat.IDUsuario = usuario.ID AND usuario_x_chat.IDChat = 3);
+	else
+		SELECT * FROM usuario WHERE EXISTS ( SELECT 1 FROM profesor WHERE profesor.ID = usuario.ID) 
+        AND NOT EXISTS ( SELECT 1 FROM usuario_x_chat WHERE usuario_x_chat.IDUsuario = usuario.ID AND usuario_x_chat.IDChat = 3);
 	end if;
 END$$
 DELIMITER ;

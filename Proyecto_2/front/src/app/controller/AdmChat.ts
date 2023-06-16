@@ -66,7 +66,7 @@ export class AdmChat{
     public getContactosEstudiantes(sede: string): Observable<Estudiante[]>{
         return this.DAO.getContactosestudiantes(sede).pipe(
             map((data: any) => { 
-                const profesoresJson = data.profesores;
+                const profesoresJson = data.estudiantes;
                 return profesoresJson.map((profesorJson: any) => {
                     return new Estudiante(
                         profesorJson.id,
