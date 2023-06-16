@@ -26,7 +26,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   }
 
   ngOnInit() {
-
+console.log(this.pasarDatos.actividadPlanDeTrabajo)
     if (this.pasarDatos.loginUser instanceof Profesor) {
       if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))
@@ -56,6 +56,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.respuestaComentarios = res1
       })
     ).subscribe()
+    this.ngOnInit()
   }
 
   guardarComentario(comentarioGuardar: string) {
@@ -69,6 +70,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
 
@@ -85,6 +87,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
   agregarObservacion(observacion: string) {
@@ -97,6 +100,7 @@ export class VerActividadesPlanDeTrabajoComponent {
         this.showSuccessAlert();
       }
     )
+    this.ngOnInit()
   }
 
   guardarDeNuevoActividad() {
@@ -105,6 +109,7 @@ export class VerActividadesPlanDeTrabajoComponent {
   cancelarActividad() {
     this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
     this.showSuccessAlert();
+    this.ngOnInit()
   }
 
   showSuccessAlert() {

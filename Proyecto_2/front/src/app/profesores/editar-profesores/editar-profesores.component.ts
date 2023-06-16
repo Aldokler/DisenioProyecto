@@ -46,6 +46,7 @@ export class EditarProfesoresComponent {
         this.showSuccessAlert() ;
       }
     )
+    this.ngOnInit()
   }
 
   showSuccessAlert() {
@@ -54,7 +55,7 @@ export class EditarProfesoresComponent {
       title: 'Registrado con éxito',
       timer: 2000
     });
-    this.router.navigate(['/home-profesores']);
+    this.router.navigate(['/editar-profesores']);
   }
 
   showErrorAlert() {

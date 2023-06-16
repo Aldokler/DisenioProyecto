@@ -9,6 +9,10 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Actividad } from '../model/actividad';
+import { TIndoleActividad } from '../model/tindoleactividad';
+import { TModalidad } from '../model/tmodalidad';
+import { TEstado } from '../model/testado';
+import { Evidencia } from '../model/evidencia';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +27,10 @@ export class HomeComponent {
   public notificaciones: Notificacion[] = []
   public notificacionesleidas: Notificacion[] = []
   public notificacionesNoLeidas: Notificacion[] = []
-  public comentActividad : any
+  public evidencia: Evidencia = new Evidencia(0, [], "");
+  public comentActividad: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
+    "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
+    this.evidencia, [], '', "", '');;
 
   constructor(private controller: ControladorService, private router: Router) { }
   ngOnInit(): void {
@@ -109,7 +116,7 @@ export class HomeComponent {
 
   cambiarEstadoNotificacionOjito(notificacion: Notificacion) {
     console.log("entra aqui ")
-    this.controller.setEstadoNotificacion(this.pasarDatos.loginUser.getId(),notificacion.getId()).subscribe()
+    this.controller.setEstadoNotificacion(this.pasarDatos.loginUser.getId(), notificacion.getId()).subscribe()
     console.log(notificacion.getEstado())
     this.ngOnInit()
   }
@@ -117,16 +124,26 @@ export class HomeComponent {
   guardarDatoActividadNotificacion(notificacion: Notificacion) {
 
     this.pasarDatos.guardarActividadNotificacion = notificacion.getId()
-    this.comentActividad = this.controller.getActividad(this.pasarDatos.guardarActividadNotificacion);
+    console.log("pasar datos")
+    console.log(this.pasarDatos.guardarActividadNotificacion)
 
-    this.pasarDatos.actividadPlanDeTrabajo = new Actividad(this.comentActividad.getId(),
-    this.comentActividad.getSemana(),this.comentActividad.getTipo(),this.comentActividad.getNombre(),
-    this.comentActividad.getFechaHora(),this.comentActividad.getResponsables(),
-    this.comentActividad.getDiasAnunciar(),this.comentActividad.getDiasRecordatorio(),
-    this.comentActividad.getModalidad(),this.comentActividad.getLink(),this.comentActividad.getAfiche(),
-    this.comentActividad.getEstado(),this.comentActividad.getEvidencia(),
-    this.comentActividad.getComentarios(),this.comentActividad.getFechaCancelacion(),
-    this.comentActividad.getObservacion(),this.comentActividad.getFechaAPublicar())
+    this.controller.getActividad(this.pasarDatos.guardarActividadNotificacion).subscribe(
+      (actividad: Actividad) => {
+        // Asignar el valor de la actividad al comentActividad dentro de la función de suscripción
+        this.comentActividad = actividad;
+        console.log("ComentActividad")
+        console.log(this.comentActividad)
+        this.pasarDatos.actividadPlanDeTrabajo = this.comentActividad
+      },
+      (error: any) => {
+        // Manejo de errores en caso de que ocurra alguno
+        console.error('Error al obtener la actividad:', error);
+      }
+    );
+
+
+
+
   }
 
 }
