@@ -340,7 +340,7 @@ END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getChatByUser; //
-CREATE PROCEDURE getChatByUser(IN pIDUser INT)
+CREATE PROCEDURE getChatByUser(IN pIDUser varchar(45))
 BEGIN
 	SELECT c.* 
     FROM usuario_x_chat uxc

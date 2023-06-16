@@ -24,6 +24,7 @@ import { AdmBuzon } from './AdmBuzon';
 import { Notificacion } from '../model/notificacion';
 import { SistemaNotificador } from "./SistemaNotificador";
 import { AdmChat } from './AdmChat';
+import { Chat } from '../model/chat';
 
 
 @Injectable({
@@ -277,5 +278,9 @@ public crearChat(user: string): Observable<boolean>{
 
 public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID: number): Observable<boolean>{
   return this.AdmChat.crearMensaje(Emisor, FechaHora, Contenido, ChatID)
+}
+
+public getChatsOfUser(id: string): Observable<Chat[]>{
+  return this.AdmChat.getChatsOfUser(id)
 }
 }

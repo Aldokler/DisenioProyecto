@@ -262,5 +262,9 @@ export class ApiService {
     return this.http.post(this.url+ 'mensaje', {Emisor, FechaHora, Contenido, ChatID})
   }
 
+  public getChatsOfUser(id: string){
+    return this.http.get(this.url+ 'chatUser/' + id)
+  }
+
 
 }

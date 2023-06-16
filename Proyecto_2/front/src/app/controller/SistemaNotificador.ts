@@ -1,6 +1,7 @@
 import { Observable, map } from "rxjs";
 import { ApiService } from "./DAO/SERVICES/api.service";
 import { Observer } from "./Observer";
+import { Chat } from "../model/chat";
 
 
 export class SistemaNotificador implements Observer{
@@ -22,5 +23,7 @@ export class SistemaNotificador implements Observer{
             })
         )
     }
+
+    
     
 }
