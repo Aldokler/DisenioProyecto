@@ -275,7 +275,7 @@ export class ApiService {
   }
 
   public getContactosprofesores(sede: string){
-    return this.http.get(this.url+ 'getgetContactosprofesoresContactos/' + sede)
+    return this.http.get(this.url+ 'getContactosprofesores/' + sede)
   }
 
 
