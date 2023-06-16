@@ -107,13 +107,11 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
     this.pasarDatos.actividadPlanDeTrabajo = this.pasarDatos.actividadPlanDeTrabajo
   }
   cancelarActividad() {
-    //this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
-    
-    
-    //this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getId() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora());
+    this.controller.cancelarActividad(this.pasarDatos.actividadPlanDeTrabajo.getId());
  
 
-  this.controller.crearNotificacion(70, "Actividad","2023-06-15 19:00:00", "cancelado" ).pipe(
+    this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+    .pipe(
     tap(res => {
       if (res) {
         console.log("hola")
