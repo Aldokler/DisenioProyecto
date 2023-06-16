@@ -802,10 +802,10 @@ module.exports= router;
 // gestion notificaciones
 // crear notificacion-----------------------------------------------------------
 router.post('/notificacion', (request, response)=>{
-    console.log("dd")
-    const {IDEmisor, TipoEmisor, FechaHora, Contenido} = request.query;    
+    console.log("dd") 
+    const {pIDEmisor, pEmisorTipo, pFechaHora, pContenido} = request.body;    
     let sql = 'call addNotificacion(?,?,?,?)';
-    conexion.query(sql, [IDEmisor, TipoEmisor, FechaHora, Contenido], (error, rows, fields)=>{
+    conexion.query(sql, [pIDEmisor, pEmisorTipo, pFechaHora, pContenido], (error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

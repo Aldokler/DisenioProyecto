@@ -229,10 +229,10 @@ export class ApiService {
     return this.http.post(this.url + 'notificador', {ID, Tipo});
   }
 
-  public crearNotificacion(IDEmisor :number, TipoEmisor: string, FechaHora :string, Contenido :string){
-    console.log("api")
-    console.log(IDEmisor)
-    return this.http.post(this.url + 'notificacion', {IDEmisor, TipoEmisor, FechaHora, Contenido});
+  public crearNotificacion(pIDEmisor :number, pEmisorTipo: string, pFechaHora :string, pContenido :string){
+    console.log("apidd")
+    console.log(pIDEmisor, pEmisorTipo)
+    return this.http.post(this.url + 'notificacion', {pIDEmisor, pEmisorTipo, pFechaHora, pContenido} );
   }
 
   public getBuzon(ID: string, filtro: number){

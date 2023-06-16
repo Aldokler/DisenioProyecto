@@ -111,7 +111,19 @@ console.log(this.pasarDatos.actividadPlanDeTrabajo)
     
     
     //this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId() , "Actividad" , this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0] , "se ha cancelado la actividad" + this.pasarDatos.actividadPlanDeTrabajo.getId() + "del día"+  this.pasarDatos.actividadPlanDeTrabajo.getFechaHora());
-  this.controller.crearNotificacion(70, "Actividad","2023-06-15 19:00:00", "cancelado" )
+ 
+
+  this.controller.crearNotificacion(70, "Actividad","2023-06-15 19:00:00", "cancelado" ).pipe(
+    tap(res => {
+      if (res) {
+        console.log("hola")
+      }
+    })
+  ).subscribe(
+    () => {
+      this.showSuccessAlert() ;
+    }
+  )
        //this.showSuccessAlert();
        //this.ngOnInit()
 
