@@ -32,6 +32,7 @@ export class HomeComponent {
     "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
     this.evidencia, [], '', "", '');
   public fecha = new Date();
+  public boolean = false
 
   constructor(private controller: ControladorService, private router: Router) { }
   ngOnInit(): void {
@@ -115,8 +116,10 @@ export class HomeComponent {
 
   }
 
-  aceptarInvitacion() {
-    //this.controller.unirseAChat(,this.pasarDatos.loginUser.getId()).subscribe()
+  aceptarInvitacion(notificacion:Notificacion) {
+    this.controller.unirseAChat(notificacion.getIdEmisor(),this.pasarDatos.loginUser.getId()).subscribe()
+    this.boolean = true
+    this.ngOnInit()
   }
 
   denegarInvitacion() {

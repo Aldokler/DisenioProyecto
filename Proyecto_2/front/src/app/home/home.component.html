@@ -45,7 +45,7 @@
           <button class="btn btn-link position-relative" [routerLink]="['/mensajes']">
             <i class="bi bi-envelope display-4" style="color: black; font-size: 40px;"></i>
 
-            
+
 
           </button>
         </div>
@@ -87,7 +87,8 @@
                   style="max-width: 400px;">
                   <div *ngFor="let notificacion of notificaciones">
                     <div *ngIf="notificacion.getEmisorTipo() == 'Actividad' ">
-                      <div [ngStyle]="notificacion.getEstado() === 1 ? { 'background-color': '#FFFFFF' } : { 'background-color': '#E2EFF8' }"> 
+                      <div
+                        [ngStyle]="notificacion.getEstado() === 1 ? { 'background-color': '#FFFFFF' } : { 'background-color': '#E2EFF8' }">
                         <div class="dropdown-item d-flex align-items-center overflow-auto text-wrap">
                           <div style="width: 300px;">
                             <div>
@@ -97,16 +98,18 @@
                                 {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                               </p>
                             </div>
-                            <button (click)="cambiarEstadoNotificacion(notificacion);guardarDatoActividadNotificacion(notificacion)" 
-                            [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
+                            <button
+                              (click)="cambiarEstadoNotificacion(notificacion);guardarDatoActividadNotificacion(notificacion)"
+                              [routerLink]="['/ver-actividades-plan-de-trabajo']" class="btn text-white text-center "
                               style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;"
                               type="button">
                               Ver más detalles
                             </button>
-                            <button class="btn btn-link text-danger ms-auto" type="button" (click)="borrarNotificacion(notificacion)">
+                            <button class="btn btn-link text-danger ms-auto" type="button"
+                              (click)="borrarNotificacion(notificacion)">
                               <i class="bi bi-trash"></i>
                             </button>
-                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacion)" >
+                            <button type="button" (click)="cambiarEstadoNotificacionOjito(notificacion)">
                               <i [ngClass]="notificacion.getEstado() === 1 ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
                             </button>
 
@@ -126,14 +129,18 @@
                               {{notificacion.getFechaHora().toString().replace('T', ' ').substring(0,19)}}
                             </p>
                           </div>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Aceptar Invitación
-                          </button>
-                          <button class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
-                            Declinar Invitación
-                          </button>
+                          <div *ngIf="!boolean">
+                            <button (click)="aceptarInvitacion(notificacion)" type="button"
+                              class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Aceptar Invitación
+                            </button>
+                            <button class="btn text-white text-center "
+                              style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
+                              Declinar Invitación
+                            </button>
+                          </div>
+
                           <button class="btn btn-link text-danger ms-auto" type="button">
                             <i class="bi bi-trash"></i>
                           </button>
@@ -186,11 +193,11 @@
                             </p>
                           </div>
                           <button type="button" class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;" (click)="aceptarInvitacion()">
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
                             Aceptar Invitación
                           </button>
                           <button type="button" class="btn text-white text-center "
-                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;" (click)="denegarInvitacion()">
+                            style="background-color: #13293D; width: 120px; height: 30px; font-size: 0.75rem;">
                             Declinar Invitación
                           </button>
                           <button class="btn btn-link text-danger ms-auto" type="button">

@@ -71,7 +71,7 @@ export class MensajesComponent {
 
     this.controller.getContactosE(this.pasarDatos.loginUser.getSede()).pipe(
       tap(res => {
-        console.log("res2")
+        console.log("res")
         console.log(res)
         this.contactosEstudiante = res;
       })
@@ -84,7 +84,12 @@ export class MensajesComponent {
   }
 
   crearGrupo(contacto: Usuario) {
-    this.contactosSeleccionados.push(contacto);
+    if (this.contactosSeleccionados.includes(contacto)) {
+      this.contactosSeleccionados = this.contactosSeleccionados.filter(p => p !== contacto);
+    } else {
+      this.contactosSeleccionados.push(contacto);
+    }
+
   }
 
   crearGrupoLista() {
@@ -104,8 +109,6 @@ export class MensajesComponent {
               tap(res2 => {
                 console.log("ssss", res2)
                 this.controller.subject.notificar(res, "Chat", res2)
-
-
               })
             ).subscribe()
           for (const contacto of this.contactosSeleccionados) {
@@ -114,8 +117,6 @@ export class MensajesComponent {
 
         })
       ).subscribe()
-
-
     }
   }
 
