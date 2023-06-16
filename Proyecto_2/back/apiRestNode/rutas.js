@@ -1154,9 +1154,9 @@ router.get('/chatUser/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            const chat = rows[0].map(row => 
+            const chats = rows[0].map(row => 
                 new Chat(row.ID, row.Host));
-                response.json({chat})
+                response.json({chats})
         }
     })
 });

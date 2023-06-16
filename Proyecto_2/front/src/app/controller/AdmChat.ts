@@ -32,7 +32,7 @@ export class AdmChat{
     public getChatsOfUser(id: string): Observable<Chat[]> {
         return this.DAO.getChatsOfUser(id).pipe(
             map((data: any) => {
-                const json = data.chat;
+                const json = data.chats;
                 return json.map((json: any) => {
                     return new Chat(
                         json.id,
