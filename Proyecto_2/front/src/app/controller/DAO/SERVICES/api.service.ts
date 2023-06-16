@@ -239,4 +239,7 @@ export class ApiService {
     return this.http.delete(this.url + 'buzon/' + id + '/' + notificacion)
   }
 
+  public setEstadoNotificacion(id: String, notificacion: number){
+    return this.http.post(this.url + 'buzon/', {id, notificacion})
+  }
 }

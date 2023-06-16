@@ -253,5 +253,9 @@ public deleteNotificacionBuzon(id: string, notificacion: number): Observable<boo
   return this.AdmBuzon.deleteNotificacionBuzon(id, notificacion)
 }
 
+public setEstadoNotificacion(id: string, notificacion: number): Observable<boolean>{
+  return this.AdmBuzon.setEstadoNotificacion(id, notificacion)
+}
+
 
 }
