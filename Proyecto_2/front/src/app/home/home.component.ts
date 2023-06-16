@@ -28,7 +28,7 @@ export class HomeComponent {
   public notificacionesleidas: Notificacion[] = []
   public notificacionesNoLeidas: Notificacion[] = []
   public evidencia: Evidencia = new Evidencia(0, [], "");
-  public comentActividad: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
+  public actividadNotificacion: Actividad = new Actividad(0, 0, TIndoleActividad.MOTIVACIONAL,
     "", '', [], 0, [], TModalidad.PRESENCIAL, "", "", TEstado.CANCELADA,
     this.evidencia, [], '', "", '');;
 
@@ -122,26 +122,15 @@ export class HomeComponent {
   }
 
   guardarDatoActividadNotificacion(notificacion: Notificacion) {
-
-    this.pasarDatos.guardarActividadNotificacion = notificacion.getId()
     console.log("pasar datos")
-    console.log(this.pasarDatos.guardarActividadNotificacion)
+    console.log(notificacion.getIdEmisor())
 
-    this.controller.getActividad(this.pasarDatos.guardarActividadNotificacion).subscribe(
-      (actividad: Actividad) => {
-        // Asignar el valor de la actividad al comentActividad dentro de la función de suscripción
-        this.comentActividad = actividad;
-        console.log("ComentActividad")
-        console.log(this.comentActividad)
-        this.pasarDatos.actividadPlanDeTrabajo = this.comentActividad
-      },
-      (error: any) => {
-        // Manejo de errores en caso de que ocurra alguno
-        console.error('Error al obtener la actividad:', error);
-      }
-    );
-
-
+    this.controller.getActividad(notificacion.getIdEmisor()).pipe(
+      tap(res1 => {
+        this.pasarDatos.actividadPlanDeTrabajo = res1;
+        console.log(res1)
+      })
+    ).subscribe()
 
 
   }
