@@ -362,5 +362,16 @@ BEGIN
     COMMIT;
 END; //
 
+
+drop procedure if exists setEstadoNotificacion;
+DELIMITER $$
+CREATE PROCEDURE setEstadoNotificacion(IN buzon varchar(45),IN notificacion int)
+BEGIN
+	UPDATE usuario_x_notificacion SET Estado = not Estado WHERE IDUsuario = buzon AND IDNotificacion = notificacion;
+    COMMIT;
+END$$
+
+
+
 COMMIT;
 
