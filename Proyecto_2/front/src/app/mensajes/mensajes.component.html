@@ -92,10 +92,10 @@
                             <ul class="list-group">
                                 <div>
 
-                                    <li *ngFor="let chatActivo of chatsActivos"
+                                    <li *ngFor="let chatActivo of chatsActivos; let i = index"
                                         class="list-group-item text-align-items-center">
                 
-                                            <h3 *ngFor="let num of numeros"> Chat {{ num }} </h3>
+                                            <h3> Chat {{ i+1 }} </h3>
                                      
                                         
                                         <button (click)=" verChat(chatActivo.getId(),chatActivo)"
