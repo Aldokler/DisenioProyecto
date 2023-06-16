@@ -239,8 +239,8 @@ export class ApiService {
     return this.http.delete(this.url + 'buzon/' + id + '/' + notificacion)
   }
 
-  public setEstadoNotificacion(id: String, notificacion: number){
+  public setEstadoNotificacion(id: String, noti: number){
     console.log("api")
-    return this.http.put(this.url + 'buzon', {id, notificacion})
+    return this.http.put(this.url + 'buzone/' + id , {noti})
   }
 }
