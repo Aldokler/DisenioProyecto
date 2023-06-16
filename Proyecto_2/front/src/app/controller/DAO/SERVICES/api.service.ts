@@ -55,7 +55,7 @@ export class ApiService {
   }
 
   public getActividad(id: number){
-    return this.http.get(this.url + 'plan_trabajo/actividad/' + id)
+    return this.http.get(this.url + 'plan_trabajoo/actividadID/' + id)
   }
 
   public getNextActividad(id: number, fecha: string){

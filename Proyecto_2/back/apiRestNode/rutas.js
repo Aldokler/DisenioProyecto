@@ -363,8 +363,8 @@ router.get('/plan_trabajo_next/:pplan/:pfecha', (request, response)=>{
 });
 
 
-// get actividad by ID ---------------------------------------------***
-router.get('/plan_trabajo/actividad/:id', (request, response)=>{
+//get actividad por ID -----------------------------------------------------
+router.get('/plan_trabajoo/actividadID/:id', (request, response)=>{
     const {id} = request.params;
     let sql = "call getActividadByID(?);";
     conexion.query(sql, [id], (error, rows, fields)=>{
@@ -373,9 +373,9 @@ router.get('/plan_trabajo/actividad/:id', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
-            const actividad = rows.map(row => 
-                new Actividad(row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
-            response.json({actividad})
+            const actividad = rows[0].map(row => 
+                new Actividad(row.ID,row.Semana, row.Tipo, row.Nombre, row.FechaHora, row.Responsables, row.DiasAnunciar, row.DiasRecordatorio, row.Modalidad, row.Link, row.Afiche, row.Estado, row.Evidencia, row.Comentarios, row.FechaCancelacion, row.Observacion, row.FechaAPublicar));
+                response.json({actividad})
         }
     })
 });
