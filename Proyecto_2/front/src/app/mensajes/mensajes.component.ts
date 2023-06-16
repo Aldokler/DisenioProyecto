@@ -33,9 +33,11 @@ export class MensajesComponent {
   public contactosSeleccionados: Usuario[] = []
   public mensajes: Mensaje[] = []
   public contactosNoAnadidos: Usuario[] = []
+  public numeros: number[] = []
 
 
   ngOnInit(): void {
+    this.numeros = Array.from({ length: this.chatsActivos.length }, (_, i) => i + 1);
     if (this.pasarDatos.loginUser instanceof Profesor) {
       if (this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId())) {
         console.log(this.controller.revisarCoordinador(this.pasarDatos.loginUser.getId()))

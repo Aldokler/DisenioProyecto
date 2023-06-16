@@ -56,20 +56,6 @@
 
     <div class="container">
 
-        <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <h6>Ejemplo de notificación</h6>
-                  <p>Esta es una notificación de ejemplo.</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-
         <div class="d-flex align-items-center pb-1 mb-4 mt-4">
             <a href="" class="text-decoration-none text-reset" [routerLink]="['/home-equipo-guia']">
                 <img src="assets/imagenes/regresar.png" alt="">
@@ -89,7 +75,8 @@
                     </div>
 
                     <div class="col">
-                        <select #annioFiltrar class="form-select me-2" name="opcion2" id="opcion2" aria-placeholder="año">
+                        <select #annioFiltrar class="form-select me-2" name="opcion2" id="opcion2"
+                            aria-placeholder="año">
                             <option *ngFor="let anio of annios" value="{{anio}}">{{anio}}</option>
 
                         </select>
@@ -108,13 +95,14 @@
 
         <div class="card mt-4 mb-4">
             <div class="card-body">
-                <div class="text-center alert alert-danger fade show" [ngClass]="{'fade': !showError, 'show': showError}" role="alert"
-                    *ngIf="errorMessage">
-                {{ errorMessage }}
+                <div class="text-center alert alert-danger fade show"
+                    [ngClass]="{'fade': !showError, 'show': showError}" role="alert" *ngIf="errorMessage">
+                    {{ errorMessage }}
                 </div>
                 <!--Aqui se hace un nuevo equipo de trabajo-->
-                <div  class="row mb-3 mt-3 text-center">
-                    <div *ngFor="let profesorCoordinador of listaEquipo" class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
+                <div class="row mb-3 mt-3 text-center">
+                    <div *ngFor="let profesorCoordinador of listaEquipo"
+                        class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative">
                         <div class="fw-normal card mt-2 mb-2">
                             <div class="card-body" style="background-color: #E2EFF8;">
 
@@ -123,13 +111,14 @@
 
                                 <p class="card-text">{{ profesorCoordinador.getCorreoElectronico() }}</p>
 
-                                <p class="card-text">{{ profesorCoordinador.getNombre() + ' ' + profesorCoordinador.getApellido1() }}</p>
+                                <p class="card-text">{{ profesorCoordinador.getNombre() + ' ' +
+                                    profesorCoordinador.getApellido1() }}</p>
 
-                                <button *ngIf="tipoDeUsuario === 'Administrativo' "  class="btn text-white me-2"
-                                        [style.background-color]="profesoresSeleccionados.includes(profesorCoordinador) ? '#ADD8E6' : '#13293D'"
-                                        (click)="seleccionarCoordinador(profesorCoordinador)">
-                                        Seleccionar coordinador
-                                    </button>
+                                <button *ngIf="tipoDeUsuario === 'Administrativo' " class="btn text-white me-2"
+                                    [style.background-color]="profesoresSeleccionados.includes(profesorCoordinador) ? '#ADD8E6' : '#13293D'"
+                                    (click)="seleccionarCoordinador(profesorCoordinador)">
+                                    Seleccionar coordinador
+                                </button>
 
                             </div>
 
@@ -138,7 +127,7 @@
                     </div>
 
                     <!----------------------------------------------------->
-                    
+
                 </div>
 
             </div>

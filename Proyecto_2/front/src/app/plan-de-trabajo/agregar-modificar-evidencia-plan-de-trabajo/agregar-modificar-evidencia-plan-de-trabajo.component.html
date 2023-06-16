@@ -57,19 +57,7 @@
 
     <div class="container">
 
-        <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
-            <button class="btn btn-link dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/imagenes/campana.png" alt="Ícono de campana" style="width: 40px; height: 40px;">
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="notificationsDropdown">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <h6>Ejemplo de notificación</h6>
-                  <p>Esta es una notificación de ejemplo.</p>
-                </a>
-              </li>
-            </ul>
-          </div>
+        
 
         <div class="d-flex align-items-center pb-1 mb-4 mt-4">
             <a href="" class="text-decoration-none text-reset" [routerLink]="['/ver-actividades-plan-de-trabajo']">
@@ -85,8 +73,7 @@
                     <div class="carousel-inner">
 
                         <div *ngFor="let evidencia of evidencias" class="carousel-item active">
-                            <img class="d-block card-img mx-auto" style="height: 400px; width: 400px;"
-                                src="">
+                            <img class="d-block card-img mx-auto" style="height: 400px; width: 400px;" src="">
                             <div class="carousel-caption d-none d-md-block">
                                 <button class="btn btn-danger" onclick="eliminarFotoEvidencia()">Eliminar</button>
                             </div>
@@ -112,13 +99,14 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-outline mb-2">
-                                    <input #foto input (change)="handleFileInput($event)" type="file" id="foto" name="foto" accept=".jpg,.png" class="form-control"
-                                        style="width: 350px" />
+                                    <input #foto input (change)="handleFileInput($event)" type="file" id="foto"
+                                        name="foto" accept=".jpg,.png" class="form-control" style="width: 350px" />
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-outline">
-                                    <input #link type="text" id="link" name="link" class="form-control" placeholder="Link" style="background-color: #E2EFF8;"/>
+                                    <input #link type="text" id="link" name="link" class="form-control"
+                                        placeholder="Link" style="background-color: #E2EFF8;" />
                                 </div>
 
                             </div>
