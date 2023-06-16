@@ -1266,4 +1266,40 @@ router.get('/getContactosestudiantes/:sede', (request, response)=>{
     })
 });
 
+//getContactos -----------------------------------------------------
+//get profesores ---------------------------------------------------------
+router.get('/getContactosprofesoresno/:sede/:chat', (request, response)=>{
+    const {sede, chat} = request.params;
+    let sql = "call getContactosNoEnChat(?,?.?)";
+    conexion.query(sql, [sede,0, chat], (error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const profesores = rows[0].map(row => 
+                new Profesor(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, row.Contraseña, row.TelefonoOficina, row.Fotografia, row.Rol ));
+                response.json({profesores})
+        }
+    })
+});
+
+//getContactos NO en Chat-----------------------------------------------------
+//get profesores ---------------------------------------------------------
+router.get('/getContactosestudiantesno/:sede/:id', (request, response)=>{
+    const {sede, chat} = request.params;
+    let sql = "call getContactos(?,?)";
+    conexion.query(sql, [sede,1],(error, rows, fields)=>{
+        if(error){
+            console.log(error);
+            response.json({status: '-1' });
+        }
+        else{
+            const estudiantes = rows[0].map(row => 
+                new Estudiante(row.ID, row.Nombre, row.Apellido1, row.Apellido2, row.CorreoElectronico, row.Celular, row.Sede, ""));
+                response.json({estudiantes})
+        }
+    })
+});
+
 module.exports= router;
