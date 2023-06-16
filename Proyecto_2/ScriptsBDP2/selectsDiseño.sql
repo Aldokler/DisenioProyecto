@@ -335,8 +335,10 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS getMensajesByChat; //
 CREATE PROCEDURE getMensajesByChat(IN pIDChat INT)
 BEGIN
-	SELECT * FROM mensaje WHERE ChatID = pIDChat order by ID desc;
+	SELECT * FROM mensaje WHERE ChatID = pIDChat order by ID asc;
 END; //
+
+
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS getChatByUser; //
@@ -355,3 +357,24 @@ BEGIN
 	SELECT ID FROM actividad order by ID desc limit 1;
 END$$
 DELIMITER ;
+
+drop procedure if exists getContactos;
+DELIMITER $$
+CREATE PROCEDURE getContactos(vchat int, vsede varchar(45))
+BEGIN
+	SELECT * FROM usuario join usuario_x_chat on IDChat = vchat
+    where Sede =  vsede;
+END$$
+DELIMITER ;
+
+drop procedure if exists getContactosNoAñadidos;
+DELIMITER $$
+CREATE PROCEDURE getContactos(vchat int, vsede varchar(45))
+BEGIN
+	SELECT * FROM usuario join usuario_x_chat on IDChat = vchat
+    where Sede =  vsede;
+END$$
+DELIMITER ;
+
+
+call getContactos(1, );

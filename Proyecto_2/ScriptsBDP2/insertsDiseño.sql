@@ -301,14 +301,18 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS addChat; //
 CREATE PROCEDURE addChat(IN pIDUsuario VARCHAR(45))
 BEGIN
+	DECLARE vID int;
+
 	INSERT INTO chat (ID, Host) VALUES(default, pIDUsuario);
+    SELECT ID into vID FROM chat order by ID desc limit 1;
+    call addUserChat(vID, pIDUsuario);
 END; //
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS sendMessage; //
-CREATE PROCEDURE sendMessage(IN pEmisor VARCHAR(45), IN pFechaHora DATETIME, IN pContenido VARCHAR(300), IN ChatID INT)
+CREATE PROCEDURE sendMessage(IN pEmisor VARCHAR(45), IN pFechaHora DATETIME, IN pContenido VARCHAR(300), IN pChatID INT)
 BEGIN
-	INSERT INTO chat (ID, Emisor, FechaHora, Contenido, ChatID) VALUES(default, pEmisor, pFechaHora, pContenido, pChatID);
+	INSERT INTO mensaje (ID, Emisor, FechaHora, Contenido, ChatID) VALUES(default, pEmisor, pFechaHora, pContenido, pChatID);
 END; //
 
 

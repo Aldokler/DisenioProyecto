@@ -273,7 +273,7 @@ public unirseAChat(chat: number, user: string): Observable<boolean>{
   return this.AdmChat.unirseAChat(chat , user)
 }
 
-public crearChat(user: string): Observable<boolean>{
+public crearChat(user: string): Observable<number>{
   return this.AdmChat.crearChat(user)
 }
 
