@@ -25,6 +25,7 @@ import { Notificacion } from '../model/notificacion';
 import { SistemaNotificador } from "./SistemaNotificador";
 import { AdmChat } from './AdmChat';
 import { Chat } from '../model/chat';
+import { Mensaje } from '../model/mensaje';
 
 
 @Injectable({
@@ -283,4 +284,9 @@ public crearMensaje(Emisor: string, FechaHora: string, Contenido: string, ChatID
 public getChatsOfUser(id: string): Observable<Chat[]>{
   return this.AdmChat.getChatsOfUser(id)
 }
+
+public getMensajesChat(id: string): Observable<Mensaje[]>{
+  return this.AdmChat.getMensajesChat(id)
+}
+
 }
