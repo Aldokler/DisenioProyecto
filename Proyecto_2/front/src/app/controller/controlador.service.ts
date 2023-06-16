@@ -285,7 +285,7 @@ public getChatsOfUser(id: string): Observable<Chat[]>{
   return this.AdmChat.getChatsOfUser(id)
 }
 
-public getMensajesChat(id: string): Observable<Mensaje[]>{
+public getMensajesChat(id: number): Observable<Mensaje[]>{
   return this.AdmChat.getMensajesChat(id)
 }
 

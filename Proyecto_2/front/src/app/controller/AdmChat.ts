@@ -43,7 +43,7 @@ export class AdmChat{
         );
     }
 
-    public getMensajesChat(id: string): Observable<Mensaje[]> {
+    public getMensajesChat(id: number): Observable<Mensaje[]> {
         return this.DAO.getMensajesChat(id).pipe(
             map((data: any) => {
                 const json = data.mensajes;
