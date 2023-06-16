@@ -76,6 +76,16 @@ export class VerActividadesPlanDeTrabajoComponent {
 
 
   responderComentario(respuestaAComentario: string) {
+    console.log("comentarioseleccionado")
+    console.log(this.pasarDatos.comentarioSeleccionado)
+    console.log("idcomentarioseleccionado")
+    console.log(this.pasarDatos.comentarioSeleccionado.getId())
+
+    console.log("actividadseleccionada")
+    console.log(this.pasarDatos.actividadPlanDeTrabajo)
+    console.log("actividadseleccionada")
+    console.log(this.pasarDatos.actividadPlanDeTrabajo.getId())
+
     let respuestaComentario: Comentario = new Comentario(0, respuestaAComentario,
       this.pasarDatos.loginUser.getId(),
       this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0],

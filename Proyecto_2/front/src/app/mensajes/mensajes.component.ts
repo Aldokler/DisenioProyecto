@@ -10,6 +10,7 @@ import { PasarDatosService } from 'src/app/pasar-datos.service';
 import { Chat } from '../model/chat';
 import swal from 'sweetalert2';
 import { Mensaje } from '../model/mensaje';
+import { Estudiante } from '../model/estudiante';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class MensajesComponent {
     private controller: ControladorService, private router: Router
   ) { }
 
-  public contactos: Usuario[] = []
+  public contactosProfesor: Profesor[] = []
+  public contactosEstudiante: Estudiante[] = []
+  public fecha = new Date();
   public chatsActivos: Chat[] = []
   public pasarDatos: PasarDatosService = PasarDatosService.getInstance()
   public tipoDeUsuario: string = "";
@@ -53,6 +56,24 @@ export class MensajesComponent {
       })
     ).subscribe()
 
+    this.controller.getMensajesChat(this.pasarDatos.chatActual).pipe(
+      tap(res => {
+        this.mensajes = res;
+      })
+    ).subscribe()
+
+    this.controller.getContactosP(this.pasarDatos.loginUser.getSede()).pipe(
+      tap(res => {
+        this.contactosProfesor = res;
+      })
+    ).subscribe()
+
+    this.controller.getContactosE(this.pasarDatos.loginUser.getSede()).pipe(
+      tap(res => {
+        this.contactosEstudiante = res;
+      })
+    ).subscribe()
+
   }
 
   agregarParticipantes(contacto: Usuario) {
@@ -68,23 +89,45 @@ export class MensajesComponent {
       this.controller.crearChat(this.contactosSeleccionados[0].getId())
     }
     else {
-      this.controller.crearChat(this.pasarDatos.loginUser.getId())
-      this.controller.subject.crearNotificador(this.pasarDatos.loginUser.getId(),"Chat")
-      for (const contacto of this.contactosSeleccionados) {
-        
-      }
+      this.controller.crearChat(this.pasarDatos.loginUser.getId()).pipe(
+        tap(res => {
+          console.log("ssss", res)
+          this.controller.subject.crearNotificador(res, "Chat")
+          for (const contacto of this.contactosSeleccionados) {
+            this.controller.subject.suscribirse(res, contacto.getId(), "Chat")
+          }
+          this.controller.crearNotificacion(res, "Chat", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "invitación a chat" + "del profesor" + this.pasarDatos.loginUser.getNombre() + this.pasarDatos.loginUser.getApellido1())
+            .pipe(
+              tap(res2 => {
+                console.log("ssss", res2)
+                this.controller.subject.notificar(res, "Chat", res2)
+
+
+              })
+            ).subscribe()
+          for (const contacto of this.contactosSeleccionados) {
+            this.controller.subject.desuscribirse(res, contacto.getId(), "Chat")
+          }
+
+        })
+      ).subscribe()
+
+
     }
   }
 
   enviarMensaje(mensajeEnviado: string) {
-
+    this.controller.crearMensaje(this.pasarDatos.loginUser.getId(), 
+    this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 
+    mensajeEnviado, this.pasarDatos.chatMensaje.getId()).subscribe()
+    this.ngOnInit()
   }
 
-  verChat(chat: number) {
+  verChat(chat: number, chatMensaje: Chat) {
+    this.pasarDatos.chatMensaje = chatMensaje
+    this.pasarDatos.chatActual = chat
     this.controller.getMensajesChat(chat).pipe(
       tap(res => {
-        console.log("res")
-        console.log(res)
         this.mensajes = res;
       })
     ).subscribe()

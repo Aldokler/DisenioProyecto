@@ -80,7 +80,8 @@
                         <div class="tab-pane fade show active" id="contactos">
 
                             <ul class="list-group">
-                                <li *ngFor="let contacto of contactos" class="list-group-item">
+                                <h4>Profesores:</h4>
+                                <li *ngFor="let contacto of contactosProfesor" class="list-group-item">
                                     <div class="card-header" style="background-color: #E2EFF8;">
                                         {{contacto.getNombre()}}
                                     </div>
@@ -92,7 +93,21 @@
                                         </button>
                                     </div>
                                     
-                                    Contacto 1
+                                </li>
+
+                                <h4>Estudiantes:</h4>
+                                <li *ngFor="let contacto of contactosEstudiante" class="list-group-item">
+                                    <div class="card-header" style="background-color: #E2EFF8;">
+                                        {{contacto.getNombre()}}
+                                    </div>
+                                    <div class="card-footer text-muted" style="background-color: #E2EFF8;">
+                                        <button class="btn text-white me-2"
+                                            [style.background-color]="contactosSeleccionados.includes(contacto) ? '#ADD8E6' : '#13293D'"
+                                            (click)="crearGrupo(contacto)">
+                                            Seleccionar
+                                        </button>
+                                    </div>
+                                    
                                 </li>
                             </ul>
 
@@ -104,7 +119,7 @@
 
                                     <li *ngFor="let chatActivo of chatsActivos" class="list-group-item text-align-items-center">
                                         <h3>Chat 1 </h3>
-                                        <button (click)=" verChat(chatActivo.getId())" class="btn btn-primary" type="button"
+                                        <button (click)=" verChat(chatActivo.getId(),chatActivo)" class="btn btn-primary" type="button"
                                             style="background-color: #13293D;">
                                             Ver Chat
                                         </button>

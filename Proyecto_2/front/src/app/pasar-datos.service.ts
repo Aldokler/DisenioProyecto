@@ -14,6 +14,7 @@ import { TEstado } from './model/testado';
 import { Evidencia } from './model/evidencia';
 import { Comentario } from './model/comentario';
 import { Notificacion } from './model/notificacion';
+import { Chat } from './model/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,8 @@ export class PasarDatosService {
   public comentarioSeleccionado: Comentario = new Comentario(0, "", "", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], 0, 0);
   public guardarEstudiante: Estudiante = new Estudiante("", "", "", "", "", "", TSede.CA, "", "");
   public guardarActividadNotificacion: number = 0
+  public chatMensaje:Chat = new Chat(0,"")
+  public chatActual:number = 0
   
 }
 
