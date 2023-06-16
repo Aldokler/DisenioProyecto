@@ -114,74 +114,8 @@
                         (click)="crearGrupoLista()">Crear Chat</button>
                 </div>
                 <div class="col-9">
-                    <div class="row">
-                        <div>
-                            <h5 class="col">Chat actual</h5>
-                        </div>
-                        <div row>
-                            <div *ngIf="tipoDeUsuario != 'Profesor'">
 
-                                <button class="btn btn-primary mt-3 col" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse_nomembers" aria-expanded="false"
-                                    style="background-color: #13293D; color: white;">
-                                    Añadir Participantes
-                                </button>
-
-                                <div class="collapse" id="collapse_nomembers">
-                                    <div class="mt-4"
-                                        style="height: 400px; display: block; overflow: auto; position: relative;">
-
-                                        <div *ngFor="let contactoNoAnadidos of contactosNoAnadidos" class="card mb-4">
-
-                                            <div class="card-header" style="background-color: #E2EFF8;">
-                                                {{contactoNoAnadidos.getNombre()}}
-                                            </div>
-                                            <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                                <button class="btn text-white me-2"
-                                                    [style.background-color]="contactosSeleccionados.includes(contactoNoAnadidos) ? '#ADD8E6' : '#13293D'"
-                                                    (click)="agregarParticipantes(contactoNoAnadidos)">
-                                                    Seleccionar
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <button class="btn btn-primary mt-3 col" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_members" aria-expanded="false"
-                                style="background-color: #13293D; color: white;">
-                                Ver Participantes
-                            </button>
-
-                            <div class="collapse" id="collapse_members">
-                                <div class="mt-4"
-                                    style="height: 400px; display: block; overflow: auto; position: relative;">
-
-                                    <div *ngFor="let contactoNoAnadidos of contactosNoAnadidos" class="card mb-4">
-
-                                        <div class="card-header" style="background-color: #E2EFF8;">
-                                            {{contactoNoAnadidos.getNombre()}}
-                                        </div>
-                                        <div class="card-footer text-muted" style="background-color: #E2EFF8;">
-                                            <button class="btn text-white me-2"
-                                                [style.background-color]="contactosSeleccionados.includes(contactoNoAnadidos) ? '#ADD8E6' : '#13293D'"
-                                                (click)="agregarParticipantes(contactoNoAnadidos)">
-                                                Seleccionar
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="chat-container" style="height: 350px;">
+                    <div class="chat-container" style="height: 460px;">
 
                         <div *ngFor="let mensaje of mensajes">
 
