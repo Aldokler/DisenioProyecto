@@ -50,8 +50,7 @@ export class MensajesComponent {
 
     this.controller.getChatsOfUser(this.pasarDatos.loginUser.getId()).pipe(
       tap(res => {
-        console.log("res")
-        console.log(res)
+
         this.chatsActivos = res;
       })
     ).subscribe()
@@ -64,12 +63,16 @@ export class MensajesComponent {
 
     this.controller.getContactosP(this.pasarDatos.loginUser.getSede()).pipe(
       tap(res => {
+        console.log("res")
+        console.log(res)
         this.contactosProfesor = res;
       })
     ).subscribe()
 
     this.controller.getContactosE(this.pasarDatos.loginUser.getSede()).pipe(
       tap(res => {
+        console.log("res2")
+        console.log(res)
         this.contactosEstudiante = res;
       })
     ).subscribe()
