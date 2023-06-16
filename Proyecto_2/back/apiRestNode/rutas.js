@@ -1132,6 +1132,7 @@ router.get('/last_actividad', (request, response)=>{
 
 // crear chat-----------------------------------------------------------
 router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
+    console.log("crear chat api")
     const {IDChat,IDUsuario} = request.params;    
     let sql = 'call addUserChat(?,?)';
     conexion.query(sql, [IDChat,IDUsuario], (error, rows, fields)=>{
@@ -1140,6 +1141,7 @@ router.post('/chat/:IDChat/:IDUsuario', (request, response)=>{
             response.json({status: '-1' });
         }
         else{
+            console.log("crear chat api else ")
             response.json(rows[0][0])
         }
     })

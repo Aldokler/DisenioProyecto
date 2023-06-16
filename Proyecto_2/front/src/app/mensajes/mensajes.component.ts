@@ -95,6 +95,7 @@ export class MensajesComponent {
   }
 
   crearGrupoLista() {
+    console.log("crear chat")
     if (this.contactosSeleccionados.length == 1) {
       this.controller.crearChat(this.contactosSeleccionados[0].getId())
     }

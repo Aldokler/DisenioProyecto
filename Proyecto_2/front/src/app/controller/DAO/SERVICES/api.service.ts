@@ -255,6 +255,7 @@ export class ApiService {
   }
 
   public crearChat(user: string){
+    console.log("crear chat  front")
     return this.http.post(this.url+ 'chat', {user})
   }
 
