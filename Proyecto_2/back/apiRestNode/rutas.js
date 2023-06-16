@@ -1268,9 +1268,9 @@ router.get('/getContactosestudiantes/:sede', (request, response)=>{
 
 //getContactos -----------------------------------------------------
 //get profesores ---------------------------------------------------------
-router.get('/getContactosprofesoresno/:sede/:chat', (request, response)=>{
-    const {sede, chat} = request.params;
-    let sql = "call getContactosNoEnChat(?,?.?)";
+router.get('/getContactosprofesoresno', (request, response)=>{
+    const {sede, chat} = request.body;
+    let sql = "call getContactosNoEnChat(?,?,?)";
     conexion.query(sql, [sede,0, chat], (error, rows, fields)=>{
         if(error){
             console.log(error);
@@ -1286,10 +1286,10 @@ router.get('/getContactosprofesoresno/:sede/:chat', (request, response)=>{
 
 //getContactos NO en Chat-----------------------------------------------------
 //get profesores ---------------------------------------------------------
-router.get('/getContactosestudiantesno/:sede/:id', (request, response)=>{
-    const {sede, chat} = request.params;
-    let sql = "call getContactos(?,?)";
-    conexion.query(sql, [sede,1],(error, rows, fields)=>{
+router.get('/getContactosestudiantesno', (request, response)=>{
+    const {sede, chat} = request.body;
+    let sql = "call getContactosNoEnChat(?,?,?)";
+    conexion.query(sql, [sede,1, chat],(error, rows, fields)=>{
         if(error){
             console.log(error);
             response.json({status: '-1' });

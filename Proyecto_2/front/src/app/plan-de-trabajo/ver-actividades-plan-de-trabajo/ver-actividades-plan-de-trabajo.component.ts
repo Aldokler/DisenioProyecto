@@ -152,6 +152,19 @@ export class VerActividadesPlanDeTrabajoComponent {
         }
       )
 
+      this.controller.crearNotificacion(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", this.fecha.toISOString().split('T')[0] + ' ' + this.fecha.toTimeString().split(' ')[0], "Inviitacion a  actividad " + this.pasarDatos.actividadPlanDeTrabajo.getNombre() + " del día " + this.pasarDatos.actividadPlanDeTrabajo.getFechaHora())
+      .pipe(
+        tap(res => {
+          console.log("ssss", res)
+          this.controller.subject.notificar(this.pasarDatos.actividadPlanDeTrabajo.getId(), "Actividad", res)
+
+        })
+      ).subscribe(
+        () => {
+          this.showSuccessAlert();
+        }
+      )
+
 
   }
 
